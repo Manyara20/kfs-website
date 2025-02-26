@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Box, Menu, MenuItem, IconButton, Link, Drawer, List, ListItem, ListItemText, Collapse } from '@mui/material';
-import { ArrowDropDown, Menu as MenuIcon, ExpandLess, ExpandMore } from '@mui/icons-material';
+"use client";
+import React, { useState } from "react";
+import { AppBar, Toolbar, Typography, Box, Menu, MenuItem, IconButton, Link, Drawer, List, ListItem, ListItemText, Collapse } from "@mui/material";
+import { ArrowDropDown, Menu as MenuIcon, ExpandLess, ExpandMore } from "@mui/icons-material";
+
 
 const MainNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);

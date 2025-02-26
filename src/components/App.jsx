@@ -3,7 +3,7 @@ import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import HeroSection from "@/components/HeroSection";
 import MissionSection from "@/components/MissionSection";
-import CodeOfConductSection from "@/components/CodeOfConductSection";
+import CodeOfConductSection from "@/components/CodeofConductSection";
 import About from "@/components/About";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <MainNavBar />
       <HeroSection />
       <MissionSection />
-      <CodeOfConductSection />
+      <CodeOfConductSection /> 
       <About />
     </div>
   );

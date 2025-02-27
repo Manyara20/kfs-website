@@ -5,10 +5,19 @@ import HeroSection from "@/components/HeroSection";
 import MissionSection from "@/components/MissionSection";
 import CodeOfConductSection from "@/components/CodeOfConductSection";
 import About from "@/components/About";
+import NewsSection from "@/components/NewsSection";
+import CoreValues from "@/components/CoreValues";
+import Footer from "@/components/Footer";
+import MagazineSection from "@/components/MagazineSection";
+
 
 function App() {
   return (
     <div>
+      <NewsSection/>
+      <CoreValues/>
+      <MagazineSection/>
+      <Footer/>
       <TopNavBar />
       <MainNavBar />
       <HeroSection />

@@ -14,16 +14,16 @@ import MagazineSection from "@/components/MagazineSection";
 function App() {
   return (
     <div>
+      <NewsSection/>
+      <CoreValues/>
+      <MagazineSection/>
+      <Footer/>
       <TopNavBar />
       <MainNavBar />
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
       <About />
-      <NewsSection/>
-      <CoreValues/>
-      <MagazineSection/>
-      <Footer/>
     </div>
   );
 }

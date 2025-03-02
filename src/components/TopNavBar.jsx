@@ -5,74 +5,82 @@ import { Email, Call, AccountBox, Assignment, AccessTime } from '@mui/icons-mate
 const TopNavBar = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: '#0D3C00' }}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', padding: '0 16px' }}>
-        
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '0 12px',
+          flexWrap: 'nowrap',
+          overflow: 'hidden',
+        }}
+      >
         {/* Left side: Various details */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'nowrap' }}>
           {/* Staff Email */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <Email />
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <Email fontSize="small" />
             </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>Email</Typography>
-          </Box>
-          
-          {/* Pipe separator */}
-          <Typography variant="body2" sx={{ color: 'white' }}>||</Typography>
-          
-          {/* E-registration */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <Assignment />
-            </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>E-Registration</Typography>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>Email</Typography>
           </Box>
 
-          {/* Pipe separator */}
-          <Typography variant="body2" sx={{ color: 'white' }}>||</Typography>
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>||</Typography>
+
+          {/* E-registration */}
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <Assignment fontSize="small" />
+            </IconButton>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>E-Registration</Typography>
+          </Box>
+
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>||</Typography>
 
           {/* Research License */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <AccountBox />
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <AccountBox fontSize="small" />
             </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>Research License</Typography>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>Research License</Typography>
           </Box>
         </Box>
 
         {/* Right side: Contact and operation hours */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          {/* Pipe separator */}
-          <Typography variant="body2" sx={{ color: 'white' }}>||</Typography>
-          
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'nowrap' }}>
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>||</Typography>
+
           {/* Toll-free call */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <Call />
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <Call fontSize="small" />
             </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>0800 123 456 - Toll Free</Typography>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>
+              0800 123 456 - Toll Free
+            </Typography>
           </Box>
 
-          {/* Pipe separator */}
-          <Typography variant="body2" sx={{ color: 'white' }}>||</Typography>
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>||</Typography>
 
           {/* Working Hours */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <AccessTime />
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <AccessTime fontSize="small" />
             </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>Mon-Fri(8am - 5pm) Sat & Sun CLOSED</Typography>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>
+              Mon-Fri (8am - 5pm) Sat & Sun CLOSED
+            </Typography>
           </Box>
 
-          {/* Pipe separator */}
-          <Typography variant="body2" sx={{ color: 'white' }}>||</Typography>
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>||</Typography>
 
           {/* Public Email */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ color: 'white' }}>
-              <Email />
+          <Box sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <IconButton sx={{ color: 'white', padding: '4px' }}>
+              <Email fontSize="small" />
             </IconButton>
-            <Typography variant="body2" sx={{ color: 'white' }}>info@kenyaforestservice.org</Typography>
+            <Typography variant="body2" sx={{ color: 'white', fontSize: '0.75rem' }}>
+              info@kenyaforestservice.org
+            </Typography>
           </Box>
         </Box>
       </Toolbar>

@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 const GuidingPrinciples = () => {
   return (
-    <section className="w-full min-h-screen bg-[#0E2E0E] flex justify-center items-center">
-      <div className="relative w-full max-w-screen-md">
+
+      <div className="relative w-full ">
 
         {/* Top Frame (1/4 Section) */}
         <div className="bg-white rounded-t-3xl h-1/4 flex items-center justify-center">
@@ -85,7 +85,7 @@ const GuidingPrinciples = () => {
         </div>
 
       </div>
-    </section>
+
   );
 };
 

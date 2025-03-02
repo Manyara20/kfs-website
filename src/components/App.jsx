@@ -9,6 +9,8 @@ import NewsSection from "@/components/NewsSection";
 import CoreValues from "@/components/CoreValues";
 import Footer from "@/components/Footer";
 import MagazineSection from "@/components/MagazineSection";
+import Principles from "@/components/Principles";
+import PatnersSection from "@/components/Patners";
 
 
 function App() {
@@ -19,9 +21,11 @@ function App() {
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
+      <Principles/>
       <About />
       <NewsSection/>
       <CoreValues/>
+      <PatnersSection/>
       <MagazineSection/>
       <Footer/>
     </div>

@@ -5,6 +5,11 @@ import HeroSection from "@/components/HeroSection";
 import MissionSection from "@/components/MissionSection";
 import CodeOfConductSection from "@/components/CodeofConductSection";
 import About from "@/components/About";
+import NewsSection from "@/components/NewsSection";
+import CoreValues from "@/components/CoreValues";
+import Footer from "@/components/Footer";
+import MagazineSection from "@/components/MagazineSection";
+
 
 function App() {
   return (
@@ -15,6 +20,10 @@ function App() {
       <MissionSection />
       <CodeOfConductSection /> 
       <About />
+      <NewsSection/>
+      <CoreValues/>
+      <MagazineSection/>
+      <Footer/>
     </div>
   );
 }

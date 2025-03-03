@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import MagazineSection from "@/components/MagazineSection";
 import Principles from "@/components/Principles";
 import PatnersSection from "@/components/Patners";
+import FooterBottom from "@/components/FooterBottom";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <PatnersSection/>
       <MagazineSection/>
       <Footer/>
+      <FooterBottom />
     </div>
   );
 }

@@ -66,8 +66,8 @@ const CodeOfConductSection = () => {
 
         {/* Right Side: Strategic Objectives */}
         <div>
-          <h2 className="text-3xl font-bold mb-4 !text-black">Strategic Objectives</h2>
-          <p className="text-lg mb-6 font-black !text-black">
+          <h2 className="text-3xl font-bold mb-4 text-centre !text-black">Strategic Objectives</h2>
+          <p className="text-lg mb-6  !text-black">
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision. The service will therefore focus on the following strategic objectives:
           </p>
 

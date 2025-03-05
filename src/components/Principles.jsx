@@ -2,12 +2,14 @@ import Image from 'next/image';
 
 const GuidingPrinciples = () => {
   return (
-
+      <>
+      <div className="bg-white rounded-t-3xl h-20 flex items-center justify-center relative shadow-lg z-10">
+          <h2 className="text-3xl text-black font-extrabold text-center">Guiding Principles</h2>
+      </div>
       <div className="relative w-full ">
 
         {/* Top Frame (1/4 Section) */}
-        <div className="bg-white rounded-t-3xl h-70 flex items-center justify-center relative shadow-lg z-10">
-          <h2 className="text-3xl text-black font-extrabold text-center">Guiding Principles</h2>
+        <div className="bg-white rounded-t-3xl h-40 flex items-center justify-center relative shadow-lg z-10">
         </div>
 
         {/* Bottom Frame (3/4 Section) */}
@@ -88,6 +90,7 @@ const GuidingPrinciples = () => {
         </div>
 
       </div>
+      </>
 
   );
 };

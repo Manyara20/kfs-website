@@ -85,35 +85,61 @@ const MainNavBar = () => {
   ];
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'white' }}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '85%' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <img src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png" alt="KFS Logo" style={{ height: '50px', marginRight: '20px' }} />
+    <AppBar position="static" sx={{ backgroundColor: "white" }}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "85%",
+          mx: "auto", // Center the toolbar
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
+            alt="KFS Logo"
+            style={{ height: "50px", marginRight: "20px" }}
+          />
         </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2.5 }}>
-          {menuItems.map((item, index) => (
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2.5 }}>
+          {menuItems.map((item, index) =>
             item.subItems ? (
               <Box key={index}>
-                <IconButton onClick={handleMenuOpen} sx={{ color: '#6A961F' }}>
+                <IconButton onClick={handleMenuOpen} sx={{ color: "#6A961F" }}>
                   <Typography variant="body1">{item.label}</Typography>
-                  <ArrowDropDown sx={{ color: '#6A961F' }} />
+                  <ArrowDropDown sx={{ color: "#6A961F" }} />
                 </IconButton>
-                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
                   {item.subItems.map((subItem, idx) => (
-                    <MenuItem key={idx} onClick={handleMenuClose}>{subItem}</MenuItem>
+                    <MenuItem key={idx} onClick={handleMenuClose}>
+                      {subItem}
+                    </MenuItem>
                   ))}
                 </Menu>
               </Box>
             ) : (
-              <Link key={index} href={item.link} sx={{ color: '#6A961F', textDecoration: 'none' }}>
+              <Link
+                key={index}
+                href={item.link}
+                sx={{ color: "#6A961F", textDecoration: "none" }}
+              >
                 <Typography variant="body1">{item.label}</Typography>
               </Link>
             )
           )}
         </Box>
 
-        <IconButton edge="end" sx={{ display: { xs: 'block', md: 'none' } }} onClick={toggleDrawer(true)}>
+        <IconButton
+          edge="end"
+          sx={{ display: { xs: "block", md: "none" }, color: "#6A961F" }}
+          onClick={toggleDrawer(true)}
+        >
           <MenuIcon />
         </IconButton>
       </Toolbar>
@@ -134,7 +160,13 @@ const MainNavBar = () => {
                 sx={{ color: "#6A961F" }}
               >
                 <ListItemText primary={item.label} />
-                {item.subItems ? (openSubMenu[index] ? <ExpandLess /> : <ExpandMore />) : null}
+                {item.subItems ? (
+                  openSubMenu[index] ? (
+                    <ExpandLess />
+                  ) : (
+                    <ExpandMore />
+                  )
+                ) : null}
               </ListItem>
               {item.subItems && (
                 <Collapse in={openSubMenu[index]} timeout="auto" unmountOnExit>

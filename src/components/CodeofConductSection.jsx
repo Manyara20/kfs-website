@@ -1,5 +1,7 @@
-import React from 'react';
-import { Box, Typography, Button, Container, Grid } from '@mui/material';
+"use client";
+
+import React, { useState } from "react";
+import { Box, Typography, Button, Container, Grid } from "@mui/material";
 
 const CodeOfConductSection = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -7,6 +9,34 @@ const CodeOfConductSection = () => {
   const handleToggle = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
+
+  // Define the objectives array (replace with your actual data)
+  const objectives = [
+    {
+      title: "Enhance Forest Conservation",
+      details: [
+        "Increase tree cover by 10% annually.",
+        "Promote sustainable forestry practices.",
+        "Engage communities in conservation efforts.",
+      ],
+    },
+    {
+      title: "Strengthen Policy Framework",
+      details: [
+        "Develop new forest management policies.",
+        "Enforce compliance with existing regulations.",
+        "Collaborate with stakeholders for policy input.",
+      ],
+    },
+    {
+      title: "Boost Eco-Tourism",
+      details: [
+        "Develop eco-tourism sites in national forests.",
+        "Train local guides for tourism activities.",
+        "Market forest destinations globally.",
+      ],
+    },
+  ];
 
   return (
     <div className="py-10 px-4 md:px-16">
@@ -31,8 +61,8 @@ const CodeOfConductSection = () => {
 
         {/* Right Side: Strategic Objectives */}
         <div>
-          <h2 className="text-3xl font-bold mb-4 text-centre !text-black">Strategic Objectives</h2>
-          <p className="text-lg mb-6  !text-black">
+          <h2 className="text-3xl font-bold mb-4 text-center !text-black">Strategic Objectives</h2>
+          <p className="text-lg mb-6 !text-black">
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision. The service will therefore focus on the following strategic objectives:
           </p>
 
@@ -43,8 +73,8 @@ const CodeOfConductSection = () => {
                   onClick={() => handleToggle(index)}
                   className={`w-full text-left p-4 rounded-lg transition-colors ${
                     expandedIndex === index
-                      ? 'bg-green-700'
-                      : 'bg-green-600 hover:bg-green-700'
+                      ? "bg-green-700"
+                      : "bg-green-600 hover:bg-green-700"
                   } text-white focus:outline-none`}
                 >
                   {item.title}

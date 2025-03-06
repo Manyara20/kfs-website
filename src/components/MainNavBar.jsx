@@ -25,24 +25,12 @@ import {
 
 const MainNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [activeMenu, setActiveMenu] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState({});
 
-  const handleMenuOpen = (event, index) => {
-    setAnchorEl(event.currentTarget);
-    setActiveMenu(index);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setActiveMenu(null);
-  };
-
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
-  };
-
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
+  const toggleDrawer = (open) => () => setDrawerOpen(open);
   const handleSubMenuToggle = (index) => {
     setOpenSubMenu((prev) => ({
       ...prev,
@@ -97,106 +85,41 @@ const MainNavBar = () => {
   ];
 
   return (
-    <AppBar
-      position="static"
-      sx={{ backgroundColor: "white", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}
-    >
-      <Toolbar
-        sx={{
-          maxWidth: "85%",
-          mx: "auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between", // Ensures logo stays left, rest adjusts
-          width: "100%",
-        }}
-      >
-        {/* Logo on the Left */}
-        <Box sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-          <img
-            src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
-            alt="KFS Logo"
-            style={{ height: "50px", marginRight: "20px" }}
-          />
+    <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '85%' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <img src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png" alt="KFS Logo" style={{ height: '50px', marginRight: '20px' }} />
         </Box>
 
-        {/* Centered Navigation */}
-        <Box
-          sx={{
-            display: { xs: "none", md: "flex" }, // Hidden on mobile
-            flexGrow: 1, // Takes up available space
-            justifyContent: "center", // Centers the nav items
-            gap: 2.5, // Spacing between items
-          }}
-        >
-          {menuItems.map((item, index) =>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2.5 }}>
+          {menuItems.map((item, index) => (
             item.subItems ? (
               <Box key={index}>
-                <IconButton
-                  onClick={(e) => handleMenuOpen(e, index)}
-                  sx={{
-                    color: "#6A961F",
-                    "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-                  }}
-                >
+                <IconButton onClick={handleMenuOpen} sx={{ color: '#6A961F' }}>
                   <Typography variant="body1">{item.label}</Typography>
-                  <ArrowDropDown sx={{ color: "#6A961F" }} />
+                  <ArrowDropDown sx={{ color: '#6A961F' }} />
                 </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl) && activeMenu === index}
-                  onClose={handleMenuClose}
-                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                  transformOrigin={{ vertical: "top", horizontal: "left" }}
-                  sx={{ "& .MuiPaper-root": { minWidth: "200px" } }}
-                >
+                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
                   {item.subItems.map((subItem, idx) => (
-                    <MenuItem
-                      key={idx}
-                      onClick={handleMenuClose}
-                      sx={{ color: "#333" }}
-                    >
-                      {subItem}
-                    </MenuItem>
+                    <MenuItem key={idx} onClick={handleMenuClose}>{subItem}</MenuItem>
                   ))}
                 </Menu>
               </Box>
             ) : (
-              <Link
-                key={index}
-                href={item.link}
-                sx={{
-                  color: "#6A961F",
-                  textDecoration: "none",
-                  "&:hover": { color: "#4a6b15" },
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
+              <Link key={index} href={item.link} sx={{ color: '#6A961F', textDecoration: 'none' }}>
                 <Typography variant="body1">{item.label}</Typography>
               </Link>
             )
           )}
         </Box>
 
-        {/* Mobile Menu Button on the Right */}
-        <IconButton
-          edge="end"
-          sx={{ display: { xs: "block", md: "none" }, color: "#6A961F" }}
-          onClick={toggleDrawer(true)}
-        >
+        <IconButton edge="end" sx={{ display: { xs: 'block', md: 'none' } }} onClick={toggleDrawer(true)}>
           <MenuIcon />
         </IconButton>
       </Toolbar>
 
-      {/* Mobile Drawer */}
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={toggleDrawer(false)}
-        sx={{ "& .MuiDrawer-paper": { width: { xs: "75%", sm: 300 } } }}
-      >
-        <List>
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+        <List sx={{ width: 500 }}>
           {menuItems.map((item, index) => (
             <React.Fragment key={index}>
               <ListItem
@@ -211,8 +134,7 @@ const MainNavBar = () => {
                 sx={{ color: "#6A961F" }}
               >
                 <ListItemText primary={item.label} />
-                {item.subItems &&
-                  (openSubMenu[index] ? <ExpandLess /> : <ExpandMore />)}
+                {item.subItems ? (openSubMenu[index] ? <ExpandLess /> : <ExpandMore />) : null}
               </ListItem>
               {item.subItems && (
                 <Collapse in={openSubMenu[index]} timeout="auto" unmountOnExit>

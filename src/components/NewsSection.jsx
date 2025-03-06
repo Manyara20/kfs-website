@@ -9,7 +9,7 @@ const newsData = [
     description:
       "The CCF Mr. Alex Lemarkoko has today been paid a courtesy call by Friends of Karura Community Forest Association (FKF-CFA) officials led by Cristina Boelcke.",
     imageUrl: "https://example.com/news1.jpg",
-    author: "Admin",
+    author: "By Admin",
     date: "June 19, 2024",
     comments: 0,
   },
@@ -18,7 +18,7 @@ const newsData = [
     description:
       "Kenya Forest Service has launched a new initiative to plant 5 million trees nationwide to combat deforestation.",
     imageUrl: "https://example.com/news2.jpg",
-    author: "Admin",
+    author: "By Admin",
     date: "July 5, 2024",
     comments: 12,
   },
@@ -36,7 +36,7 @@ const newsData = [
     description:
       "A new campaign to raise awareness about forest fires and how to prevent them has been launched.",
     imageUrl: "https://example.com/news4.jpg",
-    author: "Admin",
+    author: "By Admin",
     date: "September 2, 2024",
     comments: 8,
   },
@@ -44,17 +44,17 @@ const newsData = [
 
 const NewsSection = () => {
   return (
-    <section className="bg-white py-12 px-6">
+    <section className="bg-white py-12 px-2">
       {/* Centered Headers */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold">News</h1>
-        <h2 className="text-xl font-extrabold text-green-900 mt-2">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-ultrabold text-black font-black">News</h1>
+        <h2 className="text-3xl font-extrabold text-green-900 mt-2">
           KFS Latest News
         </h2>
       </div>
 
       {/* News Card Scrollable Container */}
-      <div className="flex gap-6 overflow-x-auto no-scrollbar">
+      <div className="flex gap-1.5 overflow-x-auto no-scrollbar ">
         {newsData.map((item, index) => (
           <NewsCard key={index} {...item} />
         ))}

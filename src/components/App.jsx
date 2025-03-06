@@ -9,6 +9,9 @@ import NewsSection from "@/components/NewsSection";
 import CoreValues from "@/components/CoreValues";
 import Footer from "@/components/Footer";
 import MagazineSection from "@/components/MagazineSection";
+import Principles from "@/components/Principles";
+import PatnersSection from "@/components/Patners";
+import FooterBottom from "@/components/FooterBottom";
 
 
 function App() {
@@ -20,10 +23,13 @@ function App() {
       <MissionSection />
       <CodeOfConductSection /> 
       <About />
+      <Principles/>
       <NewsSection/>
       <CoreValues/>
+      <PatnersSection/>
       <MagazineSection/>
       <Footer/>
+      <FooterBottom />
     </div>
   );
 }

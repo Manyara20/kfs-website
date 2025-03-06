@@ -22,8 +22,8 @@ function App() {
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
-      <Principles/>
       <About />
+      <Principles/>
       <NewsSection/>
       <CoreValues/>
       <PatnersSection/>

@@ -24,18 +24,28 @@ import {
   ExpandMore,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
-import Image from "next/image"; // Import Next.js Image component
+import Image from "next/image";
 
 const MainNavBar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // Single anchor element
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null); // Track which menu is open
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState({});
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Switch to mobile view below 900px
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
-  const handleMenuClose = () => setAnchorEl(null);
+  const handleMenuOpen = (event, index) => {
+    setAnchorEl(event.currentTarget);
+    setActiveMenuIndex(index);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setActiveMenuIndex(null);
+  };
+
   const toggleDrawer = (open) => () => setDrawerOpen(open);
+
   const handleSubMenuToggle = (index) => {
     setOpenSubMenu((prev) => ({
       ...prev,
@@ -107,7 +117,6 @@ const MainNavBar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "85%",
         }}
       >
         {/* Logo */}
@@ -116,14 +125,14 @@ const MainNavBar = () => {
             <Image
               src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
               alt="KFS Logo"
-              width={50} // Fixed width
-              height={35} // Fixed height
+              width={50}
+              height={35}
               style={{ marginRight: { xs: "8px", md: "15px" } }}
             />
           </Link>
         </Box>
 
-        {/* Desktop Navigation - Items in a Straight Line */}
+        {/* Desktop Navigation */}
         <Box
           sx={{
             display: { xs: "none", md: "flex" },
@@ -148,13 +157,13 @@ const MainNavBar = () => {
                   <ArrowDropDown sx={{ color: "#6A961F" }} />
                 </Typography>
                 <Menu
-                  anchorEl={anchorEl[index]}
-                  open={Boolean(anchorEl[index])}
-                  onClose={() => handleMenuClose(index)}
+                  anchorEl={anchorEl}
+                  open={activeMenuIndex === index}
+                  onClose={handleMenuClose}
                   sx={{ mt: 1 }}
                 >
                   {item.subItems.map((subItem, idx) => (
-                    <MenuItem key={idx} onClick={() => handleMenuClose(index)}>
+                    <MenuItem key={idx} onClick={handleMenuClose}>
                       {subItem}
                     </MenuItem>
                   ))}
@@ -192,7 +201,16 @@ const MainNavBar = () => {
         <List sx={{ width: 500 }}>
           {menuItems.map((item, index) => (
             <React.Fragment key={index}>
-              <ListItem button onClick={() => handleSubMenuToggle(index)}>
+              <ListItem
+                button
+                onClick={
+                  item.subItems
+                    ? () => handleSubMenuToggle(index)
+                    : toggleDrawer(false)
+                }
+                component={item.link && !item.subItems ? Link : "div"}
+                href={item.link}
+              >
                 <ListItemText primary={item.label} />
                 {item.subItems ? (
                   openSubMenu[index] ? (
@@ -206,7 +224,12 @@ const MainNavBar = () => {
                 <Collapse in={openSubMenu[index]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {item.subItems.map((subItem, idx) => (
-                      <ListItem button key={idx} sx={{ pl: 4 }}>
+                      <ListItem
+                        button
+                        key={idx}
+                        sx={{ pl: 4 }}
+                        onClick={toggleDrawer(false)}
+                      >
                         <ListItemText primary={subItem} />
                       </ListItem>
                     ))}

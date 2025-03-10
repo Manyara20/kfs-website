@@ -2,7 +2,6 @@
 import React from "react";
 import NewsCard from "@/components/NewsCard";
 
-
 const newsData = [
   {
     title: "FKF-CFA Pays CCF a Courtesy Call",
@@ -44,20 +43,24 @@ const newsData = [
 
 const NewsSection = () => {
   return (
-    <section className="bg-white py-12 px-2">
+    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Centered Headers */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-ultrabold text-black font-black">News</h1>
-        <h2 className="text-3xl font-extrabold text-green-900 mt-2">
+      <div className="text-center mb-6 sm:mb-8 md:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0E2E0E] font-black">
+          News
+        </h1>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mt-1 sm:mt-2">
           KFS Latest News
         </h2>
       </div>
 
       {/* News Card Scrollable Container */}
-      <div className="flex gap-1.5 overflow-x-auto no-scrollbar ">
-        {newsData.map((item, index) => (
-          <NewsCard key={index} {...item} />
-        ))}
+      <div className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto no-scrollbar snap-x">
+        <div className="flex gap-3 sm:gap-4 md:gap-6 pb-4 md:pb-6">
+          {newsData.map((item, index) => (
+            <NewsCard key={index} {...item} className="snap-center" />
+          ))}
+        </div>
       </div>
     </section>
   );

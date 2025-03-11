@@ -9,13 +9,13 @@ const FooterBottom = () => {
         
         {/* Left Side */}
         <p className="text-sm">
-          © 2023 Designed by <span className="font-semibold">KFS ICT Team</span>
+          © 2025 Designed by <span className="font-semibold">KFS ICT Team</span>
         </p>
 
         {/* Right Side (Sitemap Links) */}
         <div className="flex space-x-8 mt-4 md:mt-0">
-          <Link href="/sitemap" className="hover:underline transition-transform hover:scale-105">
-            Sitemap
+          <Link href="/SiteMap" className="hover:underline transition-transform hover:scale-105">
+            SiteMap
           </Link>
           <Link href="/terms-of-service" className="hover:underline transition-transform hover:scale-105">
             Terms of Service

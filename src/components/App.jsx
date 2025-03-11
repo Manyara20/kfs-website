@@ -4,7 +4,7 @@ import MainNavBar from "@/components/MainNavBar";
 import HeroSection from "@/components/HeroSection";
 import MissionSection from "@/components/MissionSection";
 import CodeOfConductSection from "@/components/CodeOfConductSection";
-import About from "@/components/About";
+import About from "@/components/AboutSection";
 import NewsSection from "@/components/NewsSection";
 import CoreValues from "@/components/CoreValues";
 import Footer from "@/components/Footer";

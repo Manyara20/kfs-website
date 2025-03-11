@@ -67,15 +67,16 @@ const CodeOfConductSection = () => {
 
           <div className="flex flex-col gap-4">
             {objectives.map((item, index) => (
-              <div key={index} className="group w-full">
-                <div
-                  className="w-full text-left p-4 rounded-lg bg-green-600 text-white transition-colors group-hover:bg-green-700"
-                >
-                  {item.title}
-                </div>
-                <div className="mt-2 ml-4 hidden group-hover:flex flex-col gap-1">
+              <div 
+                key={index} 
+                className="group w-full p-4 rounded-lg bg-green-600 text-white transition-all duration-300 hover:bg-green-700 cursor-pointer"
+              >
+                <p className="text-lg font-semibold">{item.title}</p>
+
+                {/* Details - Hidden by Default, Shown on Hover */}
+                <div className="mt-2 space-y-1 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-screen">
                   {item.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-black">• {detail}</p>
+                    <p key={i} className="text-sm text-white">• {detail}</p>
                   ))}
                 </div>
               </div>

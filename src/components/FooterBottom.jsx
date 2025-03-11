@@ -17,7 +17,7 @@ const FooterBottom = () => {
           <Link href="/SiteMap" className="hover:underline transition-transform hover:scale-105">
             SiteMap
           </Link>
-          <Link href="/terms-of-service" className="hover:underline transition-transform hover:scale-105">
+          <Link href="/Terms of Service" className="hover:underline transition-transform hover:scale-105">
             Terms of Service
           </Link>
           <Link href="/privacy-policy" className="hover:underline transition-transform hover:scale-105">

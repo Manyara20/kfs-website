@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 const objectives = [
   {
@@ -37,12 +37,6 @@ const objectives = [
 ];
 
 const CodeOfConductSection = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
-  const handleToggle = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
-
   return (
     <div className="py-10 px-4 md:px-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -66,32 +60,24 @@ const CodeOfConductSection = () => {
 
         {/* Right Side: Strategic Objectives */}
         <div>
-          <h2 className="text-3xl font-bold mb-4 text-centre !text-black">Strategic Objectives</h2>
-          <p className="text-lg mb-6  !text-black">
+          <h2 className="text-3xl font-bold mb-4 text-center text-black">Strategic Objectives</h2>
+          <p className="text-lg mb-6 text-black">
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision. The service will therefore focus on the following strategic objectives:
           </p>
 
           <div className="flex flex-col gap-4">
             {objectives.map((item, index) => (
-              <div key={index}>
-                <button
-                  onClick={() => handleToggle(index)}
-                  className={`w-full text-left p-4 rounded-lg transition-colors ${
-                    expandedIndex === index
-                      ? 'bg-green-700'
-                      : 'bg-green-600 hover:bg-green-700'
-                  } text-white focus:outline-none`}
+              <div key={index} className="group w-full">
+                <div
+                  className="w-full text-left p-4 rounded-lg bg-green-600 text-white transition-colors group-hover:bg-green-700"
                 >
                   {item.title}
-                </button>
-
-                {expandedIndex === index && (
-                  <div className="mt-2 ml-4">
-                    {item.details.map((detail, i) => (
-                      <p key={i} className="text-sm !text-black mb-1">• {detail}</p>
-                    ))}
-                  </div>
-                )}
+                </div>
+                <div className="mt-2 ml-4 hidden group-hover:flex flex-col gap-1">
+                  {item.details.map((detail, i) => (
+                    <p key={i} className="text-sm text-black">• {detail}</p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

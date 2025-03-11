@@ -14,10 +14,10 @@ const FooterBottom = () => {
 
         {/* Right Side (Sitemap Links) */}
         <div className="flex space-x-8 mt-4 md:mt-0">
-          <Link href="/sitemap" className="hover:underline transition-transform hover:scale-105">
+          <Link href="/app/" className="hover:underline transition-transform hover:scale-105">
             Sitemap
           </Link>
-          <Link href="/terms-of-service" className="hover:underline transition-transform hover:scale-105">
+          <Link href="/" className="hover:underline transition-transform hover:scale-105">
             Terms of Service
           </Link>
           <Link href="/privacy-policy" className="hover:underline transition-transform hover:scale-105">

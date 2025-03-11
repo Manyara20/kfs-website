@@ -24,7 +24,7 @@ const FlipCard = ({ frontText, backText, frontIcon: FrontIcon, backIcon: BackIco
           style={{ backfaceVisibility: 'hidden' }}
         >
           {FrontIcon && <FrontIcon className="absolute top-4 right-4 text-2xl" />}
-          <p className="text-2xl">{frontText}</p>
+          <p className="text-2xl text-center">{frontText}</p>
         </div>
 
         {/* Back Side */}
@@ -43,7 +43,7 @@ const FlipCard = ({ frontText, backText, frontIcon: FrontIcon, backIcon: BackIco
 const CoreValues = () => {
   return (
     <section className="bg-white py-20 flex flex-col items-center">
-      <h2 className="text-4xl font-bold text-center mb-12">Our Core Values</h2>
+      <h2 className="text-4xl font-bold text-center mb-12 text-black">Our Core Values</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <FlipCard

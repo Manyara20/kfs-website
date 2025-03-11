@@ -1,66 +1,54 @@
-import Image from 'next/image';
+'use client';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#023011] text-white p-8">
-      <div className="flex justify-between items-start gap-12">
-
-        {/* Left Section: Logo  */}
-
-          <div className="place-items-center  bg-white p-2 w-fit ">
-              {/* Logo */}
-              <Image
-                src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
-                alt="Kenya Forest Service Logo"
-                width={120}
-                height={80}
-              />
-          </div>
-           
-         
-
-        {/* Right Section: Mission Card + Toll-Free Card */}
-        <div className="flex gap-8  ">
-          {/* Mission Card */}
-          <div className="bg-white p-4 shadow-lg inline-block w-100 h-fit rounded-2xl">
-            <h2 className="text-xl font-semibold leading-tight">
-              <span className="font-extrabold text-[#7E4009]">Kenya </span>
-              <span className="font-medium text-[#0A6527]">Forest Service</span>
-            </h2>
-            <p className="mt-4 text-gray-800">
-              To be an internationally recognized organization for excellence in knowledge-based sustainable forest resources management and conservation.
-            </p>
-          </div>
-
-          {/* Toll-Free Card */}
-          <div className="bg-[#0D3C00] p-4 shadow-lg inline-block border-white border-4 rounded-3xl">
-            <h3 className="text-lg font-bold mb-4 leading-tight">
-              Toll Free Number (For Anticorruption and Complaints)
+    <footer className="bg-[#0A6527] text-white py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Toll-Free Section */}
+          <div className="bg-white/10 p-4 rounded-lg shadow-md transition-transform hover:scale-102 backdrop-blur-sm">
+            <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-2">
+              Toll Free
             </h3>
-            <div className="flex items-center gap-2 text-lg font-bold mb-4">
-              📞 <span>0800 721 277</span>
+            <div className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-white mb-2">
+              <span>📞</span> <span>0800 721 277</span>
             </div>
-            <p>Contact Us Now through our Toll Free Number</p>
-            <div className="flex justify-center">
-              <button className="bg-black text-white py-2 px-4 rounded-2xl mt-4">
-                Contact Us
+            <p className="text-sm md:text-base text-white/80 text-center">
+              Anticorruption & Complaints
+            </p>
+            <div className="flex justify-center mt-2">
+              <button className="bg-white text-[#0A6527] py-1 px-4 rounded-md text-sm md:text-base font-medium hover:bg-[#0A6527] hover:text-white transition-colors">
+                Call Now
               </button>
             </div>
           </div>
-          
 
+          {/* Contact Info Section */}
+          <div className="bg-white/10 p-4 rounded-lg shadow-md transition-transform hover:scale-102 backdrop-blur-sm">
+            <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-2">
+              Contact Us
+            </h3>
+            <div className="grid grid-cols-1 gap-2 text-center text-white/80">
+              <p className="text-sm md:text-base bg-white/5 py-1 rounded-md">
+                info@kenyaforestservice.org
+              </p>
+              <p className="text-sm md:text-base bg-white/5 py-1 rounded-md">
+                P.O BOX 30513 - 00100
+              </p>
+              <p className="text-sm md:text-base bg-white/5 py-1 rounded-md">
+                Mon-Fri: 8am-5pm
+              </p>
+            </div>
+          </div>
         </div>
 
-      </div>
-      <div>
-        <div className="bg-[#023011] border-2 border-white  p-4 inline-block rounded-3xl w-90">
-          <h3 className="text-lg font-extrabold  mb-2 text-center">Contact Us!</h3>
-          <p className="border-1 border-white p-1  rounded text-center  mb-4">info@kenyaforestservice.org</p>
-          <p className="border-1 border-white p-1  rounded  text-center mb-4">P.O BOX 30513 - 00100</p>
-          <p className="border-1 border-white rounded text-center  p-1">Mon - Fri (8am - 5pm) Sat & Sun CLOSED</p>
+        {/* Bottom Bar */}
+        <div className="mt-4 border-t border-white/30 pt-2 text-center">
+          <p className="text-xs md:text-sm text-white/80">
+            © {new Date().getFullYear()} Kenya Forest Service. All rights reserved.
+          </p>
         </div>
-
-
       </div>
     </footer>
   );

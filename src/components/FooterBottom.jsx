@@ -1,12 +1,9 @@
-// components/FooterBottom.jsx
-
 import Link from "next/link";
 
 const FooterBottom = () => {
   return (
     <div className="bg-[#023011] text-white py-6 border-t-4 border-white shadow-lg shadow-gray-800/50 relative z-10">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
-        
         {/* Left Side */}
         <p className="text-sm">
           © 2025 Designed by <span className="font-semibold">KFS ICT Team</span>
@@ -24,7 +21,6 @@ const FooterBottom = () => {
             Privacy Policy
           </Link>
         </div>
-
       </div>
     </div>
   );

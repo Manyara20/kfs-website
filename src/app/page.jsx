@@ -1,5 +1,5 @@
-import App from "@/components/App"; // Import App component
+import HomePageContents from "@/app/pages/homepage/HomePageContents"; // Import App component
 
 export default function Page() {
-  return <App />;
+  return <HomePageContents/>;
 }

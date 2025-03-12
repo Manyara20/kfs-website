@@ -13,6 +13,8 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemButton,
+  Collapse,
   useMediaQuery,
   TextField,
   InputAdornment,
@@ -21,6 +23,8 @@ import {
   ArrowDropDown,
   Menu as MenuIcon,
   Search as SearchIcon,
+  ExpandLess,
+  ExpandMore,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
@@ -30,6 +34,7 @@ const MainNavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [expandedItems, setExpandedItems] = useState({}); // State to track expanded sub-menus
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -53,13 +58,56 @@ const MainNavBar = () => {
     }
   };
 
+  // Toggle sub-menu expansion
+  const handleToggle = (index) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   const menuItems = [
     { label: "Home", link: "/" },
-    { label: "About", subItems: ["KFS Board", "Senior Management", "Core Programs", "Other Programs", "Projects"] },
-    { label: "Media Center", subItems: ["News & Events", "Photo Gallery", "Events Calendar", "The Forester Magazine", "Press Releases"] },
-    { label: "Quick Links", subItems: ["Tree Planting", "Participatory Forest Management", "EcoTourism", "Online Systems"] },
+    {
+      label: "About",
+      subItems: [
+        { label: "KFS Board", link: "/about/kfs-board" },
+        { label: "Senior Management", link: "/about/senior-management" },
+        { label: "Core Programs", link: "/about/core-programming" },
+        { label: "Other Programs", link: "/about/other-programming" },
+        { label: "Projects", link: "/about/projects" },
+      ],
+    },
+    {
+      label: "Media Center",
+      subItems: [
+        { label: "News & Events", link: "/media-center/news-events" },
+        { label: "Photo Gallery", link: "/media-center/photo-gallery" },
+        { label: "Events Calendar", link: "/media-center/events-calendar" },
+        { label: "The Forester Magazine", link: "/media-center/forester-magazine" },
+        { label: "Press Releases", link: "/media-center/press-releases" },
+      ],
+    },
+    {
+      label: "Quick Links",
+      subItems: [
+        { label: "Tree Planting", link: "/quick-links/tree-planting" },
+        { label: "Participatory Forest Management", link: "/quick-links/participatory-forest-management" },
+        { label: "EcoTourism", link: "/quick-links/ecotourism" },
+        { label: "Online Systems", link: "/quick-links/online-systems" },
+      ],
+    },
     { label: "Contact Us", link: "/contact" },
-    { label: "E-Documents", subItems: ["Public Documents", "Legal Documents", "Policy Documents", "Video Documentation", "Documents Archive"] },
+    {
+      label: "E-Documents",
+      subItems: [
+        { label: "Public Documents", link: "/e-documents/public" },
+        { label: "Legal Documents", link: "/e-documents/legal" },
+        { label: "Policy Documents", link: "/e-documents/policy" },
+        { label: "Video Documentation", link: "/e-documents/video" },
+        { label: "Documents Archive", link: "/e-documents/archive" },
+      ],
+    },
     { label: "Tenders", link: "/tenders" },
     { label: "Jobs", link: "/jobs" },
   ];
@@ -127,7 +175,12 @@ const MainNavBar = () => {
                         onClick={() => handleMenuClose(index)}
                         sx={{ fontSize: "0.9rem", "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" } }}
                       >
-                        {subItem}
+                        <Link
+                          href={subItem.link || "#"}
+                          style={{ textDecoration: "none", color: "inherit", width: "100%", display: "block" }}
+                        >
+                          {subItem.label}
+                        </Link>
                       </MenuItem>
                     ))}
                   </Menu>
@@ -199,24 +252,62 @@ const MainNavBar = () => {
         open={drawerOpen}
         onClose={toggleDrawer(false)}
         sx={{
-          "& .MuiDrawer-paper": { width: { xs: "80%", sm: "60%" }, maxWidth: "300px", backgroundColor: "#fff" },
+          "& .MuiDrawer-paper": {
+            width: { xs: "80%", sm: "60%" },
+            maxWidth: "300px",
+            backgroundColor: "#fff",
+            padding: "1rem",
+          },
         }}
       >
-        <Box sx={{ width: "100%", p: 2 }}>
-          <IconButton onClick={toggleDrawer(false)} sx={{ mb: 2 }}>
-            <MenuIcon sx={{ color: "#6A961F" }} />
+        <Box sx={{ width: "100%" }}>
+          {/* Close Button at Top Right */}
+          <IconButton
+            onClick={toggleDrawer(false)}
+            sx={{ position: "absolute", top: "1rem", right: "1rem", color: "#6A961F" }}
+          >
+            <MenuIcon />
           </IconButton>
-          <List>
+          <List sx={{ paddingTop: "3rem" }}> {/* Extra padding to avoid overlap with close button */}
             {menuItems.map((item, index) => (
-              <ListItem key={index}>
+              <React.Fragment key={index}>
                 {item.link ? (
-                  <Link href={item.link} sx={{ textDecoration: "none", color: "#6A961F" }}>
-                    <ListItemText primary={item.label} />
-                  </Link>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      component={Link}
+                      href={item.link}
+                      sx={{ color: "#6A961F", padding: "8px 16px" }}
+                    >
+                      <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
+                    </ListItemButton>
+                  </ListItem>
                 ) : (
-                  <ListItemText primary={item.label} sx={{ color: "#6A961F" }} />
+                  <>
+                    <ListItemButton
+                      onClick={() => handleToggle(index)}
+                      sx={{ color: "#6A961F", padding: "8px 16px" }}
+                    >
+                      <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
+                      {expandedItems[index] ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    <Collapse in={expandedItems[index]} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding sx={{ pl: 3 }}>
+                        {item.subItems.map((subItem, idx) => (
+                          <ListItem key={idx} disablePadding>
+                            <ListItemButton
+                              component={Link}
+                              href={subItem.link || "#"}
+                              sx={{ color: "#6A961F", padding: "6px 16px" }}
+                            >
+                              <ListItemText primary={subItem.label} sx={{ fontSize: "0.9rem" }} />
+                            </ListItemButton>
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Collapse>
+                  </>
                 )}
-              </ListItem>
+              </React.Fragment>
             ))}
           </List>
         </Box>
@@ -229,7 +320,7 @@ const MainNavBar = () => {
         onClose={toggleSearchDrawer}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "rgba(0, 0, 0, 0.85)", // Black translucent background
+            backgroundColor: "rgba(0, 0, 0, 0.85)",
             color: "white",
             height: "auto",
             width: "100%",

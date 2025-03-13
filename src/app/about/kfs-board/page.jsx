@@ -1,5 +1,5 @@
 // src/app/about/kfs-board/page.jsx
-import KFSBoardSection from "@/app/pages/about/KFSBoardSection";
+import KFSBoardSection from "@/pages/about/KFSBoardSection";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from '@/components/FooterBottom';

@@ -3,7 +3,7 @@ import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import HeroSection from "@/app/pages/homepage/HeroSection";
 import MissionSection from "@/app/pages/homepage/MissionSection";
-import CodeOfConductSection from "@/app/pages/homepage/CodeOfConductSection";
+import CodeOfConductSection from "@/app/pages/homepage/CodeofConductSection";
 import AboutSection from "@/app/pages/homepage/AboutSection";
 import NewsSection from "@/app/pages/homepage/NewsSection";
 import CoreValues from "@/app/pages/homepage/CoreValues";

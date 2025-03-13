@@ -1,7 +1,6 @@
 // src/components/NewsCard.jsx
 import Image from 'next/image';
 
-
 const NewsCard = ({ title, description, imageUrl, author, date, comments }) => {
     return (
       <div className="bg-gray-100 rounded-t-3xl shadow-lg w-97 flex-shrink-0 mx-4">

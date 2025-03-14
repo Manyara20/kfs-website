@@ -1,4 +1,6 @@
-"use client";
+"use client"; // Mark this as a client component
+
+import Link from 'next/link';
 import React, { useState } from "react";
 import {
   AppBar,
@@ -8,7 +10,6 @@ import {
   Menu,
   MenuItem,
   IconButton,
-  Link,
   Drawer,
   List,
   ListItem,
@@ -73,8 +74,8 @@ const MainNavBar = () => {
       subItems: [
         { label: "KFS Board", link: "/about/kfs-board" },
         { label: "Senior Management", link: "/about/senior-management" },
-        { label: "Core Programs", link: "/about/core-programming" },
-        { label: "Other Programs", link: "/about/other-programming" },
+        { label: "Core Programs", link: "/about/core-programs" },
+        { label: "Other Programs", link: "/about/other-programs" },
         { label: "Projects", link: "/about/projects" },
       ],
     },
@@ -88,15 +89,7 @@ const MainNavBar = () => {
         { label: "Press Releases", link: "/media-center/press-releases" },
       ],
     },
-    {
-      label: "Quick Links",
-      subItems: [
-        { label: "Tree Planting", link: "/quick-links/tree-planting" },
-        { label: "Participatory Forest Management", link: "/quick-links/participatory-forest-management" },
-        { label: "EcoTourism", link: "/quick-links/ecotourism" },
-        { label: "Online Systems", link: "/quick-links/online-systems" },
-      ],
-    },
+    { label: "Quick Links", subItems: ["Tree Planting", "Participatory Forest Management", "EcoTourism", "Online Systems"] },
     { label: "Contact Us", link: "/contact" },
     {
       label: "E-Documents",
@@ -175,11 +168,10 @@ const MainNavBar = () => {
                         onClick={() => handleMenuClose(index)}
                         sx={{ fontSize: "0.9rem", "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" } }}
                       >
-                        <Link
-                          href={subItem.link || "#"}
-                          style={{ textDecoration: "none", color: "inherit", width: "100%", display: "block" }}
-                        >
-                          {subItem.label}
+                        <Link href={subItem.link} passHref>
+                          <Typography sx={{ textDecoration: 'none', color: 'inherit' }}>
+                            {subItem.label}
+                          </Typography>
                         </Link>
                       </MenuItem>
                     ))}
@@ -272,15 +264,9 @@ const MainNavBar = () => {
             {menuItems.map((item, index) => (
               <React.Fragment key={index}>
                 {item.link ? (
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      component={Link}
-                      href={item.link}
-                      sx={{ color: "#6A961F", padding: "8px 16px" }}
-                    >
-                      <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
-                    </ListItemButton>
-                  </ListItem>
+                  <Link href={item.link} passHref>
+                    <ListItemText primary={item.label} sx={{ textDecoration: "none", color: "#6A961F" }} />
+                  </Link>
                 ) : (
                   <>
                     <ListItemButton

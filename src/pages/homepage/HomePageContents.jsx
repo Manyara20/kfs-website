@@ -4,7 +4,6 @@ import MainNavBar from "@/components/MainNavBar";
 import HeroSection from "@/pages/homepage/HeroSection";
 import MissionSection from "@/pages/homepage/MissionSection";
 import CodeOfConductSection from "@/pages/homepage/CodeofConductSection";
-import AboutSection from "@/pages/homepage/AboutSection";
 import NewsSection from "@/pages/homepage/NewsSection";
 import NewsCard from "@/pages/homepage/NewsCard";
 import CoreValues from "@/pages/homepage/CoreValues";

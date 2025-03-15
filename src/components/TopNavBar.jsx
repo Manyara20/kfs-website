@@ -23,11 +23,14 @@ const TopNavBar = () => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm")); // <600px
   const isMedium = useMediaQuery(theme.breakpoints.down("md")); // <900px
 
-  // Menu items
-  const allItems = [
+  // Menu items split into two groups
+  const group1 = [
     { icon: <Email />, text: "Staff Email", priority: 2 },
     { icon: <Assignment />, text: "E-Registration", priority: 3 },
     { icon: <AccountBox />, text: "Research License", priority: 3 },
+  ];
+
+  const group2 = [
     { icon: <Call />, text: "0800 123 456 - Toll Free", priority: 1 },
     {
       icon: <AccessTime />,
@@ -38,10 +41,16 @@ const TopNavBar = () => {
   ];
 
   // Filter items based on screen size and priority
-  const visibleItems = allItems.filter((item) => {
-    if (isExtraSmall) return item.priority === 1; // Show only highest priority
-    if (isSmall) return item.priority <= 2; // Show priority 1 and 2
-    return true; // Show all on larger screens
+  const visibleGroup1 = group1.filter((item) => {
+    if (isExtraSmall) return item.priority === 1;
+    if (isSmall) return item.priority <= 2;
+    return true;
+  });
+
+  const visibleGroup2 = group2.filter((item) => {
+    if (isExtraSmall) return item.priority === 1;
+    if (isSmall) return item.priority <= 2;
+    return true;
   });
 
   return (
@@ -60,9 +69,9 @@ const TopNavBar = () => {
           minHeight: "auto !important",
           display: "flex",
           alignItems: "center",
-          overflowX: isMedium ? "auto" : "hidden", // Enable horizontal scrolling on medium and below
-          whiteSpace: "nowrap", // Prevent wrapping within the scrollable area
-          "&::-webkit-scrollbar": { height: "4px" }, // Thin scrollbar
+          overflowX: isMedium ? "auto" : "hidden",
+          whiteSpace: "nowrap",
+          "&::-webkit-scrollbar": { height: "4px" },
           "&::-webkit-scrollbar-thumb": {
             backgroundColor: "rgba(255,255,255,0.3)",
             borderRadius: "4px",
@@ -71,60 +80,89 @@ const TopNavBar = () => {
       >
         <Box
           sx={{
-            display: "flex",
+            display: isSmall ? "none" : "flex", // Hide completely on small screens
             alignItems: "center",
             gap: { xs: 0.5, sm: 1, md: 1.5 },
-            flexShrink: 0, // Prevent items from shrinking too much
+            flexShrink: 0,
+            width: "100%",
+            justifyContent: "space-between", // Space between groups
           }}
         >
-          {visibleItems.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <IconButton
-                sx={{
-                  color: "white",
-                  padding: { xs: "2px", sm: "4px" },
-                }}
+          {/* Group 1 */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+            {visibleGroup1.map((item, index) => (
+              <Box
+                key={index}
+                sx={{ display: "flex", alignItems: "center" }}
               >
-                {React.cloneElement(item.icon, {
-                  fontSize: isExtraSmall
-                    ? "small"
-                    : isSmall
-                    ? "medium"
-                    : "inherit", // Dynamic icon sizing
-                })}
-              </IconButton>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "white",
-                  fontSize: {
-                    xs: "0.6rem",
-                    sm: "0.7rem",
-                    md: "0.75rem",
-                  },
-                  whiteSpace: "nowrap", // Keep text in one line
-                }}
-              >
-                {item.text}
-              </Typography>
-              {index < visibleItems.length - 1 && (
-                <Box
+                <IconButton
+                  sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
+                >
+                  {React.cloneElement(item.icon, {
+                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                  })}
+                </IconButton>
+                <Typography
+                  variant="body2"
                   sx={{
-                    width: "1px",
-                    height: "16px",
-                    backgroundColor: "white",
-                    mx: { xs: 0.25, sm: 0.5, md: 1 },
+                    color: "white",
+                    fontSize: { xs: "0.6rem", sm: "0.7rem", md: "0.75rem" },
+                    whiteSpace: "nowrap",
                   }}
-                />
-              )}
-            </Box>
-          ))}
+                >
+                  {item.text}
+                </Typography>
+                {index < visibleGroup1.length - 1 && (
+                  <Box
+                    sx={{
+                      width: "1px",
+                      height: "16px",
+                      backgroundColor: "white",
+                      mx: { xs: 0.25, sm: 0.5, md: 1 },
+                    }}
+                  />
+                )}
+              </Box>
+            ))}
+          </Box>
+
+          {/* Group 2 */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+            {visibleGroup2.map((item, index) => (
+              <Box
+                key={index}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <IconButton
+                  sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
+                >
+                  {React.cloneElement(item.icon, {
+                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                  })}
+                </IconButton>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "white",
+                    fontSize: { xs: "0.6rem", sm: "0.7rem", md: "0.75rem" },
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.text}
+                </Typography>
+                {index < visibleGroup2.length - 1 && (
+                  <Box
+                    sx={{
+                      width: "1px",
+                      height: "16px",
+                      backgroundColor: "white",
+                      mx: { xs: 0.25, sm: 0.5, md: 1 },
+                    }}
+                  />
+                )}
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Toolbar>
     </AppBar>

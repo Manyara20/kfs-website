@@ -1,46 +1,162 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+"use client";
+import React, { useState, useEffect } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: "Kenya Forest Service",
+      subtitle: "Kenya Forest Service is a state corporation that was created through the Forest Act (2005)",
+      image: "/images/forest.jpg", // Path relative to /public
+    },
+    {
+      title: "Conservation Efforts",
+      subtitle: "Protecting Kenya's forests for future generations",
+      image: "/images/plantation.jpg", // Path relative to /public
+    },
+    {
+      title: "Sustainable Future",
+      subtitle: "Promoting environmental sustainability since 2005",
+      image: "/images/nuseries.jpg", // Path relative to /public
+    },
+  ];
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <Box
       sx={{
-        position: 'relative',
-        height: '80vh',
-        backgroundImage: 'url(https://th.bing.com/th/id/R.ac067b59d49524eb63f49efceee9d4a5?rik=P2w2V4X9HHSCyw&pid=ImgRaw&r=0)', // Ensure the URL is correctly wrapped with url() and quotes
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        display: 'flex',
-        justifyContent: 'flex-start',  
-        alignItems: 'flex-start',      
-        color: 'white',
-        padding: '20px', 
+        position: "relative",
+        height: "80vh",
+        width: "100%",
+        overflow: "hidden",
       }}
     >
-      <Box>
-        <Typography
-          variant="h1"
+      {/* Slide Container */}
+      <Box
+        sx={{
+          position: "relative",
+          height: "100%",
+          backgroundImage: `url(${slides[currentSlide].image})`, // Use path from /public
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
+          color: "white",
+          padding: "20px",
+          transition: "background-image 0.5s ease-in-out",
+        }}
+      >
+        <Box
           sx={{
-            fontSize: '4rem',  
-            fontWeight: 'bold', 
-            marginBottom: '20px',
-            letterSpacing: '2px', // Add some letter spacing if needed
-            textShadow: '2px 2px 5px rgba(0, 0, 0, 0.7)', 
+            textAlign: "center", // Ensure text is centered within the Box
           }}
         >
-          Kenya Forest Service
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{// Adjust font size
-            fontSize: '2.5rem',
-            marginBottom: '20px',
-            fontStyle: 'italic', // Make the description italic if desired
-            textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)', 
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: "4rem",
+              fontWeight: "bold",
+              marginBottom: "20px",
+              letterSpacing: "2px",
+              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
+            }}
+          >
+            {slides[currentSlide].title}
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: "2.5rem",
+              marginBottom: "20px",
+              fontStyle: "italic",
+              textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
+            }}
+          >
+            {slides[currentSlide].subtitle}
+          </Typography>
+        </Box>
+
+        {/* Navigation Buttons */}
+        <Button
+          onClick={handlePrev}
+          sx={{
+            position: "absolute",
+            left: "20px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "white",
+            bgcolor: "rgba(0, 0, 0, 0.5)",
+            "&:hover": {
+              bgcolor: "rgba(0, 0, 0, 0.7)",
+            },
+            zIndex: 1,
           }}
         >
-          Kenya Forest Service is a state corporation that was created through the Forest Act (2005)
-        </Typography>
+          <ArrowBackIosIcon />
+        </Button>
+        <Button
+          onClick={handleNext}
+          sx={{
+            position: "absolute",
+            right: "20px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "white",
+            bgcolor: "rgba(0, 0, 0, 0.5)",
+            "&:hover": {
+              bgcolor: "rgba(0, 0, 0, 0.7)",
+            },
+            zIndex: 1,
+          }}
+        >
+          <ArrowForwardIosIcon />
+        </Button>
+
+        {/* Slide Indicators */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: "10px",
+          }}
+        >
+          {slides.map((_, index) => (
+            <Box
+              key={index}
+              sx={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                backgroundColor: currentSlide === index ? "white" : "rgba(255, 255, 255, 0.5)",
+                cursor: "pointer",
+              }}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );

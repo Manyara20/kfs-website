@@ -1,90 +1,171 @@
-'use client';
-
-import React from 'react';
+"use client";
+import React from "react";
+import { Box, Typography, Button, Card, CardContent, Grid } from "@mui/material";
 
 const objectives = [
   {
-    title: 'KRA 1: Forest and Tree Cover Expansion for Climate Mitigation and Adaptation',
+    title: "KRA 1: Forest and Tree Cover Expansion for Climate Mitigation and Adaptation",
     details: [
-      'Increase the National Tree Cover from 13% to 21.03% in 5 years towards 30% by 2032.',
-      'Increase the National Forest Cover from 8.3% to 10% in 5 years towards 10% by 2030.',
+      "Increase the National Tree Cover from 13% to 21.03% in 5 years towards 30% by 2032.",
+      "Increase the National Forest Cover from 8.3% to 10% in 5 years towards 10% by 2030.",
     ],
   },
   {
-    title: 'KRA 2: Conservation and Protection of Forests for Climate Change Resilience',
+    title: "KRA 2: Conservation and Protection of Forests for Climate Change Resilience",
     details: [
-      'Strengthen enforcement capacity in forest protection and secure corporate assets.',
-      'Improve governance for sustainable forest management.',
-      'Strengthen climate change actions and response capacities.',
-      'Reverse degradation of Mangrove ecosystems for climate mitigation.',
+      "Strengthen enforcement capacity in forest protection and secure corporate assets.",
+      "Improve governance for sustainable forest management.",
+      "Strengthen climate change actions and response capacities.",
+      "Reverse degradation of Mangrove ecosystems for climate mitigation.",
     ],
   },
   {
-    title: 'KRA 3: Economic Development and Livelihood Improvement',
+    title: "KRA 3: Economic Development and Livelihood Improvement",
     details: [
-      'Strengthen nature-based enterprises for improving livelihoods and climate resilience.',
-      'Develop commercial forest plantations on public, community, and private lands.',
-      'Collaborate with private sectors for climate finance and carbon project development.',
+      "Strengthen nature-based enterprises for improving livelihoods and climate resilience.",
+      "Develop commercial forest plantations on public, community, and private lands.",
+      "Collaborate with private sectors for climate finance and carbon project development.",
     ],
   },
   {
-    title: 'KRA 4: Organizational Capacity Building and Collaboration',
+    title: "KRA 4: Organizational Capacity Building and Collaboration",
     details: [
-      'Promote operational efficiency and effectiveness to deliver on mandate.',
-      'Strengthen partnerships and increase resource mobilization capacity.',
+      "Promote operational efficiency and effectiveness to deliver on mandate.",
+      "Strengthen partnerships and increase resource mobilization capacity.",
     ],
   },
 ];
 
 const CodeOfConductSection = () => {
   return (
-    <div className="py-10 px-4 md:px-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        {/* Left Side: Image and Logo */}
-        <div>
-          <img
-            src="https://www.kbc.co.ke/wp-content/uploads/2023/09/KFS.jpeg"
-            alt="KFS Personnel"
-            className="w-full rounded-xl"
-          />
-
-          <div className="flex flex-col items-start mt-4">
-            <img
-              src="https://th.bing.com/th/id/R.e05b02abfe95029c425adbc0ba7b900c?rik=3o4JFkXm2MflHQ&pid=ImgRaw&r=0"
-              alt="KFS Logo"
-              className="w-36 mb-2"
-            />
-            <p className="text-sm text-gray-500">THE CODE OF CONDUCT AND ETHICS 2021</p>
-          </div>
-        </div>
+    <Box sx={{ py: 10, px: { xs: 4, md: 16 } }}>
+      <Grid container spacing={4} alignItems="stretch">
+        {/* Left Side: Image with Card on Top */}
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: "100%", // Fills the height of the Grid item
+              backgroundImage: `url("/images/foresty.jpg")`, // Local path placeholder
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              borderRadius: "16px",
+              overflow: "hidden",
+            }}
+          >
+            <Card
+              sx={{
+                backgroundColor: "transparent", // No background
+                boxShadow: "none", // Remove shadow for a cleaner look
+                borderRadius: "16px",
+                p: 3,
+                position: "relative", // Stays on top of the image
+                zIndex: 1, // Ensures card is above the image
+                maxWidth: "80%", // Limits card width for balance
+                mx: "auto", // Centers the card horizontally
+                mt: { xs: 2, md: 4 }, // Adds top margin for spacing
+              }}
+            >
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  color="#4A7C12"
+                  fontWeight="bold"
+                  sx={{ textTransform: "uppercase", textAlign: "center" }}
+                >
+                  About Kenya Forest Service
+                </Typography>
+                <Typography variant="body1" paragraph sx={{ color: "black" }}>
+                  In carrying out its mandate, the functions of KFS include among others:
+                </Typography>
+                <Typography variant="body1" paragraph sx={{ color: "black" }}>
+                  1. Conserve, protect and manage all Public Forests
+                </Typography>
+                <Typography variant="body1" paragraph sx={{ color: "black" }}>
+                  2. Prepare and implement management plans for all public forests, and, where requested, assist in preparation
+                  of management plans for community forests or private forests in consultation with the relevant owners
+                </Typography>
+                <Typography variant="body1" paragraph sx={{ color: "black" }}>
+                  3. Receive and consider applications for licenses or permits in
+                  relation to forest resources or management of forests or any other relevant matter in accordance with the Act
+                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      color: "#4A7C12",
+                      borderColor: "#4A7C12",
+                      "&:hover": { backgroundColor: "#4A7C12", color: "white" },
+                      mt: 2,
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
+        </Grid>
 
         {/* Right Side: Strategic Objectives */}
-        <div>
-          <h2 className="text-3xl font-bold mb-4 text-center text-black">Strategic Objectives</h2>
-          <p className="text-lg mb-6 text-black">
+        <Grid item xs={12} md={6}>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: "1.875rem", fontWeight: "bold", mb: 4, textAlign: "center", color: "black" }}
+          >
+            Strategic Objectives
+          </Typography>
+          <Typography variant="body1" sx={{ fontSize: "1.125rem", mb: 6, textAlign: "center", color: "black" }}>
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision. The service will therefore focus on the following strategic objectives:
-          </p>
+          </Typography>
 
-          <div className="flex flex-col gap-4">
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {objectives.map((item, index) => (
-              <div 
-                key={index} 
-                className="group w-full p-4 rounded-lg bg-green-600 text-white transition-all duration-300 hover:bg-green-700 cursor-pointer"
+              <Box
+                key={index}
+                sx={{
+                  width: "100%",
+                  p: 2,
+                  borderRadius: "8px",
+                  bgcolor: "#16a34a", // green-600 equivalent
+                  color: "white",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    bgcolor: "#15803d", // green-700 equivalent
+                  },
+                  "&:hover .details": { // Target the details class on hover
+                    opacity: 1,
+                    maxHeight: "1000px", // Large enough to accommodate content
+                  },
+                  cursor: "pointer",
+                }}
               >
-                <p className="text-lg font-semibold">{item.title}</p>
-
-                {/* Details - Hidden by Default, Shown on Hover */}
-                <div className="mt-2 space-y-1 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-screen">
+                <Typography sx={{ fontSize: "1.125rem", fontWeight: "semibold" }}>{item.title}</Typography>
+                <Box
+                  className="details" // Add className for targeting
+                  sx={{
+                    mt: 1,
+                    opacity: 0,
+                    maxHeight: 0,
+                    overflow: "hidden",
+                    transition: "all 0.3s ease",
+                  }}
+                  component="div"
+                >
                   {item.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-white">• {detail}</p>
+                    <Typography key={i} sx={{ fontSize: "0.875rem", color: "white" }}>
+                      • {detail}
+                    </Typography>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

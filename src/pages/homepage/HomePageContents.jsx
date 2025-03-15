@@ -23,7 +23,6 @@ function HomePageContents() {
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
-      <AboutSection />
       <Principles/>
       <NewsSection/>
       <NewsCard/>

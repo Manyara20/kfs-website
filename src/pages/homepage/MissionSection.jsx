@@ -11,9 +11,11 @@ const StrategicSection = () => {
         padding: { xs: "16px", sm: "24px", md: "32px", lg: "40px" },
         backgroundColor: "#e6f5e6",
         minHeight: "100%", // Ensure it takes full height if needed
+        display: "flex", // Center content vertically and horizontally
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-
       {/* Centered Grid */}
       <Grid
         container
@@ -42,6 +44,14 @@ const StrategicSection = () => {
               },
               bgcolor: "white",
               minHeight: { xs: "240px", sm: "260px", md: "280px" }, // Ensure consistent height
+              animation: {
+                xs: "slideIn 0.5s ease-in-out forwards", // Slide animation on xs screens
+                sm: "none", // No animation on larger screens
+              },
+              "@keyframes slideIn": {
+                "0%": { transform: "translateX(-100%)", opacity: 0 },
+                "100%": { transform: "translateX(0)", opacity: 1 },
+              },
             }}
           >
             <MissionIcon
@@ -106,6 +116,14 @@ const StrategicSection = () => {
               },
               bgcolor: "white",
               minHeight: { xs: "240px", sm: "260px", md: "280px" },
+              animation: {
+                xs: "slideIn 0.5s ease-in-out forwards 0.2s", // Delay for second card
+                sm: "none",
+              },
+              "@keyframes slideIn": {
+                "0%": { transform: "translateX(-100%)", opacity: 0 },
+                "100%": { transform: "translateX(0)", opacity: 1 },
+              },
             }}
           >
             <VisionIcon
@@ -170,6 +188,14 @@ const StrategicSection = () => {
               },
               bgcolor: "white",
               minHeight: { xs: "240px", sm: "260px", md: "280px" },
+              animation: {
+                xs: "slideIn 0.5s ease-in-out forwards 0.4s", // Delay for third card
+                sm: "none",
+              },
+              "@keyframes slideIn": {
+                "0%": { transform: "translateX(-100%)", opacity: 0 },
+                "100%": { transform: "translateX(0)", opacity: 1 },
+              },
             }}
           >
             <GoalIcon

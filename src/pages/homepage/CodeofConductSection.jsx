@@ -6,32 +6,32 @@ const objectives = [
   {
     title: "KRA 1: Forest and Tree Cover Expansion for Climate Mitigation and Adaptation",
     details: [
-      "Increase the National Tree Cover from 13% to 21.03% in 5 years towards 30% by 2032.",
-      "Increase the National Forest Cover from 8.3% to 10% in 5 years towards 10% by 2030.",
+      "1.1 Increase the National Tree Cover from 13% to 21.03% in 5 years towards 30% by 2032.",
+      "1.2 Increase the National Forest Cover from 8.3% to 10% in 5 years towards 10% by 2030.",
     ],
   },
   {
     title: "KRA 2: Conservation and Protection of Forests for Climate Change Resilience",
     details: [
-      "Strengthen enforcement capacity in forest protection and secure corporate assets.",
-      "Improve governance for sustainable forest management.",
-      "Strengthen climate change actions and response capacities.",
-      "Reverse degradation of Mangrove ecosystems for climate mitigation.",
+      "2.1 Strengthen enforcement capacity in forest protection and secure corporate assets.",
+      "2.2 Improve governance for sustainable forest management.",
+      "2.3 Strengthen climate change actions and response capacities.",
+      "2.4 Reverse degradation of Mangrove ecosystems for climate mitigation.",
     ],
   },
   {
     title: "KRA 3: Economic Development and Livelihood Improvement",
     details: [
-      "Strengthen nature-based enterprises for improving livelihoods and climate resilience.",
-      "Develop commercial forest plantations on public, community, and private lands.",
-      "Collaborate with private sectors for climate finance and carbon project development.",
+      "3.1 Strengthen nature-based enterprises for improving livelihoods and climate resilience.",
+      "3.2 Develop commercial forest plantations on public, community, and private lands.",
+      "3.3 Collaborate with private sectors for climate finance and carbon project development.",
     ],
   },
   {
     title: "KRA 4: Organizational Capacity Building and Collaboration",
     details: [
-      "Promote operational efficiency and effectiveness to deliver on mandate.",
-      "Strengthen partnerships and increase resource mobilization capacity.",
+      "4.1 Promote operational efficiency and effectiveness to deliver on mandate.",
+      "4.2 Strengthen partnerships and increase resource mobilization capacity.",
     ],
   },
 ];
@@ -50,7 +50,7 @@ const CodeOfConductSection = () => {
               backgroundImage: `url("/images/foresty.jpg")`, // Local path placeholder
               backgroundSize: "cover",
               backgroundPosition: "center",
-              borderRadius: "16px",
+              borderRadius: "0px",
               overflow: "hidden",
             }}
           >
@@ -58,7 +58,7 @@ const CodeOfConductSection = () => {
               sx={{
                 backgroundColor: "transparent", // No background
                 boxShadow: "none", // Remove shadow for a cleaner look
-                borderRadius: "16px",
+                // borderRadius: "16px",
                 p: 3,
                 position: "relative", // Stays on top of the image
                 zIndex: 1, // Ensures card is above the image
@@ -71,7 +71,7 @@ const CodeOfConductSection = () => {
                 <Typography
                   variant="h5"
                   gutterBottom
-                  color="#4A7C12"
+                  color="#0D3C00"
                   fontWeight="bold"
                   sx={{ textTransform: "uppercase", textAlign: "center" }}
                 >
@@ -129,11 +129,15 @@ const CodeOfConductSection = () => {
                   width: "100%",
                   p: 2,
                   borderRadius: "8px",
-                  bgcolor: "#16a34a", // green-600 equivalent
+                  bgcolor: "#0D3C00", // green-600 equivalent
                   color: "white",
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    bgcolor: "#15803d", // green-700 equivalent
+                    //bgcolor: "#15803d", // green-700 equivalent
+                    bgcolor: "#fff",
+                    border: "3px solid #15803d",
+                    color:"#0D3C00"
+                    
                   },
                   "&:hover .details": { // Target the details class on hover
                     opacity: 1,
@@ -151,12 +155,13 @@ const CodeOfConductSection = () => {
                     maxHeight: 0,
                     overflow: "hidden",
                     transition: "all 0.3s ease",
+                    color:"black"
                   }}
                   component="div"
                 >
                   {item.details.map((detail, i) => (
-                    <Typography key={i} sx={{ fontSize: "0.875rem", color: "white" }}>
-                      • {detail}
+                    <Typography key={i} sx={{ fontSize: "0.875rem", color: "#0D3C00" }}>
+                       {detail}
                     </Typography>
                   ))}
                 </Box>

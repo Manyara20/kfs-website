@@ -33,7 +33,7 @@ const MainNavBar = () => {
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedItems, setExpandedItems] = useState({});
-  const [isSticky, setIsSticky] = useState(false); // New state to track sticky status
+  const [isSticky, setIsSticky] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -56,27 +56,58 @@ const MainNavBar = () => {
     }));
   };
 
-  // Effect to detect when the navbar is sticky
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      setIsSticky(offset > 0); // Navbar is sticky when scrolled past initial position
+      setIsSticky(offset > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
+  const navigationItems = [
     { label: "Home", link: "/" },
     {
       label: "About",
       subItems: [
         { label: "KFS Board", link: "/about/kfs-board" },
         { label: "Senior Management", link: "/about/senior-management" },
-        { label: "Core Programs", link: "/about/core-programming" },
-        { label: "Other Programs", link: "/about/other-programming" },
-        { label: "Projects", link: "/about/projects" },
+        {
+          label: "Core Programs",
+          link: "/about/core-programs",
+          subItems: [
+            { label: "Forest Conservation and Management", link: "/about/core-programs/forest-conservation-management" },
+            { label: "Forest Plantation and Management", link: "/about/core-programs/forest-plantation-management" },
+            { label: "Forest Protection and Security", link: "/about/core-programs/forest-protection-security" },
+            {
+              label: "Dryland & private Forestry Development",
+              link: "/about/core-programs/dryland-private-forestry",
+              subItems: [
+                { label: "Conservation Coordination", link: "/about/core-programs/dryland-private-forestry/conservation-coordination" },
+                { label: "Forestry Advisory & County Liaison", link: "/about/core-programs/dryland-private-forestry/forestry-advisory-county-liaison" },
+              ],
+            },
+          ],
+        },
+        {
+          label: "Other Programs",
+          link: "/about/other-programs",
+          subItems: [
+            { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
+            { label: "Strategy, Patnerships & Resorce Mobilizations", link: "/about/other-programs/strategy-patnerships-resources" },
+            { label: "Corprate Services", link: "/about/other-programs/corporate-services" },
+          ],
+        },
+        {
+          label: "Projects",
+          link: "/about/projects",
+          subItems: [
+            { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
+            { label: "NTPC", link: "/about/projects/NTPC" },
+            { label: "IC-FRA Documents", link: "/about/projects/IC-FRA-Documents" },
+          ],
+        },
       ],
     },
     {
@@ -117,9 +148,9 @@ const MainNavBar = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: isSticky ? "#0D3C00" : "white", // Change background when sticky
+        backgroundColor: isSticky ? "#0D3C00" : "white",
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        transition: "background-color 0.3s ease", // Smooth transition for background color
+        transition: "background-color 0.3s ease",
       }}
     >
       <Toolbar
@@ -156,7 +187,7 @@ const MainNavBar = () => {
               gap: { md: 1, lg: 2 },
             }}
           >
-            {menuItems.map((item, index) =>
+            {navigationItems.map((item, index) =>
               item.subItems ? (
                 <Box
                   key={index}
@@ -171,7 +202,7 @@ const MainNavBar = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: isSticky ? "white" : "#6A961F", // Change text color when sticky
+                      color: isSticky ? "white" : "#6A961F",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -180,7 +211,7 @@ const MainNavBar = () => {
                       padding: { md: "6px 8px", lg: "8px 12px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                       borderRadius: "4px",
-                      transition: "color 0.3s ease", // Smooth transition for text color
+                      transition: "color 0.3s ease",
                     }}
                   >
                     {item.label}
@@ -202,22 +233,74 @@ const MainNavBar = () => {
                     }}
                   >
                     {item.subItems.map((subItem, idx) => (
-                      <MenuItem
+                      <Box
                         key={idx}
                         sx={{
-                          fontSize: "0.9rem",
-                          color: "black",
-                          "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-                          padding: "8px 16px",
+                          position: "relative",
+                          "&:hover > .MuiBox-root": {
+                            visibility: "visible",
+                            opacity: 1,
+                          },
                         }}
                       >
-                        <Link
-                          href={subItem.link || "#"}
-                          style={{ textDecoration: "none", color: "inherit", width: "100%", display: "block" }}
+                        <MenuItem
+                          sx={{
+                            fontSize: "0.9rem",
+                            color: "black",
+                            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
+                            padding: "8px 16px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                          }}
                         >
-                          {subItem.label}
-                        </Link>
-                      </MenuItem>
+                          <Link
+                            href={subItem.link || "#"}
+                            style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                          >
+                            {subItem.label}
+                          </Link>
+                          {subItem.subItems && subItem.subItems.length > 0 && (
+                            <ArrowDropDown sx={{ color: "black", fontSize: "1.2rem" }} />
+                          )}
+                        </MenuItem>
+                        {subItem.subItems && subItem.subItems.length > 0 && (
+                          <Box
+                            sx={{
+                              visibility: "hidden",
+                              opacity: 0,
+                              position: "absolute",
+                              top: 0,
+                              left: "100%",
+                              backgroundColor: "white",
+                              minWidth: "200px",
+                              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                              borderRadius: "4px",
+                              zIndex: 1000,
+                              transition: "opacity 0.2s ease-in-out",
+                            }}
+                          >
+                            {subItem.subItems.map((nestedItem, nestedIdx) => (
+                              <MenuItem
+                                key={nestedIdx}
+                                sx={{
+                                  fontSize: "0.9rem",
+                                  color: "black",
+                                  "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
+                                  padding: "8px 16px",
+                                }}
+                              >
+                                <Link
+                                  href={nestedItem.link || "#"}
+                                  style={{ textDecoration: "none", color: "inherit", width: "100%", display: "block" }}
+                                >
+                                  {nestedItem.label}
+                                </Link>
+                              </MenuItem>
+                            ))}
+                          </Box>
+                        )}
+                      </Box>
                     ))}
                   </Box>
                 </Box>
@@ -226,14 +309,14 @@ const MainNavBar = () => {
                   key={index}
                   href={item.link}
                   sx={{
-                    color: isSticky ? "white" : "#6A961F", // Change text color when sticky
+                    color: isSticky ? "white" : "#6A961F",
                     textDecoration: "none",
                     padding: { md: "6px 8px", lg: "8px 12px" },
                     "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                     borderRadius: "4px",
                     display: "flex",
                     alignItems: "center",
-                    transition: "color 0.3s ease", // Smooth transition for text color
+                    transition: "color 0.3s ease",
                   }}
                 >
                   <Typography sx={{ fontSize: { md: "0.85rem", lg: "0.95rem" }, fontWeight: 500 }}>
@@ -250,12 +333,12 @@ const MainNavBar = () => {
           <Box sx={{ flexShrink: 0 }}>
             <IconButton
               sx={{
-                color: isSticky ? "white" : "black", // Change icon color when sticky
+                color: isSticky ? "white" : "black",
                 fontWeight: "bold",
                 padding: { md: "6px", lg: "8px" },
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
                 borderRadius: "4px",
-                transition: "color 0.3s ease", // Smooth transition for icon color
+                transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
             >
@@ -312,7 +395,7 @@ const MainNavBar = () => {
             <MenuIcon />
           </IconButton>
           <List sx={{ paddingTop: "3rem" }}>
-            {menuItems.map((item, index) => (
+            {navigationItems.map((item, index) => (
               <React.Fragment key={index}>
                 {item.link ? (
                   <ListItem disablePadding>

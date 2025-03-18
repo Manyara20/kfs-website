@@ -50,7 +50,6 @@ const CodeOfConductSection = () => {
               backgroundImage: `url("/images/foresty.jpg")`, // Local path placeholder
               backgroundSize: "cover",
               backgroundPosition: "center",
-              borderRadius: "16px",
               overflow: "hidden",
             }}
           >
@@ -58,7 +57,6 @@ const CodeOfConductSection = () => {
               sx={{
                 backgroundColor: "transparent", // No background
                 boxShadow: "none", // Remove shadow for a cleaner look
-                borderRadius: "16px",
                 p: 3,
                 position: "relative", // Stays on top of the image
                 zIndex: 1, // Ensures card is above the image
@@ -128,7 +126,6 @@ const CodeOfConductSection = () => {
                 sx={{
                   width: "100%",
                   p: 2,
-                  borderRadius: "8px",
                   bgcolor: "#16a34a", // green-600 equivalent
                   color: "white",
                   transition: "all 0.3s ease",

@@ -1,14 +1,12 @@
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from '@/components/FooterBottom';
-import ForestConservationManagement from '@/pages/about/Core Programs/ForestConservationManagement';
 
 function KFSBoardPage() {
   return (
     <div>
       <TopNavBar />
       <MainNavBar />
-      <ForestConservationManagement/>
       <FooterBottom />
     </div>
   );

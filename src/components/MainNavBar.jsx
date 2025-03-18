@@ -113,20 +113,38 @@ const MainNavBar = () => {
     {
       label: "Media Center",
       subItems: [
-        { label: "News & Events", link: "/media-center/news-events" },
-        { label: "Photo Gallery", link: "/media-center/photo-gallery" },
-        { label: "Events Calendar", link: "/media-center/events-calendar" },
-        { label: "The Forester Magazine", link: "/media-center/forester-magazine" },
-        { label: "Press Releases", link: "/media-center/press-releases" },
+        { label: "News & Events", link: "/mediacenter/news-events" },
+        { label: "Photo Gallery", link: "/mediacenter/photo-gallery" },
+        { label: "Events Calendar", link: "/mediacenter/events-calendar" },
+        { label: "The Forester Magazine", link: "/mediacenter/forester-magazine" },
+        { label: "Press Releases", link: "/mediacenter/press-releases" },
       ],
     },
     {
       label: "Quick Links",
       subItems: [
         { label: "Tree Planting", link: "/quick-links/tree-planting" },
-        { label: "Participatory Forest Management", link: "/quick-links/participatory-forest-management" },
+        { 
+          label: "Participatory Forest Management",
+          link: "/quick-links/participatory-forest-management",
+          subItems: [
+            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Forest Management Agreements", link: "/quick-links/participatory-forest-management/forest-agreements" },
+            { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/forest-plans" },
+          ],
+        },
         { label: "EcoTourism", link: "/quick-links/ecotourism" },
-        { label: "Online Systems", link: "/quick-links/online-systems" },
+        { 
+          label: "Online Systems",
+          link: "/quick-links/online-systems",
+          subItems: [
+            { label: "Staff Mail", link: "/quick-links/online-systems/staff-mail" },
+            { label: "E-Registration", link: "/quick-links/online-systems/e-registration" },
+            { label: "E-Nursery", link: "/quick-links/online-systems/e-nursery" },
+            { label: "Research Lisence", link: "/quick-links/online-systems/research-lisence" },
+            { label: "Monitoring and Evaluation", link: "/quick-links/online-systems/monitoring-evaluation" },
+          ],
+        },
       ],
     },
     { label: "Contact Us", link: "/contact" },

@@ -1,7 +1,9 @@
+/* global.css */
+
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
-/* global.css */
+/* Custom CSS variables */
 :root {
   --background: #ffffff;
   --foreground: #ffe8e8;
@@ -22,11 +24,71 @@ body {
 
 /* Hide scrollbar for Chrome, Safari, and Edge */
 .no-scrollbar::-webkit-scrollbar {
-    display: none; /* For Webkit-based browsers */
-  }
-  
-  /* Hide scrollbar for Firefox */
-  .no-scrollbar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
+  display: none; /* For Webkit-based browsers */
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Container for the X feed */
+.twitter-feed-container {
+  background-color: #ffffff;
+}
+
+/* Override X timeline container */
+.twitter-feed-container .twitter-timeline,
+.twitter-feed-container .twitter-timeline-rendered {
+  background-color: #fff !important;
+  border: none !important;
+  width: 100% !important;
+}
+
+/* Style individual tweets */
+.twitter-feed-container .timeline-TweetList-tweet {
+  background-color: #ffffff !important;
+  border: none !important;
+  padding: 12px !important;
+  margin-bottom: 8px !important;
+}
+
+/* Style tweet text */
+.twitter-feed-container .timeline-Tweet-text {
+  color: #ffffff !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+/* Style tweet author name */
+.twitter-feed-container .timeline-Tweet-author .TweetAuthor-name {
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* Style tweet handle and timestamp */
+.twitter-feed-container .timeline-Tweet-author .TweetAuthor-screenName,
+.twitter-feed-container .timeline-Tweet-timestamp {
+  color: #e0e0e0 !important;
+  font-size: 12px !important;
+}
+
+/* Remove unwanted elements */
+.twitter-feed-container .timeline-Header,
+.twitter-feed-container .timeline-Footer {
+  display: none !important;
+}
+
+/* Ensure tweet cards have no rounded corners */
+.twitter-feed-container .timeline-TweetList-tweet {
+  border-radius: 0 !important;
+}
+
+/* Links in tweets */
+.twitter-feed-container .timeline-Tweet-text a {
+  color: #a6192e !important;
+}
+

@@ -120,22 +120,6 @@ const ForestConservationPage = () => {
 
   return (
     <PageContainer>
-      {/* Social Media Icons */}
-      <SocialIconsContainer>
-        <SocialIconButton>
-          <Facebook />
-        </SocialIconButton>
-        <SocialIconButton>
-          <Twitter />
-        </SocialIconButton>
-        <SocialIconButton>
-          <YouTube />
-        </SocialIconButton>
-        <SocialIconButton>
-          <Instagram />
-        </SocialIconButton>
-      </SocialIconsContainer>
-
       {/* Main Content Card */}
       <ContentCard
         initial="hidden"

@@ -5,7 +5,6 @@ import HeroSection from "@/pages/homepage/HeroSection";
 import MissionSection from "@/pages/homepage/MissionSection";
 import CodeOfConductSection from "@/pages/homepage/CodeofConductSection";
 import NewsSection from "@/pages/homepage/NewsSection";
-import NewsCard from "@/pages/homepage/NewsCard";
 import CoreValues from "@/pages/homepage/CoreValues";
 import Footer from "@/pages/homepage/Footer";
 import MagazineSection from "@/pages/homepage/MagazineSection";
@@ -24,7 +23,6 @@ function HomePageContents() {
       <CodeOfConductSection />
       <Principles/>
       <NewsSection/>
-      <NewsCard/>
       <CoreValues/>
       <PatnersSection/>
       <MagazineSection/>

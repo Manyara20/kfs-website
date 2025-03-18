@@ -7,7 +7,7 @@ const newsData = [
     title: "FKF-CFA Pays CCF a Courtesy Call",
     description:
       "The CCF Mr. Alex Lemarkoko has today been paid a courtesy call by Friends of Karura Community Forest Association (FKF-CFA) officials led by Cristina Boelcke.",
-    imageUrl: "https://example.com/news1.jpg",
+    imageUrl: "https://www.kenyaforestservice.org/wp-content/uploads/2024/06/448638908_856950539798958_73282423479938082_n-768x527.jpg",
     author: "By Admin",
     date: "June 19, 2024",
     comments: 0,
@@ -16,7 +16,7 @@ const newsData = [
     title: "KFS Launches New Tree Planting Initiative",
     description:
       "Kenya Forest Service has launched a new initiative to plant 5 million trees nationwide to combat deforestation.",
-    imageUrl: "https://example.com/news2.jpg",
+    imageUrl: "https://www.kenyaforestservice.org/wp-content/uploads/2024/06/448638908_856950539798958_73282423479938082_n-768x527.jpg",
     author: "By Admin",
     date: "July 5, 2024",
     comments: 12,
@@ -25,7 +25,7 @@ const newsData = [
     title: "Community Clean-Up Day Announced",
     description:
       "KFS has announced a community clean-up day to be held in all major towns to promote environmental conservation.",
-    imageUrl: "https://example.com/news3.jpg",
+    imageUrl: "https://www.kenyaforestservice.org/wp-content/uploads/2024/06/448638908_856950539798958_73282423479938082_n-768x527.jpg",
     author: "Admin",
     date: "August 10, 2024",
     comments: 5,
@@ -34,7 +34,7 @@ const newsData = [
     title: "Forest Fire Awareness Campaign",
     description:
       "A new campaign to raise awareness about forest fires and how to prevent them has been launched.",
-    imageUrl: "https://example.com/news4.jpg",
+    imageUrl: "https://www.kenyaforestservice.org/wp-content/uploads/2024/06/448638908_856950539798958_73282423479938082_n-768x527.jpg",
     author: "By Admin",
     date: "September 2, 2024",
     comments: 8,

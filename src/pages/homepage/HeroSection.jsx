@@ -11,17 +11,17 @@ const HeroSection = () => {
     {
       title: "Kenya Forest Service",
       subtitle: "Kenya Forest Service is a state corporation that was created through the Forest Act (2005)",
-      image: "/images/forest.jpg", // Path relative to /public
+      image: "/images/cypress.JPG", // Path relative to /public
     },
     {
-      title: "Conservation Efforts",
+      title: "Mangrove Forest Conservation Efforts",
       subtitle: "Protecting Kenya's forests for future generations",
-      image: "/images/plantation.jpg", // Path relative to /public
+      image: "/images/Mangroveforest.png", // Path relative to /public
     },
     {
       title: "Sustainable Future",
       subtitle: "Promoting environmental sustainability since 2005",
-      image: "/images/nuseries.jpg", // Path relative to /public
+      image: "/images/MTKULAL.JPG", // Path relative to /public
     },
   ];
 

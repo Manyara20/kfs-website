@@ -1,6 +1,6 @@
 // components/NewsSection.jsx
 import React from "react";
-import NewsCard from "@/pages/homepage/NewsCard";
+import NewsCard from "@/app/homepage/NewsCard";
 
 const newsData = [
   {

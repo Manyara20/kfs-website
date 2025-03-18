@@ -133,7 +133,24 @@ const MainNavBar = () => {
             { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/forest-plans" },
           ],
         },
-        { label: "EcoTourism", link: "/quick-links/ecotourism" },
+        { 
+          label: "EcoTourism",
+          link: "/quick-links/ecotourism",
+          subItems: [
+            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Fees & Charges", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Investement Opportunities", link: "/quick-links/participatory-forest-management/background" },
+            { 
+              label: "Attractions", 
+              link: "/quick-links/participatory-forest-management/background",
+              subItems: [
+                { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+              ],
+            },
+            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+          ],
+        },
         { 
           label: "Online Systems",
           link: "/quick-links/online-systems",

@@ -5,7 +5,7 @@ import { FaUsers, FaBalanceScale, FaBullseye, FaStar, FaFlask, FaShieldAlt } fro
 
 const CoreValueCard = ({ title, description, Icon, bgColor }) => {
   return (
-    <div className="flex-shrink-0 w-80 h-auto bg-[#420909] text-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+    <div className="flex-1 min-w-[200px] h-auto bg-[#420909] text-white rounded-[16px] shadow-lg p-6 flex flex-col items-center">
       <Icon className="text-4xl mb-4" />
       <h3 className="text-2xl font-semibold mb-4 text-center">{title}</h3>
       <p className="text-base text-center">{description}</p>
@@ -32,7 +32,6 @@ const CoreValues = () => {
       description: "The Service will pursue timely attainment of targeted results at all levels.",
       Icon: FaBullseye,
     },
-    
     {
       title: "Scientific Principles & Professionalism",
       description:
@@ -48,11 +47,11 @@ const CoreValues = () => {
   ];
 
   return (
-    <section className="bg-white py-20 flex flex-col items-center">
+    <section className="py-20 flex flex-col items-center" style={{ backgroundColor: '#ffffff' }}>
       <h2 className="text-4xl font-bold text-center mb-12 text-black">Our Core Values</h2>
 
-      <div className="inherit">
-        <div className="flex gap-8 px-4" style={{ minWidth: "min-content" }}>
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-8 px-4">
           {values.map((value, index) => (
             <CoreValueCard
               key={index}

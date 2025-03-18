@@ -7,7 +7,7 @@ import CodeOfConductSection from "@/pages/homepage/CodeofConductSection";
 import NewsSection from "@/pages/homepage/NewsSection";
 import CoreValues from "@/pages/homepage/CoreValues";
 import Footer from "@/pages/homepage/Footer";
-import MagazineSection from "@/pages/homepage/MagazineSection";
+import FeedSection from "@/pages/homepage/FeedSection";
 import Principles from "@/pages/homepage/Principles";
 import PatnersSection from "@/pages/homepage/Patners";
 import FooterBottom from "@/components/FooterBottom";
@@ -25,7 +25,7 @@ function HomePageContents() {
       <NewsSection/>
       <CoreValues/>
       <PatnersSection/>
-      <MagazineSection/>
+      <FeedSection/>
       <Footer/>
       <FooterBottom />
     </div>

@@ -1,11 +1,13 @@
 "use client";
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { IoMdHelpCircle } from "react-icons/io";
-import Link from "next/link"; // Added import for Link
+import Slider from "react-slick"; // Import react-slick
+import "slick-carousel/slick/slick.css"; // Import slick styles
+import "slick-carousel/slick/slick-theme.css"; // Import slick theme styles
+import Image from "next/image"; // Import next/image for optimized image loading
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -34,7 +36,7 @@ const PageContainer = styled(Box)({
 });
 
 const ContentCard = styled(motion.div)({
-  background: "#1a3c34",
+  background: "rgba(255, 255, 255, 0.95)",
   padding: "3rem",
   maxWidth: "800px",
   width: "100%",
@@ -47,7 +49,7 @@ const ContentCard = styled(motion.div)({
 const Title = styled(Typography)({
   fontFamily: "'Poppins', sans-serif",
   fontWeight: 700,
-  color: "#00ffff",
+  color: "#0f5a28",
   marginBottom: "1.5rem",
   fontSize: "2.5rem",
   lineHeight: 1.2,
@@ -57,7 +59,7 @@ const Title = styled(Typography)({
 const Description = styled(Typography)({
   fontFamily: "'Roboto', sans-serif",
   fontWeight: 400,
-  color: "#ffffff",
+  color: "#000000",
   lineHeight: 1.6,
   fontSize: "1.1rem",
   marginBottom: "1.5rem",
@@ -89,41 +91,60 @@ const SectionText = styled(ListItemText)({
   },
 });
 
-const ImageGallery = styled(Box)({
+const ImageSliderContainer = styled(Box)({
   marginTop: "2rem",
-  overflowX: "auto",
-  whiteSpace: "nowrap",
-  paddingBottom: "1rem",
-  "&::-webkit-scrollbar": {
-    height: "8px",
+  "& .slick-slide": {
+    padding: "0 10px",
   },
-  "&::-webkit-scrollbar-track": {
-    background: "#1a3c34",
+  "& .slick-prev, & .slick-next": {
+    zIndex: 1,
+    width: "40px",
+    height: "40px",
+    background: "rgba(0, 0, 0, 0.5)",
+    borderRadius: "50%",
+    "&:hover": {
+      background: "rgba(0, 0, 0, 0.7)",
+    },
   },
-  "&::-webkit-scrollbar-thumb": {
-    background: "#00ffff",
-    borderRadius: "4px",
+  "& .slick-prev": {
+    left: "10px",
   },
-  "&::-webkit-scrollbar-thumb:hover": {
-    background: "#00cccc",
+  "& .slick-next": {
+    right: "10px",
+  },
+  "& .slick-dots": {
+    bottom: "-30px",
+    "& li button:before": {
+      color: "#1a3c34",
+    },
+    "& li.slick-active button:before": {
+      color: "#00ffff",
+    },
   },
 });
 
 const ImageItem = styled(Box)({
-  display: "inline-block",
   width: "300px",
   height: "200px",
-  marginRight: "1rem",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
+  position: "relative",
   border: "1px solid rgba(255, 255, 255, 0.3)",
+  borderRadius: "8px",
+  overflow: "hidden",
 });
+
+// Helper function to convert external URLs to proxy URLs
+const toProxyUrl = (url) => {
+  const kfsBaseUrl = "https://www.kenyaforestservice.org/";
+  if (url.startsWith(kfsBaseUrl)) {
+    return url.replace(kfsBaseUrl, "/proxy/kfs/");
+  }
+  return url;
+};
 
 // FLEA Page Component
 export default function FleaPage() {
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);
-  const galleryRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true); // Fade-in effect on load
@@ -142,12 +163,42 @@ export default function FleaPage() {
   };
 
   const sections = ["Background", "Objectives", "Methodology", "Results"];
+
+  // Image URLs from www.kenyaforestservice.org (replace with actual FLEA-related images if available)
   const imageUrls = [
-    "https://via.placeholder.com/300x200?text=Forest+Landscape+1",
-    "https://via.placeholder.com/300x200?text=Forest+Landscape+2",
-    "https://via.placeholder.com/300x200?text=Forest+Landscape+3",
-    "https://via.placeholder.com/300x200?text=Forest+Landscape+4",
-  ]; // Replace with actual FLEA image URLs
+    toProxyUrl("/images/FLEA-1.jpg"),
+    toProxyUrl("/images/FLEA-2.jpg"),
+    toProxyUrl("/images/FLEA-3.jpg"),
+    toProxyUrl("/images/FLEA-1.jpg"),
+  ];
+
+  // Slider settings for react-slick
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <PageContainer>
@@ -183,22 +234,23 @@ export default function FleaPage() {
         <Description className="mt-4">
           Stay informed about FLEA progress and KFS updates.
         </Description>
-        <Link
-          href="/#kfs-feeds"
-          className="text-cyan-300 hover:text-cyan-200 mt-2 inline-block text-sm"
-        >
-          View KFS Feeds
-        </Link>
 
-        {/* Image Gallery */}
-        <ImageGallery ref={galleryRef}>
-          {imageUrls.map((url, index) => (
-            <ImageItem
-              key={index}
-              style={{ backgroundImage: `url(${url})` }}
-            />
-          ))}
-        </ImageGallery>
+        {/* Slideable Image Gallery */}
+        <ImageSliderContainer>
+          <Slider {...sliderSettings}>
+            {imageUrls.map((url, index) => (
+              <ImageItem key={index}>
+                <Image
+                  src={url}
+                  alt={`FLEA Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
+                  quality={75}
+                />
+              </ImageItem>
+            ))}
+          </Slider>
+        </ImageSliderContainer>
       </ContentCard>
 
       {/* Accessibility Controls */}

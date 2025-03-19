@@ -34,7 +34,7 @@ const PageContainer = styled(Box)({
 });
 
 const ContentCard = styled(motion.div)({
-  background: "#e6f5e6",
+  background: "rgba(255, 255, 255, 0.95)",
   padding: "3rem",
   maxWidth: "800px",
   width: "100%",
@@ -47,7 +47,7 @@ const ContentCard = styled(motion.div)({
 const Title = styled(Typography)({
   fontFamily: "'Roboto', sans-serif",
   fontWeight: 700,
-  color: "#000",
+  color: "#0f5a28",
   marginBottom: "1.5rem",
   fontSize: "2.5rem",
   lineHeight: 1.2,
@@ -147,12 +147,7 @@ export default function Divisions() {
         <Description className="mt-4">
           Explore our ongoing efforts and updates below.
         </Description>
-        <Link
-          href="/#kfs-feeds"
-          className="text-black"
-        >
-          View KFS Feeds
-        </Link>
+        
       </ContentCard>
 
       {/* Accessibility Controls */}

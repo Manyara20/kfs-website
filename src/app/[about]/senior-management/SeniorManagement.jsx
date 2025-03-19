@@ -72,7 +72,7 @@ export default function SeniorManagementSection() {
           <Typography variant="body2" sx={{ color: "#666" }}>{ceo.title}</Typography>
 
           {/* Add Info Icon with Link */}
-          <Link href={`/senior-management/${ceo.id}`} passHref>
+          <Link href={`/about/senior-management/${ceo.id}`} passHref>
             <IconButton
               sx={{
                 color: "#6A961F",
@@ -111,7 +111,7 @@ export default function SeniorManagementSection() {
                 <Typography variant="body2" sx={{ color: "#666" }}>{member.title}</Typography>
 
                 {/* Add Info Icon with Link for Each Board Member */}
-                <Link href={`/senior-management/${member.id}`} passHref>
+                <Link href={`/about/senior-management/${member.id}`} passHref>
                   <IconButton
                     sx={{
                       color: "#6A961F",

@@ -3,7 +3,7 @@ import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from '@/components/FooterBottom';
 import SeniorManagementSection from "@/app/[about]/senior-management/SeniorManagement";
 
-function KFSBoardPage() {
+function SeniorManagementPage() {
   return (
     <div>
       <TopNavBar />
@@ -14,4 +14,4 @@ function KFSBoardPage() {
   );
 }
 
-export default KFSBoardPage;
+export default SeniorManagementPage;

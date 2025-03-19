@@ -45,7 +45,7 @@ const ContentCard = styled(motion.div)({
 const Title = styled(Typography)({
   fontFamily: "'Poppins', sans-serif",
   fontWeight: 700,
-  color: "#0D3C00",
+  color: "#0f5a28",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
   marginBottom: "1.5rem",
   fontSize: "2.5rem",

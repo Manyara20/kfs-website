@@ -4,10 +4,10 @@ import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { IoMdHelpCircle } from "react-icons/io";
-import Slider from "react-slick"; // Import react-slick
-import "slick-carousel/slick/slick.css"; // Import slick styles
-import "slick-carousel/slick/slick-theme.css"; // Import slick theme styles
-import Image from "next/image"; // Import next/image for optimized image loading
+import Slider from "react-slick"; 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css"; 
+import Image from "next/image";
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -124,8 +124,8 @@ const ImageSliderContainer = styled(Box)({
 });
 
 const ImageItem = styled(Box)({
-  width: "300px",
-  height: "200px",
+  width: "1500",
+  height: "300px",
   position: "relative",
   border: "1px solid rgba(255, 255, 255, 0.3)",
   borderRadius: "8px",
@@ -164,7 +164,6 @@ export default function FleaPage() {
 
   const sections = ["Background", "Objectives", "Methodology", "Results"];
 
-  // Image URLs from www.kenyaforestservice.org (replace with actual FLEA-related images if available)
   const imageUrls = [
     toProxyUrl("/images/FLEA-1.jpg"),
     toProxyUrl("/images/FLEA-2.jpg"),
@@ -210,6 +209,23 @@ export default function FleaPage() {
         <Title variant="h1">
           Forest Landscape and Ecological Assessment (FLEA)
         </Title>
+
+        <ImageSliderContainer>
+          <Slider {...sliderSettings}>
+            {imageUrls.map((url, index) => (
+              <ImageItem key={index}>
+                <Image
+                  src={url}
+                  alt={`FLEA Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
+                  quality={75}
+                />
+              </ImageItem>
+            ))}
+          </Slider>
+        </ImageSliderContainer>
+
         <Description>
           The Forest Landscape and Ecological Assessment (FLEA) is a strategic initiative by
           the Kenya Forest Service (KFS) to evaluate the ecological status of forest landscapes
@@ -235,22 +251,6 @@ export default function FleaPage() {
           Stay informed about FLEA progress and KFS updates.
         </Description>
 
-        {/* Slideable Image Gallery */}
-        <ImageSliderContainer>
-          <Slider {...sliderSettings}>
-            {imageUrls.map((url, index) => (
-              <ImageItem key={index}>
-                <Image
-                  src={url}
-                  alt={`FLEA Image ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={75}
-                />
-              </ImageItem>
-            ))}
-          </Slider>
-        </ImageSliderContainer>
       </ContentCard>
 
       {/* Accessibility Controls */}

@@ -66,6 +66,64 @@ const MainNavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Recursive function to render nested submenus
+  const renderSubMenu = (items, level = 0) => {
+    return items.map((item, idx) => (
+      <Box
+        key={idx}
+        sx={{
+          position: "relative",
+          "&:hover > .MuiBox-root": {
+            visibility: "visible",
+            opacity: 1,
+          },
+        }}
+      >
+        <MenuItem
+          sx={{
+            fontSize: "0.9rem",
+            color: "black",
+            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
+            padding: "8px 16px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Link
+            href={item.link || "#"}
+            style={{ textDecoration: "none", color: "inherit", display: "block" }}
+          >
+            {item.label}
+          </Link>
+          {item.subItems && item.subItems.length > 0 && (
+            <ArrowDropDown sx={{ color: "black", fontSize: "1.2rem" }} />
+          )}
+        </MenuItem>
+        {item.subItems && item.subItems.length > 0 && (
+          <Box
+            sx={{
+              visibility: "hidden",
+              opacity: 0,
+              position: "absolute",
+              top: "100%",
+              left: level === 0 ? "100%" : "100%",
+              backgroundColor: "white",
+              minWidth: "200px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+              borderRadius: "4px",
+              zIndex: 1000 + level, // Ensure dropdowns stack correctly
+              transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
+            }}
+          >
+            {renderSubMenu(item.subItems, level + 1)}
+          </Box>
+        )}
+      </Box>
+    ));
+  };
+
+
   const navigationItems = [
     { label: "Home", link: "/" },
     {
@@ -120,7 +178,6 @@ const MainNavBar = () => {
         { label: "Press Releases", link: "/mediacenter/press-releases" },
       ],
     },
-
     {
       label: "Quick Links",
       subItems: [
@@ -132,45 +189,44 @@ const MainNavBar = () => {
             { label: "Background", link: "/quick-links/participatory-forest-management/background" },
             { label: "Forest Management Agreements", link: "/quick-links/participatory-forest-management/forest-agreements" },
             { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/forest-plans" },
-            
           ],
         },
         { 
           label: "Customer Feedback", 
           link: "/quick-links/participatory-forest-management/customer-feedback" },
         { 
-          label: "EcoTourism",
-          link: "/quick-links/ecotourism",
+          label: "eco-tourism",
+          link: "/quick-links/eco-tourism",
           subItems: [
-            { label: "Background", link: "/quick-links/ecotourism/background" },
-            { label: "Fees & Charges", link: "/quick-links/ecotourism/fees-charges" },
-            { label: "Investment Opportunities", link: "/quick-links/ecotourism/investment-opportunities" },
-            { label: "Attractions", link: "/quick-links/ecotourism/attractions",
+            { label: "Background", link: "/quick-links/eco-tourism/background" },
+            { label: "Fees & Charges", link: "/quick-links/eco-tourism/fees-charges" },
+            { label: "Investment Opportunities", link: "/quick-links/eco-tourism/investment-opportunities" },
+            { label: "Attractions", link: "/quick-links/eco-tourism/attractions",
               subItems: [
-                { label: "Menengai Forest", link: "/quick-links/ecotourism/attractions/menengai-forest" },
-                { label: "Arabuko Sokoke Forest", link: "/quick-links/ecotourism/attractions/arabuko-sokoke-forest" },
-                { label: "Karura Forest", link: "/quick-links/ecotourism/attractions/karura-forest" },
-                { label: "Ngong Hills Forest", link: "/quick-links/ecotourism/attractions/ngong-hills-forest" },
-                { label: "Ngare Ndare Forest", link: "/quick-links/ecotourism/attractions/ngare-ndare-forest" },
-                { label: "Mt Kenya Forest Reserve", link: "/quick-links/ecotourism/attractions/mt-kenya-forest-reserve" },
-                { label: "Hombe Forest Guesthouse", link: "/quick-links/ecotourism/attractions/hombe-forest-guesthouse" },
-                { label: "Ndaragwa Nature Trail", link: "/quick-links/ecotourism/attractions/ndaragwa-nature-trail" },
-                { label: "Nairobi Arboretum", link: "/quick-links/ecotourism/attractions/nairobi-arboretum" },
-                { label: "Community Ecotourism Facilities", link: "/quick-links/ecotourism/attractions/community-ecotourism-facilities" },
-                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/ecotourism/attractions/kfc-guesthouse-conference-centre" },
+                { label: "Menengai Forest", link: "/quick-links/eco-tourism/attractions/menengai-forest" },
+                { label: "Arabuko Sokoke Forest", link: "/quick-links/eco-tourism/attractions/arabuko-sokoke-forest" },
+                { label: "Karura Forest", link: "/quick-links/eco-tourism/attractions/karura-forest" },
+                { label: "Ngong Hills Forest", link: "/quick-links/eco-tourism/attractions/ngong-hills-forest" },
+                { label: "Ngare Ndare Forest", link: "/quick-links/eco-tourism/attractions/ngare-ndare-forest" },
+                { label: "Mt Kenya Forest Reserve", link: "/quick-links/eco-tourism/attractions/mt-kenya-forest-reserve" },
+                { label: "Hombe Forest Guesthouse", link: "/quick-links/eco-tourism/attractions/hombe-forest-guesthouse" },
+                { label: "Ndaragwa Nature Trail", link: "/quick-links/eco-tourism/attractions/ndaragwa-nature-trail" },
+                { label: "Nairobi Arboretum", link: "/quick-links/eco-tourism/attractions/nairobi-arboretum" },
+                { label: "Community eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
+                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/eco-tourism/attractions/kfc-guesthouse-conference-centre" },
               ]
             },
-            { label: "Guidelines & Code of Conduct", link: "/quick-links/ecotourism/guidelines",
+            { label: "Guidelines & Code of Conduct", link: "/quick-links/eco-tourism/guidelines",
               subItems: [
-                { label: "Code of Conduct for Forest Adjacent Communities", link: "/quick-links/ecotourism/guidelines/forest-adjacent-communities" },
-                { label: "Code of Conduct for Private Investors in Ecotourism & Recreation Facilities", link: "/quick-links/ecotourism/guidelines/private-investors" },
-                { label: "Code of Conduct for Tour Leaders", link: "/quick-links/ecotourism/guidelines/tour-leaders" },
-                { label: "Code of Conduct for Visitors to Ecotourism", link: "/quick-links/ecotourism/guidelines/visitors" },
-                { label: "Guidelines for Constructing Ecotourism & Recreational Facilities", link: "/quick-links/ecotourism/guidelines/construction" },
-                { label: "Guidelines for Decommissioning Ecotourism Facilities", link: "/quick-links/ecotourism/guidelines/decommissioning" },
+                { label: "Code of Conduct for Forest Adjacent Communities", link: "/quick-links/eco-tourism/guidelines/forest-adjacent-communities" },
+                { label: "Code of Conduct for Private Investors in eco-tourism & Recreation Facilities", link: "/quick-links/eco-tourism/guidelines/private-investors" },
+                { label: "Code of Conduct for Tour Leaders", link: "/quick-links/eco-tourism/guidelines/tour-leaders" },
+                { label: "Code of Conduct for Visitors to eco-tourism", link: "/quick-links/eco-tourism/guidelines/visitors" },
+                { label: "Guidelines for Constructing eco-tourism & Recreational Facilities", link: "/quick-links/eco-tourism/guidelines/construction" },
+                { label: "Guidelines for Decommissioning eco-tourism Facilities", link: "/quick-links/eco-tourism/guidelines/decommissioning" },
               ]
             },
-            { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/ecotourism/why-visit" },
+            { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/eco-tourism/why-visit" },
           ],
         },
         { 
@@ -186,8 +242,6 @@ const MainNavBar = () => {
         },
       ],
     },
-    
-    
     { 
       label: "Contact Us", 
       link: "/ContactUsPage" },
@@ -207,6 +261,7 @@ const MainNavBar = () => {
     { label: "Jobs", link: "/jobs" },
   ];
 
+  
   return (
     <AppBar
       position="sticky"
@@ -292,79 +347,10 @@ const MainNavBar = () => {
                       boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                       borderRadius: "4px",
                       zIndex: 1000,
-                      transition: "opacity 0.2s ease-in-out",
+                      transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
                     }}
                   >
-                    {item.subItems.map((subItem, idx) => (
-                      <Box
-                        key={idx}
-                        sx={{
-                          position: "relative",
-                          "&:hover > .MuiBox-root": {
-                            visibility: "visible",
-                            opacity: 1,
-                          },
-                        }}
-                      >
-                        <MenuItem
-                          sx={{
-                            fontSize: "0.9rem",
-                            color: "black",
-                            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-                            padding: "8px 16px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <Link
-                            href={subItem.link || "#"}
-                            style={{ textDecoration: "none", color: "inherit", display: "block" }}
-                          >
-                            {subItem.label}
-                          </Link>
-                          {subItem.subItems && subItem.subItems.length > 0 && (
-                            <ArrowDropDown sx={{ color: "black", fontSize: "1.2rem" }} />
-                          )}
-                        </MenuItem>
-                        {subItem.subItems && subItem.subItems.length > 0 && (
-                          <Box
-                            sx={{
-                              visibility: "hidden",
-                              opacity: 0,
-                              position: "absolute",
-                              top: 0,
-                              left: "100%",
-                              backgroundColor: "white",
-                              minWidth: "200px",
-                              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                              borderRadius: "4px",
-                              zIndex: 1000,
-                              transition: "opacity 0.2s ease-in-out",
-                            }}
-                          >
-                            {subItem.subItems.map((nestedItem, nestedIdx) => (
-                              <MenuItem
-                                key={nestedIdx}
-                                sx={{
-                                  fontSize: "0.9rem",
-                                  color: "black",
-                                  "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-                                  padding: "8px 16px",
-                                }}
-                              >
-                                <Link
-                                  href={nestedItem.link || "#"}
-                                  style={{ textDecoration: "none", color: "inherit", width: "100%", display: "block" }}
-                                >
-                                  {nestedItem.label}
-                                </Link>
-                              </MenuItem>
-                            ))}
-                          </Box>
-                        )}
-                      </Box>
-                    ))}
+                    {renderSubMenu(item.subItems)}
                   </Box>
                 </Box>
               ) : (
@@ -572,5 +558,4 @@ const MainNavBar = () => {
   );
 };
 
-export default MainNavBar
-
+export default MainNavBar;

@@ -95,13 +95,6 @@ const Footer = () => {
             </form>
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-6 border-t border-white/30 pt-2">
-          <p className="text-xs md:text-sm text-white/80 text-center">
-            © {new Date().getFullYear()} Kenya Forest Service. All rights reserved.
-          </p>
-        </div>
       </div>
     </footer>
   );

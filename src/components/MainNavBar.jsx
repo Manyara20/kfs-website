@@ -120,6 +120,7 @@ const MainNavBar = () => {
         { label: "Press Releases", link: "/mediacenter/press-releases" },
       ],
     },
+
     {
       label: "Quick Links",
       subItems: [
@@ -131,24 +132,45 @@ const MainNavBar = () => {
             { label: "Background", link: "/quick-links/participatory-forest-management/background" },
             { label: "Forest Management Agreements", link: "/quick-links/participatory-forest-management/forest-agreements" },
             { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/forest-plans" },
+            
           ],
         },
+        { 
+          label: "Customer Feedback", 
+          link: "/quick-links/participatory-forest-management/customer-feedback" },
         { 
           label: "EcoTourism",
           link: "/quick-links/ecotourism",
           subItems: [
-            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
-            { label: "Fees & Charges", link: "/quick-links/participatory-forest-management/background" },
-            { label: "Investement Opportunities", link: "/quick-links/participatory-forest-management/background" },
-            { 
-              label: "Attractions", 
-              link: "/quick-links/participatory-forest-management/background",
+            { label: "Background", link: "/quick-links/ecotourism/background" },
+            { label: "Fees & Charges", link: "/quick-links/ecotourism/fees-charges" },
+            { label: "Investment Opportunities", link: "/quick-links/ecotourism/investment-opportunities" },
+            { label: "Attractions", link: "/quick-links/ecotourism/attractions",
               subItems: [
-                { label: "Background", link: "/quick-links/participatory-forest-management/background" },
-              ],
+                { label: "Menengai Forest", link: "/quick-links/ecotourism/attractions/menengai-forest" },
+                { label: "Arabuko Sokoke Forest", link: "/quick-links/ecotourism/attractions/arabuko-sokoke-forest" },
+                { label: "Karura Forest", link: "/quick-links/ecotourism/attractions/karura-forest" },
+                { label: "Ngong Hills Forest", link: "/quick-links/ecotourism/attractions/ngong-hills-forest" },
+                { label: "Ngare Ndare Forest", link: "/quick-links/ecotourism/attractions/ngare-ndare-forest" },
+                { label: "Mt Kenya Forest Reserve", link: "/quick-links/ecotourism/attractions/mt-kenya-forest-reserve" },
+                { label: "Hombe Forest Guesthouse", link: "/quick-links/ecotourism/attractions/hombe-forest-guesthouse" },
+                { label: "Ndaragwa Nature Trail", link: "/quick-links/ecotourism/attractions/ndaragwa-nature-trail" },
+                { label: "Nairobi Arboretum", link: "/quick-links/ecotourism/attractions/nairobi-arboretum" },
+                { label: "Community Ecotourism Facilities", link: "/quick-links/ecotourism/attractions/community-ecotourism-facilities" },
+                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/ecotourism/attractions/kfc-guesthouse-conference-centre" },
+              ]
             },
-            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
-            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Guidelines & Code of Conduct", link: "/quick-links/ecotourism/guidelines",
+              subItems: [
+                { label: "Code of Conduct for Forest Adjacent Communities", link: "/quick-links/ecotourism/guidelines/forest-adjacent-communities" },
+                { label: "Code of Conduct for Private Investors in Ecotourism & Recreation Facilities", link: "/quick-links/ecotourism/guidelines/private-investors" },
+                { label: "Code of Conduct for Tour Leaders", link: "/quick-links/ecotourism/guidelines/tour-leaders" },
+                { label: "Code of Conduct for Visitors to Ecotourism", link: "/quick-links/ecotourism/guidelines/visitors" },
+                { label: "Guidelines for Constructing Ecotourism & Recreational Facilities", link: "/quick-links/ecotourism/guidelines/construction" },
+                { label: "Guidelines for Decommissioning Ecotourism Facilities", link: "/quick-links/ecotourism/guidelines/decommissioning" },
+              ]
+            },
+            { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/ecotourism/why-visit" },
           ],
         },
         { 
@@ -158,12 +180,14 @@ const MainNavBar = () => {
             { label: "Staff Mail", link: "/quick-links/online-systems/staff-mail" },
             { label: "E-Registration", link: "/quick-links/online-systems/e-registration" },
             { label: "E-Nursery", link: "/quick-links/online-systems/e-nursery" },
-            { label: "Research Lisence", link: "/quick-links/online-systems/research-lisence" },
+            { label: "Research License", link: "/quick-links/online-systems/research-license" },
             { label: "Monitoring and Evaluation", link: "/quick-links/online-systems/monitoring-evaluation" },
           ],
         },
       ],
     },
+    
+    
     { 
       label: "Contact Us", 
       link: "/ContactUsPage" },
@@ -548,4 +572,5 @@ const MainNavBar = () => {
   );
 };
 
-export default MainNavBar;
+export default MainNavBar
+

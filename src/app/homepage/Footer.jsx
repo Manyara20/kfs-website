@@ -1,242 +1,110 @@
-import React from 'react';
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
-import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa';
+"use client";
 
-const ContactUsPage = () => {
+import React from "react";
+import Image from "next/image";
+import { FaTwitter, FaFacebookF, FaInstagram, FaSkype, FaPhone } from "react-icons/fa";
+
+const Footer = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
-
-      {/* Main Navigation Bar */}
-      <MainNavBar />
-
-      {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-12">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-600">We are here to help! Reach out to us for any inquiries or support.</p>
-        </div>
-
-        {/* Grid Layout for Contact Information and Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column: Contact Information */}
-          <div className="space-y-8">
-            {/* Headquarters Card */}
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h2 className="text-2xl font-semibold text-green-900 mb-6">Kenya Forest Service Headquarters</h2>
-              <div className="space-y-4 text-gray-700 break-words">
-                <p>Karura Forest, Off Kiambu Road</p>
-                <p>P.O. Box 30513-00100</p>
-                <p>
-                  Email:{" "}
-                  <a
-                    href="mailto:info@kenyaforestservice.org"
-                    className="text-green-600 hover:underline break-all"
-                  >
-                    info@kenyaforestservice.org
-                  </a>
-                </p>
-                <p>
-                  Website:{" "}
-                  <a
-                    href="https://www.kenyaforestservice.org"
-                    className="text-green-600 hover:underline break-all"
-                  >
-                    www.kenyaforestservice.org
-                  </a>
-                </p>
-                <p>Tel: 020-2014663, 020-2020285, 020-2689882/3</p>
-              </div>
+    <footer className="bg-[#0D3C00] text-white py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Column 1: Logo, Tagline, Socials */}
+          <div className="p-4 flex flex-col items-start">
+            <div className="mb-4">
+              <Image
+                src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
+                alt="Kenya Forest Service Logo"
+                width={80}
+                height={56}
+              />
             </div>
-
-            {/* Social Media Card */}
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h2 className="text-2xl font-semibold text-green-900 mb-6">Follow Us</h2>
-              <div className="flex gap-4">
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Twitter"
-                  className="text-green-600 hover:text-green-700 transition duration-300"
-                >
-                  <FaTwitter className="text-3xl" />
-                </a>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="text-green-600 hover:text-green-700 transition duration-300"
-                >
-                  <FaFacebookF className="text-3xl" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="text-green-600 hover:text-green-700 transition duration-300"
-                >
-                  <FaInstagram className="text-3xl" />
-                </a>
-                <a
-                  href="skype:user?call"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Skype"
-                  className="text-green-600 hover:text-green-700 transition duration-300"
-                >
-                  <FaSkype className="text-3xl" />
-                </a>
-              </div>
+            <p className="text-sm text-white/80 mb-4">
+              To be an internationally recognized organisation for excellence in knowledge-based sustainable forest resources management and conservation.
+            </p>
+            <div className="flex gap-4">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <FaTwitter className="text-white hover:text-[#0A6527] text-xl" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <FaFacebookF className="text-white hover:text-[#0A6527] text-xl" />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <FaInstagram className="text-white hover:text-[#0A6527] text-xl" />
+              </a>
+              <a href="skype:user?call" target="_blank" rel="noopener noreferrer">
+                <FaSkype className="text-white hover:text-[#0A6527] text-xl" />
+              </a>
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
-          <div className="bg-white p-8 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-semibold text-green-900 mb-6">Send Us a Message</h2>
-            <form className="space-y-6">
-              <div>
-                <label className="block text-gray-700 mb-2">Name*</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Email*</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Phone Number*</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Case Detail*</label>
-                <textarea
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300"
-              >
-                SUBMIT QUOTE
+          {/* Column 2: Contact Info */}
+          <div className="p-4">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+              Contact Us
+            </h3>
+            <div className="grid grid-cols-1 gap-2 text-white/80">
+              <p className="text-sm md:text-base py-1">info@kenyaforestservice.org</p>
+              <p className="text-sm md:text-base py-1">
+                P.O BOX 30513 - 00100 NAIROBI - KENYA
+              </p>
+              <p className="text-sm md:text-base py-1">
+                Mon - Fri (8am - 5pm) Sat & Sun CLOSED
+              </p>
+            </div>
+          </div>
+
+          {/* Column 3: Toll-Free */}
+          <div className="p-4">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+              Toll Free
+            </h3>
+            <div className="flex items-center gap-2 text-xl md:text-2xl font-semibold text-white mb-2">
+              <span className="text-white"><FaPhone className="text-white text-xl rotate-180" /></span> <span>0800 721 277</span>
+            </div>
+            <p className="text-sm md:text-base text-white/80 mb-4">
+            Toll Free Number (For Anticorruption and Complaints)
+            </p>
+            <div className="flex justify-center">
+              <button className="bg-white text-[#0A6527] py-1 px-4 rounded-md text-sm md:text-base font-medium hover:bg-[#0A6527] hover:text-white transition-colors">
+                Call Now
               </button>
+            </div>
+          </div>
+
+          {/* Column 4: Subscribe */}
+          <div className="p-4">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+              Subscribe to The Forester Magazine
+            </h3>
+            <form className="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full max-w-xs p-2 rounded-md text-black text-sm md:text-base border border-white focus:outline-none focus:ring-2 focus:ring-[#0A6527]"
+              />
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-white text-[#0A6527] py-1 px-4 rounded-md text-sm md:text-base font-medium hover:bg-[#0A6527] hover:text-white transition-colors"
+                >
+                  Subscribe
+                </button>
+              </div>
             </form>
           </div>
         </div>
 
-        {/* Conservancy Information Section */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold text-green-900 text-center mb-8">Our Conservancies</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {conservancies.map((conservancy, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg break-words">
-                <h3 className="text-xl font-semibold text-green-900 mb-4">{conservancy.name}</h3>
-                <div className="space-y-2 text-gray-700">
-                  <p>{conservancy.address}</p>
-                  <p>
-                    Email:{" "}
-                    <a
-                      href={`mailto:${conservancy.email}`}
-                      className="text-green-600 hover:underline break-all"
-                    >
-                      {conservancy.email}
-                    </a>
-                  </p>
-                  <p>Tel: {conservancy.phone}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Bottom Bar */}
+        <div className="mt-6 border-t border-white/30 pt-2">
+          <p className="text-xs md:text-sm text-white/80 text-center">
+            © {new Date().getFullYear()} Kenya Forest Service. All rights reserved.
+          </p>
         </div>
-      </main>
-
-      {/* Footer */}
-      <FooterBottom />
-    </div>
+      </div>
+    </footer>
   );
 };
 
-// Conservancy Data
-const conservancies = [
-  {
-    name: "Nairobi Conservancy",
-    address: "P.O.BOX 24951-00500 Karen, Nairobi",
-    email: "hocnairobi@kenyaforestservice.org",
-    phone: "020 2014663/2020285",
-  },
-  {
-    name: "Central Highlands Conservancy",
-    address: "Nyeri Town, P.O. Box 28, Nyeri",
-    email: "nhoccentralhighlands@kenyaforestservice.org",
-    phone: "0709751863",
-  },
-  {
-    name: "Eastern Conservancy",
-    address: "Embu Town, Njukiini East Forest Station P.O. Box 2, Embu",
-    email: "hoceastern@kenyaforestservice.org",
-    phone: "0709751839",
-  },
-  {
-    name: "North Eastern Conservancy",
-    address: "Garissa Town, P.O. Box 89, Garissa",
-    email: "hocnortheastern@kenyaforestservice.org",
-    phone: "0709751843",
-  },
-  {
-    name: "Ewaso North Conservancy",
-    address: "Isiolo Town, P.O. Box 141, Isiolo",
-    email: "hocewasonorth@kenyaforestservice.org",
-    phone: "0709751861",
-  },
-  {
-    name: "Coast Conservancy",
-    address: "Mombasa Town, P.O. Box 80078, Mombasa",
-    email: "hoccoast@kenyaforestservice.org",
-    phone: "0709751877",
-  },
-  {
-    name: "Mau Conservancy",
-    address: "Nakuru Town, Opposite Pyrethrum Road P.O. Box 281, Nakuru",
-    email: "hocmau@kenyaforestservice.org",
-    phone: "0709751828",
-  },
-  {
-    name: "North Rift Conservancy",
-    address: "Eldoret Town, P.O. Box 2501, Eldoret",
-    email: "hocnorthrift@kenyaforestservice.org",
-    phone: "0709748862",
-  },
-  {
-    name: "Western Conservancy",
-    address: "Kakamega Town, P.O. Box 1233, Kakamega",
-    email: "hocwestern@kenyaforestservice.org",
-    phone: "0709751876",
-  },
-  {
-    name: "Nyanza Conservancy",
-    address: "Kisumu Town, P.O. Box 1048, Kisumu",
-    email: "hocnyanza@kenyaforestservice.org",
-    phone: "0709751792",
-  },
-];
-
-export default ContactUsPage;
+export default Footer;

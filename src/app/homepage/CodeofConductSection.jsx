@@ -47,7 +47,7 @@ const CodeOfConductSection = () => {
               position: "relative",
               width: "100%",
               height: "100%", // Fills the height of the Grid item
-              backgroundImage: `url("/images/foresty.jpg")`, // Local path placeholder
+              backgroundImage: `url("/images/about.png")`, // Local path placeholder
               backgroundSize: "cover",
               backgroundPosition: "center",
               overflow: "hidden",
@@ -93,9 +93,10 @@ const CodeOfConductSection = () => {
                   <Button
                     variant="outlined"
                     sx={{
-                      color: "#4A7C12",
+                      color: "white",
                       borderColor: "#4A7C12",
-                      "&:hover": { backgroundColor: "#4A7C12", color: "white" },
+                      backgroundColor: "#0D3C00",
+                      "&:hover": { backgroundColor: "white", color: "#4A7C12" },
                       mt: 2,
                     }}
                   >
@@ -111,7 +112,7 @@ const CodeOfConductSection = () => {
         <Grid item xs={12} md={6}>
           <Typography
             variant="h3"
-            sx={{ fontSize: "1.875rem", fontWeight: "bold", mb: 4, textAlign: "center", color: "black" }}
+            sx={{ fontSize: "1.875rem", fontWeight: "bold", mb: 4, textAlign: "center", color: "black", textTransform: "uppercase" }}
           >
             Strategic Objectives
           </Typography>

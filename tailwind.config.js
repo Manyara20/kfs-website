@@ -7,7 +7,11 @@ module.exports = {
     './pages/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        peugeot: ['Peugeot New', 'Helvetica', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };

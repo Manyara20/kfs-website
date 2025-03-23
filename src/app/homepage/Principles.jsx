@@ -39,7 +39,7 @@ const GuidingPrinciples = () => {
     <>
       {/* Header */}
       <div className="bg-white rounded-t-3xl h-20 flex items-center justify-center shadow-lg z-10">
-        <h2 className="text-3xl text-black font-extrabold">Guiding Principles</h2>
+        <h2 className="text-3xl text-black font-extrabold uppercase">Guiding Principles</h2>
       </div>
 
       {/* Main Section with Dynamic Background and Gradient */}

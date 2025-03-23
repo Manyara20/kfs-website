@@ -1,8 +1,8 @@
 import React from 'react';
+import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa'; // Correct import
 import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
-import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa';
 
 const ContactUsPage = () => {
   return (

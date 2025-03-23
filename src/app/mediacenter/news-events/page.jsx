@@ -315,8 +315,78 @@ const NewsandEvents = () => {
       comments: "15 Comments",
       reverse: true,
     },
+    {
+      id: 32,
+      title: "",
+      text: "Kenya Forest Service Kinale hosted a delegation from African Development Bank(AfDB) and the National Treasury for a tree planting event at Kinale Forest Station, Kiambu County. The AfDB team, led by their First Lady Grace Adasina and Nancy Ndungu, planted 60 ceremonial trees each representing an African state and partner states as part of an […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/447004586_843866411107371_6401616353362453521_n-768x512.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: false,
+    },
+    {
+      id: 33,
+      title: "",
+      text: "KFS hosted the French Ambassador His Excellency Anauld Suguet and his team from the embassy at the Mau Regional Conservancy office at Nakuru. The Ambassador and his team assessed the progress of the fire project activities at the Service that have been funded by the French Government. During the visit, he was shown the the […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/445034749_843591927801486_8200863996708668315_n-768x512.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: true,
+    },
+    {
+      id: 34,
+      title: "NRT SEEEKS PARTNERSHIP WITH KFS IN COASTAL TERRESTRIAL CARBON PROJECT",
+      text: "NRT SEEEKS PARTNERSHIP WITH KFS IN COASTAL TERRESTRIAL CARBON PROJECT The CCF Mr. Alex Lemarkoko hosted team from the Northern Rangeland Trust (NRT) and The Nature Conservancy (TNC) at KFS headquarters led by NRT Technical Adviser, Ms. Juliet King , the team is seeking to partner with the Service in a carbon project that targets […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/445066742_843196504507695_5006624721720386633_n-768x396.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: false,
+    },
+    {
+      id: 35,
+      title: "",
+      text: "UNODC and Kenya Forest Service Collaborate to Enhance Integrity with Policy Handover Ceremony. In a significant step towards bolstering integrity and transparency within the Kenya Forest Service (KFS), the Chief Conservator of Forests (CCF) Mr. Alex Lemarkoko, led a ceremony to officiate the handover of three crucial policy documents, the event marked the transfer of […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/445066703_843183651175647_788357935974992215_n-768x345.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: true,
+    },
+    {
+      id: 36,
+      title: "STAKEHOLDERS GIVE FEEDBACK ON PROPOSED KAPTAGAT FENCING",
+      text: "The Kenya Forest Service (KFS) has conducted a series of Public Participation Meetings from May 20th to May 24th, 2024, regarding the proposed Solar Electric Fence Project for the conservation of the Kaptagat Ecosystem. The objectives of the forums which were spearheaded by the Head of Watersheds Mr. Benedict Omondi and the North Rift Regional […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/444149847_841976687963010_5226508474417126514_n-768x576.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: false,
+    },
+    {
+      id: 37,
+      title: "PS LEADS TREE GROWING EXERCISE IN KIRISIA FOREST",
+      text: "It was the culmination of week 3 of the accelerated tree growing exercise that was ordered by his Excellency the President to hasten the attainment of a 30% tree cover by 2032 through the growing of 15 billion trees. The tree growing exercise took place at Kirisia Forest Station in Samburu County and was presided […]",
+      image:  "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/444138145_841292314698114_6820832052217174877_n-768x512.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: true,
+    },
+    {
+      id: 38,
+      title: "",
+      text: "It was the culmination of week 3 of the accelerated tree growing exercise that was ordered by his Excellency the President to hasten the attainment of a 30% tree cover by 2032 through the growing of 15 billion trees. The tree growing exercise took place at Kirisia Forest Station in Samburu County and was presided […]",
+      image: "https://www.kenyaforestservice.org/wp-content/uploads/2024/05/444203569_841253321368680_8143420657370366021_n-768x512.jpg",
+      author: "By Admin",
+      date: "May 5, 2025",
+      comments: "15 Comments",
+      reverse: false,
+    },
 
-
+  
     // Add more items until you have at least 10
     // ...
   ];
@@ -398,7 +468,7 @@ const NewsandEvents = () => {
           &rarr;
         </button>
       </div>
-
+      
       <FooterBottom />
     </>
   );
@@ -449,9 +519,9 @@ const ZigzagSection = ({
         {/* Learn More Button */}
         <button
           onClick={onLearnMore}
-          className="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-lg hover:bg-yellow-600 transition duration-300"
+          className="mt-6 bg-yellow-500 text-black px-6 py-2  hover:bg-yellow-600 transition duration-300"
         >
-          Learn More
+          READ MORE
         </button>
       </div>
     </section>

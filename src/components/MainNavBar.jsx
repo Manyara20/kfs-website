@@ -164,7 +164,9 @@ const MainNavBar = () => {
         },
       ],
     },
-    { label: "Contact Us", link: "/contact" },
+    { 
+      label: "Contact Us", 
+      link: "/ContactUsPage" },
     {
       label: "E-Documents",
       subItems: [
@@ -175,7 +177,9 @@ const MainNavBar = () => {
         { label: "Documents Archive", link: "/e-documents/archive" },
       ],
     },
-    { label: "Tenders", link: "/tenders" },
+    { 
+      label: "Tenders", 
+      link: "/TendersPage" },
     { label: "Jobs", link: "/jobs" },
   ];
 

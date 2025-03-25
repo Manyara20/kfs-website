@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Button, IconButton } from "@mui/material";
+import React from "react";
+import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 
@@ -16,17 +16,6 @@ const PageContainer = styled(Box)({
   padding: "2rem",
   position: "relative",
   overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.1,
-    zIndex: 0,
-  },
 });
 
 const ContentCard = styled(motion.div)({
@@ -49,7 +38,6 @@ const Title = styled(Typography)({
   marginBottom: "1.5rem",
   fontSize: "2.5rem",
   lineHeight: 1.2,
-  letterSpacing: "0.5px",
 });
 
 const Description = styled(Typography)({
@@ -61,58 +49,34 @@ const Description = styled(Typography)({
   marginBottom: "1.5rem",
 });
 
-const DownloadButton = styled(Button)({
-  backgroundColor: "#0D3C00",
-  color: "#fff",
-  padding: "0.75rem 1.5rem",
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 500,
-  textTransform: "none",
-  "&:hover": {
-    backgroundColor: "#0f5a28",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.3)",
-  },
-});
-
-const SocialIconsContainer = styled(Box)({
-  position: "absolute",
-  top: "2rem",
-  left: "2rem",
-  display: "flex",
-  flexDirection: "column",
+const ProjectList = styled(List)({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
   gap: "1rem",
-  zIndex: 2,
+  padding: 0,
 });
 
-const SocialIconButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: "rgba(255, 255, 255, 0.9)",
-  color: "#0D3C00",
-  transition: "all 0.3s ease",
+const ProjectItem = styled(ListItem)({
+  background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  padding: "1rem",
   "&:hover": {
-    backgroundColor: "#0D3C00",
-    color: "#fff",
-    transform: "scale(1.1)",
-    boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+    transform: "translateY(-5px)",
+    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
+    background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
   },
-}));
+});
 
-const GzdspPage = () => {
-  // State to hold dynamic content from backend
-  const [content, setContent] = useState({
-    title: "Green Zones Development Support Project - Phase II",
-    description1:
-      "The Green Zones Development Support Project-Phase II builds on the success of the concluded GZDSP-1 project. GZDSP-1 contributed to the rehabilitation and protection for regeneration of 309,000ha of degraded forest land translating to 0.54% increase in the national forest cover and significantly increased (by 25%) the annual incomes of 375,912 households (40% female-headed) through direct employment, and income generating activities.",
-    description2:
-      "Phase II aims to further enhance forest conservation efforts, promote sustainable land use, and support community livelihoods through innovative forestry practices and partnerships.",
-    documentUrl: "#", // Placeholder for uploaded document URL
-  });
+const ProjectText = styled(ListItemText)({
+  "& .MuiTypography-root": {
+    fontFamily: "'Roboto', sans-serif",
+    fontWeight: 500,
+    color: "#0D3C00",
+    fontSize: "1rem",
+  },
+});
 
-  // Simulate fetching content from backend (replace with actual API call)
-  useEffect(() => {
-    // Example: fetch('/api/gzdsp-content').then(res => res.json()).then(data => setContent(data));
-    // For now, using static content as placeholder
-  }, []);
-
+const GreenZonesPage = () => {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -120,23 +84,30 @@ const GzdspPage = () => {
 
   return (
     <PageContainer>
-      {/* Main Content Card */}
       <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
-        <Title variant="h1">{content.title}</Title>
-        <Description>{content.description1}</Description>
-        <Description>{content.description2}</Description>
-        {content.documentUrl && (
-          <DownloadButton
-            href={content.documentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download Project Document
-          </DownloadButton>
-        )}
+        <Title variant="h1">Green Zones Development Support Project</Title>
+        <Description>
+          The Green Zones Development Support Project aims to promote conservation
+          and sustainable management of forest resources while improving the
+          livelihoods of communities living around forests.
+        </Description>
+        <ProjectList>
+          <ProjectItem>
+            <ProjectText primary="Afforestation and Reforestation Programs" />
+          </ProjectItem>
+          <ProjectItem>
+            <ProjectText primary="Community Empowerment and Livelihood Support" />
+          </ProjectItem>
+          <ProjectItem>
+            <ProjectText primary="Watershed Management and Soil Conservation" />
+          </ProjectItem>
+          <ProjectItem>
+            <ProjectText primary="Sustainable Agroforestry Practices" />
+          </ProjectItem>
+        </ProjectList>
       </ContentCard>
     </PageContainer>
   );
 };
 
-export default GzdspPage;
+export default GreenZonesPage;

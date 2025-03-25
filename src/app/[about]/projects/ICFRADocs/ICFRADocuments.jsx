@@ -1,49 +1,45 @@
-// pages/policy-documents.js
+// pages/ic-fra-documents.js
 import Link from 'next/link';
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
 
-export default function PolicyDocumentsPage() {
-  // Documents data for the Policy Documents page
+export default function ICFraDocumentsPage() {
+  // Sample IC FRA documents data
   const documents = [
     {
-      title: "National Forest Policy 2020",
-      fileSize: "1.2 MB",
-      link: "/path/to/national-forest-policy-2020.pdf",
+      title: "IC FRA Assessment Report 2024",
+      fileSize: "2 MB",
+      link: "/path/to/ic-fra-report-2024.pdf",
     },
     {
-      title: "Participatory Forest Management (PFM) Guidelines",
-      fileSize: "900 KB",
-      link: "/path/to/pfm-guidelines.pdf",
-    },
-    {
-      title: "KFS Strategic Plan 2020-2025",
+      title: "IC FRA Compliance Audit 2023",
       fileSize: "1.5 MB",
-      link: "/path/to/kfs-strategic-plan-2020-2025.pdf",
+      link: "/path/to/ic-fra-audit-2023.pdf",
     },
     {
-      title: "Forest Conservation and Management Regulations",
+      title: "Forest Risk Assessment Guidelines 2022",
       fileSize: "800 KB",
-      link: "/path/to/forest-conservation-regulations.pdf",
+      link: "/path/to/fra-guidelines-2022.pdf",
+    },
+    {
+      title: "IC FRA Monitoring Report Q1 2025",
+      fileSize: "1 MB",
+      link: "/path/to/ic-fra-monitoring-q1-2025.pdf",
+    },
+    {
+      title: "IC FRA Environmental Impact Assessment 2024",
+      fileSize: "3 MB",
+      link: "/path/to/ic-fra-eia-2024.pdf",
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
-
-      {/* Main Navigation Bar */}
-      <MainNavBar />
-
       {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Policy Documents</h1>
+          <h1 className="text-5xl font-bold text-green-900 mb-4">IC FRA Documents</h1>
           <p className="text-xl text-gray-600">
-            Access policy documents and guidelines governing forest management from the Kenya Forest Service.
+            Access the latest Independent Conformity and Forest Risk Assessment (IC FRA) documents from the Kenya Forest Service.
           </p>
         </div>
 
@@ -66,8 +62,6 @@ export default function PolicyDocumentsPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <FooterBottom />
     </div>
   );
 }

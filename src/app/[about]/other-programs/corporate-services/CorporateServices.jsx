@@ -126,7 +126,7 @@ const ForestConservationPage = () => {
         variants={cardVariants}
       >
         <Title variant="h1">
-          The Directorate of Forest Conservation and Management (DFCM)
+          Corporate Service
         </Title>
         <Description>
         Corporate Service Directorate is established to ensure prudent utilization of financial resources, aligning human resources strategy of the organization, infrastructure management, leveraging on ICT technology and enhancing the image and communication of the organization.

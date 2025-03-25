@@ -1,14 +1,14 @@
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
-import NTPC from "@/app/[about]/projects/NTPC/NTPCpage";
 import FooterBottom from '@/components/FooterBottom';
+import ForestConservationManagement from '@/app/[about]/core-programs/forest-conservation-management/ForestConservationManagement'
 
 function KFSBoardPage() {
   return (
     <div>
       <TopNavBar />
       <MainNavBar />
-      <NTPC/>
+      <ForestConservationManagement/>
       <FooterBottom />
     </div>
   );

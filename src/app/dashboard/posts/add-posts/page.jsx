@@ -14,10 +14,27 @@ export default function AddPost() {
       alert("Unauthorized");
       return;
     }
-    await axios.post("http://localhost:5000/api/posts", form, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    setForm({ image: "", title: "", content: "" });
+    const token = localStorage.getItem("token"); // Ensure token is retrieved
+    if (!token) {
+      alert("No token found. Please log in again.");
+      return;
+    }
+    try {
+      await axios.post(
+        "http://localhost:5000/api/posts",
+        form,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Ensure Bearer prefix
+          },
+        }
+      );
+      setForm({ image: "", title: "", content: "" });
+      alert("Post added successfully!");
+    } catch (error) {
+      console.error("Error adding post:", error.response?.data || error.message);
+      alert("Failed to add post: " + (error.response?.data?.error || "Unknown error"));
+    }
   };
 
   return (
@@ -43,7 +60,9 @@ export default function AddPost() {
         onChange={(e) => setForm({ ...form, content: e.target.value })}
         className="block w-full p-2 mb-4 border"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Post</button>
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        Add Post
+      </button>
     </form>
   );
 }

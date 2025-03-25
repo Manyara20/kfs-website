@@ -10,14 +10,20 @@ export default function AddEvent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (session.user.role !== "admin") {
+    if (!session?.user || session.user.role !== "admin") {
       alert("Unauthorized");
       return;
     }
-    await axios.post("http://localhost:5000/api/events", form, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    setForm({ title: "", date: "", time: "", venue: "", flag: "happening" });
+    try {
+      await axios.post("http://localhost:5000/api/events", form, {
+        headers: { Authorization: `Bearer ${session?.accessToken || localStorage.getItem("token")}` },
+      });
+      setForm({ title: "", date: "", time: "", venue: "", flag: "happening" });
+      alert("Event added successfully!");
+    } catch (error) {
+      console.error("Error adding event:", error.response?.data || error.message);
+      alert("Failed to add event: " + (error.response?.data?.error || "Unknown error"));
+    }
   };
 
   return (

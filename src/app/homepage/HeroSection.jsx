@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+//import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+//import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -96,12 +96,12 @@ const HeroSection = () => {
           </Typography>
         </Box>
 
-        {/* Navigation Buttons */}
+        {/* Navigation Buttons 
         <Button
           onClick={handlePrev}
           sx={{
             position: "absolute",
-            left: "20px",
+            left: "0px",
             top: "50%",
             transform: "translateY(-50%)",
             color: "white",
@@ -130,7 +130,7 @@ const HeroSection = () => {
           }}
         >
           <ArrowForwardIosIcon />
-        </Button>
+        </Button> */}
 
         {/* Slide Indicators */}
         <Box

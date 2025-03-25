@@ -1,31 +1,36 @@
-// src/middleware.js
-import { auth } from "./app/lib/auth";
 import { NextResponse } from "next/server";
+import { auth } from "./app/lib/auth";
 
-export default auth((req) => {
-  const { pathname } = req.nextUrl;
-  const session = req.auth;
+export default async function middleware(req) {
+  try {
+    // Ensure auth is a function
+    if (typeof auth !== "function") {
+      console.error("auth is not a function:", auth);
+      throw new Error("Authentication middleware misconfigured");
+    }
 
-  if (pathname.startsWith("/dashboard") && !session) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    // Run auth middleware to inject session
+    const response = await auth((req) => {
+      const { pathname } = req.nextUrl;
+      const session = req.auth;
+
+      console.log("Middleware session:", session); // Debug session
+
+      if (!session && pathname.startsWith("/dashboard")) {
+        const loginUrl = new URL("/login", req.url);
+        loginUrl.searchParams.set("callbackUrl", pathname);
+        return NextResponse.redirect(loginUrl);
+      }
+
+      return NextResponse.next();
+    })(req);
+
+    return response;
+  } catch (error) {
+    console.error("Middleware error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
-
-  // Role-based access
-  if (session) {
-    const role = session.user.role;
-    if (pathname.includes("/posts") && role !== "admin" && role !== "communication_officer") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
-    if (pathname.includes("/tenders") && role !== "admin" && role !== "supply_chain") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
-    if (pathname.includes("/documents") && role === "user") {
-      // Allow view-only access (implement in page logic)
-    }
-  }
-
-  return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: ["/dashboard/:path*"],

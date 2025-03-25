@@ -1,7 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["whatthelogo.com", "th.bing.com", "cdn.standardmedia.co.ke", "www.kenyaforestservice.org", "www.flaticon.com"], 
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.kenyaforestservice.org",
+      },
+      {
+        protocol: "https",
+        hostname: "whatthelogo.com",
+      },
+      {
+        protocol: "https",
+        hostname: "th.bing.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.standardmedia.co.ke",
+      },
+      {
+        protocol: "https",
+        hostname: "www.flaticon.com",
+      },
+    ],
   },
 };
 

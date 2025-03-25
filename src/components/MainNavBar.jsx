@@ -163,7 +163,7 @@ const MainNavBar = () => {
           subItems: [
             { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
             { label: "NTPC", link: "/about/projects/NTPC" },
-            { label: "IC-FRA Documents", link: "/about/projects/IC-FRA-Documents" },
+            { label: "IC-FRA Documents", link: "/about/projects/ICFRADocs" },
           ],
         },
       ],
@@ -258,7 +258,7 @@ const MainNavBar = () => {
     { 
       label: "Tenders", 
       link: "/TendersPage" },
-    { label: "Jobs", link: "/jobs" },
+    { label: "Jobs", link: "/Jobs" },
   ];
 
   

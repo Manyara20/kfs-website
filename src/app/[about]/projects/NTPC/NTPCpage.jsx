@@ -1,49 +1,25 @@
-// pages/public-documents.js
+// pages/ic-fra-documents.js
 import Link from 'next/link';
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
 
-export default function PublicDocumentsPage() {
-  // Documents data for the Public Documents page
+export default function ICFraDocumentsPage() {
+ 
   const documents = [
     {
-      title: "Filming and Photoshoot Application Form",
-      fileSize: "56.42 KB",
-      link: "/path/to/filming-photoshoot-application-form.pdf",
-    },
-    {
-      title: "Tree Planting Permit Application Form",
-      fileSize: "120 KB",
-      link: "/path/to/tree-planting-permit-form.pdf",
-    },
-    {
-      title: "Public Forest Access Permit Application Form",
-      fileSize: "90 KB",
-      link: "/path/to/public-forest-access-permit-form.pdf",
-    },
-    {
-      title: "KFS Annual Public Report 2024",
+      title: "National Tree Planting Campaign",
       fileSize: "2 MB",
-      link: "/path/to/kfs-annual-public-report-2024.pdf",
+      link: "/path/to/ic-fra-report-2024.pdf",
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
-
-      {/* Main Navigation Bar */}
-      <MainNavBar />
-
       {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Public Documents</h1>
+          <h1 className="text-5xl font-bold text-green-900 mb-4">IC FRA Documents</h1>
           <p className="text-xl text-gray-600">
-            Access forms, permits, and reports available to the public from the Kenya Forest Service.
+            Access the latest Independent Conformity and Forest Risk Assessment (IC FRA) documents from the Kenya Forest Service.
           </p>
         </div>
 
@@ -66,8 +42,6 @@ export default function PublicDocumentsPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <FooterBottom />
     </div>
   );
 }

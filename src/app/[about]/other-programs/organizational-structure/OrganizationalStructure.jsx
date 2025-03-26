@@ -81,34 +81,44 @@ const OrgChartContainer = styled(Box)({
   padding: "1rem",
   background: "#f9f9f9",
   borderRadius: "8px",
-  overflowX: "auto",
   display: "flex",
   justifyContent: "center",
+  overflowX: "auto",
 });
 
 const Node = styled(Box)(({ color }) => ({
-  padding: "1rem",
-  background: color || "#6A961F",
-  color: color === "#FFFFFF" ? "#333" : "white",
+  padding: "0.75rem",
+  background: color || "#0E5827",
+  color: color === "#FFF" ? "#000000" : "white", // Black text for white background
   borderRadius: "8px",
   textAlign: "center",
   fontFamily: "'Roboto', sans-serif",
-  fontSize: "0.9rem",
+  fontSize: "0.85rem",
   fontWeight: 500,
-  minWidth: "150px",
-  border: "2px solid #6A961F",
+  minWidth: "120px",
+  maxWidth: "150px",
+  border: "2px solid #0E5827",
+  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   "&:hover": {
     opacity: 0.9,
     cursor: "pointer",
   },
 }));
 
-const Connector = styled(Box)({
-  borderLeft: "2px solid #6A961F",
+const ConnectorVertical = styled(Box)({
+  borderLeft: "2px solid #0E5827",
   marginLeft: "auto",
   marginRight: "auto",
   width: "2px",
   height: "20px",
+});
+
+const ConnectorHorizontal = styled(Box)({
+  borderTop: "2px solid #0E5827",
+  height: "2px",
+  width: "100%",
+  position: "absolute",
+  top: "-10px",
 });
 
 const LevelContainer = styled(Box)({
@@ -117,6 +127,7 @@ const LevelContainer = styled(Box)({
   justifyContent: "center",
   gap: "1rem",
   marginTop: "1rem",
+  position: "relative",
 });
 
 const KeyContainer = styled(Box)({
@@ -159,173 +170,173 @@ export default function OrganizationGradingStructurePage() {
     visible: { opacity: 1, y: 0, transition: { duration: "0.8", ease: "easeOut" } },
   };
 
-  // Organizational structure data with updated colors and expanded levels
+  // Organizational structure data with updated KFS colors
   const orgStructure = {
     name: "Board of Directors",
-    color: "#C62828", // Deep red from KFS logo
+    color: "#0E5827", // Dark green for top level
     level: "Board of Directors",
     children: [
       {
         name: "Chief Conservator of Forests (CCF)",
-        color: "#FFB300", // Golden yellow from KFS logo
+        color: "#0F5A26", // Slightly different dark green for CCF
         level: "CCF",
         children: [
           {
             name: "Directorate of Forest Protection and Security",
-            color: "#6A961F", // KFS Green
+            color: "#226436", // Medium-dark green for Directorates
             level: "Directorate",
             children: [
               {
                 name: "Forest Protection, Fire and Disaster Operations",
-                color: "#A5D6A7",
+                color: "#245B3C", // Slightly lighter green for Divisions
                 level: "Division",
                 children: [
                   {
                     name: "Fire Management Section",
-                    color: "#4CAF50",
+                    color: "#2E5B37", // Muted green for Sections
                     level: "Section",
                     children: [
-                      { name: "Fire Response Unit", color: "#2E7D32", level: "Unit" },
-                      { name: "Fire Prevention Unit", color: "#2E7D32", level: "Unit" },
+                      { name: "Fire Response Unit", color: "#78A783", level: "Unit" }, // Light green for Units
+                      { name: "Fire Prevention Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
                   {
                     name: "Disaster Response Section",
-                    color: "#4CAF50",
+                    color: "#2E5B37",
                     level: "Section",
                     children: [
-                      { name: "Flood Response Unit", color: "#2E7D32", level: "Unit" },
-                      { name: "Landslide Response Unit", color: "#2E7D32", level: "Unit" },
+                      { name: "Flood Response Unit", color: "#78A783", level: "Unit" },
+                      { name: "Landslide Response Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
                 ],
               },
               {
                 name: "Investigation, Prosecution & Inspection",
-                color: "#A5D6A7",
+                color: "#245B3C",
                 level: "Division",
                 children: [
                   {
                     name: "Legal Enforcement Section",
-                    color: "#4CAF50",
+                    color: "#2E5B37",
                     level: "Section",
                     children: [
-                      { name: "Prosecution Unit", color: "#2E7D32", level: "Unit" },
-                      { name: "Inspection Unit", color: "#2E7D32", level: "Unit" },
+                      { name: "Prosecution Unit", color: "#78A783", level: "Unit" },
+                      { name: "Inspection Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
                 ],
               },
-              { name: "Forest Law Enforcement Academy - FoLEA", color: "#A5D6A7", level: "Division" },
-              { name: "Forest Security Intelligence", color: "#A5D6A7", level: "Division" },
-              { name: "Kenya Forestry College - KFC", color: "#A5D6A7", level: "Division" },
-              { name: "Forestry Advisory & County Liaison", color: "#A5D6A7", level: "Division" },
-              { name: "Dry-land & Private Forest Development Coordination", color: "#A5D6A7", level: "Division" },
+              { name: "Forest Law Enforcement Academy - FoLEA", color: "#245B3C", level: "Division" },
+              { name: "Forest Security Intelligence", color: "#245B3C", level: "Division" },
+              { name: "Kenya Forestry College - KFC", color: "#245B3C", level: "Division" },
+              { name: "Forestry Advisory & County Liaison", color: "#245B3C", level: "Division" },
+              { name: "Dry-land & Private Forest Development Coordination", color: "#245B3C", level: "Division" },
             ],
           },
           {
             name: "Directorate of Forest Conservation & Management",
-            color: "#6A961F",
+            color: "#226436",
             level: "Directorate",
             children: [
               {
                 name: "Natural Forest Conservation & Information Management",
-                color: "#A5D6A7",
+                color: "#245B3C",
                 level: "Division",
                 children: [
                   {
                     name: "Biodiversity Section",
-                    color: "#4CAF50",
+                    color: "#2E5B37",
                     level: "Section",
                     children: [
-                      { name: "Wildlife Monitoring Unit", color: "#2E7D32", level: "Unit" },
-                      { name: "Flora Preservation Unit", color: "#2E7D32", level: "Unit" },
+                      { name: "Wildlife Monitoring Unit", color: "#78A783", level: "Unit" },
+                      { name: "Flora Preservation Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
                 ],
               },
-              { name: "Forest Plantation Management", color: "#A5D6A7", level: "Division" },
-              { name: "Conservancy Coordination", color: "#A5D6A7", level: "Division" },
+              { name: "Forest Plantation Management", color: "#245B3C", level: "Division" },
+              { name: "Conservancy Coordination", color: "#245B3C", level: "Division" },
             ],
           },
           {
             name: "Directorate of Strategy, Partnerships & Resource Mobilization",
-            color: "#6A961F",
+            color: "#226436",
             level: "Directorate",
             children: [
-              { name: "Partnerships & Resource Mobilization", color: "#A5D6A7", level: "Division" },
-              { name: "Enterprise and Marketing", color: "#A5D6A7", level: "Division" },
-              { name: "Planning, M&E and Performance Management", color: "#A5D6A7", level: "Division" },
-              { name: "Quality Assurance & Risk Management", color: "#A5D6A7", level: "Division" },
+              { name: "Partnerships & Resource Mobilization", color: "#245B3C", level: "Division" },
+              { name: "Enterprise and Marketing", color: "#245B3C", level: "Division" },
+              { name: "Planning, M&E and Performance Management", color: "#245B3C", level: "Division" },
+              { name: "Quality Assurance & Risk Management", color: "#245B3C", level: "Division" },
             ],
           },
           {
             name: "Directorate of Corporate Services",
-            color: "#6A961F",
+            color: "#226436",
             level: "Directorate",
             children: [
               {
                 name: "Finance & Accounts",
-                color: "#FFFFFF",
+                color: "#FFF", // White with black text
                 level: "Sub-Division",
                 children: [
                   {
                     name: "Budgeting Section",
-                    color: "#4CAF50",
+                    color: "#2E5B37",
                     level: "Section",
                     children: [
-                      { name: "Expenditure Unit", color: "#2E7D32", level: "Unit" },
-                      { name: "Revenue Unit", color: "#2E7D32", level: "Unit" },
+                      { name: "Expenditure Unit", color: "#78A783", level: "Unit" },
+                      { name: "Revenue Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
                 ],
               },
-              { name: "Human Resource Management", color: "#FFFFFF", level: "Sub-Division" },
-              { name: "Administration & Infrastructure Development", color: "#FFFFFF", level: "Sub-Division" },
-              { name: "Information Communication Technology - ICT", color: "#FFFFFF", level: "Sub-Division" },
-              { name: "Corporate Communications", color: "#FFFFFF", level: "Sub-Division" },
+              { name: "Human Resource Management", color: "#FFF", level: "Sub-Division" },
+              { name: "Administration & Infrastructure Development", color: "#FFF", level: "Sub-Division" },
+              { name: "Information Communication Technology - ICT", color: "#FFF", level: "Sub-Division" },
+              { name: "Corporate Communications", color: "#FFF", level: "Sub-Division" },
             ],
           },
-          { name: "Directorate of Internal Audit", color: "#6A961F", level: "Directorate" },
-          { name: "Directorate of Corporation Secretary", color: "#6A961F", level: "Directorate" },
-          { name: "Supply Chain Management", color: "#A5D6A7", level: "Department" },
-          { name: "Air-Wing", color: "#A5D6A7", level: "Department" },
-          { name: "Inspectorate and Internal Affairs", color: "#A5D6A7", level: "Department" },
+          { name: "Directorate of Internal Audit", color: "#226436", level: "Directorate" },
+          { name: "Directorate of Corporation Secretary", color: "#226436", level: "Directorate" },
+          { name: "Supply Chain Management", color: "#245B3C", level: "Department" },
+          { name: "Air-Wing", color: "#245B3C", level: "Department" },
+          { name: "Inspectorate and Internal Affairs", color: "#245B3C", level: "Department" },
           {
             name: "Nairobi Conservancy",
-            color: "#689F38",
+            color: "#6F6F50", // Neutral greenish-brown for Conservancies
             level: "Conservancy",
             children: [
               {
                 name: "Nairobi County",
-                color: "#8BC34A",
+                color: "#8B6A53", // Earthy brown for Counties
                 level: "County",
                 children: [
-                  { name: "Karura Forest Station", color: "#43A047", level: "Station" },
-                  { name: "Ngong Road Forest Station", color: "#43A047", level: "Station" },
+                  { name: "Karura Forest Station", color: "#78A783", level: "Station" }, // Light green for Stations
+                  { name: "Ngong Road Forest Station", color: "#78A783", level: "Station" },
                 ],
               },
               {
                 name: "Kiambu County",
-                color: "#8BC34A",
+                color: "#8B6A53",
                 level: "County",
                 children: [
-                  { name: "Kereita Forest Station", color: "#43A047", level: "Station" },
+                  { name: "Kereita Forest Station", color: "#78A783", level: "Station" },
                 ],
               },
             ],
           },
           {
             name: "Central Highlands Conservancy",
-            color: "#689F38",
+            color: "#6F6F50",
             level: "Conservancy",
             children: [
               {
                 name: "Nyeri County",
-                color: "#8BC34A",
+                color: "#8B6A53",
                 level: "County",
                 children: [
-                  { name: "Aberdare Forest Station", color: "#43A047", level: "Station" },
+                  { name: "Aberdare Forest Station", color: "#78A783", level: "Station" },
                 ],
               },
             ],
@@ -335,18 +346,18 @@ export default function OrganizationGradingStructurePage() {
     ],
   };
 
-  // Updated key data for the legend with new colors and levels
+  // Updated key data with new KFS colors
   const keyData = [
-    { level: "Board of Directors", color: "#C62828", description: "Highest governing body" },
-    { level: "CCF", color: "#FFB300", description: "Chief Conservator of Forests (CEO)" },
-    { level: "Directorate", color: "#6A961F", description: "Strategic leadership units" },
-    { level: "Department/Division", color: "#A5D6A7", description: "Operational units" },
-    { level: "Sub-Division", color: "#FFFFFF", borderColor: "#6A961F", description: "Support and specialized roles" },
-    { level: "Section", color: "#4CAF50", description: "Operational sections within divisions" },
-    { level: "Unit", color: "#2E7D32", description: "Specialized units within sections" },
-    { level: "Conservancy", color: "#689F38", description: "Regional management units" },
-    { level: "County", color: "#8BC34A", description: "County-level management" },
-    { level: "Station", color: "#43A047", description: "Local forest stations" },
+    { level: "Board of Directors", color: "#0E5827", description: "Highest governing body" },
+    { level: "CCF", color: "#0F5A26", description: "Chief Conservator of Forests (CEO)" },
+    { level: "Directorate", color: "#226436", description: "Strategic leadership units" },
+    { level: "Department/Division", color: "#245B3C", description: "Operational units" },
+    { level: "Sub-Division", color: "#FFF", borderColor: "#0E5827", description: "Support and specialized roles" },
+    { level: "Section", color: "#2E5B37", description: "Operational sections within divisions" },
+    { level: "Unit", color: "#78A783", description: "Specialized units within sections" },
+    { level: "Conservancy", color: "#6F6F50", description: "Regional management units" },
+    { level: "County", color: "#8B6A53", description: "County-level management" },
+    { level: "Station", color: "#78A783", description: "Local forest stations" },
   ];
 
   // Recursive component to render the org chart
@@ -355,10 +366,12 @@ export default function OrganizationGradingStructurePage() {
       <Node color={node.color}>{node.name}</Node>
       {node.children && (
         <>
-          <Connector />
+          <ConnectorVertical />
           <LevelContainer>
             {node.children.map((child, index) => (
-              <Box key={index} sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <Box key={index} sx={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                {index > 0 && <ConnectorHorizontal sx={{ left: "0", width: `calc(50% + ${index * 75}px)` }} />}
+                {index < node.children.length - 1 && <ConnectorHorizontal sx={{ right: "0", width: `calc(50% + ${(node.children.length - 1 - index) * 75}px)` }} />}
                 {renderNode(child)}
               </Box>
             ))}

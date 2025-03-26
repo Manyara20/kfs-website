@@ -21,65 +21,131 @@ export default function KFSBoardSection() {
   ];
 
   return (
-    <Box sx={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
-      {/* Title and Description; Placeholder */}
-      <Typography variant="h1" sx={{ fontSize: "2.5rem", marginBottom: "1rem", color: "#023011" }}>
-        KFS BOARD OF DIRECTORS
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: "2rem", color: "#666" }}>
-        This section covers details regarding the board members of KFS.
-      </Typography>
+    <Box sx={{ padding: { xs: "1rem", md: "3rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      {/* Title and Description */}
+      <Box sx={{ textAlign: "center", mb: 5 }}>
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: { xs: "2rem", md: "2.5rem" },
+            marginBottom: "1rem",
+            color: "#023011",
+          }}
+        >
+          KFS Board of Directors
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#666",
+            marginBottom: "2rem",
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        >
+          This section covers details regarding the board members of KFS.
+        </Typography>
+      </Box>
 
       {/* CEO Section */}
-      <Box sx={{ marginBottom: "3rem", padding: "1rem", backgroundColor: "#f9f9f9", borderRadius: "8px" }}>
-        <Typography 
-      variant="h6"
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            border: "2px solid #e0e0e0",
+            boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
+            width: { xs: "100%", sm: "350px" },
+            p: 3,
+            textAlign: "center",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            "&:hover": {
+              transform: "translateY(-5px)",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+            },
+          }}
         >
-        
-        </Typography>
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              backgroundColor: "#6A961F",
+              color: "white",
+              padding: "0.5rem 1rem",
+              display: "inline-block",
+              mb: 2,
+              fontSize: "0.9rem",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+            }}
+          >
+            Chairman
+          </Typography>
           <Avatar
             sx={{
               width: 150,
               height: 150,
-              marginBottom: "1rem",
+              mx: "auto",
+              mb: 2,
               border: "2px solid #6A961F",
-              borderRadius: "50%",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
             }}
             alt={ceo.name}
             src={ceo.image}
           />
-          <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000" }}>{ceo.name}</Typography>
-          <Typography variant="body2" sx={{ color: "#666" }}>{ceo.title}</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000", mb: 1 }}>
+            {ceo.name}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "#666", mb: 2 }}>
+            {ceo.title}
+          </Typography>
         </Box>
       </Box>
 
       {/* Board Members Section */}
-      <Box>
-        <Grid container spacing={3} justifyContent="center">
-          {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={4}>
-              <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Grid container spacing={3} justifyContent="center">
+        {boardMembers.map((member, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+            <Box
+              sx={{
+                backgroundColor: "white",
+                border: "2px solid #e0e0e0",
+                boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
+                p: 3,
+                textAlign: "center",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+                },
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Box>
                 <Avatar
                   sx={{
-                    width: 150,
-                    height: 150,
-                    marginBottom: "1rem",
+                    width: 120,
+                    height: 120,
+                    mx: "auto",
+                    mb: 2,
                     border: "2px solid #6A961F",
-                    borderRadius: "50%",
                     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                   }}
                   alt={member.name}
                   src={member.image}
                 />
-                <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000" }}>{member.name}</Typography>
-                <Typography variant="body2" sx={{ color: "#666" }}>{member.title}</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000", mb: 1 }}>
+                  {member.name}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#666", mb: 2 }}>
+                  {member.title}
+                </Typography>
               </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }

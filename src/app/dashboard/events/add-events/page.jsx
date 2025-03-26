@@ -5,30 +5,58 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function AddEvent() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [form, setForm] = useState({ title: "", date: "", time: "", venue: "", flag: "happening" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!session?.user || session.user.role !== "admin") {
-      alert("Unauthorized");
+    if (status === "loading") return;
+    if (!session || session.user.role !== "admin") {
+      setError("Unauthorized access. Only admins can add events.");
       return;
     }
+
+    const token = session.user.backendToken;
+    if (!token) {
+      setError("No backend authentication token found. Please log in again.");
+      return;
+    }
+
     try {
-      await axios.post("http://localhost:5000/api/events", form, {
-        headers: { Authorization: `Bearer ${session?.accessToken || localStorage.getItem("token")}` },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/events",
+        form,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Event added:", response.data);
       setForm({ title: "", date: "", time: "", venue: "", flag: "happening" });
+      setError("");
       alert("Event added successfully!");
-    } catch (error) {
-      console.error("Error adding event:", error.response?.data || error.message);
-      alert("Failed to add event: " + (error.response?.data?.error || "Unknown error"));
+    } catch (err) {
+      const errorDetails = {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      };
+      console.error("Error adding event:", errorDetails);
+      setError(
+        err.response?.data?.error || `Failed to add event (Status: ${err.response?.status || "unknown"})`
+      );
     }
   };
+
+  if (status === "unauthenticated") return <div>Please log in to add events.</div>;
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <h2 className="text-2xl mb-4">Add Event</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <input
         type="text"
         placeholder="Title"

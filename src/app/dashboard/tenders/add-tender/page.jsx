@@ -5,14 +5,21 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function AddTender() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [form, setForm] = useState({ pdf: null, description: "" });
-  const [error, setError] = useState(null); // Add error state for debugging
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!session?.user || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
-      alert("Unauthorized");
+    if (status === "loading") return;
+    if (!session || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
+      setError("Unauthorized access. Only admins or supply chain can add tenders.");
+      return;
+    }
+
+    const token = session.user.backendToken;
+    if (!token) {
+      setError("No backend authentication token found. Please log in again.");
       return;
     }
 
@@ -21,19 +28,34 @@ export default function AddTender() {
     formData.append("description", form.description);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/tenders", formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/tenders",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log("Tender added:", response.data);
       setForm({ pdf: null, description: "" });
+      setError("");
+      alert("Tender added successfully!");
     } catch (err) {
-      console.error("Error adding tender:", err);
-      setError(err.response?.data?.error || "Failed to add tender");
+      const errorDetails = {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      };
+      console.error("Error adding tender:", errorDetails);
+      setError(
+        err.response?.data?.error || `Failed to add tender (Status: ${err.response?.status || "unknown"})`
+      );
     }
   };
+
+  if (status === "unauthenticated") return <div>Please log in to add tenders.</div>;
 
   return (
     <form onSubmit={handleSubmit} className="p-6">

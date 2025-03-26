@@ -1,51 +1,140 @@
 const express = require("express");
 const { Pool } = require("pg");
 const multer = require("multer");
+const path = require("path");
 const router = express.Router();
-const pool = new Pool();
-const upload = multer({ dest: "uploads/" });
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
 
+// Multer setup with custom storage
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: (req, file, cb) => {
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
+  },
+});
+const upload = multer({ storage });
+
+// Middleware to log request details
+router.use((req, res, next) => {
+  console.log(`${req.method} /api/notices${req.path} - User:`, req.user);
+  next();
+});
+
+// GET /api/notices - Retrieve all active notices
 router.get("/", async (req, res) => {
-  if (req.user.role !== "admin") return res.status(403).json({ error: "Forbidden" });
-  const result = await pool.query("SELECT * FROM notices WHERE archived = FALSE");
-  res.json(result.rows);
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+    const result = await pool.query("SELECT * FROM notices WHERE archived = FALSE");
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching notices:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
+// POST /api/notices - Create a new notice
 router.post("/", upload.single("file"), async (req, res) => {
-  const { title, description } = req.body;
-  const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
-  if (req.user.role !== "admin") return res.status(403).json({ error: "Forbidden" });
-  const result = await pool.query(
-    "INSERT INTO notices (title, description, file_url) VALUES ($1, $2, $3) RETURNING *",
-    [title, description, fileUrl]
-  );
-  res.json(result.rows[0]);
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+
+    const { title, description } = req.body;
+    if (!title || !description) {
+      return res.status(400).json({ error: "Title and description are required" });
+    }
+
+    const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const result = await pool.query(
+      "INSERT INTO notices (title, description, file_url, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, description, fileUrl, req.user.id]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error("Error creating notice:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
+// PUT /api/notices/:id - Update an existing notice
 router.put("/:id", upload.single("file"), async (req, res) => {
-  const { id } = req.params;
-  const { title, description } = req.body;
-  const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
-  if (req.user.role !== "admin") return res.status(403).json({ error: "Forbidden" });
-  const result = await pool.query(
-    "UPDATE notices SET title = $1, description = $2, file_url = COALESCE($3, file_url) WHERE id = $4 RETURNING *",
-    [title, description, fileUrl, id]
-  );
-  res.json(result.rows[0]);
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+
+    const { id } = req.params;
+    const { title, description } = req.body;
+    const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const result = await pool.query(
+      "UPDATE notices SET title = $1, description = $2, file_url = COALESCE($3, file_url), updated_at = NOW() WHERE id = $4 AND archived = FALSE RETURNING *",
+      [title, description, fileUrl, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Notice not found or already archived" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error updating notice:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
+// DELETE /api/notices/:id - Delete a notice
 router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  if (req.user.role !== "admin") return res.status(403).json({ error: "Forbidden" });
-  await pool.query("DELETE FROM notices WHERE id = $1", [id]);
-  res.json({ message: "Notice deleted" });
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+
+    const { id } = req.params;
+    const result = await pool.query("DELETE FROM notices WHERE id = $1 AND archived = FALSE", [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Notice not found or already archived" });
+    }
+
+    res.json({ message: "Notice deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting notice:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
+// PATCH /api/notices/:id/archive - Archive a notice
 router.patch("/:id/archive", async (req, res) => {
-  const { id } = req.params;
-  if (req.user.role !== "admin") return res.status(403).json({ error: "Forbidden" });
-  await pool.query("UPDATE notices SET archived = TRUE WHERE id = $1", [id]);
-  res.json({ message: "Notice archived" });
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+
+    const { id } = req.params;
+    const result = await pool.query(
+      "UPDATE notices SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      [id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Notice not found or already archived" });
+    }
+
+    res.json({ message: "Notice archived successfully", notice: result.rows[0] });
+  } catch (error) {
+    console.error("Error archiving notice:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 module.exports = router;

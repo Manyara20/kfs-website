@@ -5,32 +5,64 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function UpdateTender() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [id, setId] = useState("");
   const [form, setForm] = useState({ pdf: null, description: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (session.user.role !== "admin" && session.user.role !== "supply_chain") {
-      alert("Unauthorized");
+    if (status === "loading") return;
+    if (!session || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
+      setError("Unauthorized access. Only admins or supply chain can update tenders.");
       return;
     }
+
+    const token = session.user.backendToken;
+    if (!token) {
+      setError("No backend authentication token found. Please log in again.");
+      return;
+    }
+
     const formData = new FormData();
     if (form.pdf) formData.append("pdf", form.pdf);
     formData.append("description", form.description);
-    await axios.put(`http://localhost:5000/api/tenders/${id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    setId("");
-    setForm({ pdf: null, description: "" });
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/tenders/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Tender updated:", response.data);
+      setId("");
+      setForm({ pdf: null, description: "" });
+      setError("");
+      alert("Tender updated successfully!");
+    } catch (err) {
+      const errorDetails = {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      };
+      console.error("Error updating tender:", errorDetails);
+      setError(
+        err.response?.data?.error || `Failed to update tender (Status: ${err.response?.status || "unknown"})`
+      );
+    }
   };
+
+  if (status === "unauthenticated") return <div>Please log in to update tenders.</div>;
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <h2 className="text-2xl mb-4">Update Tender</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <input
         type="text"
         placeholder="Tender ID"

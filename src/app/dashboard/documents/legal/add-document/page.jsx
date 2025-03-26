@@ -5,30 +5,62 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function AddDocument() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [form, setForm] = useState({ pdf: null, description: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (session.user.role !== "admin") {
-      alert("Unauthorized");
+    if (status === "loading") return;
+    if (!session || session.user.role !== "admin") {
+      setError("Unauthorized access. Only admins can add legal documents.");
       return;
     }
+
+    const token = session.user.backendToken;
+    if (!token) {
+      setError("No backend authentication token found. Please log in again.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("pdf", form.pdf);
     formData.append("description", form.description);
-    await axios.post("http://localhost:5000/api/documents/legal", formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    setForm({ pdf: null, description: "" });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/documents/legal",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Legal document added:", response.data);
+      setForm({ pdf: null, description: "" });
+      setError("");
+      alert("Legal document added successfully!");
+    } catch (err) {
+      const errorDetails = {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      };
+      console.error("Error adding legal document:", errorDetails);
+      setError(
+        err.response?.data?.error || `Failed to add legal document (Status: ${err.response?.status || "unknown"})`
+      );
+    }
   };
+
+  if (status === "unauthenticated") return <div>Please log in to add legal documents.</div>;
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <h2 className="text-2xl mb-4">Add Legal Document</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <input
         type="file"
         accept="application/pdf"
@@ -42,7 +74,7 @@ export default function AddDocument() {
         className="block w-full p-2 mb-4 border"
       />
       <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-        Add Document
+        Add Legal Document
       </button>
     </form>
   );

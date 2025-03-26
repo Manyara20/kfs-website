@@ -5,41 +5,58 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function AddPost() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [form, setForm] = useState({ image: "", title: "", content: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (session.user.role !== "admin" && session.user.role !== "communication_officer") {
-      alert("Unauthorized");
+    if (status === "loading") return;
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
+      setError("Unauthorized access. Only admins or communication officers can add posts.");
       return;
     }
-    const token = localStorage.getItem("token"); // Ensure token is retrieved
+
+    const token = session.user.backendToken;
     if (!token) {
-      alert("No token found. Please log in again.");
+      setError("No backend authentication token found. Please log in again.");
       return;
     }
+
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/api/posts",
         form,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Ensure Bearer prefix
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
+      console.log("Post added:", response.data);
       setForm({ image: "", title: "", content: "" });
+      setError("");
       alert("Post added successfully!");
-    } catch (error) {
-      console.error("Error adding post:", error.response?.data || error.message);
-      alert("Failed to add post: " + (error.response?.data?.error || "Unknown error"));
+    } catch (err) {
+      const errorDetails = {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      };
+      console.error("Error adding post:", errorDetails);
+      setError(
+        err.response?.data?.error || `Failed to add post (Status: ${err.response?.status || "unknown"})`
+      );
     }
   };
+
+  if (status === "unauthenticated") return <div>Please log in to add posts.</div>;
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <h2 className="text-2xl mb-4">Add Post</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <input
         type="text"
         placeholder="Image URL"

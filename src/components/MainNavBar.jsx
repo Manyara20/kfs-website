@@ -66,7 +66,7 @@ const MainNavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Recursive function to render nested submenus
+  // Recursive function to render nested submenus for desktop
   const renderSubMenu = (items, level = 0) => {
     return items.map((item, idx) => (
       <Box
@@ -92,6 +92,8 @@ const MainNavBar = () => {
         >
           <Link
             href={item.link || "#"}
+            target={item.isExternal ? "_blank" : "_self"} // Open external links in new tab
+            rel={item.isExternal ? "noopener noreferrer" : undefined} // Security for external links
             style={{ textDecoration: "none", color: "inherit", display: "block" }}
           >
             {item.label}
@@ -107,12 +109,12 @@ const MainNavBar = () => {
               opacity: 0,
               position: "absolute",
               top: "100%",
-              left: level === 0 ? "100%" : "100%",
+              left: "100%", // Adjusted for better alignment
               backgroundColor: "white",
               minWidth: "200px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
               borderRadius: "4px",
-              zIndex: 1000 + level, // Ensure dropdowns stack correctly
+              zIndex: 1000 + level,
               transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
             }}
           >
@@ -122,7 +124,6 @@ const MainNavBar = () => {
       </Box>
     ));
   };
-
 
   const navigationItems = [
     { label: "Home", link: "/" },
@@ -138,14 +139,6 @@ const MainNavBar = () => {
             { label: "Forest Conservation and Management", link: "/about/core-programs/forest-conservation-management" },
             { label: "Forest Plantation and Management", link: "/about/core-programs/forest-plantation-management" },
             { label: "Forest Protection and Security", link: "/about/core-programs/forest-protection-security" },
-            {
-              label: "Dryland & private Forestry Development",
-              link: "/about/core-programs/dryland-private-forestry",
-              subItems: [
-                { label: "Conservation Coordination", link: "/about/core-programs/dryland-private-forestry/conservation-coordination" },
-                { label: "Forestry Advisory & County Liaison", link: "/about/core-programs/dryland-private-forestry/forestry-advisory-county-liaison" },
-              ],
-            },
           ],
         },
         {
@@ -153,8 +146,8 @@ const MainNavBar = () => {
           link: "/about/other-programs",
           subItems: [
             { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy, Patnerships & Resorce Mobilizations", link: "/about/other-programs/strategy-patnerships-resources" },
-            { label: "Corprate Services", link: "/about/other-programs/corporate-services" },
+            { label: "Strategy, Partnerships & Resource Mobilizations", link: "/about/other-programs/strategy-partnerships-resources" },
+            { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
           ],
         },
         {
@@ -163,7 +156,7 @@ const MainNavBar = () => {
           subItems: [
             { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
             { label: "NTPC", link: "/about/projects/NTPC" },
-            { label: "IC-FRA Documents", link: "/about/projects/ICFRADocs" },
+            { label: "IC-FRA Documents", link: "/about/projects/ICFRA" },
           ],
         },
       ],
@@ -182,26 +175,26 @@ const MainNavBar = () => {
       label: "Quick Links",
       subItems: [
         { label: "Tree Planting", link: "/quick-links/tree-planting" },
-        { 
+        {
           label: "Participatory Forest Management",
           link: "/quick-links/participatory-forest-management",
           subItems: [
-            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
+            { label: "Background", link: "/quick-links/participatory-forest-management/Background" },
             { label: "Forest Management Agreements", link: "/quick-links/participatory-forest-management/forest-agreements" },
-            { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/forest-plans" },
+            { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/ForestPlans" },
           ],
         },
-        { 
-          label: "Customer Feedback", 
-          link: "/quick-links/participatory-forest-management/customer-feedback" },
-        { 
-          label: "eco-tourism",
+        { label: "Customer Feedback", link: "/quick-links/CustomerFeedback" },
+        {
+          label: "Eco-tourism",
           link: "/quick-links/eco-tourism",
           subItems: [
             { label: "Background", link: "/quick-links/eco-tourism/background" },
             { label: "Fees & Charges", link: "/quick-links/eco-tourism/fees-charges" },
             { label: "Investment Opportunities", link: "/quick-links/eco-tourism/investment-opportunities" },
-            { label: "Attractions", link: "/quick-links/eco-tourism/attractions",
+            {
+              label: "Attractions",
+              link: "/quick-links/eco-tourism/attractions",
               subItems: [
                 { label: "Menengai Forest", link: "/quick-links/eco-tourism/attractions/menengai-forest" },
                 { label: "Arabuko Sokoke Forest", link: "/quick-links/eco-tourism/attractions/arabuko-sokoke-forest" },
@@ -212,39 +205,39 @@ const MainNavBar = () => {
                 { label: "Hombe Forest Guesthouse", link: "/quick-links/eco-tourism/attractions/hombe-forest-guesthouse" },
                 { label: "Ndaragwa Nature Trail", link: "/quick-links/eco-tourism/attractions/ndaragwa-nature-trail" },
                 { label: "Nairobi Arboretum", link: "/quick-links/eco-tourism/attractions/nairobi-arboretum" },
-                { label: "Community eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
+                { label: "Community Eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
                 { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/eco-tourism/attractions/kfc-guesthouse-conference-centre" },
-              ]
+              ],
             },
-            { label: "Guidelines & Code of Conduct", link: "/quick-links/eco-tourism/guidelines",
+            {
+              label: "Guidelines & Code of Conduct",
+              link: "/quick-links/eco-tourism/guidelines",
               subItems: [
                 { label: "Code of Conduct for Forest Adjacent Communities", link: "/quick-links/eco-tourism/guidelines/forest-adjacent-communities" },
-                { label: "Code of Conduct for Private Investors in eco-tourism & Recreation Facilities", link: "/quick-links/eco-tourism/guidelines/private-investors" },
+                { label: "Code of Conduct for Private Investors in Eco-tourism & Recreation Facilities", link: "/quick-links/eco-tourism/guidelines/private-investors" },
                 { label: "Code of Conduct for Tour Leaders", link: "/quick-links/eco-tourism/guidelines/tour-leaders" },
-                { label: "Code of Conduct for Visitors to eco-tourism", link: "/quick-links/eco-tourism/guidelines/visitors" },
-                { label: "Guidelines for Constructing eco-tourism & Recreational Facilities", link: "/quick-links/eco-tourism/guidelines/construction" },
-                { label: "Guidelines for Decommissioning eco-tourism Facilities", link: "/quick-links/eco-tourism/guidelines/decommissioning" },
-              ]
+                { label: "Code of Conduct for Visitors to Eco-tourism", link: "/quick-links/eco-tourism/guidelines/visitors" },
+                { label: "Guidelines for Constructing Eco-tourism & Recreational Facilities", link: "/quick-links/eco-tourism/guidelines/construction" },
+                { label: "Guidelines for Decommissioning Eco-tourism Facilities", link: "/quick-links/eco-tourism/guidelines/decommissioning" },
+              ],
             },
             { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/eco-tourism/why-visit" },
           ],
         },
-        { 
+        {
           label: "Online Systems",
           link: "/quick-links/online-systems",
           subItems: [
-            { label: "Staff Mail", link: "/quick-links/online-systems/staff-mail" },
-            { label: "E-Registration", link: "/quick-links/online-systems/e-registration" },
-            { label: "E-Nursery", link: "/quick-links/online-systems/e-nursery" },
-            { label: "Research License", link: "/quick-links/online-systems/research-license" },
-            { label: "Monitoring and Evaluation", link: "/quick-links/online-systems/monitoring-evaluation" },
+            { label: "Staff Mail", link: "https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f", isExternal: true },
+            { label: "E-Registration", link: "https://sawmillers.kenyaforestservice.org/", isExternal: true },
+            { label: "E-Nursery", link: "https://enursery.kenyaforestservice.org/", isExternal: true },
+            { label: "Research License", link: "/quick-links/online-systems/research-license", isExternal: false }, // Kept as internal since no external URL provided
+            { label: "Monitoring and Evaluation", link: "http://monitoring.kenyaforestservice.org/#/home", isExternal: true },
           ],
         },
       ],
     },
-    { 
-      label: "Contact Us", 
-      link: "/ContactUsPage" },
+    { label: "Contact Us", link: "/ContactUsPage" },
     {
       label: "E-Documents",
       subItems: [
@@ -255,13 +248,10 @@ const MainNavBar = () => {
         { label: "Documents Archive", link: "/e-documents/archive" },
       ],
     },
-    { 
-      label: "Tenders", 
-      link: "/TendersPage" },
+    { label: "Tenders", link: "/TendersPage" },
     { label: "Jobs", link: "/Jobs" },
   ];
 
-  
   return (
     <AppBar
       position="sticky"
@@ -357,6 +347,8 @@ const MainNavBar = () => {
                 <Link
                   key={index}
                   href={item.link}
+                  target={item.isExternal ? "_blank" : "_self"}
+                  rel={item.isExternal ? "noopener noreferrer" : undefined}
                   sx={{
                     color: isSticky ? "white" : "#6A961F",
                     textDecoration: "none",
@@ -451,6 +443,8 @@ const MainNavBar = () => {
                     <ListItemButton
                       component={Link}
                       href={item.link}
+                      target={item.isExternal ? "_blank" : "_self"}
+                      rel={item.isExternal ? "noopener noreferrer" : undefined}
                       sx={{ color: "#6A961F", padding: "8px 16px" }}
                     >
                       <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
@@ -467,11 +461,13 @@ const MainNavBar = () => {
                     </ListItemButton>
                     <Collapse in={expandedItems[index]} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding sx={{ pl: 3 }}>
-                        {item.subItems.map((subItem, idx) => (
-                          <ListItem key={idx} disablePadding>
+                        {item.subItems.map((subItem, subIdx) => (
+                          <ListItem key={subIdx} disablePadding>
                             <ListItemButton
                               component={Link}
                               href={subItem.link || "#"}
+                              target={subItem.isExternal ? "_blank" : "_self"}
+                              rel={subItem.isExternal ? "noopener noreferrer" : undefined}
                               sx={{ color: "#6A961F", padding: "6px 16px" }}
                             >
                               <ListItemText primary={subItem.label} sx={{ fontSize: "0.9rem" }} />

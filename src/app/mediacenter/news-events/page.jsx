@@ -519,7 +519,7 @@ const ZigzagSection = ({
         {/* Learn More Button */}
         <button
           onClick={onLearnMore}
-          className="mt-6 bg-yellow-500 text-black px-6 py-2  hover:bg-yellow-600 transition duration-300"
+          className="mt-6  bg-emerald-950 text-white px-6 py-2  hover:bg-green-500 transition duration-300"
         >
           READ MORE
         </button>

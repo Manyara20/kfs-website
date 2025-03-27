@@ -1,5 +1,7 @@
 const express = require("express");
 const { Pool } = require("pg");
+const multer = require("multer");
+const path = require("path");
 const router = express.Router();
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -8,6 +10,16 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
 });
+
+// Multer setup for image uploads
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: (req, file, cb) => {
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
+  },
+});
+const upload = multer({ storage });
 
 // Middleware to log request details
 router.use((req, res, next) => {
@@ -29,21 +41,23 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST /api/posts - Create a new post
-router.post("/", async (req, res) => {
+// POST /api/posts - Create a new post with image upload
+router.post("/", upload.single("image"), async (req, res) => {
   try {
     if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
-    const { image, title, content } = req.body;
+    const { title, content } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: "Title and content are required" });
     }
 
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
     const result = await pool.query(
       "INSERT INTO posts (image, title, author_id, content) VALUES ($1, $2, $3, $4) RETURNING *",
-      [image || null, title, req.user.id, content]
+      [imageUrl, title, req.user.id, content]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -53,18 +67,19 @@ router.post("/", async (req, res) => {
 });
 
 // PUT /api/posts/:id - Update an existing post
-router.put("/:id", async (req, res) => {
+router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
     const { id } = req.params;
-    const { image, title, content } = req.body;
+    const { title, content } = req.body;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await pool.query(
       "UPDATE posts SET image = COALESCE($1, image), title = $2, content = $3, updated_at = NOW() WHERE id = $4 AND archived = FALSE RETURNING *",
-      [image || null, title, content, id]
+      [imageUrl, title, content, id]
     );
 
     if (result.rowCount === 0) {

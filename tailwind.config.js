@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        peugeot: ['Peugeot New', 'Helvetica', 'sans-serif'],
+        peugeot: ['Peugeot', 'Peugeot New'],
       },
     },
   },

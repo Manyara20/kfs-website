@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 export default function AddPost() {
   const { data: session, status } = useSession();
-  const [form, setForm] = useState({ image: "", title: "", content: "" });
+  const [form, setForm] = useState({ image: null, title: "", content: "" });
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -23,19 +23,24 @@ export default function AddPost() {
       return;
     }
 
+    const formData = new FormData();
+    if (form.image) formData.append("image", form.image); // Append image file if present
+    formData.append("title", form.title);
+    formData.append("content", form.content);
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/posts",
-        form,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
       console.log("Post added:", response.data);
-      setForm({ image: "", title: "", content: "" });
+      setForm({ image: null, title: "", content: "" });
       setError("");
       alert("Post added successfully!");
     } catch (err) {
@@ -58,10 +63,9 @@ export default function AddPost() {
       <h2 className="text-2xl mb-4">Add Post</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <input
-        type="text"
-        placeholder="Image URL"
-        value={form.image}
-        onChange={(e) => setForm({ ...form, image: e.target.value })}
+        type="file"
+        accept="image/*" // Restrict to image files (e.g., .jpg, .png)
+        onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
         className="block w-full p-2 mb-4 border"
       />
       <input

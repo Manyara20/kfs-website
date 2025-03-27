@@ -1,125 +1,195 @@
-import React from 'react';
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
+"use client";
+import React from "react";
+import Link from "next/link";
+import { Box, Typography, Button } from "@mui/material";
+import { styled } from "@mui/system";
+import { motion } from "framer-motion";
+import { Description as DescriptionIcon } from "@mui/icons-material";
 
-function ForesterMagazinePage() {
+// Styled Components
+const PageContainer = styled(Box)({
+  minHeight: "100vh",
+  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",
+  padding: "2rem",
+  position: "relative",
+  overflow: "hidden",
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+    opacity: 0.05,
+    zIndex: 0,
+  },
+});
+
+const ContentWrapper = styled(Box)({
+  maxWidth: "1200px",
+  margin: "0 auto",
+  padding: "3rem 1rem",
+  position: "relative",
+  zIndex: 1,
+});
+
+const HeaderTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 700,
+  color: "#ffffff",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+  fontSize: "3rem",
+  lineHeight: 1.2,
+  letterSpacing: "0.5px",
+  textAlign: "center",
+  marginBottom: "3rem",
+});
+
+const DocumentCard = styled(motion.div)(({ theme }) => ({
+  background: "rgba(255, 255, 255, 0.95)",
+  borderRadius: "12px",
+  padding: "1.5rem",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  marginBottom: "1.5rem",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "1rem",
+  },
+  "&:hover": {
+    transform: "translateY(-5px)",
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+  },
+}));
+
+const DocumentInfo = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem",
+});
+
+const DocumentTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  color: "#0f5a28",
+  fontSize: "1.25rem",
+});
+
+const FileSize = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  color: "#666",
+  fontSize: "0.9rem",
+});
+
+const DownloadButton = styled(Button)({
+  backgroundColor: "#0f5a28",
+  color: "#fff",
+  textTransform: "none",
+  padding: "0.5rem 1.5rem",
+  fontSize: "0.9rem",
+  fontFamily: "'Roboto', sans-serif",
+  borderRadius: "8px",
+  "&:hover": {
+    backgroundColor: "#388e3c",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+  },
+});
+
+export default function ForesterMagazinePage() {
+  const magazines = [
+    {
+      title: "Forester January-June 2024",
+      fileSize: "31 MB",
+      link: "/path/to/forester-jan-jun-2024.pdf",
+    },
+    {
+      title: "Forester July-December 2023",
+      fileSize: "58 MB",
+      link: "/path/to/forester-jul-dec-2023.pdf",
+    },
+  ];
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
-
-      {/* Main Navigation Bar */}
-      <MainNavBar />
-
-      {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-12">
+    <PageContainer>
+      <ContentWrapper>
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">The Forester Magazine</h1>
-          <p className="text-xl text-gray-600">Biannual Forestry Magazine of the Kenya Forest Service</p>
-        </div>
+        <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
+        <Typography variant="h6" align="center" color="#fff" gutterBottom>
+          Biannual Forestry Magazine of the Kenya Forest Service
+        </Typography>
 
-        {/* Magazine Content Section */}
-        <div className="max-w-3xl mx-auto text-gray-700">
-          <p className="mb-6">
-            Welcome to the latest edition of our biannual forestry magazine. As we reflect on the past six months, we’re proud to share the significant strides made in Kenya’s forestry sector.
-          </p>
-          <p className="mb-6">
-            In this issue, we spotlight several key events and initiatives that underscore our commitment to sustainable forest management and conservation. Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap that will guide our efforts in the coming years to enhance forest cover and promote sustainable utilization of forest resources.
-          </p>
-          <p className="mb-6">
-            We also bring you highlights from the International Day of Forests celebrations, where we joined the global community in recognizing the vital role forests play in our lives and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an initiative that saw thousands of Kenyans come together to green our nation.
-          </p>
-          <p className="mb-6">
-            This edition also features news on various Memoranda of Understanding signed with partner organizations, strengthening our collaborative efforts in forest conservation and management.
-          </p>
-          <p className="mb-6">
-            These stories reflect our ongoing dedication to Kenya’s forests and the communities that depend on them. We hope this issue informs and inspires you to join us in our mission to protect and nurture our precious forest resources.
-          </p>
-          <p className="mb-6 font-semibold">
-            Happy reading! <br />
+        {/* New Content Section */}
+        <Box mt={4} p={3} bgcolor="rgba(255,255,255,0.9)" borderRadius="12px" boxShadow={3}>
+          <Typography variant="h6" color="#0f5a28" fontWeight="bold">
+            Welcome to the latest edition of our biannual forestry magazine.
+          </Typography>
+          <Typography variant="body1" color="textSecondary" mt={2}>
+            As we reflect on the past six months, we’re proud to share the significant strides
+            made in Kenya’s forestry sector. In this issue, we spotlight several key events and
+            initiatives that underscore our commitment to sustainable forest management and
+            conservation.
+          </Typography>
+          <Typography variant="body1" color="textSecondary" mt={2}>
+            Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
+            that will guide our efforts in the coming years to enhance forest cover and promote
+            sustainable utilization of forest resources.
+          </Typography>
+          <Typography variant="body1" color="textSecondary" mt={2}>
+            We also bring you highlights from the International Day of Forests celebrations, where
+            we joined the global community in recognizing the vital role forests play in our lives
+            and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
+            initiative that saw thousands of Kenyans come together to green our nation.
+          </Typography>
+          <Typography variant="body1" color="textSecondary" mt={2}>
+            This edition also features news on various Memoranda of Understanding signed with
+            partner organizations, strengthening our collaborative efforts in forest conservation
+            and management.
+          </Typography>
+          <Typography variant="body1" color="textSecondary" mt={2}>
+            These stories reflect our ongoing dedication to Kenya’s forests and the communities
+            that depend on them. We hope this issue informs and inspires you to join us in our
+            mission to protect and nurture our precious forest resources.
+          </Typography>
+          <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={3}>
+            Happy reading!
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
             Anne Kaari, ‘ndc‘ (K)
-          </p>
-        </div>
+          </Typography>
+        </Box>
 
-        {/* Download Section */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold text-green-900 text-center mb-8">Download the Magazine</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* January-June 2024 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-green-900 mb-4">Forester January-June 2024</h3>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-green-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-700">1 file(s) 31 MB</p>
-                  <a
-                    href="/path/to/forester-jan-jun-2024.pdf"
-                    download
-                    className="text-green-600 hover:underline"
-                  >
-                    Download
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* July-December 2023 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-green-900 mb-4">Forester July-December 2023</h3>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-green-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-700">1 file(s) 58 MB</p>
-                  <a
-                    href="/path/to/forester-jul-dec-2023.pdf"
-                    download
-                    className="text-green-600 hover:underline"
-                  >
-                    Download
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <FooterBottom />
-    </div>
+        {/* Magazine Download Section */}
+        <Box mt={4}>
+          {magazines.map((magazine, index) => (
+            <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+              <DocumentInfo>
+                <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                <Box>
+                  <DocumentTitle>{magazine.title}</DocumentTitle>
+                  <FileSize>1 file(s) {magazine.fileSize}</FileSize>
+                </Box>
+              </DocumentInfo>
+              <Link href={magazine.link} target="_blank" rel="noopener noreferrer" passHref>
+                <DownloadButton>Download</DownloadButton>
+              </Link>
+            </DocumentCard>
+          ))}
+        </Box>
+      </ContentWrapper>
+    </PageContainer>
   );
 }
-
-export default ForesterMagazinePage;

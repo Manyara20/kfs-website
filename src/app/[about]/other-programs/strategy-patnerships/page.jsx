@@ -1,14 +1,13 @@
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from '@/components/FooterBottom';
-import ICFRADocs from "@/app/[about]/projects/ICFRADocs/ICFRADocuments";
-
+import StrategyPatnerships from '@/app/[about]/other-programs/strategy-patnerships/StrategyPatnerships';
 function KFSBoardPage() {
   return (
     <div>
       <TopNavBar />
       <MainNavBar />
-      <ICFRADocs/>
+      <StrategyPatnerships/>
       <FooterBottom />
     </div>
   );

@@ -146,7 +146,7 @@ const MainNavBar = () => {
           link: "/about/other-programs",
           subItems: [
             { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy, Partnerships & Resource Mobilizations", link: "/about/other-programs/strategy-partnerships-resources" },
+            { label: "Strategy Patnerships Resource Mobilizations v", link: "/about/other-programs/strategy-patnerships" },
             { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
           ],
         },

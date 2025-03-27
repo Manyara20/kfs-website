@@ -1,4 +1,4 @@
-// pages/ntpc-documents.js
+// pages/ic-fra-documents.js
 "use client";
 import Link from 'next/link';
 import { Box, Typography, Button } from "@mui/material";
@@ -104,12 +104,42 @@ const DownloadButton = styled(Button)({
   },
 });
 
-export default function NTPCPage() {
+export default function ICFRADocumentsPage() {
   const documents = [
     {
-      title: "National Tree Planting Campaign",
-      fileSize: "2 MB",
-      link: "/path/to/ic-fra-report-2024.pdf",
+      title: "Field Manual for Biophysical Forest Resources Assessment in Kenya",
+      fileSize: "1.5 MB",
+      link: "/documents/field-manual-biophysical-forest-resources-assessment.pdf",
+    },
+    {
+      title: "Field Manual for Tree Volume and Biomass Modelling",
+      fileSize: "1.2 MB",
+      link: "/documents/field-manual-tree-volume-biomass-modelling.pdf",
+    },
+    {
+      title: "Field Manual for LiDAR Assisted Estimation of Forest Resources in Kenya",
+      fileSize: "2.0 MB",
+      link: "/documents/field-manual-lidar-assisted-estimation.pdf",
+    },
+    {
+      title: "Technical Report on Sampling Design Simulations for National Forest Resources Assessment in Kenya",
+      fileSize: "1.8 MB",
+      link: "/documents/technical-report-sampling-design-simulations.pdf",
+    },
+    {
+      title: "Proposal for National Forest Resources Assessment in Kenya (NFRA) Technical Report on the Pilot Inventory",
+      fileSize: "2.5 MB",
+      link: "/documents/proposal-nfra-technical-report-pilot-inventory.pdf",
+    },
+    {
+      title: "Manual for Preparation and Organic Carbon Analyses from Forest Soil and Mangrove Sediment Samples",
+      fileSize: "1.3 MB",
+      link: "/documents/manual-organic-carbon-analyses.pdf",
+    },
+    {
+      title: "Technical Report on LiDAR Assisted Estimation of Forest Resources in Kenya",
+      fileSize: "2.0 MB",
+      link: "/documents/technical-report-lidar-assisted-estimation.pdf",
     },
   ];
 
@@ -123,7 +153,7 @@ export default function NTPCPage() {
       <ContentWrapper>
         {/* Header Section */}
         <HeaderTitle variant="h1">
-          NTPC Documents
+          IC-FRA Operating Documents
         </HeaderTitle>
 
         {/* Documents Section */}

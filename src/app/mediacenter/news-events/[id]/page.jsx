@@ -586,7 +586,7 @@ export default function NewsDetailPage({ params }) {
       <section className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Title */}
-          <h1 className="text-4xl font-bold text-white mb-6">{newsItem.title}</h1>
+          <h1 className="text-4xl font-bold text-emerald-950 mb-6">{newsItem.title}</h1>
 
           {/* Image */}
           <div className="mb-8">
@@ -598,7 +598,7 @@ export default function NewsDetailPage({ params }) {
           </div>
 
           {/* Metadata */}
-          <div className="flex items-center gap-6 text-sm text-gray-300 mb-8">
+          <div className="flex items-center gap-6 text-sm text-black mb-8">
             <div className="flex items-center gap-1">
               <Image src="/icons/user.png" alt="Author" width={16} height={16} />
               <span>{newsItem.author}</span>
@@ -614,7 +614,7 @@ export default function NewsDetailPage({ params }) {
           </div>
 
           {/* Content */}
-          <div className="text-gray-300 leading-relaxed">
+          <div className="text-emerald-700 leading-relaxed">
             <p>{newsItem.text}</p>
           </div>
         </div>

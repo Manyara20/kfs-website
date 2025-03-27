@@ -5,19 +5,19 @@ export default function KFSBoardSection() {
   const ceo = {
     name: "Mr. Titus Kipkoech Korir",
     title: "Chairman",
-    image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/10/Titus-Korir.jpg",
+    image: "/images/KFS-Board/Titus-Korir.jpg", // Updated to local path
   };
 
   const boardMembers = [
-    { name: "Ms. Jane Simita Munka", title: "Rep. CFA", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/10/Jane-Simitia-Munka.jpg" },
-    { name: "Kunal Chowdhari", title: "Rep. Timber Industry and Chairman, Finance and Resource Mobilization Committee", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/20230328162727_1B4A0697-scaled.jpg" },
-    { name: "Abdala Komesha", title: "Rep. IG, National Police Service", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/20230328162405_1B4A0671-scaled.jpg" },
-    { name: "Isabella Kogei", title: "Rep. PS National Treasury", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/20230328162502_1B4A0678-scaled.jpg" },
-    { name: "Dr. George Muthike", title: "Rep. KEFRI and Chairman, Technical, Planning, Development and KFC Committee", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/20230328162617_1B4A0688-scaled.jpg" },
-    { name: "Dr. Doris Mutta", title: "Rep. FSK. Chair, Audit Committee", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/20230328162914_1B4A0718-1-scaled.jpg" },
-    { name: "Ahmed Mohammed", title: "Rep. CoG and Chairman, Human Resource and Administration Committee", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/05/Ahmed-Mohamed-REP-COG-2.jpg" },
-    { name: "Mr. Evans Mutari", title: "Rep. PS State Department of Forestry", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/10/Evans-Mutari.jpg" },
-    { name: "Alex Lemarkoko", title: "Secretary to the Board", image: "https://www.kenyaforestservice.org/wp-content/uploads/2023/08/CCF-Board-scaled.jpg" },
+    { name: "Ms. Jane Simita Munka", title: "Rep. CFA", image: "/images/KFS-Board/Jane-Simitia-Munka.jpg" },
+    { name: "Kunal Chowdhari", title: "Rep. Timber Industry and Chairman, Finance and Resource Mobilization Committee", image: "/images/KFS-Board/Kunal-Chowdhari.jpg" },
+    { name: "Abdala Komesha", title: "Rep. IG, National Police Service", image: "/images/KFS-Board/Abdala-Komesha.jpg" },
+    { name: "Isabella Kogei", title: "Rep. PS National Treasury", image: "/images/KFS-Board/Isabella-Kogei.jpg" },
+    { name: "Dr. George Muthike", title: "Rep. KEFRI and Chairman, Technical, Planning, Development and KFC Committee", image: "/images/KFS-Board/Dr. George Muthike.jpg" },
+    { name: "Dr. Doris Mutta", title: "Rep. FSK. Chair, Audit Committee", image: "/images/KFS-Board/Dr. Doris Mutta.jpg" },
+    { name: "Ahmed Mohammed", title: "Rep. CoG and Chairman, Human Resource and Administration Committee", image: "/images/KFS-Board/Ahmed-Mohammed.jpg" },
+    { name: "Mr. Evans Mutari", title: "Rep. PS State Department of Forestry", image: "/images/KFS-Board/Evans-Mutari.jpg" },
+    { name: "Alex Lemarkoko", title: "Secretary to the Board", image: "/images/KFS-Board/Alex Lemarkoko.jpg" },
   ];
 
   return (
@@ -103,7 +103,7 @@ export default function KFSBoardSection() {
       {/* Board Members Section */}
       <Grid container spacing={3} justifyContent="center">
         {boardMembers.map((member, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
             <Box
               sx={{
                 backgroundColor: "white",

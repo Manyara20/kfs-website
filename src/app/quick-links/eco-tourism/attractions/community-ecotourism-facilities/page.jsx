@@ -1,15 +1,16 @@
-import TopNavBar from "@/components/TopNavBar";
-import MainNavBar from "@/components/MainNavBar";
-import FooterBottom from '@/components/FooterBottom';
-
-function KFSBoardPage() {
+// app/kfs-advert/page.js
+export default function PDFRedirect() {
   return (
-    <div>
-      <TopNavBar />
-      <MainNavBar />
-      <FooterBottom />
-    </div>
+    <head>
+      <meta http-equiv="refresh" content={`0; url=https://www.kenyaforestservice.org/wp-content/uploads/2023/06/Community-ecotourism-facilities.pdf`} />
+    </head>
   );
 }
 
-export default KFSBoardPage;
+
+
+
+
+
+
+

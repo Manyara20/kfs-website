@@ -81,10 +81,10 @@ const MainNavBar = () => {
       >
         <MenuItem
           sx={{
-            fontSize: "0.9rem",
+            fontSize: "0.8rem", // Decreased from 0.9rem
             color: "black",
             "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-            padding: "8px 16px",
+            padding: "6px 12px", // Decreased from 8px 16px
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -99,7 +99,7 @@ const MainNavBar = () => {
             {item.label}
           </Link>
           {item.subItems && item.subItems.length > 0 && (
-            <ArrowDropDown sx={{ color: "black", fontSize: "1.2rem" }} />
+            <ArrowDropDown sx={{ color: "black", fontSize: "1rem" }} /> // Decreased from 1.2rem
           )}
         </MenuItem>
         {item.subItems && item.subItems.length > 0 && (
@@ -111,7 +111,7 @@ const MainNavBar = () => {
               top: "100%",
               left: "100%", // Adjusted for better alignment
               backgroundColor: "white",
-              minWidth: "200px",
+              minWidth: "180px", // Decreased from 200px
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
               borderRadius: "4px",
               zIndex: 1000 + level,
@@ -146,7 +146,7 @@ const MainNavBar = () => {
           link: "/about/other-programs",
           subItems: [
             { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy, Partnerships & Resource Mobilizations", link: "/about/other-programs/strategy-partnerships-resources" },
+            { label: "Strategy Patnerships Resource Mobilizations v", link: "/about/other-programs/strategy-patnerships" },
             { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
           ],
         },
@@ -314,16 +314,16 @@ const MainNavBar = () => {
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
-                      fontSize: { md: "0.85rem", lg: "0.95rem" },
+                      fontSize: { md: "0.8rem", lg: "0.9rem" }, // Decreased from 0.85/0.95rem
                       fontWeight: 500,
-                      padding: { md: "6px 8px", lg: "8px 12px" },
+                      padding: { md: "5px 7px", lg: "7px 10px" }, // Decreased padding
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                       borderRadius: "4px",
                       transition: "color 0.3s ease",
                     }}
                   >
                     {item.label}
-                    <ArrowDropDown sx={{ color: isSticky ? "white" : "#6A961F", fontSize: "1.2rem" }} />
+                    <ArrowDropDown sx={{ color: isSticky ? "white" : "#6A961F", fontSize: "1.1rem" }} /> {/* Decreased from 1.2rem */}
                   </Typography>
                   <Box
                     sx={{
@@ -333,7 +333,7 @@ const MainNavBar = () => {
                       top: "100%",
                       left: 0,
                       backgroundColor: "white",
-                      minWidth: "200px",
+                      minWidth: "180px", // Decreased from 200px
                       boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                       borderRadius: "4px",
                       zIndex: 1000,
@@ -352,7 +352,7 @@ const MainNavBar = () => {
                   sx={{
                     color: isSticky ? "white" : "#6A961F",
                     textDecoration: "none",
-                    padding: { md: "6px 8px", lg: "8px 12px" },
+                    padding: { md: "5px 7px", lg: "7px 10px" }, // Decreased padding
                     "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                     borderRadius: "4px",
                     display: "flex",
@@ -360,7 +360,7 @@ const MainNavBar = () => {
                     transition: "color 0.3s ease",
                   }}
                 >
-                  <Typography sx={{ fontSize: { md: "0.85rem", lg: "0.95rem" }, fontWeight: 500 }}>
+                  <Typography sx={{ fontSize: { md: "0.8rem", lg: "0.9rem" }, fontWeight: 500 }}> {/* Decreased font size */}
                     {item.label}
                   </Typography>
                 </Link>
@@ -376,14 +376,14 @@ const MainNavBar = () => {
               sx={{
                 color: isSticky ? "white" : "black",
                 fontWeight: "bold",
-                padding: { md: "6px", lg: "8px" },
+                padding: { md: "5px", lg: "7px" }, // Decreased padding
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
                 borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: { xs: "1.5rem", md: "1.75rem" }, fontWeight: "bold" }} />
+              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem" }, fontWeight: "bold" }} /> {/* Decreased size */}
             </IconButton>
           </Box>
         )}
@@ -392,7 +392,7 @@ const MainNavBar = () => {
         {isMobile && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
-              sx={{ color: isSticky ? "white" : "#6A961F", padding: "6px", transition: "color 0.3s ease" }}
+              sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px", transition: "color 0.3s ease" }} // Decreased padding
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
@@ -401,14 +401,14 @@ const MainNavBar = () => {
               sx={{
                 color: isSticky ? "white" : "black",
                 fontWeight: "bold",
-                padding: "6px",
+                padding: "5px", // Decreased padding
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
                 borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: "1.5rem", fontWeight: "bold" }} />
+              <SearchIcon sx={{ fontSize: "1.4rem", fontWeight: "bold" }} /> {/* Decreased size */}
             </IconButton>
           </Box>
         )}
@@ -438,7 +438,7 @@ const MainNavBar = () => {
           <List sx={{ paddingTop: "3rem" }}>
             {navigationItems.map((item, index) => (
               <React.Fragment key={index}>
-                {item.link ? (
+                {item.link && !item.subItems ? (
                   <ListItem disablePadding>
                     <ListItemButton
                       component={Link}
@@ -447,7 +447,7 @@ const MainNavBar = () => {
                       rel={item.isExternal ? "noopener noreferrer" : undefined}
                       sx={{ color: "#6A961F", padding: "8px 16px" }}
                     >
-                      <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
+                      <ListItemText primary={item.label} sx={{ fontSize: "0.9rem" }} /> {/* Decreased size */}
                     </ListItemButton>
                   </ListItem>
                 ) : (
@@ -495,11 +495,11 @@ const MainNavBar = () => {
             color: "white",
             height: "auto",
             width: "100%",
-            maxHeight: "200px",
+            maxHeight: "180px", // Decreased from 200px
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            p: 4,
+            p: 3, // Decreased from p: 4
           },
         }}
       >
@@ -511,14 +511,14 @@ const MainNavBar = () => {
             maxWidth: "600px",
             display: "flex",
             flexDirection: "column",
-            gap: 2,
+            gap: 1.5, // Decreased from gap: 2
           }}
         >
           <Typography
             variant="h6"
             sx={{
               textAlign: "center",
-              fontSize: { xs: "1rem", sm: "1.25rem" },
+              fontSize: { xs: "0.9rem", sm: "1.1rem" }, // Decreased sizes
               color: "white",
             }}
           >
@@ -532,7 +532,7 @@ const MainNavBar = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "white" }} />
+                  <SearchIcon sx={{ color: "white", fontSize: "1.1rem" }} /> {/* Decreased size */}
                 </InputAdornment>
               ),
             }}
@@ -544,7 +544,7 @@ const MainNavBar = () => {
               },
               "& .MuiInputBase-input": {
                 color: "white",
-                fontSize: { xs: "0.9rem", sm: "1rem" },
+                fontSize: { xs: "0.85rem", sm: "0.95rem" }, // Decreased sizes
               },
             }}
           />

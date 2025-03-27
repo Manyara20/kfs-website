@@ -3,32 +3,123 @@ import { Box, Typography, Grid, IconButton, Avatar } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import Link from "next/link";
 
-export default function SeniorManagementSection() {
-  const ceo = {
-    id: "ceo",
+// Management Details Object
+const managementDetails = {
+  ceo: {
+    image: "/images/senior-management/Alex Lemarkoko.jpg",
     name: "Alex Lemarkoko",
     title: "Chief Conservator of Forests",
-    image: "/images/Alex Lemarkoko.jpg", // Local path
+    bio: "Alex Lemarkoko is the Chief Conservator of Forests with over 20 years of experience...",
+  },
+  "charity-munyasya": {
+    image: "/images/senior-management/Charity Munyasia.jpg",
+    name: "CHARITY MUNYASIA",
+    title: "Principal Deputy to the CCF - Directorate of Strategy, Partnerships & Resource Mobilization",
+    bio: "Charity Munyasya is the Principal Deputy to the CCF with expertise in...",
+  },
+  "mohamed-mohamed": {
+    image: "/images/senior-management/Commandant.jpg",
+    name: "MOHAMED .A. MOHAMED",
+    title: "Commandant",
+    bio: "",
+  },
+  "lucy-kiboi": {
+    image: "/images/senior-management/Lucy Kiboi.png",
+    name: "LUCY KIBOI",
+    title: "Senior Manager, Corporate Services",
+    bio: "",
+  },
+  "stephen-mugi": {
+    image: "/images/senior-management/Stephen Mugi.png",
+    name: "STEPHEN MUGI",
+    title: "Ag. Manager, Internal Audit",
+    bio: "Mr. Mugi is in charge of Internal Audit and has over thirteen (13) years’ experience in Auditing in the public sector. He holds a Master of Science Degree in Finance, a Bachelor’s Degree in Accounting and is a member of Institute of the Internal Auditors (IIA) – Kenyan Chapter and Institute of Certified Public Accountants of Kenya (ICPAK).",
+  },
+  "clement-ng'oriareng": {
+    image: "/images/senior-management/Dr. Clement.png",
+    name: "Dr. CLEMENT NG'ORIARENG",
+    title: "Deputy Chief Conservator of Forests - Drylands and Private Forests Development Coordination",
+    bio: "",
+  },
+  "zipporah-toroitich": {
+    image: "/images/senior-management/Zipporah Toroitich.png",
+    name: "ZIPPORAH TOROITICH",
+    title: "Deputy Chief Conservator of Forests - Forest Advisory, County Liaison and Investment",
+    bio: "",
+  },
+  "anastacia-muasya": {
+    image: "/images/senior-management/Anastacia Muasya.png",
+    name: "ANASTACIA MUASYA",
+    title: "Manager - Finance and Accounts",
+    bio: "",
+  },
+  "juliana-ochieng": {
+    image: "/images/senior-management/Juliana Ochieng.png",
+    name: "Juliana Ochieng",
+    title: "Manager - Human Resources Management",
+    bio: "Mrs. Ochieng is in charge of Human Resource Management. She holds a Master’s degree in Business Administration, a First class Bachelor’s Degree in Human Resource Management and an advanced Diploma in Human Resource Planning and Development. Other Skills and development courses undertaken include Strategic Leadership Development Programme, mentoring & coaching skills, training of trainers in public service and Senior Management Course. She is also a certified pension trustee and a member of the Institute of Human Resource Management (IHRM). She has over twenty-eight (28) years’ experience in human resource management",
+  },
+  "esther-keige": {
+    image: "/images/senior-management/Esther Keige.png",
+    name: "Esther Keige",
+    title: "Manager - Legal Services",
+    bio: "Ms Esther Keige is the Manager, Legal Services. She holds a master’s degree in Environmental Law, a Bachelors degree in Law (LLB) Hons and a post graduate diploma in Law.Professionally, the officer is an Advocate of the High Court of Kenya, a Certified Secretary (CS) and Certified Professional Mediator. She is a member of the Law Society of Kenya and the Institute of Certified Secretaries.She has over twenty (20) Years experience as an Advocate and Certified Secretary in the Private and Public Sector.",
+  },
+  "stephen-cheboi": {
+    image: "/images/senior-management/Stephen Cheboi.png",
+    name: "stephen cheboi",
+    title: "Ag. Manager - Information Communication and Technology",
+    bio: "Head – Information Communication and Technology",
+  },
+  "anne-muthamia": {
+    image: "/images/senior-management/Anne Muthama.png",
+    name: "Anne Muthamia",
+    title: "Ag. Manager - Corporate Communication",
+    bio: "Ms. Muthamia is in charge of Corporate Communications Department with over 18 years’ work experience. She holds an M.A. International Studies from the University of Nairobi and is a graduate of the National Defence College, Kenya. She also holds an M.A. Communication Studies from the University of Nairobi and B.A. Communication from Daystar University. She is a member of the Public Relations Society of Kenya (PRSK) and the Association of Media Women in Kenya (AMWIK).",
+  },
+  "victor-kobia": {
+    image: "/images/senior-management/Victor Kobia.png",
+    name: "Victor Kobia",
+    title: "Ag. Manager - Supply Chain Management",
+    bio: "Mr. Kobia is the Head, Supply Chain Management. He holds a Master of Science in Procurement and Logistics, a Bachelor’s Degree and Diploma in Procurement and Supply Management. He has over 20 years’ experience in Supply Chain Management and is a member of the Chartered Institute of Procurement and Supply (UK) and Kenya Institute of Supplies Management.",
+  },
+  "isaac-wekesa": {
+    image: "/images/senior-management/Isaac Wekesa.jpg",
+    name: "ISAAC WEKESA",
+    title: "Ag. Manager - Administration, Infrastructure Development & Maintenance",
+    bio: "",
+  },
+  "ronald-mbaji": {
+    image: "/images/senior-management/Captain-Mbaji.jpg",
+    name: "Col.(Rtd) Ronald Mbaji",
+    title: "Head - Airwing",
+    bio: "",
+  },
+  "laura-yego": {
+    image: "/images/senior-management/Laura Yego.png",
+    name: "Laura Yego",
+    title: "Principal Legal Officer & Board Secretariat",
+    bio: "Ms Yego is the Chief Legal Officer. She holds a Bachelor of Laws Degree (LLB) (Hons) and is currently pursuing a master’s degree in Environmental Law from the University of Nairobi. She is also a Certified Secretary (CS) and an Advocate of the High Court with over 15 years’ experience, a Commissioner for Oaths and a Notary Public. She is a member of the Law Society of Kenya, Institute of Certified Secretaries (Kenya) and the East Africa Law Society in good standing",
+  },
+};
+
+export default function SeniorManagementSection() {
+  // Extract CEO and board members from managementDetails
+  const ceo = {
+    id: "ceo",
+    name: managementDetails.ceo.name,
+    title: managementDetails.ceo.title,
+    image: managementDetails.ceo.image,
   };
 
-  const boardMembers = [
-    { id: "charity-munyasya", name: "Charity Munyasia", title: "Principal Deputy to the CCF - Directorate of Strategy, Partnerships & Resource Mobilization", image: "/images/Charity Munyasia.jpg" },
-    { id: "head", name: "Head", title: "Directorate of Forest Conservation and Management", image: "/images/AVERTER2.png" },
-    { id: "mohamed-mohamed", name: "Mohamed A. Mohamed", title: "Commandant", image: "/images/Commandant.jpg" },
-    { id: "lucy-kiboi", name: "Lucy Kiboi", title: "Senior Manager, Corporate Services", image: "/images/Lucy Kiboi.png" },
-    { id: "stephen-mugi", name: "Stephen Mugi", title: "Ag. Manager, Internal Audit", image: "/images/Stephen Mugi.png" },
-    { id: "clement-ngoriareng", name: "Dr. Clement Ng'oriareng", title: "Deputy Chief Conservator of Forests - Drylands and Private Forests Development Coordination", image: "/images/Dr. Clement.png" },
-    { id: "zipporah-toroitich", name: "Zipporah Toroitich", title: "Deputy Chief Conservator of Forests - Forest Advisory, County Liaison and Investment", image: "/images/Zipporah Toroitich.png" },
-    { id: "anastacia-muasya", name: "Anastacia Muasya", title: "Manager - Finance and Accounts", image: "/images/Anastasia Muasya.png" },
-    { id: "juliana-ochieng", name: "Juliana Ochieng", title: "Manager - Human Resources Management", image: "/images/Juliana Ochieng.png" },
-    { id: "esther-keige", name: "Esther Keige", title: "Manager - Legal Services", image: "/images/Esther Keige.png" },
-    { id: "stephen-cheboi", name: "Stephen Cheboi", title: "Ag. Manager - Information Communication and Technology", image: "/images/Stephen Cheboi.png" },
-    { id: "anne-muthamia", name: "Anne Muthamia", title: "Ag. Manager - Corporate Communication", image: "/images/Anne Muthama.png" },
-    { id: "victor-kobia", name: "Victor Kobia", title: "Ag. Manager - Supply Chain Management", image: "/images/Victor Kobia.png" },
-    { id: "isaac-wekesa", name: "Isaac Wekesa", title: "Ag. Manager - Administration, Infrastructure Development & Maintenance", image: "/images/Isaac Wekesa.jpg" },
-    { id: "ronald-mbaji", name: "Col.(Rtd) Ronald Mbaji", title: "Head - Airwing", image: "/images/Captain-Mbaji.jpg" },
-    { id: "laura-yego", name: "Laura Yego", title: "Principal Legal Officer & Board Secretariat", image: "/images/Laura Yego.png" },
-  ];
+  const boardMembers = Object.keys(managementDetails)
+    .filter((key) => key !== "ceo")
+    .map((key) => ({
+      id: key,
+      name: managementDetails[key].name,
+      title: managementDetails[key].title,
+      image: managementDetails[key].image,
+    }));
 
   return (
     <Box sx={{ padding: { xs: "1rem", md: "3rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
@@ -129,7 +220,7 @@ export default function SeniorManagementSection() {
       {/* Board Members Section */}
       <Grid container spacing={3} justifyContent="center">
         {boardMembers.map((member, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
             <Box
               sx={{
                 backgroundColor: "white",

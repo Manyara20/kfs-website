@@ -4,7 +4,7 @@ import FooterBottom from '@/components/FooterBottom';
 
 function ConstructionPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col ">
       <TopNavBar />
       <MainNavBar />
       

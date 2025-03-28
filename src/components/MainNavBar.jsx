@@ -156,7 +156,7 @@ const MainNavBar = () => {
           subItems: [
             { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
             { label: "NTPC", link: "/about/projects/NTPC" },
-            { label: "IC-FRA Documents", link: "/about/projects/ICFRA" },
+            { label: "IC-FRA Documents", link: "/about/projects/ICFRADocs" },
           ],
         },
       ],
@@ -180,7 +180,6 @@ const MainNavBar = () => {
           link: "/quick-links/participatory-forest-management",
           subItems: [
             { label: "Background", link: "/quick-links/participatory-forest-management/Background" },
-            { label: "Forest Management Agreements", link: "/quick-links/participatory-forest-management/forest-agreements" },
             { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/ForestPlans" },
           ],
         },

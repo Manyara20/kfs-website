@@ -1,9 +1,13 @@
 "use client";
+
 import React from "react";
 import { Box, Typography, List, ListItem, ListItemText, IconButton, Button } from "@mui/material";
 import { Facebook, Twitter, YouTube, Instagram, Description as DescriptionIcon } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 
 // Custom styled components
 const PageContainer = styled(Box)({
@@ -166,72 +170,77 @@ const ParticipatoryForestManagementPage = () => {
   };
 
   return (
-    <PageContainer>
-      {/* Social Icons */}
-      <SocialIconsContainer>
-        <SocialIconButton><Facebook /></SocialIconButton>
-        <SocialIconButton><Twitter /></SocialIconButton>
-        <SocialIconButton><YouTube /></SocialIconButton>
-        <SocialIconButton><Instagram /></SocialIconButton>
-      </SocialIconsContainer>
+    <div>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        {/* Social Icons */}
+        <SocialIconsContainer>
+          <SocialIconButton><Facebook /></SocialIconButton>
+          <SocialIconButton><Twitter /></SocialIconButton>
+          <SocialIconButton><YouTube /></SocialIconButton>
+          <SocialIconButton><Instagram /></SocialIconButton>
+        </SocialIconsContainer>
 
-      {/* Main Content Card */}
-      <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
-        <Title variant="h1">Participatory Forest Management</Title>
-        <TextDescription>
-          Kenya is endowed with a wide range of forest ecosystems ranging from montane rainforests, savannah woodlands, dry forests, and coastal forests and mangroves. The current forest cover of 7.2% of the land area of the country is still below the constitutional requirement of 10%. These forests have high species richness and endemism, which has made the country be classified as mega diverse. They rank high as the country’s natural asset, due to their environmental, life-supporting functions, and the provision of diverse goods and services.
-        </TextDescription>
+        {/* Main Content Card */}
+        <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
+          <Title variant="h1">Participatory Forest Management</Title>
+          <TextDescription>
+            Kenya is endowed with a wide range of forest ecosystems ranging from montane rainforests, savannah woodlands, dry forests, and coastal forests and mangroves. The current forest cover of 7.2% of the land area of the country is still below the constitutional requirement of 10%. These forests have high species richness and endemism, which has made the country be classified as mega diverse. They rank high as the country’s natural asset, due to their environmental, life-supporting functions, and the provision of diverse goods and services.
+          </TextDescription>
 
-        <SectionTitle>Strategic Objective</SectionTitle>
-        <TextDescription>
-          The Participatory Forest Management strategic objective is to enhance conservation, sustainable management, and utilization of forests by improving livelihoods in rural areas, conserving biodiversity while enhancing people’s livelihoods, and ensuring the sustainable use of forests.
-        </TextDescription>
+          <SectionTitle>Strategic Objective</SectionTitle>
+          <TextDescription>
+            The Participatory Forest Management strategic objective is to enhance conservation, sustainable management, and utilization of forests by improving livelihoods in rural areas, conserving biodiversity while enhancing people’s livelihoods, and ensuring the sustainable use of forests.
+          </TextDescription>
 
-        <SectionTitle>Policy Goal & Objectives</SectionTitle>
-        <TextDescription>
-          The overall policy goal of Participatory Forest Management is sustainable development, management, utilization, and conservation of forest resources and equitable sharing of accrued benefits for the present and future generations of the forest-adjacent communities and citizens at large.
-        </TextDescription>
-        <ObjectiveList>
-          <ObjectiveItem>
-            <ObjectiveText primary="Increase and maintain tree and forest cover of at least ten percent of the land area of Kenya." />
-          </ObjectiveItem>
-        </ObjectiveList>
+          <SectionTitle>Policy Goal & Objectives</SectionTitle>
+          <TextDescription>
+            The overall policy goal of Participatory Forest Management is sustainable development, management, utilization, and conservation of forest resources and equitable sharing of accrued benefits for the present and future generations of the forest-adjacent communities and citizens at large.
+          </TextDescription>
+          <ObjectiveList>
+            <ObjectiveItem>
+              <ObjectiveText primary="Increase and maintain tree and forest cover of at least ten percent of the land area of Kenya." />
+            </ObjectiveItem>
+          </ObjectiveList>
 
-        <FileSection>
-          <SectionTitle>Resources</SectionTitle>
-          <List>
-            <FileItem>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
-                <ListItemText
-                  primary="Forest Management Agreements Register"
-                  secondary="1 file(s) 338.06 KB"
-                  primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
-                  secondaryTypographyProps={{ color: "#555" }}
-                />
-              </Box>
-              <DownloadButton onClick={() => handleDownload("Forest Management Agreements Register")}>
-                Download
-              </DownloadButton>
-            </FileItem>
-            <FileItem>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
-                <ListItemText
-                  primary="Forest Management Plans"
-                  secondary="1 file(s) 4.00 KB"
-                  primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
-                  secondaryTypographyProps={{ color: "#555" }}
-                />
-              </Box>
-              <DownloadButton onClick={() => handleDownload("Forest Management Plans")}>
-                Download
-              </DownloadButton>
-            </FileItem>
-          </List>
-        </FileSection>
-      </ContentCard>
-    </PageContainer>
+          <FileSection>
+            <SectionTitle>Resources</SectionTitle>
+            <List>
+              <FileItem>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
+                  <ListItemText
+                    primary="Forest Management Agreements Register"
+                    secondary="1 file(s) 338.06 KB"
+                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
+                    secondaryTypographyProps={{ color: "#555" }}
+                  />
+                </Box>
+                <DownloadButton onClick={() => handleDownload("Forest Management Agreements Register")}>
+                  Download
+                </DownloadButton>
+              </FileItem>
+              <FileItem>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
+                  <ListItemText
+                    primary="Forest Management Plans"
+                    secondary="1 file(s) 4.00 KB"
+                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
+                    secondaryTypographyProps={{ color: "#555" }}
+                  />
+                </Box>
+                <DownloadButton onClick={() => handleDownload("Forest Management Plans")}>
+                  Download
+                </DownloadButton>
+              </FileItem>
+            </List>
+          </FileSection>
+        </ContentCard>
+      </PageContainer>
+      <FooterBottom />
+    </div>
   );
 };
 

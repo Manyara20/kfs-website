@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 // Styled Components
@@ -241,103 +241,108 @@ export default function EventsCalendarPage() {
   };
 
   return (
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          Events Calendar
-        </HeaderTitle>
-        <HeaderSubtitle>
-          Stay updated with the latest events and activities from the Kenya Forest Service.
-        </HeaderSubtitle>
+    <div>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">
+            Events Calendar
+          </HeaderTitle>
+          <HeaderSubtitle>
+            Stay updated with the latest events and activities from the Kenya Forest Service.
+          </HeaderSubtitle>
 
-        {/* Calendar Section */}
-        <Box mb={8}>
-          <SectionTitle>
-            Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-          </SectionTitle>
-          <CalendarWrapper>
-            <CalendarHeader>
-              <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
-                Previous
-              </NavButton>
-              <Typography variant="h6" sx={{ fontFamily: "'Roboto', sans-serif", color: "#0f5a28" }}>
-                {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-              </Typography>
-              <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
-                Next
-              </NavButton>
-            </CalendarHeader>
-            <CalendarGrid>
-              {/* Calendar Headers */}
-              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-                <DayHeader key={index}>
-                  {day}
-                </DayHeader>
-              ))}
-              {/* Calendar Days */}
-              {calendarDays.map((dayData, index) => {
-                const isToday =
-                  dayData.day &&
-                  dayData.day === today.getDate() &&
-                  currentDate.getMonth() === today.getMonth() &&
-                  currentDate.getFullYear() === today.getFullYear();
-                return (
-                  <DayCell
+          {/* Calendar Section */}
+          <Box mb={8}>
+            <SectionTitle>
+              Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+            </SectionTitle>
+            <CalendarWrapper>
+              <CalendarHeader>
+                <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
+                  Previous
+                </NavButton>
+                <Typography variant="h6" sx={{ fontFamily: "'Roboto', sans-serif", color: "#0f5a28" }}>
+                  {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                </Typography>
+                <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
+                  Next
+                </NavButton>
+              </CalendarHeader>
+              <CalendarGrid>
+                {/* Calendar Headers */}
+                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
+                  <DayHeader key={index}>
+                    {day}
+                  </DayHeader>
+                ))}
+                {/* Calendar Days */}
+                {calendarDays.map((dayData, index) => {
+                  const isToday =
+                    dayData.day &&
+                    dayData.day === today.getDate() &&
+                    currentDate.getMonth() === today.getMonth() &&
+                    currentDate.getFullYear() === today.getFullYear();
+                  return (
+                    <DayCell
+                      key={index}
+                      isToday={isToday}
+                      initial="hidden"
+                      animate="visible"
+                      variants={cardVariants}
+                    >
+                      {dayData.day ? (
+                        <>
+                          <DayNumber>{dayData.day}</DayNumber>
+                          {dayData.event && (
+                            <EventText>{dayData.event}</EventText>
+                          )}
+                        </>
+                      ) : null}
+                    </DayCell>
+                  );
+                })}
+              </CalendarGrid>
+            </CalendarWrapper>
+          </Box>
+
+          {/* Upcoming Events Section */}
+          <Box>
+            <SectionTitle>Upcoming Events</SectionTitle>
+            <Box maxWidth="800px" mx="auto">
+              {upcomingEvents.length > 0 ? (
+                upcomingEvents.map((event, index) => (
+                  <EventCard
                     key={index}
-                    isToday={isToday}
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
                   >
-                    {dayData.day ? (
-                      <>
-                        <DayNumber>{dayData.day}</DayNumber>
-                        {dayData.event && (
-                          <EventText>{dayData.event}</EventText>
-                        )}
-                      </>
-                    ) : null}
-                  </DayCell>
-                );
-              })}
-            </CalendarGrid>
-          </CalendarWrapper>
-        </Box>
-
-        {/* Upcoming Events Section */}
-        <Box>
-          <SectionTitle>Upcoming Events</SectionTitle>
-          <Box maxWidth="800px" mx="auto">
-            {upcomingEvents.length > 0 ? (
-              upcomingEvents.map((event, index) => (
-                <EventCard
-                  key={index}
-                  initial="hidden"
-                  animate="visible"
-                  variants={cardVariants}
+                    <EventTitle>{event.event}</EventTitle>
+                    <EventDate>
+                      {event.date.toLocaleDateString()} {event.time && `– ${event.time}`}
+                    </EventDate>
+                  </EventCard>
+                ))
+              ) : (
+                <Typography
+                  sx={{
+                    fontFamily: "'Roboto', sans-serif",
+                    color: "#ffffff",
+                    textAlign: "center",
+                    fontSize: "1.2rem",
+                  }}
                 >
-                  <EventTitle>{event.event}</EventTitle>
-                  <EventDate>
-                    {event.date.toLocaleDateString()} {event.time && `– ${event.time}`}
-                  </EventDate>
-                </EventCard>
-              ))
-            ) : (
-              <Typography
-                sx={{
-                  fontFamily: "'Roboto', sans-serif",
-                  color: "#ffffff",
-                  textAlign: "center",
-                  fontSize: "1.2rem",
-                }}
-              >
-                No upcoming events.
-              </Typography>
-            )}
+                  No upcoming events.
+                </Typography>
+              )}
+            </Box>
           </Box>
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
+    </div>
   );
 }

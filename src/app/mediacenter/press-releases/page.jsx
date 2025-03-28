@@ -1,9 +1,12 @@
 "use client";
-import Link from 'next/link';
+import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { Article as ArticleIcon } from "@mui/icons-material";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -115,30 +118,35 @@ export default function PressReleasesPage() {
   };
 
   return (
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          Press Releases
-        </HeaderTitle>
+    <div>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">
+            Press Releases
+          </HeaderTitle>
 
-        {/* Press Releases Section */}
-        <Box>
-          {pressReleases.map((press, index) => (
-            <PressCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
-              <PressInfo>
-                <ArticleIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                <PressTitle>{press.title}</PressTitle>
-              </PressInfo>
-              <Link href={press.link} target="_blank" rel="noopener noreferrer" passHref>
-                <ReadMoreButton>
-                  Read More
-                </ReadMoreButton>
-              </Link>
-            </PressCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
+          {/* Press Releases Section */}
+          <Box>
+            {pressReleases.map((press, index) => (
+              <PressCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+                <PressInfo>
+                  <ArticleIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                  <PressTitle>{press.title}</PressTitle>
+                </PressInfo>
+                <Link href={press.link} target="_blank" rel="noopener noreferrer" passHref>
+                  <ReadMoreButton>
+                    Read More
+                  </ReadMoreButton>
+                </Link>
+              </PressCard>
+            ))}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
+    </div>
   );
 }

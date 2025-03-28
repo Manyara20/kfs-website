@@ -78,7 +78,7 @@ const VideoEmbed = () => {
       <iframe
         width="100%"
         height="400px"
-        src="https://www.youtube.com/embed/KvN91WesnzA"
+        src="https://www.youtube.com/embed/674CgQpSzOk?si=bYdS0-D85cw7Yy_a"
         title="Sign Language Service Charter"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

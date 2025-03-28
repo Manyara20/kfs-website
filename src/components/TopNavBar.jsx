@@ -23,11 +23,26 @@ const TopNavBar = () => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm")); // <600px
   const isMedium = useMediaQuery(theme.breakpoints.down("md")); // <900px
 
-  // Menu items split into two groups
+  // Menu items split into two groups with links
   const group1 = [
-    { icon: <Email />, text: "Staff Email", priority: 2 },
-    { icon: <Assignment />, text: "E-Registration", priority: 3 },
-    { icon: <AccountBox />, text: "Research License", priority: 3 },
+    {
+      icon: <Email />,
+      text: "Staff Email",
+      link: "https://mail.kenyaforestservice.org/owa/#path=/mail",
+      priority: 2,
+    },
+    {
+      icon: <Assignment />,
+      text: "E-Registration",
+      link: "https://sawmillers.kenyaforestservice.org/",
+      priority: 3,
+    },
+    {
+      icon: <AccountBox />,
+      text: "Research License",
+      link: "https://enursery.kenyaforestservice.org/",
+      priority: 3,
+    },
   ];
 
   const group2 = [
@@ -37,7 +52,11 @@ const TopNavBar = () => {
       text: "Mon-Fri (8am - 5pm) Sat & Sun CLOSED",
       priority: 2,
     },
-    { icon: <Email />, text: "info@kenyaforestservice.org", priority: 1 },
+    {
+      icon: <Email />,
+      text: "info@kenyaforestservice.org",
+      priority: 1,
+    },
   ];
 
   // Filter items based on screen size and priority
@@ -89,7 +108,13 @@ const TopNavBar = () => {
           }}
         >
           {/* Group 1 */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 0.5, sm: 1, md: 1.5 },
+            }}
+          >
             {visibleGroup1.map((item, index) => (
               <Box
                 key={index}
@@ -99,7 +124,11 @@ const TopNavBar = () => {
                   sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                    fontSize: isExtraSmall
+                      ? "small"
+                      : isSmall
+                      ? "medium"
+                      : "inherit",
                   })}
                 </IconButton>
                 <Typography
@@ -110,7 +139,14 @@ const TopNavBar = () => {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {item.text}
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    {item.text}
+                  </a>
                 </Typography>
                 {index < visibleGroup1.length - 1 && (
                   <Box
@@ -127,7 +163,13 @@ const TopNavBar = () => {
           </Box>
 
           {/* Group 2 */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 0.5, sm: 1, md: 1.5 },
+            }}
+          >
             {visibleGroup2.map((item, index) => (
               <Box
                 key={index}
@@ -137,7 +179,11 @@ const TopNavBar = () => {
                   sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                    fontSize: isExtraSmall
+                      ? "small"
+                      : isSmall
+                      ? "medium"
+                      : "inherit",
                   })}
                 </IconButton>
                 <Typography

@@ -243,7 +243,13 @@ const MainNavBar = () => {
         { label: "Public Documents", link: "/e-documents/public" },
         { label: "Legal Documents", link: "/e-documents/legal" },
         { label: "Policy Documents", link: "/e-documents/policy" },
-        { label: "Video Documentation", link: "/e-documents/video" },
+        { 
+          label: "Video Documentation", 
+          subItems: [
+            { label: "Sign Language Service Charter", link: "/e-documents/video/Sign-Language" },
+            { label: "Audio Service Charter", link: "/e-documents/video/Audio-Service" },
+          ]
+           },
         { label: "Documents Archive", link: "/e-documents/archive" },
       ],
     },

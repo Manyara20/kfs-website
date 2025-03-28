@@ -1,10 +1,14 @@
-// pages/ic-fra-documents.js
 "use client";
-import Link from 'next/link';
+
+import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { Description as DescriptionIcon } from "@mui/icons-material";
+import Link from "next/link";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -104,6 +108,7 @@ const DownloadButton = styled(Button)({
   },
 });
 
+// Main Page Component
 export default function ICFRADocumentsPage() {
   const documents = [
     {
@@ -149,38 +154,43 @@ export default function ICFRADocumentsPage() {
   };
 
   return (
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          IC-FRA Operating Documents
-        </HeaderTitle>
+    <div>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">
+            IC-FRA Operating Documents
+          </HeaderTitle>
 
-        {/* Documents Section */}
-        <Box>
-          {documents.map((document, index) => (
-            <DocumentCard
-              key={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
-            >
-              <DocumentInfo>
-                <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                <Box>
-                  <DocumentTitle>{document.title}</DocumentTitle>
-                  <FileSize>1 file(s) {document.fileSize}</FileSize>
-                </Box>
-              </DocumentInfo>
-              <Link href={document.link} target="_blank" rel="noopener noreferrer" passHref>
-                <DownloadButton>
-                  Download Document
-                </DownloadButton>
-              </Link>
-            </DocumentCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
+          {/* Documents Section */}
+          <Box>
+            {documents.map((document, index) => (
+              <DocumentCard
+                key={index}
+                initial="hidden"
+                animate="visible"
+                variants={cardVariants}
+              >
+                <DocumentInfo>
+                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                  <Box>
+                    <DocumentTitle>{document.title}</DocumentTitle>
+                    <FileSize>1 file(s) {document.fileSize}</FileSize>
+                  </Box>
+                </DocumentInfo>
+                <Link href={document.link} target="_blank" rel="noopener noreferrer" passHref>
+                  <DownloadButton>
+                    Download Document
+                  </DownloadButton>
+                </Link>
+              </DocumentCard>
+            ))}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
+    </div>
   );
 }

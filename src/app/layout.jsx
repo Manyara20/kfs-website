@@ -1,4 +1,4 @@
-
+import Head from "next/head";
 import "./styles/globals.css";
 
 export const metadata = {
@@ -9,6 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+      <link rel="icon" href="/images/t_logo.png" />
+      </Head>
       <body>{children}</body>
     </html>
   );

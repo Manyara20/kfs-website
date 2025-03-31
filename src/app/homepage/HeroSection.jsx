@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Button } from "@mui/material";
-//import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-//import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Box, Typography} from "@mui/material";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -10,18 +8,18 @@ const HeroSection = () => {
   const slides = [
     {
       title: "Kenya Forest Service",
-      subtitle: "Kenya Forest Service is a state corporation that was created through the Forest Act (2005)",
-      image: "/images/cypress.JPG", // Path relative to /public
+      subtitle: "Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.",
+      image: "/images/cypress.JPG", 
     },
     {
       title: "Mangrove Forest Conservation Efforts",
-      subtitle: "Protecting Kenya's forests for future generations",
-      image: "/images/Mangroveforest.png", // Path relative to /public
+      subtitle: "Protecting Kenya's forests for future generations. Increase the National Tree Cover from13% to 21.03% in the 5-year period towards attainment of 30% tree cover by 2032",
+      image: "/images/Mangroveforest.png", 
     },
     {
-      title: "Sustainable Future",
-      subtitle: "Promoting environmental sustainability since 2005",
-      image: "/images/MTKULAL.JPG", // Path relative to /public
+      title: "Trees For Better Lives",
+      subtitle: "Promoting environmental sustainability since 2005. National Forest Cover from 83% to 10% in the 5 years plan period towards attainment of the National target of 10% forest cover by 2030",
+      image: "/images/MTKULAL.JPG", 
     },
   ];
 

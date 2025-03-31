@@ -5,6 +5,9 @@ import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { Description as DescriptionIcon } from "@mui/icons-material";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -124,72 +127,77 @@ export default function ForesterMagazinePage() {
   };
 
   return (
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
-        <Typography variant="h6" align="center" color="#fff" gutterBottom>
-          Biannual Forestry Magazine of the Kenya Forest Service
-        </Typography>
+    <div>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
+          <Typography variant="h6" align="center" color="#fff" gutterBottom>
+            Biannual Forestry Magazine of the Kenya Forest Service
+          </Typography>
 
-        {/* New Content Section */}
-        <Box mt={4} p={3} bgcolor="rgba(255,255,255,0.9)" borderRadius="12px" boxShadow={3}>
-          <Typography variant="h6" color="#0f5a28" fontWeight="bold">
-            Welcome to the latest edition of our biannual forestry magazine.
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mt={2}>
-            As we reflect on the past six months, we’re proud to share the significant strides
-            made in Kenya’s forestry sector. In this issue, we spotlight several key events and
-            initiatives that underscore our commitment to sustainable forest management and
-            conservation.
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mt={2}>
-            Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
-            that will guide our efforts in the coming years to enhance forest cover and promote
-            sustainable utilization of forest resources.
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mt={2}>
-            We also bring you highlights from the International Day of Forests celebrations, where
-            we joined the global community in recognizing the vital role forests play in our lives
-            and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
-            initiative that saw thousands of Kenyans come together to green our nation.
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mt={2}>
-            This edition also features news on various Memoranda of Understanding signed with
-            partner organizations, strengthening our collaborative efforts in forest conservation
-            and management.
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mt={2}>
-            These stories reflect our ongoing dedication to Kenya’s forests and the communities
-            that depend on them. We hope this issue informs and inspires you to join us in our
-            mission to protect and nurture our precious forest resources.
-          </Typography>
-          <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={3}>
-            Happy reading!
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Anne Kaari, ‘ndc‘ (K)
-          </Typography>
-        </Box>
+          {/* New Content Section */}
+          <Box mt={4} p={3} bgcolor="rgba(255,255,255,0.9)" borderRadius="12px" boxShadow={3}>
+            <Typography variant="h6" color="#0f5a28" fontWeight="bold">
+              Welcome to the latest edition of our biannual forestry magazine.
+            </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>
+              As we reflect on the past six months, we’re proud to share the significant strides
+              made in Kenya’s forestry sector. In this issue, we spotlight several key events and
+              initiatives that underscore our commitment to sustainable forest management and
+              conservation.
+            </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>
+              Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
+              that will guide our efforts in the coming years to enhance forest cover and promote
+              sustainable utilization of forest resources.
+            </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>
+              We also bring you highlights from the International Day of Forests celebrations, where
+              we joined the global community in recognizing the vital role forests play in our lives
+              and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
+              initiative that saw thousands of Kenyans come together to green our nation.
+            </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>
+              This edition also features news on various Memoranda of Understanding signed with
+              partner organizations, strengthening our collaborative efforts in forest conservation
+              and management.
+            </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>
+              These stories reflect our ongoing dedication to Kenya’s forests and the communities
+              that depend on them. We hope this issue informs and inspires you to join us in our
+              mission to protect and nurture our precious forest resources.
+            </Typography>
+            <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={3}>
+              Happy reading!
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              Anne Kaari, ‘ndc‘ (K)
+            </Typography>
+          </Box>
 
-        {/* Magazine Download Section */}
-        <Box mt={4}>
-          {magazines.map((magazine, index) => (
-            <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
-              <DocumentInfo>
-                <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                <Box>
-                  <DocumentTitle>{magazine.title}</DocumentTitle>
-                  <FileSize>1 file(s) {magazine.fileSize}</FileSize>
-                </Box>
-              </DocumentInfo>
-              <Link href={magazine.link} target="_blank" rel="noopener noreferrer" passHref>
-                <DownloadButton>Download</DownloadButton>
-              </Link>
-            </DocumentCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
+          {/* Magazine Download Section */}
+          <Box mt={4}>
+            {magazines.map((magazine, index) => (
+              <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+                <DocumentInfo>
+                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                  <Box>
+                    <DocumentTitle>{magazine.title}</DocumentTitle>
+                    <FileSize>1 file(s) {magazine.fileSize}</FileSize>
+                  </Box>
+                </DocumentInfo>
+                <Link href={magazine.link} target="_blank" rel="noopener noreferrer" passHref>
+                  <DownloadButton>Download</DownloadButton>
+                </Link>
+              </DocumentCard>
+            ))}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
+    </div>
   );
 }

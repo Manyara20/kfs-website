@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Typography, Button, Card, CardContent, Grid } from "@mui/material";
 
+
 const objectives = [
   {
     title: "KRA 1: Forest and Tree Cover Expansion for Climate Mitigation and Adaptation",

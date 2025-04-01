@@ -19,7 +19,7 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "1rem", 
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -37,8 +37,8 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "800px",
+  padding: "2rem", 
+  maxWidth: "700px", 
   width: "100%",
   position: "relative",
   zIndex: 1,
@@ -47,47 +47,49 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif", 
   fontWeight: 700,
   color: "#0f5a28",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
+  marginBottom: "1rem", 
+  fontSize: "1.8rem", 
+  lineHeight: 1.1,
+  letterSpacing: "0.3px", 
+  textTransform: "capitalize", 
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#000",
-  lineHeight: 1.6,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
+  lineHeight: 1.6, 
+  fontSize: "0.9rem", 
+  marginBottom: "1rem", 
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
+  gap: "0.5rem", 
   padding: 0,
 });
 
 const DepartmentItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1rem",
+  padding: "0.5rem", 
   "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
+    transform: "translateY(-2px)", 
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", 
   },
 });
 
 const DepartmentText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Peugeot', Helvetica, sans-serif", 
     fontWeight: 500,
     color: "#ffffff",
-    fontSize: "1rem",
+    fontSize: "0.85rem", 
+    textTransform: "capitalize", 
   },
 });
 
@@ -105,19 +107,19 @@ export default function KFSDivisionsPage() {
   ];
 
   useEffect(() => {
-    setIsVisible(true); // Fade-in effect on load
+    setIsVisible(true); 
   }, []);
 
   const handleFontSizeChange = (increase) => {
     setFontSize((prev) => {
       const newSize = increase ? prev + 1 : prev - 1;
-      return Math.max(12, Math.min(20, newSize)); // Limit between 12px and 20px
+      return Math.max(12, Math.min(20, newSize)); 
     });
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, 
   };
 
   return (
@@ -149,26 +151,26 @@ export default function KFSDivisionsPage() {
               </DepartmentItem>
             ))}
           </DepartmentList>
-          <Description className="mt-4">
+          <Description className="mt-2"> 
             Explore our ongoing efforts and updates below.
           </Description>
         </ContentCard>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <div className="fixed bottom-2 right-2 flex flex-col space-y-1"> 
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" 
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdHelpCircle className="text-white text-lg" /> 
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" 
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdHelpCircle className="text-white text-lg" /> 
           </button>
         </div>
       </PageContainer>

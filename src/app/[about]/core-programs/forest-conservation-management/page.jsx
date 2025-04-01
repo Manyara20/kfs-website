@@ -1,3 +1,4 @@
+// pages/dfcm.js
 "use client";
 
 import React from "react";
@@ -19,7 +20,7 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "1rem", 
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -38,9 +39,8 @@ const PageContainer = styled(Box)({
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
   backdropFilter: "blur(10px)",
-  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-  padding: "3rem",
-  maxWidth: "800px",
+  boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)", 
+  maxWidth: "700px",
   width: "100%",
   position: "relative",
   zIndex: 1,
@@ -48,59 +48,61 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif", 
   fontWeight: 700,
   color: "#0f5a28",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
+  marginBottom: "1rem", 
+  fontSize: "1.8rem", 
+  lineHeight: 1.1, 
+  letterSpacing: "0.3px", 
+  textTransform: "capitalize", 
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif", 
   fontWeight: 400,
   color: "#333",
-  lineHeight: 1.8,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
+  lineHeight: 1.6, 
+  fontSize: "0.9rem", 
+  marginBottom: "1rem", 
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
+  gap: "0.5rem", 
   padding: 0,
 });
 
 const DepartmentItem = styled(ListItem)({
   background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1rem",
+  padding: "0.5rem", 
   "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
+    transform: "translateY(-3px)", 
+    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.15)", 
     background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
   },
 });
 
 const DepartmentText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Peugeot', Helvetica, sans-serif", 
     fontWeight: 500,
     color: "#0D3C00",
-    fontSize: "1rem",
+    fontSize: "0.85rem", 
+    textTransform: "capitalize", 
   },
 });
 
 const SocialIconsContainer = styled(Box)({
   position: "absolute",
-  top: "2rem",
-  left: "2rem",
+  top: "1rem", 
+  left: "1rem", 
   display: "flex",
   flexDirection: "column",
-  gap: "1rem",
+  gap: "0.5rem", 
   zIndex: 2,
 });
 
@@ -108,11 +110,12 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: "rgba(255, 255, 255, 0.9)",
   color: "#0D3C00",
   transition: "all 0.3s ease",
+  padding: "6px", 
   "&:hover": {
     backgroundColor: "#0D3C00",
     color: "#fff",
-    transform: "scale(1.1)",
-    boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+    transform: "scale(1.05)", 
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", 
   },
 }));
 
@@ -120,7 +123,7 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
 export default function DFCMPage() {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
@@ -128,6 +131,20 @@ export default function DFCMPage() {
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
+        <SocialIconsContainer>
+          <SocialIconButton aria-label="Facebook">
+            <Facebook fontSize="small" /> {/* Reduced from default */}
+          </SocialIconButton>
+          <SocialIconButton aria-label="Twitter">
+            <Twitter fontSize="small" /> 
+          </SocialIconButton>
+          <SocialIconButton aria-label="YouTube">
+            <YouTube fontSize="small" /> 
+          </SocialIconButton>
+          <SocialIconButton aria-label="Instagram">
+            <Instagram fontSize="small" /> 
+          </SocialIconButton>
+        </SocialIconsContainer>
         <ContentCard
           initial="hidden"
           animate="visible"

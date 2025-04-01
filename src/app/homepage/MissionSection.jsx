@@ -1,5 +1,5 @@
+// components/MissionVisionGoal.js
 import Image from "next/image";
-import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
 
 const data = [
   {
@@ -24,80 +24,44 @@ const data = [
 
 export default function MissionVisionGoal() {
   return (
-    <Box
-      sx={{
-        width: "100%", // Full width on all screens
-        p: { xs: 2, md: 3 }, // Responsive padding
-        bgcolor: "#f5f5f5", // Background to emphasize full width
-      }}
-    >
-      <Grid container spacing={3}>
+    <div className="w-full p-4 md:p-6 bg-[#f5f5f5]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {data.map((item, index) => (
-          <Grid
-            item
-            xs={12} // Full width on small screens
-            sm={6}  // Two columns on medium screens
-            md={4}  // Three columns on large screens, but we'll stretch each card
+          <div
             key={index}
-            sx={{ display: "flex" }} // Ensure Grid item stretches content
+            className="flex"
           >
-            <Card
-              sx={{
-                borderRadius: 0,
-                boxShadow: 3,
-                position: "relative",
-                height: 400,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "100%", // Card takes full width of its Grid item
-                mx: { md: 0, lg: "auto" }, // Center on medium, stretch on large
-                maxWidth: { lg: "none" }, // Remove max-width constraint on large screens
-              }}
-            >
-              <Box sx={{ position: "relative", height: 250, overflow: "hidden" }}>
+            <div className="relative h-[400px] flex flex-col justify-between w-full shadow-lg rounded-none">
+              {/* Image Section */}
+              <div className="relative h-[250px] overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
                   layout="fill"
                   objectFit="cover"
                 />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    width: "100%",
-                    bgcolor: "rgba(0, 0, 0, 0.5)",
-                    color: "white",
-                    textAlign: "center",
-                    py: 1,
-                  }}
-                >
-                  <Typography variant="h6" fontWeight="bold">
+                <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-2">
+                  <h6
+                    className="text-lg font-bold"
+                    style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+                  >
                     {item.title}
-                  </Typography>
-                </Box>
-              </Box>
-              <CardContent
-                sx={{
-                  flexGrow: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  px: { xs: 2, lg: 4 }, // More padding on large screens
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  textAlign="center"
+                  </h6>
+                </div>
+              </div>
+              {/* Description Section */}
+              <div className="flex-grow flex items-center px-4 lg:px-8">
+                <p
+                  className="text-gray-600 text-base text-center"
+                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
                 >
                   {item.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+                </p>
+              </div>
+            </div>
+          </div>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 }

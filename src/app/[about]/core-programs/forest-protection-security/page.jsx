@@ -1,3 +1,4 @@
+// pages/flea-assessment.js
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "1rem", // Reduced from 2rem
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -41,8 +42,8 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "800px",
+  padding: "2rem", // Reduced from 3rem
+  maxWidth: "700px", // Reduced from 800px
   width: "100%",
   position: "relative",
   zIndex: 1,
@@ -51,59 +52,61 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
   fontWeight: 700,
   color: "#0f5a28",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
+  marginBottom: "1rem", // Reduced from 1.5rem
+  fontSize: "1.8rem", // Reduced from 2.5rem
+  lineHeight: 1.1, // Reduced from 1.2
+  letterSpacing: "0.3px", // Reduced from 0.5px
+  textTransform: "capitalize", // Added
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
   fontWeight: 400,
   color: "#000000",
-  lineHeight: 1.6,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
+  lineHeight: 1.6, // Reduced from 1.6 (already 1.6, kept for consistency)
+  fontSize: "0.9rem", // Reduced from 1.1rem
+  marginBottom: "1rem", // Reduced from 1.5rem
 });
 
 const SectionList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Reduced from 300px
+  gap: "0.5rem", // Reduced from 1rem
   padding: 0,
 });
 
 const SectionItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1rem",
+  padding: "0.5rem", // Reduced from 1rem
   "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
+    transform: "translateY(-2px)", // Reduced from -3px
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Reduced shadow
   },
 });
 
 const SectionText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
     fontWeight: 500,
     color: "#ffffff",
-    fontSize: "1rem",
+    fontSize: "0.85rem", // Reduced from 1rem
+    textTransform: "capitalize", // Added
   },
 });
 
 const ImageSliderContainer = styled(Box)({
-  marginTop: "2rem",
+  marginTop: "1rem", // Reduced from 2rem
   "& .slick-slide": {
-    padding: "0 10px",
+    padding: "0 5px", // Reduced from 0 10px
   },
   "& .slick-prev, & .slick-next": {
     zIndex: 1,
-    width: "40px",
-    height: "40px",
+    width: "30px", // Reduced from 40px
+    height: "30px", // Reduced from 40px
     background: "rgba(0, 0, 0, 0.5)",
     borderRadius: "50%",
     "&:hover": {
@@ -111,15 +114,16 @@ const ImageSliderContainer = styled(Box)({
     },
   },
   "& .slick-prev": {
-    left: "10px",
+    left: "5px", // Reduced from 10px
   },
   "& .slick-next": {
-    right: "10px",
+    right: "5px", // Reduced from 10px
   },
   "& .slick-dots": {
-    bottom: "-30px",
+    bottom: "-20px", // Reduced from -30px
     "& li button:before": {
       color: "#1a3c34",
+      fontSize: "8px", // Reduced dot size
     },
     "& li.slick-active button:before": {
       color: "#00ffff",
@@ -128,11 +132,11 @@ const ImageSliderContainer = styled(Box)({
 });
 
 const ImageItem = styled(Box)({
-  width: "100%", // Adjusted from "1500" to fit slider properly
-  height: "300px",
+  width: "100%", // Already correct
+  height: "200px", // Reduced from 300px
   position: "relative",
   border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "8px",
+  borderRadius: "6px", // Reduced from 8px
   overflow: "hidden",
 });
 
@@ -162,10 +166,8 @@ export default function FLEAAssessmentPage() {
   };
 
   const cardVariants = {
-   
-
- hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Reduced duration from 0.8
   };
 
   const sections = ["Background", "Objectives", "Methodology", "Results"];
@@ -256,26 +258,26 @@ export default function FLEAAssessmentPage() {
               </SectionItem>
             ))}
           </SectionList>
-          <Description className="mt-4">
+          <Description className="mt-2"> {/* Reduced from mt-4 */}
             Stay informed about FLEA progress and KFS updates.
           </Description>
         </ContentCard>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <div className="fixed bottom-2 right-2 flex flex-col space-y-1"> {/* Reduced from bottom-4, right-4, space-y-2 */}
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" // Reduced padding from p-2 to p-1
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdHelpCircle className="text-white text-lg" /> {/* Reduced size via class */}
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" // Reduced padding from p-2 to p-1
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdHelpCircle className="text-white text-lg" /> {/* Reduced size via class */}
           </button>
         </div>
       </PageContainer>

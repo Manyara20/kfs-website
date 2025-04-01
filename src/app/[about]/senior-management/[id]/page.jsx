@@ -1,3 +1,4 @@
+// pages/management/[id].js
 "use client"; // Ensure it's a Client Component
 
 import { useParams } from "next/navigation";
@@ -19,43 +20,43 @@ const managementDetails = {
   },
   "charity-munyasya": {
     image: "/images/senior-management/Charity Munyasia.jpg",
-    name: "CHARITY MUNYASIA",
+    name: "Charity Munyasya",
     title: "Principal Deputy to the CCF - Directorate of Strategy, Partnerships & Resource Mobilization",
     bio: "Charity Munyasya is the Principal Deputy to the CCF with expertise in...",
   },
   "mohamed-mohamed": {
     image: "/images/senior-management/Commandant.jpg",
-    name: "MOHAMED .A. MOHAMED",
+    name: "Mohamed A. Mohamed",
     title: "Commandant",
     bio: "",
   },
   "lucy-kiboi": {
     image: "/images/senior-management/Lucy Kiboi.png",
-    name: "LUCY KIBOI",
+    name: "Lucy Kiboi",
     title: "Senior Manager, Corporate Services",
     bio: "",
   },
   "stephen-mugi": {
     image: "/images/senior-management/Stephen Mugi.png",
-    name: "STEPHEN MUGI",
+    name: "Stephen Mugi",
     title: "Ag. Manager, Internal Audit",
     bio: "Mr. Mugi is in charge of Internal Audit and has over thirteen (13) years’ experience in Auditing in the public sector. He holds a Master of Science Degree in Finance, a Bachelor’s Degree in Accounting and is a member of Institute of the Internal Auditors (IIA) – Kenyan Chapter and Institute of Certified Public Accountants of Kenya (ICPAK).",
   },
   "clement-ng'oriareng": {
     image: "/images/senior-management/Dr. Clement.png",
-    name: "Dr. CLEMENT NG'ORIARENG",
-    title: "RDeputy Chief Conservator of Forests - Drylands and Private Forests Development Coordination",
+    name: "Dr. Clement Ng'oriareng",
+    title: "Deputy Chief Conservator of Forests - Drylands and Private Forests Development Coordination",
     bio: "",
   },
   "zipporah-toroitich": {
     image: "/images/senior-management/Zipporah Toroitich.png",
-    name: "ZIPPORAH TOROITICH",
+    name: "Zipporah Toroitich",
     title: "Deputy Chief Conservator of Forests - Forest Advisory, County Liaison and Investment",
     bio: "",
   },
   "anastacia-musaya": {
     image: "/images/senior-management/Anastasia Muasya.png",
-    name: "ANASTACIA MUASYA",
+    name: "Anastacia Muasya",
     title: "Manager - Finance and Accounts",
     bio: "",
   },
@@ -69,11 +70,11 @@ const managementDetails = {
     image: "/images/senior-management/Esther Keige.png",
     name: "Esther Keige",
     title: "Manager - Legal Services",
-    bio: "Ms Esther Keige is the Manager, Legal Services. She holds a master’s degree in Environmental Law, a Bachelors degree in Law (LLB) Hons and a post graduate diploma in Law.Professionally, the officer is an Advocate of the High Court of Kenya, a Certified Secretary (CS) and Certified Professional Mediator. She is a member of the Law Society of Kenya and the Institute of Certified Secretaries.She has over twenty (20) Years experience as an Advocate and Certified Secretary in the Private and Public Sector.",
+    bio: "Ms Esther Keige is the Manager, Legal Services. She holds a master’s degree in Environmental Law, a Bachelors degree in Law (LLB) Hons and a post graduate diploma in Law. Professionally, the officer is an Advocate of the High Court of Kenya, a Certified Secretary (CS) and Certified Professional Mediator. She is a member of the Law Society of Kenya and the Institute of Certified Secretaries. She has over twenty (20) Years experience as an Advocate and Certified Secretary in the Private and Public Sector.",
   },
   "stephen-cheboi": {
     image: "/images/senior-management/Stephen Cheboi.png",
-    name: "stephen cheboi",
+    name: "Stephen Cheboi",
     title: "Ag. Manager - Information Communication and Technology",
     bio: "Head – Information Communication and Technology",
   },
@@ -91,7 +92,7 @@ const managementDetails = {
   },
   "isaac-wekesa": {
     image: "/images/senior-management/Isaac Wekesa.jpg",
-    name: "ISAAC WEKESA",
+    name: "Isaac Wekesa",
     title: "Ag. Manager - Administration, Infrastructure Development & Maintenance",
     bio: "",
   },
@@ -117,8 +118,8 @@ const ManagementProfile = () => {
   if (!id || !managementDetails[id]) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-        <div className="bg-white p-6 shadow-lg border-2 border-gray-300">
-          <p className="text-gray-700 text-lg">Profile not found</p>
+        <div className="bg-white p-4 shadow-lg border-2 border-gray-300">
+          <p className="text-gray-700 text-base">Profile not found</p>
         </div>
       </div>
     );
@@ -130,10 +131,10 @@ const ManagementProfile = () => {
     <div className="min-h-screen flex flex-col bg-gray-100">
       <TopNavBar />
       <MainNavBar />
-      <div className="flex-grow flex items-center justify-center p-6">
-        <div className="bg-white shadow-xl border-2 border-gray-300 w-full max-w-2xl p-8">
+      <div className="flex-grow flex items-center justify-center p-4">
+        <div className="bg-white shadow-xl border-2 border-gray-300 w-full max-w-lg p-6">
           <div className="flex flex-col items-center">
-            <div className="relative w-48 h-48 mb-6">
+            <div className="relative w-40 h-40 mb-4">
               <Image
                 src={profile.image}
                 alt={profile.name}
@@ -143,9 +144,22 @@ const ManagementProfile = () => {
                 onError={(e) => (e.target.src = placeholderImage)} // Fallback image on error
               />
             </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">{profile.name}</h1>
-            <h2 className="text-xl text-gray-600 mb-6 text-center">{profile.title}</h2>
-            <p className="text-gray-700 text-base leading-relaxed text-center">
+            <h1
+              className="text-2xl font-bold text-gray-800 mb-1 text-center"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
+            >
+              {profile.name}
+            </h1>
+            <h2
+              className="text-lg text-gray-600 mb-4 text-center"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
+            >
+              {profile.title}
+            </h2>
+            <p
+              className="text-gray-700 text-sm leading-relaxed text-center"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+            >
               {profile.bio || "No biography available."}
             </p>
           </div>

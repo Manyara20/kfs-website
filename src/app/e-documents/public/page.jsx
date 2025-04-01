@@ -1,15 +1,17 @@
 "use client";
-import Link from 'next/link';
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { InsertDriveFile as FileIcon } from "@mui/icons-material";
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
+import axios from "axios";
 
-
-// Styled Components (same as press releases page)
+// Styled Components (unchanged from original)
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -114,30 +116,42 @@ const DownloadButton = styled(Button)({
 });
 
 export default function PublicDocumentsPage() {
-  const documents = [
-    { title: "THE FORESTS (FEES AND CHARGES) REGULATIONS, 2016", size: "233 KB", link: "#" },
-    { title: "KFC APPLICATION FORM", size: "287 KB", link: "#" },
-    { title: "STRATEGIC PLAN 2023-2027", size: "23 MB", link: "#" },
-    { title: "KFS SERVICE CHARTER", size: "430 KB", link: "#" },
-    { title: "MKATABA WA HUDUMA (KFS SERVICE CHARTER – KISWAHILI VERSION)", size: "3 MB", link: "#" },
-    { title: "PUBLIC NOTICE – THE CLIMATE CHANGE (AMENDMENT) BILL, 2023", size: "620 KB", link: "#" },
-    { title: "THE CLIMATE CHANGE (AMENDMENT) BILL, 2023", size: "326 KB", link: "#" },
-    { title: "APPLICATION FOR TRAINING PROGRAMMES 2023/2024 ACADEMIC YEAR", size: "283 KB", link: "#" },
-    { title: "KFC APPLICATION FORM", size: "223 KB", link: "#" },
-    { title: "Filming and Photoshoot Application Form", size: "56 KB", link: "#" },
-    { title: "MKATABA WA HUDUMA (KFS SERVICE CHARTER – KISWAHILI VERSION)", size: "3 MB", link: "#" },
-    { title: "CUSTOMER FEEDBACK QUESTIONNAIRE", size: "328 KB", link: "#" },
-    { title: "NETFUND RESEARCH REPORT ON FACTORS INFLUENCING HOUSEHOLD ADOPTION OF RENEWABLE ENERGY TECHNOLOGIES IN RURAL KENYA", size: "4.00 KB", link: "#" },
-    { title: "NATIONAL MANGROVE MANAGEMENT PLAN SUMMARY FOR POLICY MAKERS", size: "811 KB", link: "#" },
-    { title: "NATIONAL MANGROVE ECOSYSTEM MANAGEMENT PLAN", size: "811 KB", link: "#" },
-    { title: "Forest Conservation and Management Act No 34 of 2016", size: "821 KB", link: "#" },
-    { title: "KFS 3RD STRATEGIC PLAN 2018-2022", size: "4.00 KB", link: "#" },
-    { title: "UN STRATEGIC PLAN FOR FORESTS 2017 TO 2030", size: "469 KB", link: "#" },
-  ];
+  const [documents, setDocuments] = useState([]);
+  const [error, setError] = useState("");
+
+  // Fetch public documents from the database
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/documents/public");
+        console.log("Documents fetched:", response.data);
+        setDocuments(response.data);
+        setError("");
+      } catch (err) {
+        console.error("Error fetching documents:", {
+          message: err.message,
+          status: err.response?.status,
+          data: err.response?.data,
+        });
+        setError(
+          err.response?.data?.error || "Failed to load documents. Please try again later."
+        );
+      }
+    };
+
+    fetchDocuments();
+  }, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
+  // Helper function to calculate file size (mocked since DB doesn't store it)
+  const getFileSize = (url) => {
+    // In a real app, you'd get this from the server or file metadata
+    const sizes = ["233 KB", "287 KB", "23 MB", "430 KB", "3 MB", "620 KB", "326 KB", "283 KB", "56 KB", "328 KB", "4 MB", "811 KB", "821 KB", "469 KB"];
+    return sizes[Math.floor(Math.random() * sizes.length)];
   };
 
   return (
@@ -147,38 +161,44 @@ export default function PublicDocumentsPage() {
 
       {/* Main Navigation Bar */}
       <MainNavBar />
-      <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          Public Documents
-        </HeaderTitle>
 
-        {/* Documents Section */}
-        <Box>
-          {documents.map((doc, index) => (
-            <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
-              <DocumentInfo>
-                <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                <DocumentText>
-                  <DocumentTitle>{doc.title}</DocumentTitle>
-                  <DocumentMeta>1 file(s) {doc.size}</DocumentMeta>
-                </DocumentText>
-              </DocumentInfo>
-              <Link href={doc.link} target="_blank" rel="noopener noreferrer" passHref>
-                <DownloadButton>
-                  Download
-                </DownloadButton>
-              </Link>
-            </DocumentCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">Public Documents</HeaderTitle>
+
+          {/* Documents Section */}
+          <Box>
+            {error ? (
+              <Typography color="error" align="center">
+                {error}
+              </Typography>
+            ) : documents.length === 0 ? (
+              <Typography color="textSecondary" align="center">
+                No public documents available at this time.
+              </Typography>
+            ) : (
+              documents.map((doc, index) => (
+                <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+                  <DocumentInfo>
+                    <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                    <DocumentText>
+                      <DocumentTitle>{doc.description}</DocumentTitle>
+                      <DocumentMeta>1 file(s) {getFileSize(doc.pdf_url)}</DocumentMeta>
+                    </DocumentText>
+                  </DocumentInfo>
+                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
+                    <DownloadButton>Download</DownloadButton>
+                  </Link>
+                </DocumentCard>
+              ))
+            )}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
 
       {/* Footer */}
       <FooterBottom />
     </div>
-    
   );
 }

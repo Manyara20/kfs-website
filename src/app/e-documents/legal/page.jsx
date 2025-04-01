@@ -1,14 +1,17 @@
 "use client";
-import Link from 'next/link';
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { InsertDriveFile as FileIcon } from "@mui/icons-material";
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
+import axios from "axios";
 
-// Styled Components (consistent with other pages)
+// Styled Components (unchanged from original)
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -114,58 +117,88 @@ const DownloadButton = styled(Button)({
 });
 
 export default function LegalDocumentsPage() {
-  const legalDocuments = [
-    { title: "Forest Conservation and Management Act No 34 of 2016", size: "821 KB", link: "#" },
-    { title: "Forests Conservation & Management Bill 2014", size: "689 KB", link: "#" },
-    { title: "Forest Policy, 2014", size: "254 KB", link: "#" },
-    { title: "Forest Act, 2005", size: "270 KB", link: "#" },
-    { title: "SESSION PAPER NO. 9 OF 2005 ON FOREST POLICY", size: "2 MB", link: "#" },
-  ];
+  const [legalDocuments, setLegalDocuments] = useState([]);
+  const [error, setError] = useState("");
+
+  // Fetch legal documents from the database
+  useEffect(() => {
+    const fetchLegalDocuments = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/documents/legal");
+        console.log("Legal documents fetched:", response.data);
+        setLegalDocuments(response.data);
+        setError("");
+      } catch (err) {
+        console.error("Error fetching legal documents:", {
+          message: err.message,
+          status: err.response?.status,
+          data: err.response?.data,
+        });
+        setError(
+          err.response?.data?.error || "Failed to load legal documents. Please try again later."
+        );
+      }
+    };
+
+    fetchLegalDocuments();
+  }, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
+  // Mock file size since DB doesn't store it (adjust if you add a size column)
+  const getFileSize = () => {
+    const sizes = ["821 KB", "689 KB", "254 KB", "270 KB", "2 MB"];
+    return sizes[Math.floor(Math.random() * sizes.length)];
+  };
+
   return (
     <>
-    <TopNavBar/>
-    <MainNavBar/>
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          Legal Documents
-        </HeaderTitle>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">Legal Documents</HeaderTitle>
 
-        {/* Documents Section */}
-        <Box>
-          {legalDocuments.map((doc, index) => (
-            <DocumentCard 
-              key={index} 
-              initial="hidden" 
-              animate="visible" 
-              variants={cardVariants}
-              whileHover={{ scale: 1.01 }}
-            >
-              <DocumentInfo>
-                <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                <DocumentDetails>
-                  <DocumentTitle>{doc.title}</DocumentTitle>
-                  <DocumentSize>1 file(s) {doc.size}</DocumentSize>
-                </DocumentDetails>
-              </DocumentInfo>
-              <Link href={doc.link} target="_blank" rel="noopener noreferrer" passHref>
-                <DownloadButton>
-                  Download
-                </DownloadButton>
-              </Link>
-            </DocumentCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
-    <FooterBottom/>
+          {/* Documents Section */}
+          <Box>
+            {error ? (
+              <Typography color="error" align="center">
+                {error}
+              </Typography>
+            ) : legalDocuments.length === 0 ? (
+              <Typography color="textSecondary" align="center">
+                No legal documents available at this time.
+              </Typography>
+            ) : (
+              legalDocuments.map((doc, index) => (
+                <DocumentCard
+                  key={index}
+                  initial="hidden"
+                  animate="visible"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.01 }}
+                >
+                  <DocumentInfo>
+                    <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                    <DocumentDetails>
+                      <DocumentTitle>{doc.description}</DocumentTitle>
+                      <DocumentSize>1 file(s) {getFileSize()}</DocumentSize>
+                    </DocumentDetails>
+                  </DocumentInfo>
+                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
+                    <DownloadButton>Download</DownloadButton>
+                  </Link>
+                </DocumentCard>
+              ))
+            )}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
     </>
   );
 }

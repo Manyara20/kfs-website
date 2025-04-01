@@ -1,15 +1,17 @@
 "use client";
-import Link from 'next/link';
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { InsertDriveFile as FileIcon } from "@mui/icons-material";
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
-import { Main } from 'next/document';
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
+import axios from "axios";
 
-// Styled Components (consistent with other document pages)
+// Styled Components (unchanged from original)
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -117,11 +119,31 @@ const DownloadButton = styled(Button)({
 });
 
 export default function PolicyDocumentsPage() {
-  const policyDocuments = [
-    { title: "Whistle Blowing Policy", size: "1 MB", link: "#" },
-    { title: "Corruption Prevention Policy", size: "1 MB", link: "#" },
-    { title: "Code of Conduct Report", size: "807 KB", link: "#" },
-  ];
+  const [policyDocuments, setPolicyDocuments] = useState([]);
+  const [error, setError] = useState("");
+
+  // Fetch policy documents from the database
+  useEffect(() => {
+    const fetchPolicyDocuments = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/documents/policy");
+        console.log("Policy documents fetched:", response.data);
+        setPolicyDocuments(response.data);
+        setError("");
+      } catch (err) {
+        console.error("Error fetching policy documents:", {
+          message: err.message,
+          status: err.response?.status,
+          data: err.response?.data,
+        });
+        setError(
+          err.response?.data?.error || "Failed to load policy documents. Please try again later."
+        );
+      }
+    };
+
+    fetchPolicyDocuments();
+  }, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -131,58 +153,71 @@ export default function PolicyDocumentsPage() {
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: "easeOut",
+      },
     }),
+  };
+
+  // Mock file size since DB doesn't store it (adjust if you add a size column)
+  const getFileSize = () => {
+    const sizes = ["1 MB", "807 KB"];
+    return sizes[Math.floor(Math.random() * sizes.length)];
   };
 
   return (
     <>
-    <TopNavBar/>
-    <MainNavBar/>
-    <PageContainer>
-      <ContentWrapper>
-        {/* Header Section */}
-        <HeaderTitle variant="h1">
-          Policy Documents
-        </HeaderTitle>
+      <TopNavBar />
+      <MainNavBar />
+      <PageContainer>
+        <ContentWrapper>
+          {/* Header Section */}
+          <HeaderTitle variant="h1">Policy Documents</HeaderTitle>
 
-        {/* Documents Section */}
-        <Box sx={{ maxWidth: "800px", margin: "0 auto" }}>
-          {policyDocuments.map((doc, index) => (
-            <DocumentCard 
-              key={index}
-              custom={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
-              whileHover={{ scale: 1.02 }}
-            >
-              <DocumentInfo>
-                <FileIcon sx={{ 
-                  color: "#0f5a28", 
-                  fontSize: "2.25rem",
-                  flexShrink: 0 
-                }} />
-                <DocumentText>
-                  <DocumentTitle>{doc.title}</DocumentTitle>
-                  <DocumentMeta>1 file(s) {doc.size}</DocumentMeta>
-                </DocumentText>
-              </DocumentInfo>
-              <Link href={doc.link} target="_blank" rel="noopener noreferrer" passHref>
-                <DownloadButton
-                  variant="contained"
-                  startIcon={<FileIcon sx={{ fontSize: "1.1rem" }} />}
+          {/* Documents Section */}
+          <Box sx={{ maxWidth: "800px", margin: "0 auto" }}>
+            {error ? (
+              <Typography color="error" align="center">
+                {error}
+              </Typography>
+            ) : policyDocuments.length === 0 ? (
+              <Typography color="textSecondary" align="center">
+                No policy documents available at this time.
+              </Typography>
+            ) : (
+              policyDocuments.map((doc, index) => (
+                <DocumentCard
+                  key={index}
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.02 }}
                 >
-                  Download
-                </DownloadButton>
-              </Link>
-            </DocumentCard>
-          ))}
-        </Box>
-      </ContentWrapper>
-    </PageContainer>
-    <FooterBottom/>
+                  <DocumentInfo>
+                    <FileIcon
+                      sx={{
+                        color: "#0f5a28",
+                        fontSize: "2.25rem",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <DocumentText>
+                      <DocumentTitle>{doc.description}</DocumentTitle>
+                      <DocumentMeta>1 file(s) {getFileSize()}</DocumentMeta>
+                    </DocumentText>
+                  </DocumentInfo>
+                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
+                    <DownloadButton variant="contained" startIcon={<FileIcon sx={{ fontSize: "1.1rem" }} />}>
+                      Download
+                    </DownloadButton>
+                  </Link>
+                </DocumentCard>
+              ))
+            )}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
+      <FooterBottom />
     </>
   );
 }

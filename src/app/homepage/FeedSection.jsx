@@ -33,7 +33,7 @@ const NoticeCard = ({ title, description, file_url, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="w-full bg-[#0f5a28] text-white rounded p-2 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] h-40 overflow-hidden"
+      className="w-full bg-[#0f5a28] text-white rounded p-2 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] h-20 overflow-hidden"
     >
       <div className="flex flex-col text-xs text-left">
         <p><strong>Title:</strong> {title}</p>

@@ -1,160 +1,120 @@
-"use client";
+// pages/KFSBoardPage.js
+"use client"; // This is a Client Component
 
-import { Box, Typography, Grid, Avatar } from "@mui/material";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
+import Image from "next/image";
 
-// Main Page Component
+const ceo = {
+  name: "Mr. Titus Kipkoech Korir",
+  title: "Chairman",
+  image: "/images/KFS-Board/Titus-Korir.jpg",
+};
+
+const boardMembers = [
+  { name: "Ms. Jane Simita Munka", title: "Rep. CFA", image: "/images/KFS-Board/Jane-Simitia-Munka.jpg" },
+  { name: "Kunal Chowdhari", title: "Rep. Timber Industry and Chairman, Finance and Resource Mobilization Committee", image: "/images/KFS-Board/Kunal-Chowdhari.jpg" },
+  { name: "Abdala Komesha", title: "Rep. IG, National Police Service", image: "/images/KFS-Board/Abdala-Komesha.jpg" },
+  { name: "Isabella Kogei", title: "Rep. PS National Treasury", image: "/images/KFS-Board/Isabella-Kogei.jpg" },
+  { name: "Dr. George Muthike", title: "Rep. KEFRI and Chairman, Technical, Planning, Development and KFC Committee", image: "/images/KFS-Board/Dr. George Muthike.jpg" },
+  { name: "Dr. Doris Mutta", title: "Rep. FSK. Chair, Audit Committee", image: "/images/KFS-Board/Dr. Doris Mutta.jpg" },
+  { name: "Ahmed Mohammed", title: "Rep. CoG and Chairman, Human Resource and Administration Committee", image: "/images/KFS-Board/Ahmed-Mohammed.jpg" },
+  { name: "Mr. Evans Mutari", title: "Rep. PS State Department of Forestry", image: "/images/KFS-Board/Evans-Mutari.jpg" },
+  { name: "Alex Lemarkoko", title: "Secretary to the Board", image: "/images/KFS-Board/Alex Lemarkoko.jpg" },
+];
+
 export default function KFSBoardPage() {
-  const ceo = {
-    name: "Mr. Titus Kipkoech Korir",
-    title: "Chairman",
-    image: "/images/KFS-Board/Titus-Korir.jpg", // Updated to local path
-  };
-
-  const boardMembers = [
-    { name: "Ms. Jane Simita Munka", title: "Rep. CFA", image: "/images/KFS-Board/Jane-Simitia-Munka.jpg" },
-    { name: "Kunal Chowdhari", title: "Rep. Timber Industry and Chairman, Finance and Resource Mobilization Committee", image: "/images/KFS-Board/Kunal-Chowdhari.jpg" },
-    { name: "Abdala Komesha", title: "Rep. IG, National Police Service", image: "/images/KFS-Board/Abdala-Komesha.jpg" },
-    { name: "Isabella Kogei", title: "Rep. PS National Treasury", image: "/images/KFS-Board/Isabella-Kogei.jpg" },
-    { name: "Dr. George Muthike", title: "Rep. KEFRI and Chairman, Technical, Planning, Development and KFC Committee", image: "/images/KFS-Board/Dr. George Muthike.jpg" },
-    { name: "Dr. Doris Mutta", title: "Rep. FSK. Chair, Audit Committee", image: "/images/KFS-Board/Dr. Doris Mutta.jpg" },
-    { name: "Ahmed Mohammed", title: "Rep. CoG and Chairman, Human Resource and Administration Committee", image: "/images/KFS-Board/Ahmed-Mohammed.jpg" },
-    { name: "Mr. Evans Mutari", title: "Rep. PS State Department of Forestry", image: "/images/KFS-Board/Evans-Mutari.jpg" },
-    { name: "Alex Lemarkoko", title: "Secretary to the Board", image: "/images/KFS-Board/Alex Lemarkoko.jpg" },
-  ];
-
   return (
     <div>
       <TopNavBar />
       <MainNavBar />
-      <Box sx={{ padding: { xs: "1rem", md: "3rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      <div className="p-4 md:p-12 bg-white min-h-screen">
         {/* Title and Description */}
-        <Box sx={{ textAlign: "center", mb: 5 }}>
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: "2rem", md: "2.5rem" },
-              marginBottom: "1rem",
-              color: "#023011",
-            }}
+        <div className="text-center mb-10">
+          <h1
+            className="text-3xl md:text-4xl mb-4 text-[#023011]"
+            style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
           >
             KFS Board of Directors
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: "#666",
-              marginBottom: "2rem",
-              maxWidth: "800px",
-              margin: "0 auto",
-            }}
+          </h1>
+          <p
+            className="text-gray-600 mb-8 max-w-[800px] mx-auto"
+            style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
           >
             This section covers details regarding the board members of KFS.
-          </Typography>
-        </Box>
+          </p>
+        </div>
 
         {/* CEO Section */}
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
-          <Box
-            sx={{
-              backgroundColor: "white",
-              border: "2px solid #e0e0e0",
-              boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-              width: { xs: "100%", sm: "350px" },
-              p: 3,
-              textAlign: "center",
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              "&:hover": {
-                transform: "translateY(-5px)",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
-              },
-            }}
+        <div className="flex justify-center mb-12">
+          <div
+            className="bg-white border-2 border-gray-200 shadow-lg w-full sm:w-[350px] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            <Typography
-              variant="h6"
-              sx={{
-                backgroundColor: "#6A961F",
-                color: "white",
-                padding: "0.5rem 1rem",
-                display: "inline-block",
-                mb: 2,
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-              }}
+            <span
+              className="inline-block bg-[#6A961F] text-white px-4 py-1 mb-4 text-sm font-bold uppercase"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
             >
               Chairman
-            </Typography>
-            <Avatar
-              sx={{
-                width: 150,
-                height: 150,
-                mx: "auto",
-                mb: 2,
-                border: "2px solid #6A961F",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
-              alt={ceo.name}
-              src={ceo.image}
-            />
-            <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000", mb: 1 }}>
+            </span>
+            <div className="relative w-[150px] h-[150px] mx-auto mb-4">
+              <Image
+                src={ceo.image}
+                alt={ceo.name}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full border-2 border-[#6A961F] shadow-sm"
+              />
+            </div>
+            <h6
+              className="text-lg font-medium text-black mb-2"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+            >
               {ceo.name}
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#666", mb: 2 }}>
+            </h6>
+            <p
+              className="text-gray-600 text-sm"
+              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+            >
               {ceo.title}
-            </Typography>
-          </Box>
-        </Box>
+            </p>
+          </div>
+        </div>
 
         {/* Board Members Section */}
-        <Grid container spacing={3} justifyContent="center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
           {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
-              <Box
-                sx={{
-                  backgroundColor: "white",
-                  border: "2px solid #e0e0e0",
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-                  p: 3,
-                  textAlign: "center",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
-                  },
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Avatar
-                    sx={{
-                      width: 120,
-                      height: 120,
-                      mx: "auto",
-                      mb: 2,
-                      border: "2px solid #6A961F",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                    }}
-                    alt={member.name}
+            <div
+              key={index}
+              className="bg-white border-2 border-gray-200 shadow-lg p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col justify-between w-full max-w-[350px]"
+            >
+              <div>
+                <div className="relative w-[120px] h-[120px] mx-auto mb-4">
+                  <Image
                     src={member.image}
+                    alt={member.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full border-2 border-[#6A961F] shadow-sm"
                   />
-                  <Typography variant="h6" sx={{ fontWeight: 500, color: "#000000", mb: 1 }}>
-                    {member.name}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#666", mb: 2 }}>
-                    {member.title}
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid>
+                </div>
+                <h6
+                  className="text-lg font-medium text-black mb-2"
+                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+                >
+                  {member.name}
+                </h6>
+                <p
+                  className="text-gray-600 text-sm"
+                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
+                >
+                  {member.title}
+                </p>
+              </div>
+            </div>
           ))}
-        </Grid>
-      </Box>
+        </div>
+      </div>
       <FooterBottom />
     </div>
   );

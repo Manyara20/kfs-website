@@ -1,6 +1,6 @@
-"use client";
+"use client"; 
+
 import React, { useState, useEffect } from "react";
-import { Box, Typography} from "@mui/material";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,18 +8,21 @@ const HeroSection = () => {
   const slides = [
     {
       title: "Kenya Forest Service",
-      subtitle: "Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.",
-      image: "/images/cypress.JPG", 
+      subtitle:
+        "Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.",
+      image: "/images/cypress.JPG",
     },
     {
       title: "Mangrove Forest Conservation Efforts",
-      subtitle: "Protecting Kenya's forests for future generations. Increase the National Tree Cover from13% to 21.03% in the 5-year period towards attainment of 30% tree cover by 2032",
-      image: "/images/Mangroveforest.png", 
+      subtitle:
+        "Protecting Kenya's forests for future generations. Increase the National Tree Cover from 13% to 21.03% in the 5-year period towards attainment of 30% tree cover by 2032",
+      image: "/images/Mangroveforest.png",
     },
     {
       title: "Trees For Better Lives",
-      subtitle: "Promoting environmental sustainability since 2005. National Forest Cover from 83% to 10% in the 5 years plan period towards attainment of the National target of 10% forest cover by 2030",
-      image: "/images/MTKULAL.JPG", 
+      subtitle:
+        "Promoting environmental sustainability since 2005. National Forest Cover from 8.83% to 10% in the 5 years plan period towards attainment of the National target of 10% forest cover by 2030",
+      image: "/images/MTKULAL.JPG",
     },
   ];
 
@@ -40,123 +43,49 @@ const HeroSection = () => {
   };
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        height: "80vh",
-        width: "100%",
-        overflow: "hidden",
-      }}
-    >
+    <div className="relative h-[80vh] w-full overflow-hidden">
       {/* Slide Container */}
-      <Box
-        sx={{
-          position: "relative",
-          height: "100%",
-          backgroundImage: `url(${slides[currentSlide].image})`, // Use path from /public
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          justifyContent: "center", // Center horizontally
-          alignItems: "center", // Center vertically
-          color: "white",
-          padding: "20px",
-          transition: "background-image 0.5s ease-in-out",
+      <div
+        className="relative h-full bg-cover bg-center flex justify-center items-center text-white p-5 transition-all duration-500 ease-in-out"
+        style={{
+          backgroundImage: `url(${slides[currentSlide].image})`,
         }}
       >
-        <Box
-          sx={{
-            textAlign: "center", // Ensure text is centered within the Box
-          }}
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: "4rem",
-              fontWeight: "bold",
-              marginBottom: "20px",
-              letterSpacing: "2px",
+        <div className="text-center">
+          <h1
+            className="text-6xl font-bold mb-5 tracking-wider"
+            style={{
               textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
             }}
           >
             {slides[currentSlide].title}
-          </Typography>
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: "2.5rem",
-              marginBottom: "20px",
-              fontStyle: "italic",
+          </h1>
+          <p
+            className="text-4xl mb-5 italic"
+            style={{
               textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
             }}
           >
             {slides[currentSlide].subtitle}
-          </Typography>
-        </Box>
-
-        {/* Navigation Buttons 
-        <Button
-          onClick={handlePrev}
-          sx={{
-            position: "absolute",
-            left: "0px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            color: "white",
-            bgcolor: "rgba(0, 0, 0, 0.5)",
-            "&:hover": {
-              bgcolor: "rgba(0, 0, 0, 0.7)",
-            },
-            zIndex: 1,
-          }}
-        >
-          <ArrowBackIosIcon />
-        </Button>
-        <Button
-          onClick={handleNext}
-          sx={{
-            position: "absolute",
-            right: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            color: "white",
-            bgcolor: "rgba(0, 0, 0, 0.5)",
-            "&:hover": {
-              bgcolor: "rgba(0, 0, 0, 0.7)",
-            },
-            zIndex: 1,
-          }}
-        >
-          <ArrowForwardIosIcon />
-        </Button> */}
+          </p>
+        </div>
 
         {/* Slide Indicators */}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            gap: "10px",
-          }}
-        >
+        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2.5">
           {slides.map((_, index) => (
-            <Box
+            <div
               key={index}
-              sx={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                backgroundColor: currentSlide === index ? "white" : "rgba(255, 255, 255, 0.5)",
-                cursor: "pointer",
-              }}
+              className={`w-2.5 h-2.5 rounded-full cursor-pointer ${
+                currentSlide === index ? "bg-white" : "bg-white/50"
+              }`}
               onClick={() => setCurrentSlide(index)}
             />
           ))}
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

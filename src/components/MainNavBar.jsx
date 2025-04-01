@@ -1,3 +1,4 @@
+// components/MainNavBar.js
 "use client";
 import React, { useState, useEffect } from "react";
 import {
@@ -81,25 +82,27 @@ const MainNavBar = () => {
       >
         <MenuItem
           sx={{
-            fontSize: "0.8rem", // Decreased from 0.9rem
+            fontSize: "0.65rem",
+            fontFamily: "'Peugeot', Helvetica, sans-serif",
             color: "black",
             "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-            padding: "6px 12px", // Decreased from 8px 16px
+            padding: "6px 10px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            textTransform: "capitalize", // Capitalize first letter of each word
           }}
         >
           <Link
             href={item.link || "#"}
-            target={item.isExternal ? "_blank" : "_self"} // Open external links in new tab
-            rel={item.isExternal ? "noopener noreferrer" : undefined} // Security for external links
+            target={item.isExternal ? "_blank" : "_self"}
+            rel={item.isExternal ? "noopener noreferrer" : undefined}
             style={{ textDecoration: "none", color: "inherit", display: "block" }}
           >
             {item.label}
           </Link>
           {item.subItems && item.subItems.length > 0 && (
-            <ArrowDropDown sx={{ color: "black", fontSize: "1rem" }} /> // Decreased from 1.2rem
+            <ArrowDropDown sx={{ color: "black", fontSize: "1.1rem" }} />
           )}
         </MenuItem>
         {item.subItems && item.subItems.length > 0 && (
@@ -109,9 +112,9 @@ const MainNavBar = () => {
               opacity: 0,
               position: "absolute",
               top: "100%",
-              left: "100%", // Adjusted for better alignment
+              left: "100%",
               backgroundColor: "white",
-              minWidth: "180px", // Decreased from 200px
+              minWidth: "180px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
               borderRadius: "4px",
               zIndex: 1000 + level,
@@ -152,7 +155,7 @@ const MainNavBar = () => {
         },
         {
           label: "Projects",
-          link: "/about/projects",
+          link: "about/projects",
           subItems: [
             { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
             { label: "NTPC", link: "/about/projects/NTPC" },
@@ -230,7 +233,7 @@ const MainNavBar = () => {
             { label: "Staff Mail", link: "https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f", isExternal: true },
             { label: "E-Registration", link: "https://sawmillers.kenyaforestservice.org/", isExternal: true },
             { label: "E-Nursery", link: "https://enursery.kenyaforestservice.org/", isExternal: true },
-            { label: "Research License", link: "/quick-links/online-systems/research-license", isExternal: false }, // Kept as internal since no external URL provided
+            { label: "Research License", link: "/quick-links/online-systems/research-license", isExternal: false },
             { label: "Monitoring and Evaluation", link: "http://monitoring.kenyaforestservice.org/#/home", isExternal: true },
           ],
         },
@@ -243,13 +246,13 @@ const MainNavBar = () => {
         { label: "Public Documents", link: "/e-documents/public" },
         { label: "Legal Documents", link: "/e-documents/legal" },
         { label: "Policy Documents", link: "/e-documents/policy" },
-        { 
-          label: "Video Documentation", 
+        {
+          label: "Video Documentation",
           subItems: [
             { label: "Sign Language Service Charter", link: "/e-documents/video/Sign-Language" },
             { label: "Audio Service Charter", link: "/e-documents/video/Audio-Service" },
-          ]
-           },
+          ],
+        },
         { label: "Documents Archive", link: "/e-documents/archive" },
       ],
     },
@@ -298,6 +301,8 @@ const MainNavBar = () => {
               justifyContent: "center",
               flexGrow: 1,
               gap: { md: 1, lg: 2 },
+              flexWrap: "nowrap", // Ensure items stay on the same line
+              alignItems: "center", // Vertically align items
             }}
           >
             {navigationItems.map((item, index) =>
@@ -319,16 +324,18 @@ const MainNavBar = () => {
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
-                      fontSize: { md: "0.8rem", lg: "0.9rem" }, // Decreased from 0.85/0.95rem
+                      fontSize: { md: "0.75rem", lg: "0.75rem" },
+                      fontFamily: "'Peugeot', Helvetica, sans-serif",
                       fontWeight: 500,
-                      padding: { md: "5px 7px", lg: "7px 10px" }, // Decreased padding
+                      padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                       borderRadius: "4px",
                       transition: "color 0.3s ease",
+                      textTransform: "capitalize", // Capitalize first letter of each word
                     }}
                   >
                     {item.label}
-                    <ArrowDropDown sx={{ color: isSticky ? "white" : "#6A961F", fontSize: "1.1rem" }} /> {/* Decreased from 1.2rem */}
+                    <ArrowDropDown sx={{ color: isSticky ? "white" : "#6A961F", fontSize: "1.1rem" }} />
                   </Typography>
                   <Box
                     sx={{
@@ -338,7 +345,7 @@ const MainNavBar = () => {
                       top: "100%",
                       left: 0,
                       backgroundColor: "white",
-                      minWidth: "180px", // Decreased from 200px
+                      minWidth: "180px",
                       boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                       borderRadius: "4px",
                       zIndex: 1000,
@@ -357,7 +364,7 @@ const MainNavBar = () => {
                   sx={{
                     color: isSticky ? "white" : "#6A961F",
                     textDecoration: "none",
-                    padding: { md: "5px 7px", lg: "7px 10px" }, // Decreased padding
+                    padding: { md: "5px 7px", lg: "7px 10px" },
                     "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                     borderRadius: "4px",
                     display: "flex",
@@ -365,7 +372,14 @@ const MainNavBar = () => {
                     transition: "color 0.3s ease",
                   }}
                 >
-                  <Typography sx={{ fontSize: { md: "0.8rem", lg: "0.9rem" }, fontWeight: 500 }}> {/* Decreased font size */}
+                  <Typography
+                    sx={{
+                      fontSize: { md: "0.75rem", lg: "0.75rem" },
+                      fontFamily: "'Peugeot', Helvetica, sans-serif",
+                      fontWeight: 500,
+                      textTransform: "capitalize", // Capitalize first letter of each word
+                    }}
+                  >
                     {item.label}
                   </Typography>
                 </Link>
@@ -381,14 +395,14 @@ const MainNavBar = () => {
               sx={{
                 color: isSticky ? "white" : "black",
                 fontWeight: "bold",
-                padding: { md: "5px", lg: "7px" }, // Decreased padding
+                padding: { md: "5px", lg: "7px" },
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
                 borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem" }, fontWeight: "bold" }} /> {/* Decreased size */}
+              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem" }, fontWeight: "bold" }} />
             </IconButton>
           </Box>
         )}
@@ -397,7 +411,7 @@ const MainNavBar = () => {
         {isMobile && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
-              sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px", transition: "color 0.3s ease" }} // Decreased padding
+              sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px", transition: "color 0.3s ease" }}
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
@@ -406,14 +420,14 @@ const MainNavBar = () => {
               sx={{
                 color: isSticky ? "white" : "black",
                 fontWeight: "bold",
-                padding: "5px", // Decreased padding
+                padding: "5px",
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
                 borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: "1.4rem", fontWeight: "bold" }} /> {/* Decreased size */}
+              <SearchIcon sx={{ fontSize: "1.4rem", fontWeight: "bold" }} />
             </IconButton>
           </Box>
         )}
@@ -452,7 +466,14 @@ const MainNavBar = () => {
                       rel={item.isExternal ? "noopener noreferrer" : undefined}
                       sx={{ color: "#6A961F", padding: "8px 16px" }}
                     >
-                      <ListItemText primary={item.label} sx={{ fontSize: "0.9rem" }} /> {/* Decreased size */}
+                      <ListItemText
+                        primary={item.label}
+                        sx={{
+                          fontSize: "0.85rem",
+                          fontFamily: "'Peugeot', Helvetica, sans-serif",
+                          textTransform: "capitalize", // Capitalize first letter of each word
+                        }}
+                      />
                     </ListItemButton>
                   </ListItem>
                 ) : (
@@ -461,7 +482,14 @@ const MainNavBar = () => {
                       onClick={() => handleToggle(index)}
                       sx={{ color: "#6A961F", padding: "8px 16px" }}
                     >
-                      <ListItemText primary={item.label} sx={{ fontSize: "1rem" }} />
+                      <ListItemText
+                        primary={item.label}
+                        sx={{
+                          fontSize: "0.9rem",
+                          fontFamily: "'Peugeot', Helvetica, sans-serif",
+                          textTransform: "capitalize", // Capitalize first letter of each word
+                        }}
+                      />
                       {expandedItems[index] ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={expandedItems[index]} timeout="auto" unmountOnExit>
@@ -472,10 +500,17 @@ const MainNavBar = () => {
                               component={Link}
                               href={subItem.link || "#"}
                               target={subItem.isExternal ? "_blank" : "_self"}
-                              rel={subItem.isExternal ? "noopener noreferrer" : undefined}
+                              rel={item.isExternal ? "noopener noreferrer" : undefined}
                               sx={{ color: "#6A961F", padding: "6px 16px" }}
                             >
-                              <ListItemText primary={subItem.label} sx={{ fontSize: "0.9rem" }} />
+                              <ListItemText
+                                primary={subItem.label}
+                                sx={{
+                                  fontSize: "0.85rem",
+                                  fontFamily: "'Peugeot', Helvetica, sans-serif",
+                                  textTransform: "capitalize", // Capitalize first letter of each word
+                                }}
+                              />
                             </ListItemButton>
                           </ListItem>
                         ))}
@@ -500,11 +535,11 @@ const MainNavBar = () => {
             color: "white",
             height: "auto",
             width: "100%",
-            maxHeight: "180px", // Decreased from 200px
+            maxHeight: "180px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            p: 3, // Decreased from p: 4
+            p: 3,
           },
         }}
       >
@@ -516,15 +551,17 @@ const MainNavBar = () => {
             maxWidth: "600px",
             display: "flex",
             flexDirection: "column",
-            gap: 1.5, // Decreased from gap: 2
+            gap: 1.5,
           }}
         >
           <Typography
             variant="h6"
             sx={{
               textAlign: "center",
-              fontSize: { xs: "0.9rem", sm: "1.1rem" }, // Decreased sizes
+              fontSize: { xs: "0.85rem", sm: "1rem" },
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
               color: "white",
+              textTransform: "capitalize", // Capitalize first letter of each word
             }}
           >
             Search the Website
@@ -537,7 +574,7 @@ const MainNavBar = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "white", fontSize: "1.1rem" }} /> {/* Decreased size */}
+                  <SearchIcon sx={{ color: "white", fontSize: "1.1rem" }} />
                 </InputAdornment>
               ),
             }}
@@ -549,7 +586,9 @@ const MainNavBar = () => {
               },
               "& .MuiInputBase-input": {
                 color: "white",
-                fontSize: { xs: "0.85rem", sm: "0.95rem" }, // Decreased sizes
+                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+                textTransform: "none", // No transformation for input placeholder
               },
             }}
           />

@@ -1,3 +1,4 @@
+// pages/about/senior-management.js
 "use client";
 
 import { Box, Typography, Grid, IconButton, Avatar } from "@mui/material";
@@ -17,43 +18,43 @@ const managementDetails = {
   },
   "charity-munyasya": {
     image: "/images/senior-management/Charity Munyasia.jpg",
-    name: "CHARITY MUNYASIA",
+    name: "Charity Munyasya",
     title: "Principal Deputy to the CCF - Directorate of Strategy, Partnerships & Resource Mobilization",
     bio: "Charity Munyasya is the Principal Deputy to the CCF with expertise in...",
   },
   "mohamed-mohamed": {
     image: "/images/senior-management/Commandant.jpg",
-    name: "MOHAMED .A. MOHAMED",
+    name: "Mohamed A. Mohamed",
     title: "Commandant",
     bio: "",
   },
   "lucy-kiboi": {
     image: "/images/senior-management/Lucy Kiboi.png",
-    name: "LUCY KIBOI",
+    name: "Lucy Kiboi",
     title: "Senior Manager, Corporate Services",
     bio: "",
   },
   "stephen-mugi": {
     image: "/images/senior-management/Stephen Mugi.png",
-    name: "STEPHEN MUGI",
+    name: "Stephen Mugi",
     title: "Ag. Manager, Internal Audit",
     bio: "Mr. Mugi is in charge of Internal Audit and has over thirteen (13) years’ experience in Auditing in the public sector. He holds a Master of Science Degree in Finance, a Bachelor’s Degree in Accounting and is a member of Institute of the Internal Auditors (IIA) – Kenyan Chapter and Institute of Certified Public Accountants of Kenya (ICPAK).",
   },
   "clement-ng'oriareng": {
     image: "/images/senior-management/Dr. Clement.png",
-    name: "Dr. CLEMENT NG'ORIARENG",
+    name: "Dr. Clement Ng'oriareng",
     title: "Deputy Chief Conservator of Forests - Drylands and Private Forests Development Coordination",
     bio: "",
   },
   "zipporah-toroitich": {
     image: "/images/senior-management/Zipporah Toroitich.png",
-    name: "ZIPPORAH TOROITICH",
+    name: "Zipporah Toroitich",
     title: "Deputy Chief Conservator of Forests - Forest Advisory, County Liaison and Investment",
     bio: "",
   },
   "anastacia-muasya": {
     image: "/images/senior-management/Anastacia Muasya.png",
-    name: "ANASTACIA MUASYA",
+    name: "Anastacia Muasya",
     title: "Manager - Finance and Accounts",
     bio: "",
   },
@@ -67,11 +68,11 @@ const managementDetails = {
     image: "/images/senior-management/Esther Keige.png",
     name: "Esther Keige",
     title: "Manager - Legal Services",
-    bio: "Ms Esther Keige is the Manager, Legal Services. She holds a master’s degree in Environmental Law, a Bachelors degree in Law (LLB) Hons and a post graduate diploma in Law.Professionally, the officer is an Advocate of the High Court of Kenya, a Certified Secretary (CS) and Certified Professional Mediator. She is a member of the Law Society of Kenya and the Institute of Certified Secretaries.She has over twenty (20) Years experience as an Advocate and Certified Secretary in the Private and Public Sector.",
+    bio: "Ms Esther Keige is the Manager, Legal Services. She holds a master’s degree in Environmental Law, a Bachelors degree in Law (LLB) Hons and a post graduate diploma in Law. Professionally, the officer is an Advocate of the High Court of Kenya, a Certified Secretary (CS) and Certified Professional Mediator. She is a member of the Law Society of Kenya and the Institute of Certified Secretaries. She has over twenty (20) Years experience as an Advocate and Certified Secretary in the Private and Public Sector.",
   },
   "stephen-cheboi": {
     image: "/images/senior-management/Stephen Cheboi.png",
-    name: "stephen cheboi",
+    name: "Stephen Cheboi",
     title: "Ag. Manager - Information Communication and Technology",
     bio: "Head – Information Communication and Technology",
   },
@@ -89,7 +90,7 @@ const managementDetails = {
   },
   "isaac-wekesa": {
     image: "/images/senior-management/Isaac Wekesa.jpg",
-    name: "ISAAC WEKESA",
+    name: "Isaac Wekesa",
     title: "Ag. Manager - Administration, Infrastructure Development & Maintenance",
     bio: "",
   },
@@ -130,18 +131,19 @@ export default function KFSSeniorManagementPage() {
     <div>
       <TopNavBar />
       <MainNavBar />
-      <Box sx={{ padding: { xs: "1rem", md: "3rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      <Box sx={{ padding: { xs: "0.5rem", md: "1.5rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
         {/* Title and Description */}
-        <Box sx={{ textAlign: "center", mb: 5 }}>
+        <Box sx={{ textAlign: "center", mb: 3 }}>
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "2rem", md: "2.5rem" },
+              fontSize: { xs: "1.4rem", md: "1.8rem" }, // Further reduced from 1.5rem/2rem
               fontWeight: "bold",
               color: "#023011",
-              mb: 2,
-              textTransform: "uppercase",
-              letterSpacing: "1px",
+              mb: 0.5, // Reduced from 1
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
+              textTransform: "capitalize",
+              letterSpacing: "0.3px", // Reduced from 0.5px
             }}
           >
             Senior Management
@@ -150,9 +152,10 @@ export default function KFSSeniorManagementPage() {
             variant="body1"
             sx={{
               color: "#666",
-              fontSize: { xs: "1rem", md: "1.1rem" },
-              maxWidth: "800px",
+              fontSize: { xs: "0.85rem", md: "0.9rem" }, // Further reduced from 0.9rem/1rem
+              maxWidth: "600px", // Reduced from 700px
               margin: "0 auto",
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
             }}
           >
             Meet the dedicated leaders of the Kenya Forest Service, committed to sustainable forest management and conservation.
@@ -160,19 +163,19 @@ export default function KFSSeniorManagementPage() {
         </Box>
 
         {/* CEO Section */}
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
           <Box
             sx={{
               backgroundColor: "white",
               border: "2px solid #e0e0e0",
-              boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-              width: { xs: "100%", sm: "350px" },
-              p: 3,
+              boxShadow: "0 3px 6px rgba(0,0,0,0.1)", // Further reduced shadow
+              width: { xs: "100%", sm: "280px" }, // Reduced from 300px
+              p: 1.5, // Reduced from 2
               textAlign: "center",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               "&:hover": {
-                transform: "translateY(-5px)",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+                transform: "translateY(-3px)", // Reduced from -5px
+                boxShadow: "0 6px 12px rgba(0,0,0,0.15)", // Further reduced shadow
               },
             }}
           >
@@ -181,32 +184,52 @@ export default function KFSSeniorManagementPage() {
               sx={{
                 backgroundColor: "#6A961F",
                 color: "white",
-                padding: "0.5rem 1rem",
+                padding: "0.2rem 0.6rem", // Reduced from 0.3rem 0.8rem
                 display: "inline-block",
-                mb: 2,
-                fontSize: "0.9rem",
+                mb: 0.5, // Reduced from 1
+                fontSize: "0.75rem", // Reduced from 0.8rem
                 fontWeight: "bold",
-                textTransform: "uppercase",
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+                textTransform: "capitalize",
               }}
             >
               CCF
             </Typography>
             <Avatar
               sx={{
-                width: 150,
-                height: 150,
+                width: 100, // Reduced from 120
+                height: 100, // Reduced from 120
                 mx: "auto",
-                mb: 2,
+                mb: 0.5, // Reduced from 1
                 border: "2px solid #6A961F",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.1)", // Reduced shadow
               }}
               alt={ceo.name}
               src={ceo.image}
             />
-            <Typography variant="h6" sx={{ fontWeight: 600, color: "#023011", mb: 1 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                color: "#023011",
+                mb: 0.3, // Reduced from 0.5
+                fontSize: "0.9rem", // Reduced from 1rem
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+                textTransform: "capitalize",
+              }}
+            >
               {ceo.name}
             </Typography>
-            <Typography variant="body2" sx={{ color: "#666", mb: 2, fontSize: "0.9rem" }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "#666",
+                mb: 0.5, // Reduced from 1
+                fontSize: "0.7rem", // Reduced from 0.8rem
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+                textTransform: "capitalize",
+              }}
+            >
               {ceo.title}
             </Typography>
             <Link href={`/about/senior-management/${ceo.id}`} passHref>
@@ -219,27 +242,27 @@ export default function KFSSeniorManagementPage() {
                 }}
                 aria-label="View Profile"
               >
-                <InfoIcon fontSize="medium" />
+                <InfoIcon fontSize="small" />
               </IconButton>
             </Link>
           </Box>
         </Box>
 
         {/* Board Members Section */}
-        <Grid container spacing={3} justifyContent="center">
+        <Grid container spacing={1.5} justifyContent="center">
           {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+            <Grid item key={index} xs={12} sm={4} md={3} lg={3}>
               <Box
                 sx={{
                   backgroundColor: "white",
                   border: "2px solid #e0e0e0",
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-                  p: 3,
+                  boxShadow: "0 3px 6px rgba(0,0,0,0.1)", // Further reduced shadow
+                  p: 1.5, // Reduced from 2
                   textAlign: "center",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+                    transform: "translateY(-3px)", // Reduced from -5px
+                    boxShadow: "0 6px 12px rgba(0,0,0,0.15)", // Further reduced shadow
                   },
                   height: "100%",
                   display: "flex",
@@ -250,20 +273,39 @@ export default function KFSSeniorManagementPage() {
                 <Box>
                   <Avatar
                     sx={{
-                      width: 120,
-                      height: 120,
+                      width: 90, // Reduced from 100
+                      height: 90, // Reduced from 100
                       mx: "auto",
-                      mb: 2,
+                      mb: 0.5, // Reduced from 1
                       border: "2px solid #6A961F",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.1)", // Reduced shadow
                     }}
                     alt={member.name}
                     src={member.image}
                   />
-                  <Typography variant="h6" sx={{ fontWeight: 600, color: "#023011", mb: 1, fontSize: "1.1rem" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      color: "#023011",
+                      mb: 0.3, // Reduced from 0.5
+                      fontSize: "0.85rem", // Reduced from 0.9rem
+                      fontFamily: "'Peugeot', Helvetica, sans-serif",
+                      textTransform: "capitalize",
+                    }}
+                  >
                     {member.name}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "#666", fontSize: "0.85rem", mb: 2 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "#666",
+                      fontSize: "0.7rem", // Reduced from 0.75rem
+                      mb: 0.5, // Reduced from 1
+                      fontFamily: "'Peugeot', Helvetica, sans-serif",
+                      textTransform: "capitalize",
+                    }}
+                  >
                     {member.title}
                   </Typography>
                 </Box>
@@ -277,7 +319,7 @@ export default function KFSSeniorManagementPage() {
                     }}
                     aria-label="View Profile"
                   >
-                    <InfoIcon fontSize="medium" />
+                    <InfoIcon fontSize="small" />
                   </IconButton>
                 </Link>
               </Box>

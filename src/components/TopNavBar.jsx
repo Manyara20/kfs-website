@@ -1,3 +1,4 @@
+// components/TopNavBar.js
 "use client";
 import React from "react";
 import {
@@ -58,14 +59,14 @@ const TopNavBar = () => {
       position="static"
       sx={{
         backgroundColor: "#0D3C00",
-        padding: { xs: "2px 0", sm: "4px 0" },
+        padding: { xs: "1px 0", sm: "2px 0" }, // Reduced padding
       }}
     >
       <Toolbar
         sx={{
           width: { xs: "95%", sm: "90%", md: "85%" },
           margin: "auto",
-          padding: { xs: "0 4px", sm: "0 8px", md: "0 12px" },
+          padding: { xs: "0 2px", sm: "0 4px", md: "0 8px" }, // Reduced padding
           minHeight: "auto !important",
           display: "flex",
           alignItems: "center",
@@ -82,31 +83,33 @@ const TopNavBar = () => {
           sx={{
             display: isSmall ? "none" : "flex", // Hide completely on small screens
             alignItems: "center",
-            gap: { xs: 0.5, sm: 1, md: 1.5 },
+            gap: { xs: 0.25, sm: 0.5, md: 1 }, // Reduced gap between groups
             flexShrink: 0,
             width: "100%",
             justifyContent: "space-between", // Space between groups
           }}
         >
           {/* Group 1 */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.25, sm: 0.5, md: 1 } }}>
             {visibleGroup1.map((item, index) => (
               <Box
                 key={index}
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <IconButton
-                  sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
+                  sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                    fontSize: isExtraSmall ? "small" : isSmall ? "small" : "medium", // Reduced icon size
                   })}
                 </IconButton>
                 <Typography
                   variant="body2"
                   sx={{
                     color: "white",
-                    fontSize: { xs: "0.6rem", sm: "0.7rem", md: "0.75rem" },
+                    fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.6rem" }, // Reduced font size
+                    fontFamily: "'Peugeot', Helvetica, sans-serif", // Apply Peugeot font
+                    textTransform: "capitalize", // Capitalize first letter of each word
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -116,9 +119,9 @@ const TopNavBar = () => {
                   <Box
                     sx={{
                       width: "1px",
-                      height: "16px",
+                      height: "12px", // Reduced height
                       backgroundColor: "white",
-                      mx: { xs: 0.25, sm: 0.5, md: 1 },
+                      mx: { xs: 0.1, sm: 0.25, md: 0.5 }, // Reduced margin
                     }}
                   />
                 )}
@@ -127,24 +130,26 @@ const TopNavBar = () => {
           </Box>
 
           {/* Group 2 */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, sm: 1, md: 1.5 } }}>
+          <Box sx={{ display: "flex", alignItems: "left", gap: { xs: 0.25, sm: 0.5, md: 1 } }}>
             {visibleGroup2.map((item, index) => (
               <Box
                 key={index}
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <IconButton
-                  sx={{ color: "white", padding: { xs: "2px", sm: "4px" } }}
+                  sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "medium" : "inherit",
+                    fontSize: isExtraSmall ? "small" : isSmall ? "small" : "medium", // Reduced icon size
                   })}
                 </IconButton>
                 <Typography
                   variant="body2"
                   sx={{
                     color: "white",
-                    fontSize: { xs: "0.6rem", sm: "0.7rem", md: "0.75rem" },
+                    fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.6rem" }, // Reduced font size
+                    fontFamily: "'Peugeot', Helvetica, sans-serif", // Apply Peugeot font
+                    textTransform: "capitalize", // Capitalize first letter of each word
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -154,9 +159,9 @@ const TopNavBar = () => {
                   <Box
                     sx={{
                       width: "1px",
-                      height: "16px",
+                      height: "12px", // Reduced height
                       backgroundColor: "white",
-                      mx: { xs: 0.25, sm: 0.5, md: 1 },
+                      mx: { xs: 0.1, sm: 0.25, md: 0.5 }, // Reduced margin
                     }}
                   />
                 )}

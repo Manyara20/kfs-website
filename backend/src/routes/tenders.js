@@ -3,12 +3,23 @@ const { Pool } = require("pg");
 const multer = require("multer");
 const path = require("path");
 const router = express.Router();
+
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
+});
+
+// Test database connection on startup
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error("Database connection failed:", err.stack);
+    return;
+  }
+  console.log("Database connected successfully");
+  release();
 });
 
 // Multer setup with custom storage
@@ -21,16 +32,35 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Middleware to log request details for debugging
+// Middleware to log request details
 router.use((req, res, next) => {
-  console.log(`${req.method} /api/tenders${req.path} - User:`, req.user);
+  console.log(`${req.method} /api/tenders${req.path} - User:`, req.user || "Public");
   next();
 });
 
-// GET /api/tenders - Retrieve all active tenders
-router.get("/", async (req, res) => {
+// GET /api/tenders/public - Retrieve all active tenders (public access, no auth)
+router.get("/public", async (req, res) => {
+  console.log("Handling GET /api/tenders/public");
   try {
-    if (req.user.role !== "admin" && req.user.role !== "supply_chain") {
+    console.log("Executing query: SELECT * FROM tenders WHERE archived = FALSE");
+    const result = await pool.query("SELECT * FROM tenders WHERE archived = FALSE");
+    console.log("Query result:", result.rows);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching public tenders:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    res.status(500).json({ error: "Server error", details: error.message });
+  }
+});
+
+// GET /api/tenders - Retrieve all active tenders (authenticated)
+router.get("/", async (req, res) => {
+  console.log("Handling GET /api/tenders/");
+  try {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
     const result = await pool.query("SELECT * FROM tenders WHERE archived = FALSE");
@@ -41,10 +71,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST /api/tenders - Create a new tender
+// POST /api/tenders - Create a new tender (authenticated)
 router.post("/", upload.single("pdf"), async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "supply_chain") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -65,10 +95,10 @@ router.post("/", upload.single("pdf"), async (req, res) => {
   }
 });
 
-// PUT /api/tenders/:id - Update an existing tender
+// PUT /api/tenders/:id - Update an existing tender (authenticated)
 router.put("/:id", upload.single("pdf"), async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "supply_chain") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -92,10 +122,10 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
   }
 });
 
-// DELETE /api/tenders/:id - Delete a tender
+// DELETE /api/tenders/:id - Delete a tender (authenticated)
 router.delete("/:id", async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "supply_chain") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -113,10 +143,10 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// PATCH /api/tenders/:id/archive - Archive a tender
+// PATCH /api/tenders/:id/archive - Archive a tender (authenticated)
 router.patch("/:id/archive", async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "supply_chain") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 

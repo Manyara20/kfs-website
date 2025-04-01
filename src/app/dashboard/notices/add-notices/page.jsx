@@ -51,7 +51,9 @@ export default function AddNotice() {
       };
       console.error("Error adding notice:", errorDetails);
       setError(
-        err.response?.data?.error || `Failed to add notice (Status: ${err.response?.status || "unknown"})`
+        err.response?.data?.error ||
+        err.response?.data?.details ||
+        `Failed to add notice (Status: ${err.response?.status || "unknown"})`
       );
     }
   };
@@ -67,20 +69,20 @@ export default function AddNotice() {
         placeholder="Title"
         value={form.title}
         onChange={(e) => setForm({ ...form, title: e.target.value })}
-        className="block w-full p-2 mb-4 border"
+        className="block w-full p-2 mb-4 border rounded"
       />
       <textarea
         placeholder="Description"
         value={form.description}
         onChange={(e) => setForm({ ...form, description: e.target.value })}
-        className="block w-full p-2 mb-4 border"
+        className="block w-full p-2 mb-4 border rounded"
       />
       <input
         type="file"
         onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-        className="block w-full p-2 mb-4 border"
+        className="block w-full p-2 mb-4 border rounded"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
         Add Notice
       </button>
     </form>

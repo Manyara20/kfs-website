@@ -3,12 +3,23 @@ const { Pool } = require("pg");
 const multer = require("multer");
 const path = require("path");
 const router = express.Router();
+
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
+});
+
+// Test database connection on startup
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error("Database connection failed:", err.stack);
+    return;
+  }
+  console.log("Database connected successfully");
+  release();
 });
 
 // Multer setup for image uploads
@@ -27,24 +38,24 @@ router.use((req, res, next) => {
   next();
 });
 
-// GET /api/posts - Retrieve all active posts
+// GET /api/posts - Retrieve all active posts (admin/comms only)
 router.get("/", async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "communication_officer")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
     const result = await pool.query("SELECT * FROM posts WHERE archived = FALSE");
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching posts:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// POST /api/posts - Create a new post with image upload
+// POST /api/posts - Create a new post with image upload (admin/comms only)
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "communication_officer")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -62,14 +73,14 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error("Error creating post:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PUT /api/posts/:id - Update an existing post
+// PUT /api/posts/:id - Update an existing post (admin/comms only)
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "communication_officer")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -89,14 +100,14 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     res.json(result.rows[0]);
   } catch (error) {
     console.error("Error updating post:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// DELETE /api/posts/:id - Delete a post
+// DELETE /api/posts/:id - Delete a post (admin/comms only)
 router.delete("/:id", async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "communication_officer")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -110,14 +121,14 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error("Error deleting post:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PATCH /api/posts/:id/archive - Archive a post
+// PATCH /api/posts/:id/archive - Archive a post (admin/comms only)
 router.patch("/:id/archive", async (req, res) => {
   try {
-    if (req.user.role !== "admin" && req.user.role !== "communication_officer") {
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "communication_officer")) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -134,7 +145,7 @@ router.patch("/:id/archive", async (req, res) => {
     res.json({ message: "Post archived successfully", post: result.rows[0] });
   } catch (error) {
     console.error("Error archiving post:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 

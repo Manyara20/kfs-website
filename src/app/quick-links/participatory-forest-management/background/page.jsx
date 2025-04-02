@@ -1,163 +1,12 @@
 "use client";
 
 import React from "react";
-import { Box, Typography, List, ListItem, ListItemText, IconButton, Button } from "@mui/material";
-import { Facebook, Twitter, YouTube, Instagram, Description as DescriptionIcon } from "@mui/icons-material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Custom styled components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.1,
-    zIndex: 0,
-  },
-});
-
-const ContentCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  backdropFilter: "blur(10px)",
-  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-  padding: "3rem",
-  maxWidth: "800px",
-  width: "100%",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "12px",
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
-});
-
-const TextDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 400,
-  color: "#333",
-  lineHeight: 1.8,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
-});
-
-const SectionTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1.8rem",
-  marginBottom: "1rem",
-});
-
-const ObjectiveList = styled(List)({
-  padding: 0,
-});
-
-const ObjectiveItem = styled(ListItem)({
-  background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
-  borderRadius: "8px",
-  marginBottom: "0.5rem",
-  padding: "1rem",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-    background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
-  },
-});
-
-const ObjectiveText = styled(ListItemText)({
-  "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
-    fontWeight: 500,
-    color: "#0D3C00",
-    fontSize: "1rem",
-  },
-});
-
-const FileSection = styled(Box)({
-  marginTop: "2rem",
-});
-
-const FileItem = styled(ListItem)({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
-  borderRadius: "8px",
-  padding: "1rem",
-  marginBottom: "0.5rem",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-    background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
-  },
-});
-
-const DownloadButton = styled(Button)({
-  backgroundColor: "#0f5a28",
-  color: "#fff",
-  textTransform: "none",
-  padding: "0.5rem 1rem",
-  fontSize: "0.9rem",
-  fontFamily: "'Roboto', sans-serif",
-  "&:hover": {
-    backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-  },
-});
-
-const SocialIconsContainer = styled(Box)({
-  position: "absolute",
-  top: "2rem",
-  left: "2rem",
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
-  zIndex: 2,
-});
-
-const SocialIconButton = styled(IconButton)({
-  backgroundColor: "rgba(255, 255, 255, 0.9)",
-  color: "#0D3C00",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    backgroundColor: "#0D3C00",
-    color: "#fff",
-    transform: "scale(1.1)",
-    boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
-  },
-});
-
-const ParticipatoryForestManagementPage = () => {
+export default function ParticipatoryForestManagementPage() {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -170,78 +19,128 @@ const ParticipatoryForestManagementPage = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Top Navigation Bar */}
       <TopNavBar />
+
+      {/* Main Navigation Bar */}
       <MainNavBar />
-      <PageContainer>
+
+      {/* Page Container */}
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        {/* Overlay Pattern */}
+        <div
+          className="absolute inset-0 opacity-10 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+
         {/* Social Icons */}
-        <SocialIconsContainer>
-          <SocialIconButton><Facebook /></SocialIconButton>
-          <SocialIconButton><Twitter /></SocialIconButton>
-          <SocialIconButton><YouTube /></SocialIconButton>
-          <SocialIconButton><Instagram /></SocialIconButton>
-        </SocialIconsContainer>
+        <div className="absolute top-8 left-8 flex flex-col gap-4 z-20">
+          {[
+            { name: "Facebook", icon: "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" },
+            { name: "Twitter", icon: "M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" },
+            { name: "YouTube", icon: "M22.54 6.42A2.78 2.78 0 0020 4.5C18.88 4 12 4 12 4s-6.88 0-8 1.5A2.78 2.78 0 001.46 6.42 29.94 29.94 0 000 12a29.94 29.94 0 001.46 5.58A2.78 2.78 0 004 19.5c1.12 1.5 8 1.5 8 1.5s6.88 0 8-1.5a2.78 2.78 0 002.54-1.92A29.94 29.94 0 0024 12a29.94 29.94 0 00-1.46-5.58zM9.75 15.02V8.98l6.5 3.02-6.5 3.02z" },
+            { name: "Instagram", icon: "M12 2.16c3.21 0 3.58.01 4.85.07 1.27.06 2.14.26 2.9.56.78.3 1.44.71 2.1 1.37.66.66 1.07 1.32 1.37 2.1.3.76.5 1.63.56 2.9.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.06 1.27-.26 2.14-.56 2.9-.3.78-.71 1.44-1.37 2.1-.66.66-1.32 1.07-2.1 1.37-.76.3-1.63.5-2.9.56-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.27-.06-2.14-.26-2.9-.56-.78-.3-1.44-.71-2.1-1.37-.66-.66-1.07-1.32-1.37-2.1-.3-.76-.5-1.63-.56-2.9-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.06-1.27.26-2.14.56-2.9.3-.78.71-1.44 1.37-2.1.66-.66 1.32-1.07 2.1-1.37.76-.3 1.63-.5 2.9-.56 1.27-.06 1.64-.07 4.85-.07M12 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zm0 10.16a4 4 0 110-8 4 4 0 010 8zm6.4-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" },
+          ].map((social, index) => (
+            <button
+              key={index}
+              className="bg-white bg-opacity-90 text-[#0D3C00] p-2 rounded-full hover:bg-[#0D3C00] hover:text-white hover:scale-110 hover:shadow-lg transition-all duration-300"
+              aria-label={`Visit our ${social.name} page`}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d={social.icon} />
+              </svg>
+            </button>
+          ))}
+        </div>
 
         {/* Main Content Card */}
-        <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
-          <Title variant="h1">Participatory Forest Management</Title>
-          <TextDescription>
+        <motion.div
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-2xl w-full relative z-10 border border-white/30 rounded-xl"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h1 className="text-4xl font-bold text-[#0f5a28] text-shadow-md mb-6 leading-tight tracking-wide">
+            Participatory Forest Management
+          </h1>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             Kenya is endowed with a wide range of forest ecosystems ranging from montane rainforests, savannah woodlands, dry forests, and coastal forests and mangroves. The current forest cover of 7.2% of the land area of the country is still below the constitutional requirement of 10%. These forests have high species richness and endemism, which has made the country be classified as mega diverse. They rank high as the country’s natural asset, due to their environmental, life-supporting functions, and the provision of diverse goods and services.
-          </TextDescription>
+          </p>
 
-          <SectionTitle>Strategic Objective</SectionTitle>
-          <TextDescription>
+          <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Strategic Objective</h2>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             The Participatory Forest Management strategic objective is to enhance conservation, sustainable management, and utilization of forests by improving livelihoods in rural areas, conserving biodiversity while enhancing people’s livelihoods, and ensuring the sustainable use of forests.
-          </TextDescription>
+          </p>
 
-          <SectionTitle>Policy Goal & Objectives</SectionTitle>
-          <TextDescription>
+          <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Policy Goal & Objectives</h2>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             The overall policy goal of Participatory Forest Management is sustainable development, management, utilization, and conservation of forest resources and equitable sharing of accrued benefits for the present and future generations of the forest-adjacent communities and citizens at large.
-          </TextDescription>
-          <ObjectiveList>
-            <ObjectiveItem>
-              <ObjectiveText primary="Increase and maintain tree and forest cover of at least ten percent of the land area of Kenya." />
-            </ObjectiveItem>
-          </ObjectiveList>
+          </p>
+          <ul className="space-y-2 mb-6">
+            <li className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-lg p-4 text-[#0D3C00] text-base font-medium hover:from-[#C8E6C9] hover:to-[#A5D6A7] hover:-translate-y-1 hover:shadow-md transition-all">
+              Increase and maintain tree and forest cover of at least ten percent of the land area of Kenya.
+            </li>
+          </ul>
 
-          <FileSection>
-            <SectionTitle>Resources</SectionTitle>
-            <List>
-              <FileItem>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
-                  <ListItemText
-                    primary="Forest Management Agreements Register"
-                    secondary="1 file(s) 338.06 KB"
-                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
-                    secondaryTypographyProps={{ color: "#555" }}
-                  />
-                </Box>
-                <DownloadButton onClick={() => handleDownload("Forest Management Agreements Register")}>
-                  Download
-                </DownloadButton>
-              </FileItem>
-              <FileItem>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
-                  <ListItemText
-                    primary="Forest Management Plans"
-                    secondary="1 file(s) 4.00 KB"
-                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
-                    secondaryTypographyProps={{ color: "#555" }}
-                  />
-                </Box>
-                <DownloadButton onClick={() => handleDownload("Forest Management Plans")}>
-                  Download
-                </DownloadButton>
-              </FileItem>
-            </List>
-          </FileSection>
-        </ContentCard>
-      </PageContainer>
+          <div className="mt-8">
+            <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Resources</h2>
+            <ul className="space-y-2">
+              {[
+                { name: "Forest Management Agreements Register", size: "338.06 KB" },
+                { name: "Forest Management Plans", size: "4.00 KB" },
+              ].map((file, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between items-center bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-lg p-4 hover:from-[#C8E6C9] hover:to-[#A5D6A7] hover:-translate-y-1 hover:shadow-md transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 text-[#0D3C00]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <div>
+                      <p className="text-[#0D3C00] font-medium">{file.name}</p>
+                      <p className="text-[#555] text-sm">1 file(s) {file.size}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleDownload(file.name)}
+                    className="bg-[#0f5a28] text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-[#388e3c] hover:shadow-md transition-all"
+                  >
+                    Download
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Footer */}
       <FooterBottom />
     </div>
   );
-};
-
-export default ParticipatoryForestManagementPage;
+}

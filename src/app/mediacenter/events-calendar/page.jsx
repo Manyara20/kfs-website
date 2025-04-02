@@ -1,4 +1,3 @@
-// pages/events-calendar.js
 "use client";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
@@ -9,14 +8,13 @@ import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
-// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "2rem",
+  padding: "1rem",
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -33,149 +31,154 @@ const PageContainer = styled(Box)({
 });
 
 const ContentWrapper = styled(Box)({
-  maxWidth: "1200px",
+  maxWidth: "1000px",
   margin: "0 auto",
-  padding: "3rem 1rem",
+  padding: "2rem 0.5rem",
   position: "relative",
   zIndex: 1,
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#ffffff",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-  fontSize: "3rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
+  fontSize: "2rem",
+  lineHeight: 1.1,
+  letterSpacing: "0.3px",
   textAlign: "center",
-  marginBottom: "1rem",
+  marginBottom: "0.5rem",
+  textTransform: "capitalize",
 });
 
 const HeaderSubtitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#e0e0e0",
-  fontSize: "1.25rem",
+  fontSize: "0.9rem",
   textAlign: "center",
-  marginBottom: "3rem",
+  marginBottom: "1.5rem",
 });
 
 const SectionTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#ffffff",
-  fontSize: "2rem",
+  fontSize: "1.5rem",
   textAlign: "center",
-  marginBottom: "2rem",
+  marginBottom: "1rem",
+  textTransform: "capitalize",
 });
 
 const CalendarWrapper = styled(Box)({
   background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "12px",
-  padding: "2rem",
-  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-  marginBottom: "4rem",
+  borderRadius: "8px",
+  padding: "1.5rem",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  marginBottom: "2rem",
 });
 
 const CalendarHeader = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "1.5rem",
+  marginBottom: "1rem",
 });
 
 const CalendarGrid = styled(Box)({
   display: "grid",
   gridTemplateColumns: "repeat(7, 1fr)",
-  gap: "1rem",
+  gap: "0.5rem",
 });
 
 const DayHeader = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
   textAlign: "center",
-  padding: "0.5rem",
+  padding: "0.3rem",
+  fontSize: "0.8rem",
+  textTransform: "capitalize",
 });
 
 const DayCell = styled(motion.div, {
-  shouldForwardProp: (prop) => prop !== "isToday", // Prevent isToday from being forwarded to the DOM
+  shouldForwardProp: (prop) => prop !== "isToday",
 })(({ isToday }) => ({
   background: isToday ? "#e8f5e9" : "#ffffff",
   border: isToday ? "2px solid #0f5a28" : "1px solid #e0e0e0",
-  borderRadius: "8px",
-  padding: "1rem",
+  borderRadius: "6px",
+  padding: "0.5rem",
   textAlign: "center",
-  height: "120px",
+  height: "90px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
   overflowY: "auto",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
   "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    transform: "translateY(-2px)",
+    boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
   },
 }));
 
 const DayNumber = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.1rem",
+  fontSize: "0.9rem",
 });
 
 const EventText = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "0.85rem",
+  fontSize: "0.7rem",
   whiteSpace: "normal",
 });
 
 const EventCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "12px",
-  padding: "1.5rem",
-  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1.5rem",
+  borderRadius: "8px",
+  padding: "1rem",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  marginBottom: "1rem",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
   "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+    transform: "translateY(-3px)",
+    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
   },
 });
 
 const EventTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.5rem",
-  marginBottom: "0.5rem",
+  fontSize: "1.2rem",
+  marginBottom: "0.3rem",
+  textTransform: "capitalize",
 });
 
 const EventDate = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "1rem",
+  fontSize: "0.85rem",
 });
 
 const NavButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
+  padding: "0.3rem 0.8rem",
+  fontSize: "0.8rem",
   "&:hover": {
     backgroundColor: "#388e3c",
   },
 });
 
 export default function EventsCalendarPage() {
-  // State for current month and year
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
 
-  // Events data (map of dates to events)
   const eventsData = {
     "2025-03-03": "Africa Environment Day\nWangari Maathai Day\nWorld Wildlife Day",
     "2025-03-21": "International Day of Forests",
@@ -185,7 +188,6 @@ export default function EventsCalendarPage() {
     "2026-03-03": "Africa Environment Day\nWangari Maathai Day",
   };
 
-  // Upcoming events data
   const upcomingEventsData = [
     { date: new Date("2025-03-22"), event: "World Water Day", time: "11:59 pm" },
     { date: new Date("2025-03-23"), event: "World Meteorological Day", time: "11:11 pm" },
@@ -194,21 +196,18 @@ export default function EventsCalendarPage() {
     { date: new Date("2026-03-03"), event: "Wangari Maathai Day" },
   ];
 
-  // Generate calendar days for the current month
   useEffect(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const firstDayOfMonth = new Date(year, month, 1);
     const lastDayOfMonth = new Date(year, month + 1, 0);
-    const startingDay = firstDayOfMonth.getDay(); // 0 (Sun) to 6 (Sat)
+    const startingDay = firstDayOfMonth.getDay();
     const daysInMonth = lastDayOfMonth.getDate();
 
     const days = [];
-    // Add empty cells for days before the 1st of the month
     for (let i = 0; i < startingDay; i++) {
       days.push({ day: null, event: "" });
     }
-    // Add days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
       days.push({
@@ -219,17 +218,14 @@ export default function EventsCalendarPage() {
     setCalendarDays(days);
   }, [currentDate]);
 
-  // Navigate to previous month
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
 
-  // Navigate to next month
   const handleNextMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
-  // Get upcoming events (events after today)
   const today = new Date();
   const upcomingEvents = upcomingEventsData
     .filter(event => event.date > today)
@@ -237,7 +233,7 @@ export default function EventsCalendarPage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
 
   return (
@@ -246,7 +242,6 @@ export default function EventsCalendarPage() {
       <MainNavBar />
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
           <HeaderTitle variant="h1">
             Events Calendar
           </HeaderTitle>
@@ -254,8 +249,7 @@ export default function EventsCalendarPage() {
             Stay updated with the latest events and activities from the Kenya Forest Service.
           </HeaderSubtitle>
 
-          {/* Calendar Section */}
-          <Box mb={8}>
+          <Box mb={4}>
             <SectionTitle>
               Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
             </SectionTitle>
@@ -264,7 +258,7 @@ export default function EventsCalendarPage() {
                 <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
                   Previous
                 </NavButton>
-                <Typography variant="h6" sx={{ fontFamily: "'Roboto', sans-serif", color: "#0f5a28" }}>
+                <Typography variant="h6" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", color: "#0f5a28", fontSize: "1rem", textTransform: "capitalize" }}>
                   {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
                 </Typography>
                 <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
@@ -272,13 +266,11 @@ export default function EventsCalendarPage() {
                 </NavButton>
               </CalendarHeader>
               <CalendarGrid>
-                {/* Calendar Headers */}
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
                   <DayHeader key={index}>
                     {day}
                   </DayHeader>
                 ))}
-                {/* Calendar Days */}
                 {calendarDays.map((dayData, index) => {
                   const isToday =
                     dayData.day &&
@@ -308,10 +300,9 @@ export default function EventsCalendarPage() {
             </CalendarWrapper>
           </Box>
 
-          {/* Upcoming Events Section */}
           <Box>
             <SectionTitle>Upcoming Events</SectionTitle>
-            <Box maxWidth="800px" mx="auto">
+            <Box maxWidth="700px" mx="auto">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event, index) => (
                   <EventCard
@@ -329,10 +320,10 @@ export default function EventsCalendarPage() {
               ) : (
                 <Typography
                   sx={{
-                    fontFamily: "'Roboto', sans-serif",
+                    fontFamily: "'Peugeot', Helvetica, sans-serif",
                     color: "#ffffff",
                     textAlign: "center",
-                    fontSize: "1.2rem",
+                    fontSize: "0.9rem",
                   }}
                 >
                   No upcoming events.

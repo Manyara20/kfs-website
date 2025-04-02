@@ -1,12 +1,10 @@
-"use client"; // Mark this component as a Client Component
-
+"use client";
 import React from "react";
 import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Mock data for demonstration (replace this with your actual data fetching logic)
 const newsData = [
   {
     id: 1,
@@ -198,15 +196,6 @@ const newsData = [
     comments: "12 Comments",
   },
   {
-    id: 21,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
     id: 22,
     title: "",
     text: "",
@@ -269,357 +258,51 @@ const newsData = [
     date: "March 15, 2025",
     comments: "12 Comments",
   },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 27,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-  {
-    id: 28,
-    title: "",
-    text: "",
-    image: "",
-    author: "By Admin",
-    date: "March 15, 2025",
-    comments: "12 Comments",
-  },
-
-
-
-
-
-  // Add more items as needed
 ];
 
 export default function NewsDetailPage({ params }) {
-  // Unwrap the params promise
   const unwrappedParams = React.use(params);
   const { id } = unwrappedParams;
 
-  // Find the news item based on the ID
   const newsItem = newsData.find((item) => item.id === parseInt(id));
 
   if (!newsItem) {
-    return <div>News item not found</div>;
+    return <div className="container mx-auto px-4 py-6 text-center text-lg font-peugeot">News item not found</div>;
   }
 
   return (
     <>
       <TopNavBar />
       <MainNavBar />
-
-      {/* News Detail Section */}
-      <section className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Title */}
-          <h1 className="text-4xl font-bold text-emerald-950 mb-6">{newsItem.title}</h1>
-
-          {/* Image */}
-          <div className="mb-8">
+      <section className="container mx-auto px-4 py-6">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-2xl font-bold text-emerald-950 mb-4 font-peugeot" style={{ textTransform: "capitalize" }}>{newsItem.title}</h1>
+          <div className="mb-4">
             <img
               src={newsItem.image}
               alt={newsItem.title}
-              className="rounded-lg shadow-lg w-full"
+              className="rounded-lg shadow-md w-full h-auto"
             />
           </div>
-
-          {/* Metadata */}
-          <div className="flex items-center gap-6 text-sm text-black mb-8">
+          <div className="flex items-center gap-4 text-xs text-black mb-4 font-peugeot">
             <div className="flex items-center gap-1">
-              <Image src="/icons/user.png" alt="Author" width={16} height={16} />
+              <Image src="/icons/user.png" alt="Author" width={14} height={14} />
               <span>{newsItem.author}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Image src="/icons/calendar.png" alt="Date" width={16} height={16} />
+              <Image src="/icons/calendar.png" alt="Date" width={14} height={14} />
               <span>{newsItem.date}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Image src="/icons/comment.png" alt="Comments" width={16} height={16} />
+              <Image src="/icons/comment.png" alt="Comments" width={14} height={14} />
               <span>{newsItem.comments}</span>
             </div>
           </div>
-
-          {/* Content */}
-          <div className="text-emerald-700 leading-relaxed">
+          <div className="text-emerald-700 leading-relaxed font-peugeot text-sm">
             <p>{newsItem.text}</p>
           </div>
         </div>
       </section>
-
       <FooterBottom />
     </>
   );

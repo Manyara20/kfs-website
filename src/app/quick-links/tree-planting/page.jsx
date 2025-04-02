@@ -1,151 +1,11 @@
 "use client";
 
 import React from "react";
-import { Box, Typography, List, ListItem, ListItemText, IconButton, TextField, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Custom styled components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.1,
-    zIndex: 0,
-  },
-});
-
-const ContentCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  backdropFilter: "blur(10px)",
-  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-  padding: "3rem",
-  maxWidth: "800px",
-  width: "100%",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "12px",
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
-});
-
-const Subtitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 400,
-  color: "#555",
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
-  fontStyle: "italic",
-});
-
-const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 400,
-  color: "#333",
-  lineHeight: 1.8,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
-});
-
-const SectionTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1.8rem",
-  marginBottom: "1rem",
-});
-
-const ResponsibilityList = styled(List)({
-  padding: 0,
-});
-
-const ResponsibilityItem = styled(ListItem)({
-  background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
-  borderRadius: "8px",
-  marginBottom: "0.5rem",
-  padding: "1rem",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-    background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
-  },
-});
-
-const ResponsibilityText = styled(ListItemText)({
-  "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
-    fontWeight: 500,
-    color: "#0D3C00",
-    fontSize: "1rem",
-  },
-});
-
-const NavigationBox = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: "2rem",
-  flexDirection: "column",
-  gap: "1rem",
-  "@media (min-width: 600px)": {
-    flexDirection: "row",
-  },
-});
-
-const NavLink = styled(Button)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 500,
-  color: "#0f5a28",
-  textTransform: "none",
-  fontSize: "1rem",
-  "&:hover": {
-    color: "#388e3c",
-    textDecoration: "underline",
-  },
-});
-
-const CommentSection = styled(Box)({
-  marginTop: "3rem",
-});
-
-const CommentTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1.5rem",
-  marginBottom: "1rem",
-});
-
-// Main Page Component
 export default function TreePlanting2022Page() {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -153,33 +13,58 @@ export default function TreePlanting2022Page() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Top Navigation Bar */}
       <TopNavBar />
+
+      {/* Main Navigation Bar */}
       <MainNavBar />
-      <PageContainer>
-        {/* Main Content Card */}
-        <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
-          <Title variant="h1">Tree Planting 2022</Title>
-          <Subtitle>
+
+      {/* Page Container */}
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        {/* Overlay Pattern */}
+        <div
+          className="absolute inset-0 opacity-10 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+
+        {/* Content Card */}
+        <motion.div
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-2xl w-full relative z-10 border border-white/30 rounded-xl"
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h1 className="text-4xl font-bold text-[#0f5a28] text-shadow-md mb-6 leading-tight tracking-wide">
+            Tree Planting 2022
+          </h1>
+          <p className="text-lg text-[#555] italic mb-6">
             By Admin | February 25, 2022 | Tree Planting | No Comments
-          </Subtitle>
-          <Description>
+          </p>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             In accordance with Section 48 of the Forests Act, the Service created ten (10) Forest Conservancy
             Areas to oversee the proper and efficient management of forests, each with a ten (10) member
             Forest Conservation Committee (FCC) headed by a chairperson who is appointed by the Board of
             Directors. The Service requests applicants to forward their applications for the position of Forest
             Conservation Committee Chairperson in Eastern Conservancy.
-          </Description>
+          </p>
 
-          <SectionTitle>Job Purpose</SectionTitle>
-          <Description>
+          <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Job Purpose</h2>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             Assist the KFS Board of Management with the delivery of efficient and effective field operations
             of the regional level as well as to perform specific duties related to the implementation of the
             Forest legislation.
-          </Description>
+          </p>
 
-          <SectionTitle>Key Responsibilities</SectionTitle>
-          <ResponsibilityList>
+          <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Key Responsibilities</h2>
+          <ul className="space-y-2 mb-6">
             {[
               "The FCC Chairperson shall provide leadership of the Forest Conservancy to ensure quality performance and effective execution of the mandate and functions.",
               "He/she will work closely with representatives from other government agencies (County Government, agricultural and environment), representatives of the forest industry and community Forestry Association to ensure the sustainable management of the forest and allied resources.",
@@ -192,61 +77,69 @@ export default function TreePlanting2022Page() {
               "Ensure succession plans are in place for the FCC.",
               "Ensure government policies, legislation and sustainable forest management practices are adhered to.",
             ].map((text, index) => (
-              <ResponsibilityItem key={index}>
-                <ResponsibilityText primary={text} />
-              </ResponsibilityItem>
+              <li
+                key={index}
+                className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-lg p-4 text-[#0D3C00] text-base font-medium hover:from-[#C8E6C9] hover:to-[#A5D6A7] hover:-translate-y-1 hover:shadow-md transition-all"
+              >
+                {text}
+              </li>
             ))}
-          </ResponsibilityList>
+          </ul>
 
-          <SectionTitle>Academic Qualifications, Experience and Other Requirements</SectionTitle>
-          <Description>
+          <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">
+            Academic Qualifications, Experience and Other Requirements
+          </h2>
+          <p className="text-lg text-[#333] leading-relaxed mb-6">
             [Details to be provided by the recruiting body.]
-          </Description>
+          </p>
 
-          <NavigationBox>
-            <NavLink component="a" href="#">
-              Previous: The Restoration Initiative Tree Planting in Mt. Kulal
-            </NavLink>
-            <NavLink component="a" href="#">
-              Next: Chief Conservator of Forests End of the Year 2022 Message
-            </NavLink>
-          </NavigationBox>
-
-          <CommentSection>
-            <CommentTitle>Leave A Comment</CommentTitle>
-            <TextField
-              label="Your Name*"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label="Email*"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label="Comment"
-              fullWidth
-              variant="outlined"
-              multiline
-              rows={4}
-              sx={{ mb: 2 }}
-            />
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#0f5a28",
-                color: "#fff",
-                "&:hover": { backgroundColor: "#388e3c" },
-              }}
+          <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8 mb-12">
+            <a
+              href="#"
+              className="text-[#0f5a28] text-base font-medium hover:text-[#388e3c] hover:underline"
             >
-              Submit Comment
-            </Button>
-          </CommentSection>
-        </ContentCard>
-      </PageContainer>
+              Previous: The Restoration Initiative Tree Planting in Mt. Kulal
+            </a>
+            <a
+              href="#"
+              className="text-[#0f5a28] text-base font-medium hover:text-[#388e3c] hover:underline"
+            >
+              Next: Chief Conservator of Forests End of the Year 2022 Message
+            </a>
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-2xl font-semibold text-[#0f5a28] mb-4">Leave A Comment</h3>
+            <form className="space-y-4">
+              <input
+                type="text"
+                placeholder="Your Name*"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f5a28]"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email*"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f5a28]"
+                required
+              />
+              <textarea
+                placeholder="Comment"
+                rows="4"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f5a28]"
+              ></textarea>
+              <button
+                type="submit"
+                className="bg-[#0f5a28] text-white py-2 px-6 rounded-lg font-medium hover:bg-[#388e3c] hover:shadow-md transition-all"
+              >
+                Submit Comment
+              </button>
+            </form>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Footer */}
       <FooterBottom />
     </div>
   );

@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { InsertDriveFile as FileIcon } from "@mui/icons-material";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import axios from "axios";
+import { styled } from "@mui/material/styles";
 
-// Styled Components (unchanged from original)
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -22,7 +21,7 @@ const PageContainer = styled(Box)({
   position: "relative",
   overflow: "hidden",
   "&:before": {
-    content: '""',
+    content: "\"\"",
     position: "absolute",
     top: 0,
     left: 0,
@@ -120,7 +119,6 @@ export default function LegalDocumentsPage() {
   const [legalDocuments, setLegalDocuments] = useState([]);
   const [error, setError] = useState("");
 
-  // Fetch legal documents from the database
   useEffect(() => {
     const fetchLegalDocuments = async () => {
       try {
@@ -129,30 +127,13 @@ export default function LegalDocumentsPage() {
         setLegalDocuments(response.data);
         setError("");
       } catch (err) {
-        console.error("Error fetching legal documents:", {
-          message: err.message,
-          status: err.response?.status,
-          data: err.response?.data,
-        });
-        setError(
-          err.response?.data?.error || "Failed to load legal documents. Please try again later."
-        );
+        console.error("Error fetching legal documents:", err);
+        setError("Failed to load legal documents. Please try again later.");
       }
     };
 
     fetchLegalDocuments();
   }, []);
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  };
-
-  // Mock file size since DB doesn't store it (adjust if you add a size column)
-  const getFileSize = () => {
-    const sizes = ["821 KB", "689 KB", "254 KB", "270 KB", "2 MB"];
-    return sizes[Math.floor(Math.random() * sizes.length)];
-  };
 
   return (
     <>
@@ -160,36 +141,23 @@ export default function LegalDocumentsPage() {
       <MainNavBar />
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
-          <HeaderTitle variant="h1">Legal Documents</HeaderTitle>
-
-          {/* Documents Section */}
+          <HeaderTitle>Legal Documents</HeaderTitle>
           <Box>
             {error ? (
-              <Typography color="error" align="center">
-                {error}
-              </Typography>
+              <Typography color="error" align="center">{error}</Typography>
             ) : legalDocuments.length === 0 ? (
-              <Typography color="textSecondary" align="center">
-                No legal documents available at this time.
-              </Typography>
+              <Typography color="textSecondary" align="center">No legal documents available.</Typography>
             ) : (
               legalDocuments.map((doc, index) => (
-                <DocumentCard
-                  key={index}
-                  initial="hidden"
-                  animate="visible"
-                  variants={cardVariants}
-                  whileHover={{ scale: 1.01 }}
-                >
+                <DocumentCard key={index}>
                   <DocumentInfo>
                     <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
                     <DocumentDetails>
                       <DocumentTitle>{doc.description}</DocumentTitle>
-                      <DocumentSize>1 file(s) {getFileSize()}</DocumentSize>
+                      <DocumentSize>1 file(s) {doc.size || "Unknown size"}</DocumentSize>
                     </DocumentDetails>
                   </DocumentInfo>
-                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
+                  <Link href={doc.pdf_url} target="_blank" rel="noopener noreferrer">
                     <DownloadButton>Download</DownloadButton>
                   </Link>
                 </DocumentCard>

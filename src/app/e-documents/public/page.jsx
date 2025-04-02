@@ -11,7 +11,7 @@ import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import axios from "axios";
 
-// Styled Components (unchanged from original)
+// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -22,7 +22,7 @@ const PageContainer = styled(Box)({
   position: "relative",
   overflow: "hidden",
   "&:before": {
-    content: '""',
+    content: "''",
     position: "absolute",
     top: 0,
     left: 0,
@@ -62,7 +62,7 @@ const DocumentCard = styled(motion.div)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  transition: "all 0.3s ease",
   marginBottom: "1.5rem",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
@@ -78,7 +78,7 @@ const DocumentCard = styled(motion.div)(({ theme }) => ({
 const DocumentInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "1rem",
+  gap: "1.5rem",
 });
 
 const DocumentText = styled(Box)({
@@ -91,6 +91,7 @@ const DocumentTitle = styled(Typography)({
   fontWeight: 600,
   color: "#0f5a28",
   fontSize: "1.25rem",
+  lineHeight: 1.3,
 });
 
 const DocumentMeta = styled(Typography)({
@@ -98,20 +99,22 @@ const DocumentMeta = styled(Typography)({
   fontWeight: 400,
   color: "#666",
   fontSize: "0.9rem",
-  marginTop: "0.25rem",
+  marginTop: "0.5rem",
 });
 
 const DownloadButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.5rem 1.5rem",
-  fontSize: "0.9rem",
+  padding: "0.6rem 1.75rem",
+  fontSize: "0.95rem",
   fontFamily: "'Roboto', sans-serif",
   borderRadius: "8px",
+  fontWeight: 500,
+  minWidth: "120px",
   "&:hover": {
-    backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#1b7d3a",
+    transform: "scale(1.03)",
   },
 });
 
@@ -119,76 +122,47 @@ export default function PublicDocumentsPage() {
   const [documents, setDocuments] = useState([]);
   const [error, setError] = useState("");
 
-  // Fetch public documents from the database
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/documents/public");
-        console.log("Documents fetched:", response.data);
         setDocuments(response.data);
         setError("");
       } catch (err) {
-        console.error("Error fetching documents:", {
-          message: err.message,
-          status: err.response?.status,
-          data: err.response?.data,
-        });
         setError(
           err.response?.data?.error || "Failed to load documents. Please try again later."
         );
       }
     };
-
     fetchDocuments();
   }, []);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  };
-
-  // Helper function to calculate file size (mocked since DB doesn't store it)
-  const getFileSize = (url) => {
-    // In a real app, you'd get this from the server or file metadata
-    const sizes = ["233 KB", "287 KB", "23 MB", "430 KB", "3 MB", "620 KB", "326 KB", "283 KB", "56 KB", "328 KB", "4 MB", "811 KB", "821 KB", "469 KB"];
-    return sizes[Math.floor(Math.random() * sizes.length)];
-  };
-
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
+    <>
       <TopNavBar />
-
-      {/* Main Navigation Bar */}
       <MainNavBar />
-
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
           <HeaderTitle variant="h1">Public Documents</HeaderTitle>
-
-          {/* Documents Section */}
-          <Box>
+          <Box sx={{ maxWidth: "800px", margin: "0 auto" }}>
             {error ? (
-              <Typography color="error" align="center">
-                {error}
-              </Typography>
+              <Typography color="error" align="center">{error}</Typography>
             ) : documents.length === 0 ? (
               <Typography color="textSecondary" align="center">
                 No public documents available at this time.
               </Typography>
             ) : (
               documents.map((doc, index) => (
-                <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+                <DocumentCard key={index} initial="hidden" animate="visible">
                   <DocumentInfo>
-                    <FileIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                    <FileIcon sx={{ color: "#0f5a28", fontSize: "2.25rem", flexShrink: 0 }} />
                     <DocumentText>
-                      <DocumentTitle>{doc.description}</DocumentTitle>
-                      <DocumentMeta>1 file(s) {getFileSize(doc.pdf_url)}</DocumentMeta>
+                      <DocumentTitle>{doc.title}</DocumentTitle>
+                      <DocumentMeta>1 file(s)</DocumentMeta>
                     </DocumentText>
                   </DocumentInfo>
-                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
-                    <DownloadButton>Download</DownloadButton>
+                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer">
+                    <DownloadButton variant="contained">Download</DownloadButton>
                   </Link>
                 </DocumentCard>
               ))
@@ -196,9 +170,7 @@ export default function PublicDocumentsPage() {
           </Box>
         </ContentWrapper>
       </PageContainer>
-
-      {/* Footer */}
       <FooterBottom />
-    </div>
+    </>
   );
 }

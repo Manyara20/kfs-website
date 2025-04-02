@@ -36,7 +36,7 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
@@ -46,7 +46,7 @@ const Title = styled(Typography)({
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', sans-serif",
   fontWeight: 400,
   color: "#333",
   lineHeight: 1.8,
@@ -74,7 +74,7 @@ const ProjectItem = styled(ListItem)({
 
 const ProjectText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Peugeot', sans-serif",
     fontWeight: 500,
     color: "#0D3C00",
     fontSize: "1rem",

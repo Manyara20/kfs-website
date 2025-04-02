@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Box, Typography, List, ListItem, ListItemText, IconButton, Button } from "@mui/material";
 import { Facebook, Twitter, YouTube, Instagram, Description as DescriptionIcon } from "@mui/icons-material";
@@ -9,7 +8,6 @@ import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Custom styled components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -49,7 +47,7 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
@@ -57,10 +55,11 @@ const Title = styled(Typography)({
   fontSize: "2.5rem",
   lineHeight: 1.2,
   letterSpacing: "0.5px",
+  textTransform: "capitalize",
 });
 
 const TextDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#333",
   lineHeight: 1.8,
@@ -69,11 +68,12 @@ const TextDescription = styled(Typography)({
 });
 
 const SectionTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
   fontSize: "1.8rem",
   marginBottom: "1rem",
+  textTransform: "capitalize",
 });
 
 const FileSection = styled(Box)({
@@ -102,7 +102,7 @@ const DownloadButton = styled(Button)({
   textTransform: "none",
   padding: "0.5rem 1rem",
   fontSize: "0.9rem",
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   "&:hover": {
     backgroundColor: "#388e3c",
     boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
@@ -131,17 +131,14 @@ const SocialIconButton = styled(IconButton)({
   },
 });
 
-// Main Page Component
 export default function ForestManagementPlansPage() {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
-  // Placeholder download function (replace with actual file paths or logic)
   const handleDownload = (fileName) => {
     console.log(`Downloading ${fileName}`);
-    // Example: window.open("/path/to/file.pdf", "_blank");
   };
 
   return (
@@ -149,21 +146,17 @@ export default function ForestManagementPlansPage() {
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
-        {/* Social Icons */}
         <SocialIconsContainer>
           <SocialIconButton><Facebook /></SocialIconButton>
           <SocialIconButton><Twitter /></SocialIconButton>
           <SocialIconButton><YouTube /></SocialIconButton>
           <SocialIconButton><Instagram /></SocialIconButton>
         </SocialIconsContainer>
-
-        {/* Main Content Card */}
         <ContentCard initial="hidden" animate="visible" variants={cardVariants}>
           <Title variant="h1">Forest Management Plans</Title>
           <TextDescription>
             Forest resources serve the needs and interests of the public and hence, as required by law, the Service manages all forests according to clear management plans. A forest management plan is a specific statement of objectives that the KFS has for community forest associations, followed by a series of activities that will take place in order to meet KFS strategic objectives. In essence, the Forest Management Plan is a “road map” to guide the communities. Currently, 177 Forest Management Plans have been approved by the Director of Kenya Forest Service to enable community participation in forest conservation and management, along with 77 Forest Management Agreements.
           </TextDescription>
-
           <FileSection>
             <SectionTitle>Resources</SectionTitle>
             <List>
@@ -172,7 +165,7 @@ export default function ForestManagementPlansPage() {
                   <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
                   <ListItemText
                     primary="Forest Management Plans Register"
-                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
+                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00", fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
                   />
                 </Box>
                 <DownloadButton onClick={() => handleDownload("Forest Management Plans Register")}>
@@ -184,7 +177,7 @@ export default function ForestManagementPlansPage() {
                   <DescriptionIcon sx={{ color: "#0D3C00", mr: 1 }} />
                   <ListItemText
                     primary="Forest Management Plans"
-                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00" }}
+                    primaryTypographyProps={{ fontWeight: 500, color: "#0D3C00", fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
                   />
                 </Box>
                 <DownloadButton onClick={() => handleDownload("Forest Management Plans")}>

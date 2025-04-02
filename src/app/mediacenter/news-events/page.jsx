@@ -33,7 +33,7 @@ const NewsandEvents = () => {
               day: "numeric",
             }) || "Unknown Date",
             comments: `${post.comments_count || 0} Comments`,
-            reverse: Math.random() < 0.5,
+            reverse: Math.random() < 0.5, // Randomly assign reverse for zigzag layout
           }))
         );
         setError("");
@@ -155,42 +155,53 @@ const ZigzagSection = ({
 }) => {
   return (
     <section
-      className={`container mx-auto px-4 py-12 flex flex-col md:flex-row items-center gap-8 ${
+      className={`container mx-auto px-4 py-6 flex flex-col md:flex-row items-center gap-4 ${
         reverse ? "md:flex-row-reverse" : ""
       }`}
     >
-      {/* Image */}
       <div className="md:w-1/2">
         <img src={image} alt={title || "News Image"} className="rounded-lg shadow-lg w-full h-auto" />
       </div>
-
-      {/* Text Content */}
       <div className="md:w-1/2 text-black">
-        {title && <h2 className="text-3xl font-bold">{title}</h2>}
-        <p className="mt-4">{text}</p>
+        {title && (
+          <h2
+            className="text-xl md:text-3xl font-bold font-peugeot text-emerald-950"
+            style={{ textTransform: "capitalize" }}
+          >
+            {title}
+          </h2>
+        )}
+        <p className="mt-2 md:mt-4 text-sm md:text-base font-peugeot">{text}</p>
 
         {/* Metadata */}
-        <div className="flex items-center font-bold gap-6 text-sm text-black my-4">
-          <a href="/author-profile" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/user.png" alt="Author" width={16} height={16} />
+        <div className="flex items-center font-bold gap-4 md:gap-6 text-xs md:text-sm text-black my-2 md:my-4">
+          <a
+            href="/author-profile"
+            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+          >
+            <Image src="/icons/user.png" alt="Author" width={14} height={14} />
             {author}
           </a>
-          <a href="/events-calendar" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/calendar.png" alt="Date" width={16} height={16} />
+          <a
+            href="/events-calendar"
+            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+          >
+            <Image src="/icons/calendar.png" alt="Date" width={14} height={14} />
             {date}
           </a>
-          <a href="/comments-section" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/comment.png" alt="Comments" width={16} height={16} />
+          <a
+            href="/comments-section"
+            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+          >
+            <Image src="/icons/comment.png" alt="Comments" width={14} height={14} />
             {comments}
           </a>
         </div>
-
-        {/* Learn More Button */}
         <button
           onClick={onLearnMore}
-          className="mt-6 bg-emerald-950 text-white px-6 py-2 hover:bg-green-500 transition duration-300"
+          className="mt-4 md:mt-6 bg-emerald-950 text-white px-4 md:px-6 py-1 md:py-2 text-sm md:text-base font-peugeot hover:bg-green-500 transition duration-300"
         >
-          READ MORE
+          Read More
         </button>
       </div>
     </section>

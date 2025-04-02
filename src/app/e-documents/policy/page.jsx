@@ -11,7 +11,7 @@ import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import axios from "axios";
 
-// Styled Components (unchanged from original)
+// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
@@ -22,7 +22,7 @@ const PageContainer = styled(Box)({
   position: "relative",
   overflow: "hidden",
   "&:before": {
-    content: '""',
+    content: "''",
     position: "absolute",
     top: 0,
     left: 0,
@@ -122,47 +122,20 @@ export default function PolicyDocumentsPage() {
   const [policyDocuments, setPolicyDocuments] = useState([]);
   const [error, setError] = useState("");
 
-  // Fetch policy documents from the database
   useEffect(() => {
     const fetchPolicyDocuments = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/documents/policy");
-        console.log("Policy documents fetched:", response.data);
         setPolicyDocuments(response.data);
         setError("");
       } catch (err) {
-        console.error("Error fetching policy documents:", {
-          message: err.message,
-          status: err.response?.status,
-          data: err.response?.data,
-        });
         setError(
           err.response?.data?.error || "Failed to load policy documents. Please try again later."
         );
       }
     };
-
     fetchPolicyDocuments();
   }, []);
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
-  };
-
-  // Mock file size since DB doesn't store it (adjust if you add a size column)
-  const getFileSize = () => {
-    const sizes = ["1 MB", "807 KB"];
-    return sizes[Math.floor(Math.random() * sizes.length)];
-  };
 
   return (
     <>
@@ -170,46 +143,26 @@ export default function PolicyDocumentsPage() {
       <MainNavBar />
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
           <HeaderTitle variant="h1">Policy Documents</HeaderTitle>
-
-          {/* Documents Section */}
           <Box sx={{ maxWidth: "800px", margin: "0 auto" }}>
             {error ? (
-              <Typography color="error" align="center">
-                {error}
-              </Typography>
+              <Typography color="error" align="center">{error}</Typography>
             ) : policyDocuments.length === 0 ? (
               <Typography color="textSecondary" align="center">
                 No policy documents available at this time.
               </Typography>
             ) : (
               policyDocuments.map((doc, index) => (
-                <DocumentCard
-                  key={index}
-                  custom={index}
-                  initial="hidden"
-                  animate="visible"
-                  variants={cardVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
+                <DocumentCard key={index} initial="hidden" animate="visible">
                   <DocumentInfo>
-                    <FileIcon
-                      sx={{
-                        color: "#0f5a28",
-                        fontSize: "2.25rem",
-                        flexShrink: 0,
-                      }}
-                    />
+                    <FileIcon sx={{ color: "#0f5a28", fontSize: "2.25rem", flexShrink: 0 }} />
                     <DocumentText>
                       <DocumentTitle>{doc.description}</DocumentTitle>
-                      <DocumentMeta>1 file(s) {getFileSize()}</DocumentMeta>
+                      <DocumentMeta>1 file(s)</DocumentMeta>
                     </DocumentText>
                   </DocumentInfo>
-                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer" passHref>
-                    <DownloadButton variant="contained" startIcon={<FileIcon sx={{ fontSize: "1.1rem" }} />}>
-                      Download
-                    </DownloadButton>
+                  <Link href={`http://localhost:5000${doc.pdf_url}`} target="_blank" rel="noopener noreferrer">
+                    <DownloadButton variant="contained">Download</DownloadButton>
                   </Link>
                 </DocumentCard>
               ))

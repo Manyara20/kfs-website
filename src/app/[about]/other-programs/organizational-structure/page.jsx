@@ -1,159 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Box, Typography, Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import { styled } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { IoMdHelpCircle } from "react-icons/io";
+import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "1200px",
-  width: "100%",
-  margin: "0 auto",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "12px",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
-  textAlign: "center",
-});
-
-const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 400,
-  color: "#333",
-  lineHeight: 1.6,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
-  textAlign: "left",
-});
-
-const ListContainer = styled(Box)({
-  marginBottom: "1.5rem",
-  "& ul": {
-    margin: "0.5rem 0",
-    paddingLeft: "2rem",
-  },
-  "& li": {
-    fontFamily: "'Roboto', sans-serif",
-    fontSize: "1.1rem",
-    color: "#333",
-    lineHeight: 1.6,
-  },
-});
-
-const OrgChartContainer = styled(Box)({
-  margin: "2rem 0",
-  padding: "1rem",
-  background: "#f9f9f9",
-  borderRadius: "8px",
-  display: "flex",
-  justifyContent: "center",
-  overflowX: "auto",
-});
-
-const Node = styled(Box)(({ color }) => ({
-  padding: "0.75rem",
-  background: color || "#0E5827",
-  color: color === "#FFF" ? "#000000" : "white", // Black text for white background
-  borderRadius: "8px",
-  textAlign: "center",
-  fontFamily: "'Roboto', sans-serif",
-  fontSize: "0.85rem",
-  fontWeight: 500,
-  minWidth: "120px",
-  maxWidth: "150px",
-  border: "2px solid #0E5827",
-  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-  "&:hover": {
-    opacity: 0.9,
-    cursor: "pointer",
-  },
-}));
-
-const ConnectorVertical = styled(Box)({
-  borderLeft: "2px solid #0E5827",
-  marginLeft: "auto",
-  marginRight: "auto",
-  width: "2px",
-  height: "20px",
-});
-
-const ConnectorHorizontal = styled(Box)({
-  borderTop: "2px solid #0E5827",
-  height: "2px",
-  width: "100%",
-  position: "absolute",
-  top: "-10px",
-});
-
-const LevelContainer = styled(Box)({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  gap: "1rem",
-  marginTop: "1rem",
-  position: "relative",
-});
-
-const KeyContainer = styled(Box)({
-  marginTop: "2rem",
-  background: "#f0f4e8",
-  borderRadius: "8px",
-  padding: "1rem",
-});
-
-const CTAButton = styled(Button)({
-  backgroundColor: "#6A961F",
-  color: "white",
-  padding: "0.75rem 2rem",
-  marginTop: "2rem",
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 600,
-  "&:hover": {
-    backgroundColor: "#5a7f1a",
-  },
-});
-
-// Main Page Component
 export default function KFSOrgStructurePage() {
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);
@@ -174,33 +27,33 @@ export default function KFSOrgStructurePage() {
     visible: { opacity: 1, y: 0, transition: { duration: "0.8", ease: "easeOut" } },
   };
 
-  // Organizational structure data with updated KFS colors
+  // Organizational structure data
   const orgStructure = {
     name: "Board of Directors",
-    color: "#0E5827", // Dark green for top level
+    color: "#0E5827",
     level: "Board of Directors",
     children: [
       {
         name: "Chief Conservator of Forests (CCF)",
-        color: "#0F5A26", // Slightly different dark green for CCF
+        color: "#0F5A26",
         level: "CCF",
         children: [
           {
             name: "Directorate of Forest Protection and Security",
-            color: "#226436", // Medium-dark green for Directorates
+            color: "#226436",
             level: "Directorate",
             children: [
               {
                 name: "Forest Protection, Fire and Disaster Operations",
-                color: "#245B3C", // Slightly lighter green for Divisions
+                color: "#245B3C",
                 level: "Division",
                 children: [
                   {
                     name: "Fire Management Section",
-                    color: "#2E5B37", // Muted green for Sections
+                    color: "#2E5B37",
                     level: "Section",
                     children: [
-                      { name: "Fire Response Unit", color: "#78A783", level: "Unit" }, // Light green for Units
+                      { name: "Fire Response Unit", color: "#78A783", level: "Unit" },
                       { name: "Fire Prevention Unit", color: "#78A783", level: "Unit" },
                     ],
                   },
@@ -281,7 +134,7 @@ export default function KFSOrgStructurePage() {
             children: [
               {
                 name: "Finance & Accounts",
-                color: "#FFF", // White with black text
+                color: "#FFF",
                 level: "Sub-Division",
                 children: [
                   {
@@ -308,15 +161,15 @@ export default function KFSOrgStructurePage() {
           { name: "Inspectorate and Internal Affairs", color: "#245B3C", level: "Department" },
           {
             name: "Nairobi Conservancy",
-            color: "#6F6F50", // Neutral greenish-brown for Conservancies
+            color: "#6F6F50",
             level: "Conservancy",
             children: [
               {
                 name: "Nairobi County",
-                color: "#8B6A53", // Earthy brown for Counties
+                color: "#8B6A53",
                 level: "County",
                 children: [
-                  { name: "Karura Forest Station", color: "#78A783", level: "Station" }, // Light green for Stations
+                  { name: "Karura Forest Station", color: "#78A783", level: "Station" },
                   { name: "Ngong Road Forest Station", color: "#78A783", level: "Station" },
                 ],
               },
@@ -350,7 +203,7 @@ export default function KFSOrgStructurePage() {
     ],
   };
 
-  // Updated key data with new KFS colors
+  // Key data for the legend
   const keyData = [
     { level: "Board of Directors", color: "#0E5827", description: "Highest governing body" },
     { level: "CCF", color: "#0F5A26", description: "Chief Conservator of Forests (CEO)" },
@@ -366,136 +219,174 @@ export default function KFSOrgStructurePage() {
 
   // Recursive component to render the org chart
   const renderNode = (node) => (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Node color={node.color}>{node.name}</Node>
+    <div className="flex flex-col items-center">
+      <div
+        className="p-3 rounded-lg text-center text-sm font-medium min-w-[120px] max-w-[150px] border-2 border-[#0E5827] shadow-md hover:opacity-90 cursor-pointer"
+        style={{ backgroundColor: node.color, color: node.color === "#FFF" ? "#000000" : "white" }}
+      >
+        {node.name}
+      </div>
       {node.children && (
         <>
-          <ConnectorVertical />
-          <LevelContainer>
+          <div className="border-l-2 border-[#0E5827] w-px h-5 mx-auto"></div>
+          <div className="flex flex-wrap justify-center gap-4 mt-4 relative">
             {node.children.map((child, index) => (
-              <Box key={index} sx={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                {index > 0 && <ConnectorHorizontal sx={{ left: "0", width: `calc(50% + ${index * 75}px)` }} />}
-                {index < node.children.length - 1 && <ConnectorHorizontal sx={{ right: "0", width: `calc(50% + ${(node.children.length - 1 - index) * 75}px)` }} />}
+              <div key={index} className="relative flex flex-col items-center">
+                {index > 0 && (
+                  <div
+                    className="absolute border-t-2 border-[#0E5827] h-px top-[-10px]"
+                    style={{ left: 0, width: `calc(50% + ${index * 75}px)` }}
+                  ></div>
+                )}
+                {index < node.children.length - 1 && (
+                  <div
+                    className="absolute border-t-2 border-[#0E5827] h-px top-[-10px]"
+                    style={{ right: 0, width: `calc(50% + ${(node.children.length - 1 - index) * 75}px)` }}
+                  ></div>
+                )}
                 {renderNode(child)}
-              </Box>
+              </div>
             ))}
-          </LevelContainer>
+          </div>
         </>
       )}
-    </Box>
+    </div>
   );
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Top Navigation Bar */}
       <TopNavBar />
+
+      {/* Main Navigation Bar */}
       <MainNavBar />
-      <PageContainer>
-        <ContentCard
+
+      {/* Page Container */}
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        {/* Overlay Pattern */}
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+
+        {/* Main Content Card */}
+        <motion.div
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-5xl w-full mx-auto relative z-10 border border-white/30 rounded-xl"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
+          style={{ fontSize: `${fontSize}px` }}
         >
-          <Title variant="h1">Organization Structure</Title>
+          <h1 className="text-4xl font-bold text-[#0f5a28] mb-6 text-center leading-tight tracking-wide">
+            Organization Structure
+          </h1>
 
           {/* Organizational Chart */}
-          <OrgChartContainer>{renderNode(orgStructure)}</OrgChartContainer>
+          <div className="my-8 p-4 bg-gray-100 rounded-lg overflow-x-auto">
+            {renderNode(orgStructure)}
+          </div>
 
           {/* Key (Legend) */}
-          <KeyContainer>
-            <Typography variant="h6" sx={{ fontFamily: "'Poppins', sans-serif", color: "#0f5a28", marginBottom: "1rem" }}>
-              Legend
-            </Typography>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Level</TableCell>
-                  <TableCell>Color</TableCell>
-                  <TableCell>Description</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {keyData.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{item.level}</TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          width: "20px",
-                          height: "20px",
-                          backgroundColor: item.color,
-                          border: item.borderColor ? `2px solid ${item.borderColor}` : "none",
-                          display: "inline-block",
-                          marginRight: "0.5rem",
-                        }}
-                      />
-                      {item.color}
-                    </TableCell>
-                    <TableCell>{item.description}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </KeyContainer>
+          <div className="mt-8 bg-[#f0f4e8] rounded-lg p-4">
+            <h2 className="text-2xl font-semibold text-[#0f5a28] mb-4">Legend</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="bg-[#e8f5e9]">
+                    <th className="p-2">Level</th>
+                    <th className="p-2">Color</th>
+                    <th className="p-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {keyData.map((item, index) => (
+                    <tr key={index} className="border-b border-gray-200">
+                      <td className="p-2">{item.level}</td>
+                      <td className="p-2 flex items-center gap-2">
+                        <div
+                          className="w-5 h-5 inline-block"
+                          style={{
+                            backgroundColor: item.color,
+                            border: item.borderColor ? `2px solid ${item.borderColor}` : "none",
+                          }}
+                        ></div>
+                        {item.color}
+                      </td>
+                      <td className="p-2">{item.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          {/* Updated Description */}
-          <Description component="div">
+          {/* Description */}
+          <p className="text-lg text-[#333] leading-relaxed mt-6">
             The Service now has an Organization Structure that borrows its functionality from the Forest Conservation and Management Act, 2016 and provides for a lean span of control. The Chief Conservator of the Forests reports to the Board of Directors. To effectively carry out its functions and fulfill its strategic objectives and mandate, KFS is structured into six (6) Directorates and three (3) Departments whose heads report directly to the Chief Conservator of Forests (CEO) as follows;
-          </Description>
-          <ListContainer>
-            <Typography component="div" sx={{ fontFamily: "'Roboto', sans-serif", fontWeight: 600, color: "#333", marginBottom: "0.5rem" }}>
-              Six (6) Directorates namely:
-            </Typography>
-            <ul>
+          </p>
+          <div className="my-6">
+            <h3 className="text-xl font-semibold text-[#333] mb-2">Six (6) Directorates namely:</h3>
+            <ul className="list-disc pl-8 space-y-1 text-lg text-[#333] leading-relaxed">
               <li>Forest Conservation and Management</li>
               <li>Forest Protection and Security</li>
               <li>Strategy, Partnerships & Resource Mobilization</li>
               <li>Corporate Services</li>
               <li>Internal Audit</li>
-              
-   
- <li>Corporation Secretary</li>
+              <li>Corporation Secretary</li>
             </ul>
-          </ListContainer>
-          <ListContainer>
-            <Typography component="div" sx={{ fontFamily: "'Roboto', sans-serif", fontWeight: 600, color: "#333", marginBottom: "0.5rem" }}>
-              There are three (3) stand-alone Departments namely:
-            </Typography>
-            <ul>
+          </div>
+          <div className="my-6">
+            <h3 className="text-xl font-semibold text-[#333] mb-2">There are three (3) stand-alone Departments namely:</h3>
+            <ul className="list-disc pl-8 space-y-1 text-lg text-[#333] leading-relaxed">
               <li>Supply Chain Management</li>
               <li>Air-Wing</li>
               <li>Inspectorate and Internal Affairs</li>
             </ul>
-          </ListContainer>
-          <Description component="div">
+          </div>
+          <p className="text-lg text-[#333] leading-relaxed">
             For better span of control, the approved organization structure helps the Service to implement her mandate through these functional levels as follows; through Departments, Divisions, Sections, Units, Conservancies, Counties, Stations the functional areas have been provided for as follows; Directorates; Departments; Divisions; Sections; Units; Conservancies; Counties and Stations.
-          </Description>
+          </p>
 
           {/* Call to Action */}
-          <Box sx={{ textAlign: "center" }}>
-            <CTAButton href="https://recruitment.kenyaforestservice.org" target="_blank">
+          <div className="text-center mt-8">
+            <a
+              href="https://recruitment.kenyaforestservice.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#6A961F] text-white py-3 px-8 rounded-lg font-semibold hover:bg-[#5a7f1a] transition-all duration-300"
+            >
               Explore KFS Careers
-            </CTAButton>
-          </Box>
-        </ContentCard>
+            </a>
+          </div>
+        </motion.div>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-20">
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdAdd className="w-6 h-6" />
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdRemove className="w-6 h-6" />
           </button>
         </div>
-      </PageContainer>
+      </div>
+
+      {/* Footer */}
       <FooterBottom />
     </div>
   );

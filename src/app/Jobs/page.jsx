@@ -1,145 +1,9 @@
 "use client";
-import Link from 'next/link';
-import { Container, Typography, Box, Paper, Button, List, ListItem, ListItemText, IconButton, Collapse, Divider } from '@mui/material';
-import { styled } from '@mui/system';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
-import TopNavBar from '@/components/TopNavBar';
-import MainNavBar from '@/components/MainNavBar';
-import FooterBottom from '@/components/FooterBottom';
-import { useState } from 'react';
-
-
-const MainCard = styled(Paper)({
-  background: 'linear-gradient(145deg, #ffffff 0%, #f9f9f9 100%)',
-  boxShadow: '10 10px 30px rgba(0, 0, 0, 0.08)',
-  overflow: 'hidden',
-  border: '1px solid #e8ecef',
-  marginBottom: '40px',
-});
-
-const HeroSection = styled(Box)({
-  position: 'relative',
-  height: '250px',
-  backgroundImage: `linear-gradient(rgba(13, 86, 2, 0.85), rgba(13, 86, 2, 0.85)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  color: 'white',
-  '&:before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'inherit',
-    filter: 'blur(3px)',
-    zIndex: -1,
-  },
-});
-
-const IntroCard = styled(Paper)({
-  padding: '20px 30px',
-  textAlign: 'center',
-  background: '#f5f7fa',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-  border: '1px solid #e8ecef',
-  margin: '20px 30px',
-});
-
-const JobSection = styled(Box)({
-  padding: '30px',
-  textAlign: 'center',
-});
-
-const JobHeader = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  mb: 2,
-  padding: '15px',
-  background: '#245b3c',
-  borderRadius: '8px',
-  border: '1px solid #e8ecef',
-  maxWidth: '1000px', // Increased width
-  margin: '0 auto',
-});
-
-const JobDetails = styled(Paper)({
-  display: 'grid',
-  gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
-  gap: '20px',
-  padding: '20px',
-  background: '#ffffff',
-  borderRadius: '8px',
-  border: '1px solid #e8ecef',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', // Added shadow
-  maxWidth: '1000px', // Increased width
-  margin: '0 auto',
-});
-
-const ApplyNoteWrapper = styled(Box)({
-  display: 'flex',
-  flexDirection: { xs: 'column', md: 'row' },
-  gap: '20px',
-  padding: '30px',
-  justifyContent: 'center',
-  alignItems: 'stretch',
-});
-
-const StickyNote = styled(Box)({
-  background: '#FFFFE0',
-  padding: '20px',
-  width: '100%',
-  maxWidth: '400px',
-  textAlign: 'center',
-  boxShadow: '0 6px 16px rgba(0, 0, 0, 0.1)',
-  borderRadius: '10px',
-  border: '1px solid #d4d4d4',
-  position: 'relative',
-  fontFamily: "'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif", // Handwritten font
-});
-
-const Clip = styled(Box)({
-  position: 'absolute',
-  top: '-15px',
-  width: '30px',
-  height: '30px',
-  background: '#1a1a1a',
-  borderRadius: '4px',
-  border: '2px solid #333',
-  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-  transform: 'rotate(45deg)',
-  zIndex: 10,
-});
-
-const ClipLeft = styled(Clip)({
-  left: '20px',
-});
-
-const ClipRight = styled(Clip)({
-  right: '20px',
-});
-
-const StyledButton = styled(Button)({
-  background: 'linear-gradient(45deg, #0D5602 30%, #1a6b1a 90%)',
-  color: 'white',
-  padding: '10px 30px',
-  fontFamily: "'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif", // Handwritten font for button
-  fontWeight: 600,
-  fontSize: '0.9rem',
-  borderRadius: '8px',
-  boxShadow: '0 3px 10px rgba(0, 0, 0, 0.15)',
-  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-  '&:hover': {
-    background: 'linear-gradient(45deg, #0A4201 30%, #145214 90%)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
-  },
-});
+import Link from "next/link";
+import { useState } from "react";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 
 export default function JobVacancies() {
   const [expanded, setExpanded] = useState(false);
@@ -149,308 +13,155 @@ export default function JobVacancies() {
   };
 
   return (
-    <Box sx={{ bgcolor: '#e8f5e9', minHeight: '100vh' }}>
+    <div className="bg-[#e8f5e9] min-h-screen">
       <TopNavBar />
       <MainNavBar />
 
-      <Container maxWidth="lg" sx={{ py: 6 }}>
-        {/* Main Card Containing All Sections */}
-        <MainCard elevation={3}>
+      <div className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {/* Main Card */}
+        <div className="bg-gradient-to-br from-white to-[#f9f9f9] shadow-lg border border-[#e8ecef] mb-10 overflow-hidden">
           {/* Hero Section */}
-          <HeroSection>
-            <Typography
-              variant="h3"
-              fontWeight={800}
-              fontFamily="'Poppins', sans-serif"
-              fontSize={{ xs: '1.8rem', md: '2.5rem' }}
-              sx={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.3)' }}
-            >
-              Join the Kenya Forest Service
-            </Typography>
-            <Typography
-              variant="body1"
-              fontFamily="'Roboto', sans-serif"
-              fontSize={{ xs: '0.9rem', md: '1.1rem' }}
-              mt={1}
-              maxWidth="600px"
-              sx={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.2)' }}
-            >
-              Be part of a legacy in conserving Kenya’s forests for a sustainable future.
-            </Typography>
-          </HeroSection>
+          <div
+            className="relative h-64 bg-cover bg-center flex items-center justify-center text-center text-white"
+            style={{
+              backgroundImage: `linear-gradient(rgba(13, 86, 2, 0.85), rgba(13, 86, 2, 0.85)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+            }}
+          >
+            <div className="relative z-10">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-shadow-lg">
+                Join the Kenya Forest Service
+              </h1>
+              <p className="mt-2 text-sm sm:text-base max-w-md mx-auto text-shadow-md">
+                Be part of a legacy in conserving Kenya’s forests for a sustainable future.
+              </p>
+            </div>
+            <div className="absolute inset-0 bg-inherit blur-sm -z-10"></div>
+          </div>
 
-          {/* Single Line Space */}
-          <Divider sx={{ borderColor: '#e8ecef', mx: '30px', my: 1 }} />
+          {/* Divider */}
+          <hr className="border-[#e8ecef] mx-8 my-2" />
 
-          {/* Introduction Section (About KFS) */}
-          <IntroCard elevation={3}>
-            <Typography
-              variant="h5"
-              fontWeight={600}
-              color="#0D5602"
-              fontFamily="'Poppins', sans-serif"
-              fontSize={{ xs: '1.25rem', md: '1.5rem' }}
-              mb={2}
-            >
+          {/* Introduction Section */}
+          <div className="p-5 sm:p-8 text-center bg-[#f5f7fa] shadow-md border border-[#e8ecef] m-5 sm:m-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#0D5602] mb-4">
               About Kenya Forest Service
-            </Typography>
-            <Typography
-              variant="body1"
-              color="#333"
-              fontFamily="'Roboto', sans-serif"
-              fontSize={{ xs: '0.9rem', md: '1rem' }}
-              lineHeight={1.6}
-              maxWidth="800px"
-              mx="auto"
-            >
+            </h2>
+            <p className="text-sm sm:text-base text-[#333] leading-relaxed max-w-3xl mx-auto">
               Kenya Forest Service (KFS) is a State Corporation established under the Forest Conservation & Management Act (FCMA), 2016. The Mandate of KFS is to protect, conserve, develop and sustainably manage forests and allied resources for environmental stability and social-economic benefits for the present and future generations. KFS has partnered with the Global Environment Facility (GEF-7) through Food and Agricultural Organization of the United Nation (FAO) to support implementation of the Integrated Landscape Management for Conservation and Restoration of Mt. Elgon Ecosystem Project in Western Kenya. The Service wishes to recruit qualified personnel for a one-year renewable temporary contract.
-            </Typography>
-          </IntroCard>
+            </p>
+          </div>
 
-          {/* Single Line Space */}
-          <Divider sx={{ borderColor: '#e8ecef', mx: '30px', my: 1 }} />
+          {/* Divider */}
+          <hr className="border-[#e8ecef] mx-8 my-2" />
 
           {/* Job Listings Section */}
-          <JobSection>
-            <Typography
-              variant="h5"
-              fontWeight={600}
-              color="#0D5602"
-              fontFamily="'Poppins', sans-serif"
-              fontSize={{ xs: '1.25rem', md: '1.5rem' }}
-              mb={3}
-            >
+          <div className="p-8 text-center">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#0D5602] mb-6">
               Available Positions
-            </Typography>
+            </h2>
 
-            <JobHeader>
-              <Typography
-                variant="h6"
-                fontWeight={600}
-                color="#fff"
-                fontFamily="'Poppins', sans-serif"
-                fontSize={{ xs: '1rem', md: '1.1rem' }}
-              >
+            <div className="flex justify-between items-center mb-2 p-4 bg-[#245b3c] rounded-lg border border-[#e8ecef] max-w-4xl mx-auto">
+              <h3 className="text-base sm:text-lg font-semibold text-white">
                 Communication Expert KFS Grade 6 (REF KFS/CE/2025) - One (1) Post
-              </Typography>
-              <IconButton
+              </h3>
+              <button
                 onClick={handleExpandClick}
-                sx={{
-                  color: '#fff', // Green color for the arrow
-                  '&:hover': { color: '#fff' }, // Darker green on hover
-                }}
+                className="text-white hover:text-white focus:outline-none"
               >
-                {expanded ? <ExpandLess /> : <ExpandMore />}
-              </IconButton>
-            </JobHeader>
+                {expanded ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </button>
+            </div>
 
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <JobDetails elevation={3}>
-                <Box>
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    color="#0D5602"
-                    fontFamily="'Roboto', sans-serif"
-                    fontSize={{ xs: '0.95rem', md: '1rem' }}
-                    mb={1}
-                  >
-                    Job Specification
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="#444"
-                    fontFamily="'Roboto', sans-serif"
-                    fontSize={{ xs: '0.85rem', md: '0.9rem' }}
-                    lineHeight={1.5}
-                    mb={2}
-                  >
+            {expanded && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white rounded-lg border border-[#e8ecef] shadow-md max-w-4xl mx-auto">
+                <div>
+                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Job Specification</h4>
+                  <p className="text-sm text-[#444] leading-relaxed mb-4">
                     The Communication Expert shall report directly to the Project Manager and work in liaison with the Service’s corporate communication department and in collaboration with other Project staff and partners.
-                  </Typography>
+                  </p>
 
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    color="#0D5602"
-                    fontFamily="'Roboto', sans-serif"
-                    fontSize={{ xs: '0.95rem', md: '1rem' }}
-                    mb={1}
-                  >
-                    Duties and Responsibilities
-                  </Typography>
-                  <List sx={{ mb: 2, pl: 2 }}>
-                    {[
-                      "Implement relevant communication strategies.",
-                      "Facilitate all communication training programs targeting staff, KALRO, FAO, external staff, and other stakeholders within the project area.",
-                      "Participate and contribute in interdepartmental planning and monitoring project activities.",
-                      "Spearhead effective exchange of information between the project and its publics.",
-                      "Undertake communication research activities and dissemination of research findings to relevant audience within the project area.",
-                      "Mentoring and coaching.",
-                    ].map((duty, index) => (
-                      <ListItem key={index} sx={{ display: 'list-item', listStyleType: 'disc', pl: 0, py: 0.5 }}>
-                        <ListItemText
-                          primary={duty}
-                          primaryTypographyProps={{
-                            fontFamily: "'Roboto', sans-serif",
-                            fontSize: { xs: '0.85rem', md: '0.9rem' },
-                            color: '#444',
-                            lineHeight: 1.5,
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Box>
+                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Duties and Responsibilities</h4>
+                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                    <li className="py-1">Implement relevant communication strategies.</li>
+                    <li className="py-1">
+                      Facilitate all communication training programs targeting staff, KALRO, FAO, external staff, and other stakeholders within the project area.
+                    </li>
+                    <li className="py-1">Participate and contribute in interdepartmental planning and monitoring project activities.</li>
+                    <li className="py-1">Spearhead effective exchange of information between the project and its publics.</li>
+                    <li className="py-1">
+                      Undertake communication research activities and dissemination of research findings to relevant audience within the project area.
+                    </li>
+                    <li className="py-1">Mentoring and coaching.</li>
+                  </ul>
+                </div>
 
-                <Box>
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    color="#0D5602"
-                    fontFamily="'Roboto', sans-serif"
-                    fontSize={{ xs: '0.95rem', md: '1rem' }}
-                    mb={1}
-                  >
-                    Person Specification
-                  </Typography>
-                  <List sx={{ mb: 2, pl: 2 }}>
-                    {[
-                      "Bachelor’s degree in Communication, Social Sciences, Journalism, International Relations or other related fields of study.",
-                      "Served for at least six (6) years in a relevant position.",
-                      "Member of a professional body such as PRSK.",
-                      "Proficiency in Computer applications.",
-                      "Fulfil the requirements of Chapter Six of the Constitution.",
-                    ].map((spec, index) => (
-                      <ListItem key={index} sx={{ display: 'list-item', listStyleType: 'disc', pl: 0, py: 0.5 }}>
-                        <ListItemText
-                          primary={spec}
-                          primaryTypographyProps={{
-                            fontFamily: "'Roboto', sans-serif",
-                            fontSize: { xs: '0.85rem', md: '0.9rem' },
-                            color: '#444',
-                            lineHeight: 1.5,
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
+                <div>
+                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Person Specification</h4>
+                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                    <li className="py-1">Bachelor’s degree in Communication, Social Sciences, Journalism, International Relations or other related fields of study.</li>
+                    <li className="py-1">Served for at least six (6) years in a relevant position.</li>
+                    <li className="py-1">Member of a professional body such as PRSK.</li>
+                    <li className="py-1">Proficiency in Computer applications.</li>
+                    <li className="py-1">Fulfil the requirements of Chapter Six of the Constitution.</li>
+                  </ul>
 
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    color="#0D5602"
-                    fontFamily="'Roboto', sans-serif"
-                    fontSize={{ xs: '0.95rem', md: '1rem' }}
-                    mb={1}
-                  >
-                    Skills and Attributes
-                  </Typography>
-                  <List sx={{ pl: 2 }}>
-                    {[
-                      "Good oral and written communication skills in Kiswahili and English.",
-                      "Time management and proper planning.",
-                      "Good analytical skills.",
-                      "Team player.",
-                    ].map((skill, index) => (
-                      <ListItem key={index} sx={{ display: 'list-item', listStyleType: 'disc', pl: 0, py: 0.5 }}>
-                        <ListItemText
-                          primary={skill}
-                          primaryTypographyProps={{
-                            fontFamily: "'Roboto', sans-serif",
-                            fontSize: { xs: '0.85rem', md: '0.9rem' },
-                            color: '#444',
-                            lineHeight: 1.5,
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </Box>
-              </JobDetails>
-            </Collapse>
-          </JobSection>
+                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2 mt-4">Skills and Attributes</h4>
+                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                    <li className="py-1">Good oral and written communication skills in Kiswahili and English.</li>
+                    <li className="py-1">Time management and proper planning.</li>
+                    <li className="py-1">Good analytical skills.</li>
+                    <li className="py-1">Team player.</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
 
-          <Divider sx={{ borderColor: '#e8ecef', mx: '30px', my: 1 }} />
+          {/* Divider */}
+          <hr className="border-[#e8ecef] mx-8 my-2" />
 
-          {/* How to Apply and Note Sections as Sticky Notes */}
-          <ApplyNoteWrapper>
-            <StickyNote>
-              <ClipLeft />
-              <ClipRight />
-              <Typography
-                variant="h5"
-                fontWeight={600}
-                color="#333"
-                mb={2}
-                fontFamily="'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif"
-                fontSize={{ xs: '1.1rem', md: '1.25rem' }}
-              >
-                How to Apply
-              </Typography>
-              <Typography
-                variant="body1"
-                color="#333"
-                mb={2}
-                fontFamily="'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif"
-                fontSize={{ xs: '0.85rem', md: '0.9rem' }}
-                lineHeight={1.5}
-              >
+          {/* How to Apply and Note Sections */}
+          <div className="flex flex-col md:flex-row gap-5 p-8 justify-center items-stretch">
+            <div className="bg-[#FFFFE0] p-5 w-full max-w-sm text-center shadow-lg rounded-lg border border-[#d4d4d4] relative">
+              <div className="absolute -top-4 left-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
+              <div className="absolute -top-4 right-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
+              <h3 className="text-lg sm:text-xl font-semibold text-[#333] mb-4">How to Apply</h3>
+              <p className="text-sm text-[#333] mb-4">
                 <strong>Step 1:</strong> Visit the official Kenya Forest Service website:
-              </Typography>
-              <Link href="https://www.kenyaforestservice.org" passHref>
-                <StyledButton>Apply Online</StyledButton>
+              </p>
+              <Link href="https://www.kenyaforestservice.org" className="inline-block">
+                <button className="bg-gradient-to-r from-[#0D5602] to-[#1a6b1a] text-white py-2 px-6 font-semibold text-sm rounded-lg shadow-md hover:from-[#0A4201] hover:to-[#145214] hover:-translate-y-0.5 hover:shadow-lg transition-all">
+                  Apply Online
+                </button>
               </Link>
-              <Typography
-                variant="body1"
-                color="#333"
-                mt={2}
-                fontFamily="'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif"
-                fontSize={{ xs: '0.85rem', md: '0.9rem' }}
-                lineHeight={1.5}
-              >
+              <p className="text-sm text-[#333] mt-4">
                 <strong>Step 2:</strong> Submit a hard copy application with relevant documents.
-              </Typography>
-            </StickyNote>
+              </p>
+            </div>
 
-            <StickyNote>
-              <ClipLeft />
-              <ClipRight />
-              <Typography
-                variant="h6"
-                fontWeight={600}
-                color="#333"
-                mb={2}
-                fontFamily="'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif"
-                fontSize={{ xs: '1.1rem', md: '1.25rem' }}
-              >
-                Note
-              </Typography>
-              <List>
-                {[
-                  "The application process includes both online and hard copy submissions.",
-                  "Shortlisted candidates must provide original documents.",
-                  "KFS is an equal opportunity employer.",
-                ].map((note, index) => (
-                  <ListItem key={index} sx={{ py: 0.5 }}>
-                    <ListItemText
-                      primary={note}
-                      primaryTypographyProps={{
-                        fontFamily: "'Indie Flower', 'Comic Sans MS', 'Chalkboard SE', sans-serif",
-                        fontSize: { xs: '0.85rem', md: '0.9rem' },
-                        color: '#444',
-                        textAlign: 'center',
-                        lineHeight: 1.5,
-                      }}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            </StickyNote>
-          </ApplyNoteWrapper>
-        </MainCard>
-      </Container>
+            <div className="bg-[#FFFFE0] p-5 w-full max-w-sm text-center shadow-lg rounded-lg border border-[#d4d4d4] relative">
+              <div className="absolute -top-4 left-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
+              <div className="absolute -top-4 right-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
+              <h3 className="text-lg sm:text-xl font-semibold text-[#333] mb-4">Note</h3>
+              <ul className="text-sm text-[#444] leading-relaxed">
+                <li className="py-1">The application process includes both online and hard copy submissions.</li>
+                <li className="py-1">Shortlisted candidates must provide original documents.</li>
+                <li className="py-1">KFS is an equal opportunity employer.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <FooterBottom />
-    </Box>
+    </div>
   );
 }

@@ -81,14 +81,14 @@ const DocumentInfo = styled(Box)({
 });
 
 const DocumentTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
   fontSize: "1.25rem",
 });
 
 const FileSize = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', sans-serif",
   fontWeight: 400,
   color: "#666",
   fontSize: "0.9rem",
@@ -100,7 +100,7 @@ const DownloadButton = styled(Button)({
   textTransform: "none",
   padding: "0.5rem 1.5rem",
   fontSize: "0.9rem",
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', sans-serif",
   borderRadius: "8px",
   "&:hover": {
     backgroundColor: "#388e3c",

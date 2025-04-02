@@ -9,14 +9,13 @@ import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "2rem",
+  padding: "1rem",
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -33,77 +32,79 @@ const PageContainer = styled(Box)({
 });
 
 const ContentWrapper = styled(Box)({
-  maxWidth: "1200px",
+  maxWidth: "1000px",
   margin: "0 auto",
-  padding: "3rem 1rem",
+  padding: "2rem 0.5rem",
   position: "relative",
   zIndex: 1,
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#ffffff",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-  fontSize: "3rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
+  fontSize: "2rem",
+  lineHeight: 1.1,
+  letterSpacing: "0.3px",
   textAlign: "center",
-  marginBottom: "3rem",
+  marginBottom: "1.5rem",
+  textTransform: "capitalize",
 });
 
 const DocumentCard = styled(motion.div)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "12px",
-  padding: "1.5rem",
+  borderRadius: "8px",
+  padding: "1rem",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem",
+  marginBottom: "1rem",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: "1rem",
+    gap: "0.5rem",
   },
   "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+    transform: "translateY(-3px)",
+    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
   },
 }));
 
 const DocumentInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "1rem",
+  gap: "0.5rem",
 });
 
 const DocumentTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.25rem",
+  fontSize: "1rem",
+  textTransform: "capitalize",
 });
 
 const FileSize = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "0.9rem",
+  fontSize: "0.8rem",
 });
 
 const DownloadButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.5rem 1.5rem",
-  fontSize: "0.9rem",
-  fontFamily: "'Roboto', sans-serif",
-  borderRadius: "8px",
+  padding: "0.3rem 1rem",
+  fontSize: "0.8rem",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  borderRadius: "6px",
   "&:hover": {
     backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 1px 5px rgba(0, 0, 0, 0.2)",
   },
 });
 
@@ -123,7 +124,7 @@ export default function ForesterMagazinePage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
 
   return (
@@ -132,58 +133,55 @@ export default function ForesterMagazinePage() {
       <MainNavBar />
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
           <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
-          <Typography variant="h6" align="center" color="#fff" gutterBottom>
+          <Typography variant="h6" align="center" color="#fff" gutterBottom sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
             Biannual Forestry Magazine of the Kenya Forest Service
           </Typography>
 
-          {/* New Content Section */}
-          <Box mt={4} p={3} bgcolor="rgba(255,255,255,0.9)" borderRadius="12px" boxShadow={3}>
-            <Typography variant="h6" color="#0f5a28" fontWeight="bold">
+          <Box mt={2} p={2} bgcolor="rgba(255,255,255,0.9)" borderRadius="8px" boxShadow={2}>
+            <Typography variant="h6" color="#0f5a28" fontWeight="bold" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "1.2rem", textTransform: "capitalize" }}>
               Welcome to the latest edition of our biannual forestry magazine.
             </Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>
+            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               As we reflect on the past six months, we’re proud to share the significant strides
               made in Kenya’s forestry sector. In this issue, we spotlight several key events and
               initiatives that underscore our commitment to sustainable forest management and
               conservation.
             </Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>
+            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
               that will guide our efforts in the coming years to enhance forest cover and promote
               sustainable utilization of forest resources.
             </Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>
+            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               We also bring you highlights from the International Day of Forests celebrations, where
               we joined the global community in recognizing the vital role forests play in our lives
               and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
               initiative that saw thousands of Kenyans come together to green our nation.
             </Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>
+            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               This edition also features news on various Memoranda of Understanding signed with
               partner organizations, strengthening our collaborative efforts in forest conservation
               and management.
             </Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>
+            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               These stories reflect our ongoing dedication to Kenya’s forests and the communities
               that depend on them. We hope this issue informs and inspires you to join us in our
               mission to protect and nurture our precious forest resources.
             </Typography>
-            <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={3}>
+            <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={2} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "1.2rem", textTransform: "capitalize" }}>
               Happy reading!
             </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
+            <Typography variant="subtitle1" color="textSecondary" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
               Anne Kaari, ‘ndc‘ (K)
             </Typography>
           </Box>
 
-          {/* Magazine Download Section */}
-          <Box mt={4}>
+          <Box mt={2}>
             {magazines.map((magazine, index) => (
               <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
                 <DocumentInfo>
-                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "1.5rem" }} />
                   <Box>
                     <DocumentTitle>{magazine.title}</DocumentTitle>
                     <FileSize>1 file(s) {magazine.fileSize}</FileSize>

@@ -1,97 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import { IoMdHelpCircle } from "react-icons/io";
+import { IoMdHelpCircle, IoMdAdd, IoMdRemove } from "react-icons/io";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "800px",
-  width: "100%",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  color: "#ffffff",
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28",
-  marginBottom: "1.5rem",
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
-});
-
-const Description = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 400,
-  color: "#000",
-  lineHeight: 1.6,
-  fontSize: "1.1rem",
-  marginBottom: "1.5rem",
-});
-
-const DepartmentList = styled(List)({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "1rem",
-  padding: 0,
-});
-
-const DepartmentItem = styled(ListItem)({
-  background: "#1a3c34",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1rem",
-  "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
-  },
-});
-
-const DepartmentText = styled(ListItemText)({
-  "& .MuiTypography-root": {
-    fontFamily: "'Roboto', sans-serif",
-    fontWeight: 500,
-    color: "#ffffff",
-    fontSize: "1rem",
-  },
-});
-
-// Main Page Component
 export default function StrategyPartnershipsPage() {
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);
@@ -120,57 +35,83 @@ export default function StrategyPartnershipsPage() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Top Navigation Bar */}
       <TopNavBar />
+
+      {/* Main Navigation Bar */}
       <MainNavBar />
-      <PageContainer>
-        <ContentCard
+
+      {/* Page Container */}
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        {/* Overlay Pattern */}
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+
+        {/* Main Content Card */}
+        <motion.div
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-2xl w-full relative z-10 border border-white/30 rounded-xl"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
+          style={{ fontSize: `${fontSize}px` }}
         >
-          <Title variant="h1">
+          <h1 className="text-4xl font-bold text-[#0f5a28] mb-6 leading-tight tracking-wide">
             Directorate of Strategy, Partnerships & Resource Mobilization
-          </Title>
-          <Description>
+          </h1>
+          <p className="text-lg text-[#000] leading-relaxed mb-6">
             The Directorate is responsible for guiding the organization in setting the Strategic direction to take in the execution of her mandate in order to succeed. It guides in establishing priorities and developing corporate strategies which are harmonized with the National Development plans. It ensures that the Service uses current technologies in Forest management and complies with the quality Management standards.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-lg text-[#000] leading-relaxed mb-6">
             The directorate will also guide the Service in the implementation of quality management systems under ISO and risk-based strategies. It is further responsible for managing partnerships and mobilizing resources for the Service’ core programmes operations.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-lg text-[#000] leading-relaxed mb-6">
             It executes this mandate through the following Departments:
-          </Description>
-          <DepartmentList>
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {departments.map((dept, index) => (
-              <DepartmentItem key={index}>
-                <DepartmentText primary={dept} />
-              </DepartmentItem>
+              <li
+                key={index}
+                className="bg-[#1a3c34] text-white p-4 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+              >
+                {dept}
+              </li>
             ))}
-          </DepartmentList>
-          <Description className="mt-4">
+          </ul>
+          <p className="text-lg text-[#000] leading-relaxed mt-6">
             Explore our ongoing efforts and updates below.
-          </Description>
-        </ContentCard>
+          </p>
+        </motion.div>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-20">
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdAdd className="w-6 h-6" />
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white" />
+            <IoMdRemove className="w-6 h-6" />
           </button>
         </div>
-      </PageContainer>
+      </div>
+
+      {/* Footer */}
       <FooterBottom />
     </div>
   );

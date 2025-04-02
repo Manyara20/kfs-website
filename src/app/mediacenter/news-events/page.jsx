@@ -1,19 +1,17 @@
-"use client"; // Mark this component as a Client Component
-
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import { useRouter } from "next/navigation"; // Use next/navigation instead of next/router
+import { useRouter } from "next/navigation";
 
 const NewsandEvents = () => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Maximum of 10 zigzag sections per page
+  const itemsPerPage = 10;
 
   const zigzagData = [
-    // Add at least 10 items for testing
     {
       title: "FKF-CFA PAYS CCF A COURTESY CALL",
       text: "The CCF Mr. Alex Lemarkoko, has today been paid a courtesy call by Friends of Karura Community Forest Association (FKF-CFA) officials led by Cristina Boelcke, the two teams explored areas of common interests in the management and development of the Karura Forest ecosystem. The discussions centered on infrastructure development within Karura forest, increase in seedlings […]",
@@ -34,7 +32,6 @@ const NewsandEvents = () => {
       reverse: true,
       id: 2,
     },
-    // Add more items (at least 10 for testing)
     {
       id: 3,
       title: "CCF Hosts African Development Bank Representative",
@@ -385,10 +382,6 @@ const NewsandEvents = () => {
       comments: "15 Comments",
       reverse: false,
     },
-
-  
-    // Add more items until you have at least 10
-    // ...
   ];
 
   const totalPages = Math.ceil(zigzagData.length / itemsPerPage);
@@ -410,10 +403,9 @@ const NewsandEvents = () => {
   };
 
   const handleLearnMore = (id) => {
-    router.push(`/mediacenter/news-events/${id}`); // Use next/navigation's router.push
+    router.push(`/mediacenter/news-events/${id}`);
   };
 
-  // Slice the data to display only the items for the current page
   const currentItems = zigzagData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -423,9 +415,6 @@ const NewsandEvents = () => {
     <>
       <TopNavBar />
       <MainNavBar />
-
-    
-      {/* Dynamic Zigzag Sections */}
       {currentItems.map((item, index) => (
         <ZigzagSection
           key={item.id}
@@ -439,23 +428,21 @@ const NewsandEvents = () => {
           onLearnMore={() => handleLearnMore(item.id)}
         />
       ))}
-
-      {/* Pagination */}
-      <div className="flex justify-center items-center my-8">
+      <div className="flex justify-center items-center my-4">
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className="mx-1 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300"
+          className="mx-1 px-3 py-1 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300"
         >
-          &larr;
+          ←
         </button>
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <button
             key={page}
             onClick={() => handlePageChange(page)}
-            className={`mx-1 px-4 py-2 ${
+            className={`mx-1 px-3 py-1 ${
               currentPage === page ? "bg-green-500" : "bg-gray-800"
-            } text-white rounded-full hover:bg-green-600 transition duration-300`}
+            } text-white rounded-full hover:bg-green-600 transition duration-300 text-sm`}
           >
             {page}
           </button>
@@ -463,12 +450,11 @@ const NewsandEvents = () => {
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className="mx-1 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300"
+          className="mx-1 px-3 py-1 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300"
         >
-          &rarr;
+          →
         </button>
       </div>
-      
       <FooterBottom />
     </>
   );
@@ -486,42 +472,35 @@ const ZigzagSection = ({
 }) => {
   return (
     <section
-      className={`container mx-auto px-4 py-12 flex flex-col md:flex-row items-center gap-8 ${
+      className={`container mx-auto px-4 py-6 flex flex-col md:flex-row items-center gap-4 ${
         reverse ? "md:flex-row-reverse" : ""
       }`}
     >
-      {/* Image */}
       <div className="md:w-1/2">
-        <img src={image} alt={title} className="rounded-lg shadow-lg" />
+        <img src={image} alt={title} className="rounded-lg shadow-md w-full h-auto" />
       </div>
-
-      {/* Text Content */}
       <div className="md:w-1/2 text-black">
-        <h2 className="text-3xl font-bold">{title}</h2>
-        <p className="mt-4">{text}</p>
-
-        {/* Metadata */}
-        <div className="flex items-center font-bold gap-6 text-sm text-black my-4">
-          <a href="/author-profile" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/user.png" alt="Author" width={16} height={16} />
+        <h2 className="text-xl font-bold font-peugeot text-emerald-950" style={{ textTransform: "capitalize" }}>{title}</h2>
+        <p className="mt-2 text-sm font-peugeot">{text}</p>
+        <div className="flex items-center font-bold gap-4 text-xs text-black my-2">
+          <a href="/author-profile" className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot">
+            <Image src="/icons/user.png" alt="Author" width={14} height={14} />
             {author}
           </a>
-          <a href="/events-calendar" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/calendar.png" alt="Date" width={16} height={16} />
+          <a href="/events-calendar" className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot">
+            <Image src="/icons/calendar.png" alt="Date" width={14} height={14} />
             {date}
           </a>
-          <a href="/comments-section" className="flex items-center gap-1 hover:underline hover:text-green-500">
-            <Image src="/icons/comment.png" alt="Comments" width={16} height={16} />
+          <a href="/comments-section" className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot">
+            <Image src="/icons/comment.png" alt="Comments" width={14} height={14} />
             {comments}
           </a>
         </div>
-
-        {/* Learn More Button */}
         <button
           onClick={onLearnMore}
-          className="mt-6  bg-emerald-950 text-white px-6 py-2  hover:bg-green-500 transition duration-300"
+          className="mt-4 bg-emerald-950 text-white px-4 py-1 text-sm font-peugeot hover:bg-green-500 transition duration-300"
         >
-          READ MORE
+          Read More
         </button>
       </div>
     </section>

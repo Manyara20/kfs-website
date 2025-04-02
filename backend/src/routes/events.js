@@ -1,6 +1,7 @@
 const express = require("express");
 const { Pool } = require("pg");
 const router = express.Router();
+
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -9,30 +10,40 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
+// Test database connection on startup
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error("Database connection failed:", err.stack);
+    return;
+  }
+  console.log("Database connected successfully");
+  release();
+});
+
 // Middleware to log request details
 router.use((req, res, next) => {
   console.log(`${req.method} /api/events${req.path} - User:`, req.user);
   next();
 });
 
-// GET /api/events - Retrieve all active events
+// GET /api/events - Retrieve all active events (admin only)
 router.get("/", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
     const result = await pool.query("SELECT * FROM events WHERE archived = FALSE");
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching events:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// POST /api/events - Create a new event
+// POST /api/events - Create a new event (admin only)
 router.post("/", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -48,14 +59,14 @@ router.post("/", async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error("Error creating event:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PUT /api/events/:id - Update an existing event
+// PUT /api/events/:id - Update an existing event (admin only)
 router.put("/:id", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -74,14 +85,14 @@ router.put("/:id", async (req, res) => {
     res.json(result.rows[0]);
   } catch (error) {
     console.error("Error updating event:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// DELETE /api/events/:id - Delete an event
+// DELETE /api/events/:id - Delete an event (admin only)
 router.delete("/:id", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -95,14 +106,14 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "Event deleted successfully" });
   } catch (error) {
     console.error("Error deleting event:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PATCH /api/events/:id/archive - Archive an event
+// PATCH /api/events/:id/archive - Archive an event (admin only)
 router.patch("/:id/archive", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -119,7 +130,7 @@ router.patch("/:id/archive", async (req, res) => {
     res.json({ message: "Event archived successfully", event: result.rows[0] });
   } catch (error) {
     console.error("Error archiving event:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 

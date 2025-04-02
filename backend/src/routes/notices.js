@@ -3,12 +3,23 @@ const { Pool } = require("pg");
 const multer = require("multer");
 const path = require("path");
 const router = express.Router();
+
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
+});
+
+// Test database connection on startup
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error("Database connection failed:", err.stack);
+    return;
+  }
+  console.log("Database connected successfully");
+  release();
 });
 
 // Multer setup with custom storage
@@ -27,24 +38,24 @@ router.use((req, res, next) => {
   next();
 });
 
-// GET /api/notices - Retrieve all active notices
+// GET /api/notices - Retrieve all active notices (admin only)
 router.get("/", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
     const result = await pool.query("SELECT * FROM notices WHERE archived = FALSE");
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching notices:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// POST /api/notices - Create a new notice
+// POST /api/notices - Create a new notice (admin only)
 router.post("/", upload.single("file"), async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -61,14 +72,14 @@ router.post("/", upload.single("file"), async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error("Error creating notice:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PUT /api/notices/:id - Update an existing notice
+// PUT /api/notices/:id - Update an existing notice (admin only)
 router.put("/:id", upload.single("file"), async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -88,14 +99,14 @@ router.put("/:id", upload.single("file"), async (req, res) => {
     res.json(result.rows[0]);
   } catch (error) {
     console.error("Error updating notice:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// DELETE /api/notices/:id - Delete a notice
+// DELETE /api/notices/:id - Delete a notice (admin only)
 router.delete("/:id", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -109,14 +120,14 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "Notice deleted successfully" });
   } catch (error) {
     console.error("Error deleting notice:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PATCH /api/notices/:id/archive - Archive a notice
+// PATCH /api/notices/:id/archive - Archive a notice (admin only)
 router.patch("/:id/archive", async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
@@ -133,7 +144,7 @@ router.patch("/:id/archive", async (req, res) => {
     res.json({ message: "Notice archived successfully", notice: result.rows[0] });
   } catch (error) {
     console.error("Error archiving notice:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
@@ -180,20 +181,85 @@ export default function EventsCalendarPage() {
   const [calendarDays, setCalendarDays] = useState([]);
 
   const eventsData = {
-    "2025-03-03": "Africa Environment Day\nWangari Maathai Day\nWorld Wildlife Day",
-    "2025-03-21": "International Day of Forests",
-    "2025-03-22": "World Water Day",
-    "2025-03-23": "World Meteorological Day",
-    "2025-06-05": "World Environment Day",
+    // January
+    "2025-01-01": "New Year's Day",
+    "2026-01-01": "New Year's Day",
+    // February
+    "2025-02-02": "World Wetlands Day",
+    "2026-02-02": "World Wetlands Day",
+    // March
+    "2025-03-03": "Africa Environment Day\nWangari Maathai Day",
     "2026-03-03": "Africa Environment Day\nWangari Maathai Day",
+    "2025-03-21": "International Day of Forests",
+    "2026-03-21": "International Day of Forests",
+    "2025-03-22": "World Water Day",
+    "2026-03-22": "World Water Day",
+    "2025-03-23": "World Meteorological Day",
+    "2026-03-23": "World Meteorological Day",
+    // April
+    "2025-04-18": "Good Friday",
+    "2026-04-18": "Good Friday",
+    "2025-04-20": "Easter Monday",
+    "2026-04-20": "Easter Monday",
+    "2025-04-22": "World Earth Day",
+    "2026-04-22": "World Earth Day",
+    // May
+    "2025-05-01": "Labour Day",
+    "2026-05-01": "Labour Day",
+    "2025-05-02": "International Day for Biological Diversity",
+    "2026-05-02": "International Day for Biological Diversity",
+    // June
+    "2025-06-01": "Madaraka Day",
+    "2026-06-01": "Madaraka Day",
+    "2025-06-05": "World Environment Day",
+    "2026-06-05": "World Environment Day",
+    "2025-06-17": "World Day to Combat Desertification and Drought",
+    "2026-06-17": "World Day to Combat Desertification and Drought",
+    "2025-06-20": "World Refugees Day",
+    "2026-06-20": "World Refugees Day",
+    // October
+    "2025-10-10": "Mazingira Day",
+    "2026-10-10": "Mazingira Day",
+    "2025-10-18": "International Day for the Eradication of Poverty",
+    "2026-10-18": "International Day for the Eradication of Poverty",
+    "2025-10-20": "World Bamboo Day",
+    "2026-10-20": "World Bamboo Day",
+    // November
+    "2025-11-27": "National Tree Planting Day",
+    "2026-11-27": "National Tree Planting Day",
+    // December
+    "2025-12-12": "Jamhuri Day",
+    "2026-12-12": "Jamhuri Day",
+    "2025-12-25": "Christmas Day",
+    "2026-12-25": "Christmas Day",
+    "2025-12-26": "Boxing Day",
+    "2026-12-26": "Boxing Day",
   };
 
   const upcomingEventsData = [
-    { date: new Date("2025-03-22"), event: "World Water Day", time: "11:59 pm" },
-    { date: new Date("2025-03-23"), event: "World Meteorological Day", time: "11:11 pm" },
+    { date: new Date("2025-04-18"), event: "Good Friday" },
+    { date: new Date("2025-04-20"), event: "Easter Monday" },
+    { date: new Date("2025-04-22"), event: "World Earth Day" },
+    { date: new Date("2025-05-01"), event: "Labour Day" },
+    { date: new Date("2025-05-02"), event: "International Day for Biological Diversity" },
+    { date: new Date("2025-06-01"), event: "Madaraka Day" },
     { date: new Date("2025-06-05"), event: "World Environment Day" },
+    { date: new Date("2025-06-17"), event: "World Day to Combat Desertification and Drought" },
+    { date: new Date("2025-06-20"), event: "World Refugees Day" },
+    { date: new Date("2025-10-10"), event: "Mazingira Day" },
+    { date: new Date("2025-10-18"), event: "International Day for the Eradication of Poverty" },
+    { date: new Date("2025-10-20"), event: "World Bamboo Day" },
+    { date: new Date("2025-11-27"), event: "National Tree Planting Day" },
+    { date: new Date("2025-12-12"), event: "Jamhuri Day" },
+    { date: new Date("2025-12-25"), event: "Christmas Day" },
+    { date: new Date("2025-12-26"), event: "Boxing Day" },
+    { date: new Date("2026-01-01"), event: "New Year's Day" },
+    { date: new Date("2026-02-02"), event: "World Wetlands Day" },
     { date: new Date("2026-03-03"), event: "Africa Environment Day" },
     { date: new Date("2026-03-03"), event: "Wangari Maathai Day" },
+    { date: new Date("2026-03-21"), event: "International Day of Forests" },
+    { date: new Date("2026-03-22"), event: "World Water Day" },
+    { date: new Date("2026-03-23"), event: "World Meteorological Day" },
   ];
 
   useEffect(() => {

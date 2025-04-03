@@ -7,8 +7,8 @@ import NewsCard from "@/app/homepage/NewsCard";
 const NewsSection = () => {
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Fetch news from public endpoint
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -31,41 +31,75 @@ const NewsSection = () => {
     fetchNews();
   }, []);
 
+  // Auto-slide effect only for small screens
+  useEffect(() => {
+    if (window.innerWidth < 640 && newsData.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === displayedNews.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 3000); // Slide every 3 seconds
+      return () => clearInterval(interval); // Cleanup on unmount
+    }
+  }, [newsData]);
+
+  const displayedNews = newsData.slice(0, 3);
+
+  const truncateContent = (content) => {
+    if (content.length <= 300) return content;
+    return content.substring(0, 300) + "...";
+  };
+
   return (
     <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Centered Headers */}
       <div className="text-center mb-6 sm:mb-8 md:mb-12">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl bold text-[#0E2E0E] font-black">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl bold text-[#0E2E0E] font-black">
           News
         </h1>
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mt-1 sm:mt-2">
+        <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-semibold text-green-900 mt-1 sm:mt-2">
           KFS Latest News
         </h2>
       </div>
 
-      {/* News Card Scrollable Container */}
+      {/* News Card Container */}
       {error ? (
-        <p className="text-red-500 text-center">{error}</p>
+        <p className="text-red-500 text-center text-base xl:text-lg">{error}</p>
       ) : newsData.length === 0 ? (
-        <p className="text-gray-600 text-center">No news available at this time.</p>
+        <p className="text-gray-600 text-center text-base xl:text-lg">
+          No news available at this time.
+        </p>
       ) : (
-        <div className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto no-scrollbar snap-x">
-          <div className="flex gap-3 sm:gap-4 md:gap-6 pb-4 md:pb-6">
-            {newsData.map((item, index) => (
-              <NewsCard
+        <div className="w-full overflow-hidden sm:overflow-visible">
+          <div
+            className="flex gap-3 sm:gap-4 md:gap-6 transition-transform duration-500 ease-in-out sm:transition-none"
+            style={{
+              transform: window.innerWidth < 640 ? `translateX(-${currentIndex * (100 + 2)}%)` : "none", // Adjusted for gap
+            }}
+          >
+            {displayedNews.map((item, index) => (
+              <div
                 key={index}
-                title={item.title}
-                description={item.content}
-                imageUrl={item.image ? `http://localhost:5000${item.image}` : "https://via.placeholder.com/768x527"}
-                author={`By ${item.author_id}`} // Adjust if you have author names in DB
-                date={new Date(item.created_at).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-                comments={item.comments || 0} // Add comments column to DB if needed
-                className="snap-center"
-              />
+                className="min-w-full sm:min-w-0 flex-shrink-0 sm:flex-shrink"
+              >
+                <NewsCard
+                  title={item.title}
+                  description={truncateContent(item.content)}
+                  imageUrl={
+                    item.image
+                      ? `http://localhost:5000${item.image}`
+                      : "https://via.placeholder.com/768x527"
+                  }
+                  author={`By ${item.author_id}`}
+                  date={new Date(item.created_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                  comments={item.comments || 0}
+                  className="rounded-none"
+                />
+              </div>
             ))}
           </div>
         </div>

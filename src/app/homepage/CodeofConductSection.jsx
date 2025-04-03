@@ -1,7 +1,6 @@
-"use client"; 
-
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; 
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
 
 const objectives = [
   {
@@ -38,54 +37,74 @@ const objectives = [
 ];
 
 const CodeOfConductSection = () => {
-  const router = useRouter(); // Use router directly, no need for isClient check
+  const router = useRouter();
 
   const navigateToCodeOfConduct = () => {
-    router.push("/homepage/code-of-conduct"); // Navigate to the desired page
+    router.push("/homepage/code-of-conduct");
   };
 
   return (
-    <div className="py-10 px-4 md:px-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-        {/* Left Side: Gradient Background with Card on Top */}
-        <div className="relative w-full h-full">
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{ background: "linear-gradient(to right, #0D3C00, #e6f5e6)" }}
-          >
-            <div className="relative z-10 max-w-[80%] mx-auto mt-4 md:mt-8 p-6 bg-transparent">
-              <h5 className="text-[#0D3C00] text-xl md:text-2xl font-bold uppercase text-center">
-                About Kenya Forest Service
-              </h5>
-              <p className="text-black text-base mt-4">
-                In carrying out its mandate, the functions of KFS include among others:
-              </p>
-              <p className="text-black text-base mt-4">1. Conserve, protect and manage all Public Forests</p>
-              <p className="text-black text-base mt-4">
-                2. Prepare and implement management plans for all public forests, and, where requested, assist in
-                preparation of management plans for community forests or private forests in consultation with the
-                relevant owners
-              </p>
-              <p className="text-black text-base mt-4">
-                3. Receive and consider applications for licenses or permits in relation to forest resources or
-                management of forests or any other relevant matter in accordance with the Act
-              </p>
-              <div className="flex justify-center mt-4">
-                <button
-                  className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300"
-                  onClick={navigateToCodeOfConduct}
-                >
-                  Learn More
-                </button>
-              </div>
+    <div
+      className="py-10 px-4 md:px-16 relative overflow-hidden"
+      style={{
+        backgroundColor: "#0D3C00", // Base dark green color for the entire section
+      }}
+    >
+      {/* Starry Background for the Entire Section */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+            radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+            radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px, 30px 30px, 20px 20px",
+          backgroundPosition: "0 0, 15px 15px, 25px 25px",
+          opacity: 0.5,
+          zIndex: 0,
+        }}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch relative z-10">
+        {/* Left Side: Content without Background */}
+        <div className="w-full h-full">
+          <div className="max-w-[80%] mx-auto mt-4 md:mt-8 p-6 bg-transparent">
+            <h5 className="text-[#e6f5e6] text-xl md:text-2xl font-bold uppercase text-center">
+              About Kenya Forest Service
+            </h5>
+            <p className="text-white text-[1.2rem] mt-4">
+              In carrying out its mandate, the functions of KFS include among others:
+            </p>
+            <p className="text-white text-[1.2rem] mt-4">
+              1. Conserve, protect and manage all Public Forests
+            </p>
+            <p className="text-white text-[1.2rem] mt-4">
+              2. Prepare and implement management plans for all public forests, and, where requested, assist in
+              preparation of management plans for community forests or private forests in consultation with the
+              relevant owners
+            </p>
+            <p className="text-white text-[1.2rem] mt-4">
+              3. Receive and consider applications for licenses or permits in relation to forest resources or
+              management of forests or any other relevant matter in accordance with the Act
+            </p>
+            <div className="flex justify-center mt-4">
+              <button
+                className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300"
+                onClick={navigateToCodeOfConduct}
+              >
+                Learn More
+              </button>
             </div>
           </div>
         </div>
 
         {/* Right Side: Strategic Objectives */}
         <div>
-          <h3 className="text-3xl font-bold mb-4 text-center text-black uppercase">Strategic Objectives</h3>
-          <p className="text-lg mb-6 text-center text-black">
+          <h3 className="text-3xl font-bold mb-4 text-center text-[#e6f5e6] uppercase">
+            Strategic Objectives
+          </h3>
+          <p className="text-2xl mb-6 text-center text-white">
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision.
           </p>
 
@@ -93,12 +112,12 @@ const CodeOfConductSection = () => {
             {objectives.map((item, index) => (
               <div
                 key={index}
-                className="w-full p-4 bg-[#16a34a] text-white transition-all duration-300 hover:bg-white hover:border-4 hover:border-[#15803d] hover:text-[#0D3C00] cursor-pointer group"
+                className="w-full p-4 bg-[#0D3C00] text-white border-4 border-white transition-all duration-300 hover:bg-white hover:border-4 hover:border-[#15803d] hover:text-[#0D3C00] cursor-pointer group"
               >
                 <h6 className="text-lg font-semibold">{item.title}</h6>
                 <div className="mt-1 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-[1000px]">
                   {item.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-[#0D3C00]">
+                    <p key={i} className="text-[1rem] text-[#0D3C00] leading-7">
                       {detail}
                     </p>
                   ))}

@@ -1,4 +1,3 @@
-// components/TopNavBar.js
 "use client";
 import React from "react";
 import {
@@ -23,6 +22,7 @@ const TopNavBar = () => {
   const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs")); // <360px
   const isSmall = useMediaQuery(theme.breakpoints.down("sm")); // <600px
   const isMedium = useMediaQuery(theme.breakpoints.down("md")); // <900px
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg")); // >=1200px, adjusted for 14-inch screens
 
   // Menu items split into two groups
   const group1 = [
@@ -100,16 +100,27 @@ const TopNavBar = () => {
                   sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "small" : "medium", // Reduced icon size
+                    fontSize: isExtraSmall
+                      ? "small"
+                      : isSmall
+                      ? "small"
+                      : isLarge
+                      ? "large" // Larger icons for screens >14 inches
+                      : "medium",
                   })}
                 </IconButton>
                 <Typography
                   variant="body2"
                   sx={{
                     color: "white",
-                    fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.6rem" }, // Reduced font size
-                    fontFamily: "'Peugeot', Helvetica, sans-serif", // Apply Peugeot font
-                    textTransform: "capitalize", // Capitalize first letter of each word
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "0.6rem",
+                      md: "0.6rem",
+                      lg: "0.84rem", // 1.4x of 0.6rem for >14-inch screens (140% zoom)
+                    },
+                    fontFamily: "'Peugeot', Helvetica, sans-serif",
+                    textTransform: "capitalize",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -140,16 +151,27 @@ const TopNavBar = () => {
                   sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
                 >
                   {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall ? "small" : isSmall ? "small" : "medium", // Reduced icon size
+                    fontSize: isExtraSmall
+                      ? "small"
+                      : isSmall
+                      ? "small"
+                      : isLarge
+                      ? "large" // Larger icons for screens >14 inches
+                      : "medium",
                   })}
                 </IconButton>
                 <Typography
                   variant="body2"
                   sx={{
                     color: "white",
-                    fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.6rem" }, // Reduced font size
-                    fontFamily: "'Peugeot', Helvetica, sans-serif", // Apply Peugeot font
-                    textTransform: "capitalize", // Capitalize first letter of each word
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "0.6rem",
+                      md: "0.6rem",
+                      lg: "0.84rem", // 1.4x of 0.6rem for >14-inch screens (140% zoom)
+                    },
+                    fontFamily: "'Peugeot', Helvetica, sans-serif",
+                    //textTransform: "capitalize",
                     whiteSpace: "nowrap",
                   }}
                 >

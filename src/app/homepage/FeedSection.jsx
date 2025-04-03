@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-// EventCard component for Events
+// EventCard component
 const EventCard = ({ date, title, time, venue, onClick }) => {
   const eventDate = new Date(date);
   const day = eventDate.getDate().toString().padStart(2, "0");
@@ -12,13 +12,13 @@ const EventCard = ({ date, title, time, venue, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center bg-[#0f5a28] text-white rounded p-2 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff0000]"
+      className="w-full flex items-center bg-[#0f5a28] text-white rounded p-2 sm:p-3 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff0000]"
     >
-      <div className="w-12 h-12 bg-[#000] text-white flex flex-col items-center justify-center rounded mr-2">
-        <span className="text-base font-bold">{day}</span>
-        <span className="text-[10px] uppercase">{month}</span>
+      <div className="w-10 sm:w-12 h-10 sm:h-12 bg-[#000] text-white flex flex-col items-center justify-center rounded mr-2">
+        <span className="text-sm sm:text-base font-bold">{day}</span>
+        <span className="text-[8px] sm:text-[10px] uppercase">{month}</span>
       </div>
-      <div className="flex flex-col text-xs text-left">
+      <div className="flex flex-col text-xs sm:text-sm text-left">
         <p><strong>Title:</strong> {title}</p>
         <p><strong>Date:</strong> {day} {month}</p>
         <p><strong>Time:</strong> {time}</p>
@@ -28,14 +28,14 @@ const EventCard = ({ date, title, time, venue, onClick }) => {
   );
 };
 
-// NoticeCard component for Notices
+// NoticeCard component
 const NoticeCard = ({ title, description, file_url, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="w-full bg-[#0f5a28] text-white rounded p-2 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] h-20 overflow-hidden"
+      className="w-full bg-[#0f5a28] text-white rounded p-2 sm:p-3 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] h-20 sm:h-24 overflow-hidden"
     >
-      <div className="flex flex-col text-xs text-left">
+      <div className="flex flex-col text-xs sm:text-sm text-left">
         <p><strong>Title:</strong> {title}</p>
         <p><strong>Description:</strong> {description}</p>
         {file_url && (
@@ -53,7 +53,7 @@ const NoticeCard = ({ title, description, file_url, onClick }) => {
   );
 };
 
-// X Feed component with live tweets
+// X Feed component
 const XFeed = ({ containerHeight }) => {
   const xFeedRef = useRef(null);
 
@@ -79,10 +79,10 @@ const XFeed = ({ containerHeight }) => {
   return (
     <div
       ref={xFeedRef}
-      className="bg-[#ffffff] p-1 overflow-y-auto no-scrollbar twitter-feed-container"
+      className="bg-[#ffffff] p-2 sm:p-3 overflow-y-auto no-scrollbar"
       style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
     >
-      <h3 className="text-base font-semibold mb-1 text-black">X Feed</h3>
+      <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">X Feed</h3>
       <a
         className="twitter-timeline"
         href="https://twitter.com/KeForestService?ref_src=twsrc%5Etfw"
@@ -100,7 +100,6 @@ const KFSFeeds = () => {
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState("");
 
-  // Fetch events from public endpoint
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -151,19 +150,26 @@ const KFSFeeds = () => {
     const noticeHeight = noticeRef.current?.getBoundingClientRect().height || 0;
     const tallestHeight = Math.max(eventsHeight, noticeHeight);
     setMaxHeight(tallestHeight);
-  }, [events, notices]); // Recompute height when events or notices load
+  }, [events, notices]);
 
   return (
-    <section className="py-2 bg-[#e6f5e6] text-white">
-      <h2 className="text-xl font-bold text-center mb-2 text-black">KFS Updates</h2>
-      <div className="w-full max-w-5xl mx-auto px-1">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-          <div ref={eventsRef} className="bg-[#fff] p-1 border-2 border-[#1a3c34] min-h-64">
-            <h3 className="text-base font-semibold mb-1 text-black">Events</h3>
+    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-6 sm:mb-8 md:mb-12 text-[#0E2E0E]">
+        KFS Updates
+      </h2>
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div
+            ref={eventsRef}
+            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#1a3c34] min-h-[32rem]"
+          >
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
+              Events
+            </h3>
             {error ? (
-              <p className="text-red-500 text-xs">{error}</p>
+              <p className="text-red-500 text-xs sm:text-sm">{error}</p>
             ) : events.length === 0 ? (
-              <p className="text-gray-600 text-xs">No active events available.</p>
+              <p className="text-gray-600 text-xs sm:text-sm">No active events available.</p>
             ) : (
               events.map((item, index) => (
                 <EventCard
@@ -177,12 +183,17 @@ const KFSFeeds = () => {
               ))
             )}
           </div>
-          <div ref={noticeRef} className="bg-[#ffffff] p-1 border-2 border-[#1a3c34] min-h-64">
-            <h3 className="text-base font-semibold mb-1 text-black">Notice Board</h3>
+          <div
+            ref={noticeRef}
+            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#1a3c34] min-h-[16rem]"
+          >
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
+              Notice Board
+            </h3>
             {error ? (
-              <p className="text-red-500 text-xs">{error}</p>
+              <p className="text-red-500 text-xs sm:text-sm">{error}</p>
             ) : notices.length === 0 ? (
-              <p className="text-gray-600 text-xs">No active notices available.</p>
+              <p className="text-gray-600 text-xs sm:text-sm">No active notices available.</p>
             ) : (
               notices.map((item, index) => (
                 <NoticeCard
@@ -195,7 +206,7 @@ const KFSFeeds = () => {
               ))
             )}
           </div>
-          <div className="bg-[#ffffff] p-1 border-2 border-[#1a3c34] min-h-64">
+          <div className="bg-[#ffffff] border-2 border-[#1a3c34] min-h-[16rem]">
             <XFeed containerHeight={maxHeight} />
           </div>
         </div>

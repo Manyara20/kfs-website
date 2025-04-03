@@ -1,4 +1,3 @@
-// components/MainNavBar.js
 "use client";
 import React, { useState, useEffect } from "react";
 import {
@@ -82,15 +81,15 @@ const MainNavBar = () => {
       >
         <MenuItem
           sx={{
-            fontSize: "0.65rem",
+            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" }, // 0.65rem * 1.4 = 0.91rem for >14 inches
             fontFamily: "'Peugeot', Helvetica, sans-serif",
             color: "black",
             "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-            padding: "6px 10px",
+            padding: "0.5rem 0.6rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            textTransform: "capitalize", // Capitalize first letter of each word
+            textTransform: "capitalize",
           }}
         >
           <Link
@@ -281,7 +280,7 @@ const MainNavBar = () => {
         }}
       >
         {/* Logo */}
-        <Box sx={{ flexShrink: 0, paddingTop: "0.2rem", paddingBottom: "0.2rem" }}>
+        <Box sx={{ flexShrink: 0, paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
           <Link href="/">
             <Image
               src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
@@ -301,8 +300,8 @@ const MainNavBar = () => {
               justifyContent: "center",
               flexGrow: 1,
               gap: { md: 1, lg: 2 },
-              flexWrap: "nowrap", // Ensure items stay on the same line
-              alignItems: "center", // Vertically align items
+              flexWrap: "nowrap",
+              alignItems: "center",
             }}
           >
             {navigationItems.map((item, index) =>
@@ -324,14 +323,14 @@ const MainNavBar = () => {
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
-                      fontSize: { md: "0.75rem", lg: "0.75rem" },
+                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" }, // 0.75rem * 1.4 = 1.05rem for >14 inches
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       fontWeight: 500,
                       padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                       borderRadius: "4px",
                       transition: "color 0.3s ease",
-                      textTransform: "capitalize", // Capitalize first letter of each word
+                      textTransform: "capitalize",
                     }}
                   >
                     {item.label}
@@ -374,10 +373,10 @@ const MainNavBar = () => {
                 >
                   <Typography
                     sx={{
-                      fontSize: { md: "0.75rem", lg: "0.75rem" },
+                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" }, // 0.75rem * 1.4 = 1.05rem for >14 inches
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       fontWeight: 500,
-                      textTransform: "capitalize", // Capitalize first letter of each word
+                      textTransform: "capitalize",
                     }}
                   >
                     {item.label}
@@ -402,7 +401,7 @@ const MainNavBar = () => {
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem" }, fontWeight: "bold" }} />
+              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} /> {/* Increased for >14 inches */}
             </IconButton>
           </Box>
         )}
@@ -427,7 +426,7 @@ const MainNavBar = () => {
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: "1.4rem", fontWeight: "bold" }} />
+              <SearchIcon sx={{ fontSize: "1.4rem" }} />
             </IconButton>
           </Box>
         )}
@@ -469,9 +468,11 @@ const MainNavBar = () => {
                       <ListItemText
                         primary={item.label}
                         sx={{
-                          fontSize: "0.85rem",
-                          fontFamily: "'Peugeot', Helvetica, sans-serif",
-                          textTransform: "capitalize", // Capitalize first letter of each word
+                          "& .MuiTypography-root": {
+                            fontSize: { xs: "0.85rem", xl: "1.19rem" }, // 0.85rem * 1.4 = 1.19rem for >14 inches
+                            fontFamily: "'Peugeot', Helvetica, sans-serif",
+                            textTransform: "capitalize",
+                          },
                         }}
                       />
                     </ListItemButton>
@@ -485,9 +486,11 @@ const MainNavBar = () => {
                       <ListItemText
                         primary={item.label}
                         sx={{
-                          fontSize: "0.9rem",
-                          fontFamily: "'Peugeot', Helvetica, sans-serif",
-                          textTransform: "capitalize", // Capitalize first letter of each word
+                          "& .MuiTypography-root": {
+                            fontSize: { xs: "0.9rem", xl: "1.26rem" }, // 0.9rem * 1.4 = 1.26rem for >14 inches
+                            fontFamily: "'Peugeot', Helvetica, sans-serif",
+                            textTransform: "capitalize",
+                          },
                         }}
                       />
                       {expandedItems[index] ? <ExpandLess /> : <ExpandMore />}
@@ -506,9 +509,11 @@ const MainNavBar = () => {
                               <ListItemText
                                 primary={subItem.label}
                                 sx={{
-                                  fontSize: "0.85rem",
-                                  fontFamily: "'Peugeot', Helvetica, sans-serif",
-                                  textTransform: "capitalize", // Capitalize first letter of each word
+                                  "& .MuiTypography-root": {
+                                    fontSize: { xs: "0.85rem", xl: "1.19rem" }, // 0.85rem * 1.4 = 1.19rem for >14 inches
+                                    fontFamily: "'Peugeot', Helvetica, sans-serif",
+                                    textTransform: "capitalize",
+                                  },
                                 }}
                               />
                             </ListItemButton>
@@ -558,10 +563,10 @@ const MainNavBar = () => {
             variant="h6"
             sx={{
               textAlign: "center",
-              fontSize: { xs: "0.85rem", sm: "1rem" },
+              fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" }, // 1rem * 1.4 = 1.4rem for >14 inches
               fontFamily: "'Peugeot', Helvetica, sans-serif",
               color: "white",
-              textTransform: "capitalize", // Capitalize first letter of each word
+              textTransform: "capitalize",
             }}
           >
             Search the Website
@@ -574,7 +579,7 @@ const MainNavBar = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "white", fontSize: "1.1rem" }} />
+                  <SearchIcon sx={{ color: "white", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} /> {/* 1.1rem * 1.4 = 1.54rem */}
                 </InputAdornment>
               ),
             }}
@@ -586,9 +591,9 @@ const MainNavBar = () => {
               },
               "& .MuiInputBase-input": {
                 color: "white",
-                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" }, // 0.9rem * 1.4 = 1.26rem for >14 inches
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "none", // No transformation for input placeholder
+                textTransform: "none",
               },
             }}
           />

@@ -38,13 +38,20 @@ const coreValues = [
 
 const CoreValuesSection = () => {
   return (
-    <section className="py-24 px-8">
-      <h2 className="text-3xl font-semibold text-center text-black mb-10">Our Core Values</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto border border-gray-300 rounded-lg overflow-hidden p-8">
+    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
+      {/* Centered Header */}
+      <div className="text-center mb-6 sm:mb-8 md:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-black text-[#0E2E0E]">
+          Our Core Values
+        </h2>
+      </div>
+
+      {/* Core Values Card Container */}
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 w-full">
         {coreValues.map((value, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-center p-8 border border-gray-300 bg-[#1f5d2f] text-white hover:bg-green-50 hover:text-black transition-colors w-full h-full"
+            className="flex flex-col items-center text-center p-8 border border-gray-300 bg-[#1f5d2f] text-white hover:bg-green-50 hover:text-black transition-colors w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1.5rem)] lg:w-[calc(20%-1.2rem)] h-96"
           >
             <div className="mb-4">
               <Image src={value.icon} alt={value.title} width={60} height={60} />

@@ -1,5 +1,4 @@
-"use client"; 
-
+"use client";
 import React, { useState, useEffect } from "react";
 
 const HeroSection = () => {
@@ -53,7 +52,7 @@ const HeroSection = () => {
       >
         <div className="text-center">
           <h1
-            className="text-6xl font-bold mb-5 tracking-wider"
+            className="font-bold mb-5 tracking-wider text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] xl:text-[5rem]" // Adjusted scaling
             style={{
               textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
               fontFamily: "'Peugeot', Helvetica, sans-serif",
@@ -62,7 +61,7 @@ const HeroSection = () => {
             {slides[currentSlide].title}
           </h1>
           <p
-            className="text-4xl mb-5 italic"
+            className="mb-5 italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.8rem] xl:text-[3.5rem]" // Adjusted scaling
             style={{
               textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
               fontFamily: "'Peugeot', Helvetica, sans-serif",

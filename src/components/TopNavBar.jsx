@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import {
   AppBar,
@@ -22,7 +23,7 @@ const TopNavBar = () => {
   const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs")); // <360px
   const isSmall = useMediaQuery(theme.breakpoints.down("sm")); // <600px
   const isMedium = useMediaQuery(theme.breakpoints.down("md")); // <900px
-  const isLarge = useMediaQuery(theme.breakpoints.up("lg")); // >=1200px, adjusted for 14-inch screens
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg")); // >=1200px
 
   // Menu items split into two groups
   const group1 = [
@@ -59,18 +60,21 @@ const TopNavBar = () => {
       position="static"
       sx={{
         backgroundColor: "#0D3C00",
-        padding: { xs: "1px 0", sm: "2px 0" }, // Reduced padding
+        padding: { xs: "2px 0", sm: "4px 0", md: "6px 0" },
       }}
     >
       <Toolbar
         sx={{
-          width: { xs: "95%", sm: "90%", md: "85%" },
+          width: "100%",
+          maxWidth: "100%",
           margin: "auto",
-          padding: { xs: "0 2px", sm: "0 4px", md: "0 8px" }, // Reduced padding
+          padding: { xs: "0 4px", sm: "0 8px", md: "0 16px" },
           minHeight: "auto !important",
           display: "flex",
           alignItems: "center",
-          overflowX: isMedium ? "auto" : "hidden",
+          justifyContent: "space-between",
+          flexWrap: { xs: "wrap", md: "nowrap" },
+          overflowX: { xs: "auto", md: "hidden" },
           whiteSpace: "nowrap",
           "&::-webkit-scrollbar": { height: "4px" },
           "&::-webkit-scrollbar-thumb": {
@@ -79,117 +83,143 @@ const TopNavBar = () => {
           },
         }}
       >
+        {/* Group 1 */}
         <Box
           sx={{
-            display: isSmall ? "none" : "flex", // Hide completely on small screens
+            display: "flex",
             alignItems: "center",
-            gap: { xs: 0.25, sm: 0.5, md: 1 }, // Reduced gap between groups
+            gap: { xs: 0.5, sm: 1, md: 1.5 },
             flexShrink: 0,
-            width: "100%",
-            justifyContent: "space-between", // Space between groups
+            flexGrow: { xs: 1, md: 0 },
+            justifyContent: { xs: "flex-start", md: "flex-start" },
+            minWidth: 0,
           }}
         >
-          {/* Group 1 */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.25, sm: 0.5, md: 1 } }}>
-            {visibleGroup1.map((item, index) => (
-              <Box
-                key={index}
-                sx={{ display: "flex", alignItems: "center" }}
+          {visibleGroup1.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                minWidth: 0,
+              }}
+            >
+              <IconButton
+                sx={{
+                  color: "white",
+                  padding: { xs: "2px", sm: "4px", md: "6px" },
+                }}
               >
-                <IconButton
-                  sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
-                >
-                  {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall
-                      ? "small"
-                      : isSmall
-                      ? "small"
-                      : isLarge
-                      ? "large" // Larger icons for screens >14 inches
-                      : "medium",
-                  })}
-                </IconButton>
-                <Typography
-                  variant="body2"
+                {React.cloneElement(item.icon, {
+                  fontSize: isExtraSmall
+                    ? "small"
+                    : isSmall
+                    ? "small"
+                    : isLarge
+                    ? "large"
+                    : "medium",
+                })}
+              </IconButton>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "white",
+                  fontSize: {
+                    xs: "0.65rem",
+                    sm: "0.75rem",
+                    md: "0.875rem",
+                    lg: "1rem",
+                  },
+                  fontFamily: "'Peugeot', Helvetica, sans-serif",
+                  textTransform: "capitalize",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {item.text}
+              </Typography>
+              {index < visibleGroup1.length - 1 && (
+                <Box
                   sx={{
-                    color: "white",
-                    fontSize: {
-                      xs: "1rem",
-                      sm: "0.6rem",
-                      md: "0.6rem",
-                      lg: "0.84rem", // 1.4x of 0.6rem for >14-inch screens (140% zoom)
-                    },
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    textTransform: "capitalize",
-                    whiteSpace: "nowrap",
+                    width: "1px",
+                    height: { xs: "10px", sm: "12px", md: "14px" },
+                    backgroundColor: "white",
+                    mx: { xs: 0.25, sm: 0.5, md: 0.75 },
                   }}
-                >
-                  {item.text}
-                </Typography>
-                {index < visibleGroup1.length - 1 && (
-                  <Box
-                    sx={{
-                      width: "1px",
-                      height: "12px", // Reduced height
-                      backgroundColor: "white",
-                      mx: { xs: 0.1, sm: 0.25, md: 0.5 }, // Reduced margin
-                    }}
-                  />
-                )}
-              </Box>
-            ))}
-          </Box>
+                />
+              )}
+            </Box>
+          ))}
+        </Box>
 
-          {/* Group 2 */}
-          <Box sx={{ display: "flex", alignItems: "left", gap: { xs: 0.25, sm: 0.5, md: 1 } }}>
-            {visibleGroup2.map((item, index) => (
-              <Box
-                key={index}
-                sx={{ display: "flex", alignItems: "center" }}
+        {/* Group 2 */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: { xs: 0.5, sm: 1, md: 1.5 },
+            flexShrink: 0,
+            flexGrow: { xs: 1, md: 0 },
+            justifyContent: { xs: "flex-start", md: "flex-end" },
+            minWidth: 0,
+          }}
+        >
+          {visibleGroup2.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                minWidth: 0,
+              }}
+            >
+              <IconButton
+                sx={{
+                  color: "white",
+                  padding: { xs: "2px", sm: "4px", md: "6px" },
+                }}
               >
-                <IconButton
-                  sx={{ color: "white", padding: { xs: "1px", sm: "2px" } }} // Reduced padding
-                >
-                  {React.cloneElement(item.icon, {
-                    fontSize: isExtraSmall
-                      ? "small"
-                      : isSmall
-                      ? "small"
-                      : isLarge
-                      ? "large" // Larger icons for screens >14 inches
-                      : "medium",
-                  })}
-                </IconButton>
-                <Typography
-                  variant="body2"
+                {React.cloneElement(item.icon, {
+                  fontSize: isExtraSmall
+                    ? "small"
+                    : isSmall
+                    ? "small"
+                    : isLarge
+                    ? "large"
+                    : "medium",
+                })}
+              </IconButton>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "white",
+                  fontSize: {
+                    xs: "0.65rem",
+                    sm: "0.75rem",
+                    md: "0.875rem",
+                    lg: "1rem",
+                  },
+                  fontFamily: "'Peugeot', Helvetica, sans-serif",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {item.text}
+              </Typography>
+              {index < visibleGroup2.length - 1 && (
+                <Box
                   sx={{
-                    color: "white",
-                    fontSize: {
-                      xs: "1rem",
-                      sm: "0.6rem",
-                      md: "0.6rem",
-                      lg: "0.84rem", // 1.4x of 0.6rem for >14-inch screens (140% zoom)
-                    },
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    //textTransform: "capitalize",
-                    whiteSpace: "nowrap",
+                    width: "1px",
+                    height: { xs: "10px", sm: "12px", md: "14px" },
+                    backgroundColor: "white",
+                    mx: { xs: 0.25, sm: 0.5, md: 0.75 },
                   }}
-                >
-                  {item.text}
-                </Typography>
-                {index < visibleGroup2.length - 1 && (
-                  <Box
-                    sx={{
-                      width: "1px",
-                      height: "12px", // Reduced height
-                      backgroundColor: "white",
-                      mx: { xs: 0.1, sm: 0.25, md: 0.5 }, // Reduced margin
-                    }}
-                  />
-                )}
-              </Box>
-            ))}
-          </Box>
+                />
+              )}
+            </Box>
+          ))}
         </Box>
       </Toolbar>
     </AppBar>

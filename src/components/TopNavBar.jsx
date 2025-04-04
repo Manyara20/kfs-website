@@ -1,29 +1,18 @@
 "use client";
 
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Box,
-  useMediaQuery,
-} from "@mui/material";
+import React, { memo, useState } from "react";
 import {
   Email,
   Call,
   AccountBox,
   Assignment,
   AccessTime,
+  Menu as MenuIcon,
+  Close as CloseIcon,
 } from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
 
-const TopNavBar = () => {
-  const theme = useTheme();
-  const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs")); // <360px
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm")); // <600px
-  const isMedium = useMediaQuery(theme.breakpoints.down("md")); // <900px
-  const isLarge = useMediaQuery(theme.breakpoints.up("lg")); // >=1200px
+const TopNavBar = memo(() => {
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   // Menu items split into two groups
   const group1 = [
@@ -42,188 +31,118 @@ const TopNavBar = () => {
     { icon: <Email />, text: "info@kenyaforestservice.org", priority: 1 },
   ];
 
-  // Filter items based on screen size and priority
-  const visibleGroup1 = group1.filter((item) => {
-    if (isExtraSmall) return item.priority === 1;
-    if (isSmall) return item.priority <= 2;
-    return true;
-  });
-
-  const visibleGroup2 = group2.filter((item) => {
-    if (isExtraSmall) return item.priority === 1;
-    if (isSmall) return item.priority <= 2;
-    return true;
-  });
+  // Combine all items for the panel on smaller screens
+  const allItems = [...group1, ...group2];
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: "#0D3C00",
-        padding: { xs: "2px 0", sm: "4px 0", md: "6px 0" },
-      }}
-    >
-      <Toolbar
-        sx={{
-          width: "100%",
-          maxWidth: "100%",
-          margin: "auto",
-          padding: { xs: "0 4px", sm: "0 8px", md: "0 16px" },
-          minHeight: "auto !important",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: { xs: "wrap", md: "nowrap" },
-          overflowX: { xs: "auto", md: "hidden" },
-          whiteSpace: "nowrap",
-          "&::-webkit-scrollbar": { height: "4px" },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "rgba(255,255,255,0.3)",
-            borderRadius: "4px",
-          },
-        }}
-      >
-        {/* Group 1 */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: { xs: 0.5, sm: 1, md: 1.5 },
-            flexShrink: 0,
-            flexGrow: { xs: 1, md: 0 },
-            justifyContent: { xs: "flex-start", md: "flex-start" },
-            minWidth: 0,
-          }}
-        >
-          {visibleGroup1.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                minWidth: 0,
-              }}
-            >
-              <IconButton
-                sx={{
-                  color: "white",
-                  padding: { xs: "2px", sm: "4px", md: "6px" },
-                }}
-              >
-                {React.cloneElement(item.icon, {
-                  fontSize: isExtraSmall
-                    ? "small"
-                    : isSmall
-                    ? "small"
-                    : isLarge
-                    ? "large"
-                    : "medium",
-                })}
-              </IconButton>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "white",
-                  fontSize: {
-                    xs: "0.65rem",
-                    sm: "0.75rem",
-                    md: "0.875rem",
-                    lg: "1rem",
-                  },
-                  fontFamily: "'Peugeot', Helvetica, sans-serif",
-                  textTransform: "capitalize",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {item.text}
-              </Typography>
-              {index < visibleGroup1.length - 1 && (
-                <Box
-                  sx={{
-                    width: "1px",
-                    height: { xs: "10px", sm: "12px", md: "14px" },
-                    backgroundColor: "white",
-                    mx: { xs: 0.25, sm: 0.5, md: 0.75 },
-                  }}
-                />
-              )}
-            </Box>
-          ))}
-        </Box>
+    <nav className="bg-[#0D3C00] w-full shadow-md relative">
+      <div className="max-w-6xl mx-auto px-1 sm:px-2 md:px-3 lg:px-4">
+        {/* Desktop/Tablet View (md and above) */}
+        <div className="hidden md:flex justify-between items-center py-1">
+          {/* Group 1 */}
+          <div className="flex items-center space-x-1 flex-shrink-0">
+            {group1.map((item, index) => (
+              <div key={index} className="flex items-center">
+                <div className="text-white p-0.5">
+                  {React.cloneElement(item.icon, {
+                    className: "text-white w-3 h-3 md:w-4 md:h-4 lg:w-4 lg:h-4",
+                  })}
+                </div>
+                <span
+                  className="text-white text-[0.55rem] md:text-[0.6rem] lg:text-[0.65rem] font-['Peugeot',Helvetica,sans-serif] capitalize whitespace-nowrap"
+                >
+                  {item.text}
+                </span>
+                {index < group1.length - 1 && (
+                  <div className="w-px h-2 md:h-3 lg:h-3 bg-white mx-0.5 md:mx-1 lg:mx-1" />
+                )}
+              </div>
+            ))}
+          </div>
 
-        {/* Group 2 */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: { xs: 0.5, sm: 1, md: 1.5 },
-            flexShrink: 0,
-            flexGrow: { xs: 1, md: 0 },
-            justifyContent: { xs: "flex-start", md: "flex-end" },
-            minWidth: 0,
-          }}
+          {/* Group 2 */}
+          <div className="flex items-center space-x-1 flex-shrink-0">
+            {group2.map((item, index) => (
+              <div key={index} className="flex items-center">
+                <div className="text-white p-0.5">
+                  {React.cloneElement(item.icon, {
+                    className: "text-white w-3 h-3 md:w-4 md:h-4 lg:w-4 lg:h-4",
+                  })}
+                </div>
+                <span
+                  className="text-white text-[0.55rem] md:text-[0.6rem] lg:text-[0.65rem] font-['Peugeot',Helvetica,sans-serif] whitespace-nowrap"
+                >
+                  {item.text}
+                </span>
+                {index < group2.length - 1 && (
+                  <div className="w-px h-2 md:h-3 lg:h-3 bg-white mx-0.5 md:mx-1 lg:mx-1" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile View (below md) - Floating Action Button */}
+        <div className="md:hidden flex items-center justify-end py-2 px-3">
+          <button
+            onClick={() => setIsPanelOpen(!isPanelOpen)}
+            className="text-white focus:outline-none bg-white/20 rounded-full p-2"
+          >
+            {isPanelOpen ? (
+              <CloseIcon className="w-6 h-6 text-white" />
+            ) : (
+              <MenuIcon className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* Slide-In Panel for Mobile */}
+        <div
+          className={`md:hidden fixed top-0 right-0 h-full w-64 bg-[#0D3C00] shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
+            isPanelOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         >
-          {visibleGroup2.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                minWidth: 0,
-              }}
-            >
-              <IconButton
-                sx={{
-                  color: "white",
-                  padding: { xs: "2px", sm: "4px", md: "6px" },
-                }}
+          <div className="flex flex-col p-4">
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={() => setIsPanelOpen(false)}
+                className="text-white focus:outline-none"
               >
-                {React.cloneElement(item.icon, {
-                  fontSize: isExtraSmall
-                    ? "small"
-                    : isSmall
-                    ? "small"
-                    : isLarge
-                    ? "large"
-                    : "medium",
-                })}
-              </IconButton>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "white",
-                  fontSize: {
-                    xs: "0.65rem",
-                    sm: "0.75rem",
-                    md: "0.875rem",
-                    lg: "1rem",
-                  },
-                  fontFamily: "'Peugeot', Helvetica, sans-serif",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
+                <CloseIcon className="w-6 h-6 text-white" />
+              </button>
+            </div>
+            {allItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center py-3 border-b border-white/20 last:border-b-0"
               >
-                {item.text}
-              </Typography>
-              {index < visibleGroup2.length - 1 && (
-                <Box
-                  sx={{
-                    width: "1px",
-                    height: { xs: "10px", sm: "12px", md: "14px" },
-                    backgroundColor: "white",
-                    mx: { xs: 0.25, sm: 0.5, md: 0.75 },
-                  }}
-                />
-              )}
-            </Box>
-          ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+                <div className="text-white p-2">
+                  {React.cloneElement(item.icon, {
+                    className: "text-white w-5 h-5",
+                  })}
+                </div>
+                <span
+                  className="text-white text-base font-['Peugeot',Helvetica,sans-serif] whitespace-nowrap"
+                >
+                  {item.text}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Overlay to close panel when clicking outside */}
+        {isPanelOpen && (
+          <div
+            className="md:hidden fixed inset-0 bg-black/50 z-40"
+            onClick={() => setIsPanelOpen(false)}
+          />
+        )}
+      </div>
+    </nav>
   );
-};
+});
+
+TopNavBar.displayName = "TopNavBar";
 
 export default TopNavBar;

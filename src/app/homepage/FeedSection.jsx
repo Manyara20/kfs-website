@@ -153,7 +153,7 @@ const KFSFeeds = () => {
   }, [events, notices]);
 
   return (
-    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#fff] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-6 sm:mb-8 md:mb-12 text-[#0E2E0E]">
         KFS Updates
       </h2>
@@ -161,7 +161,7 @@ const KFSFeeds = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <div
             ref={eventsRef}
-            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#1a3c34] min-h-[32rem]"
+            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
           >
             <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
               Events
@@ -185,7 +185,7 @@ const KFSFeeds = () => {
           </div>
           <div
             ref={noticeRef}
-            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#1a3c34] min-h-[16rem]"
+            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
           >
             <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
               Notice Board
@@ -206,7 +206,7 @@ const KFSFeeds = () => {
               ))
             )}
           </div>
-          <div className="bg-[#ffffff] border-2 border-[#1a3c34] min-h-[16rem]">
+          <div className="bg-[#ffffff] border-2 border-[#0d3c00] min-h-[32rem]">
             <XFeed containerHeight={maxHeight} />
           </div>
         </div>

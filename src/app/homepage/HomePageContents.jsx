@@ -13,6 +13,7 @@ import Principles from "@/app/homepage/Principles";
 import PatnersSection from "@/app/homepage/Patners";
 import FooterBottom from "@/components/FooterBottom";
 import Sidebar from "@/app/homepage/Sidebar"
+import MomentsSection from "@/app/homepage/MomentsSection"
 
 function HomePageContents() {
   return (
@@ -26,6 +27,7 @@ function HomePageContents() {
       <NewsSection />
       <CoreValues />
       <PatnersSection />
+      <MomentsSection />
       <FeedSection />
       <Footer />
       <FooterBottom />

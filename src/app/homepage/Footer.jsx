@@ -130,30 +130,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Secondary Row: Quick Links and Copyright */}
-        <div className="border-t border-white/20 mt-8 sm:mt-6 md:mt-4 pt-6 sm:pt-4 md:pt-3">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-3">
-            {/* Quick Links */}
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-3 md:gap-2 text-white/80">
-              <a href="/about" className="text-xl sm:text-lg md:text-base lg:text-sm hover:text-[#1f5d2f] transition-colors">
-                About Us
-              </a>
-              <a href="/services" className="text-xl sm:text-lg md:text-base lg:text-sm hover:text-[#1f5d2f] transition-colors">
-                Services
-              </a>
-              <a href="/privacy" className="text-xl sm:text-lg md:text-base lg:text-sm hover:text-[#1f5d2f] transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-xl sm:text-lg md:text-base lg:text-sm hover:text-[#1f5d2f] transition-colors">
-                Terms of Use
-              </a>
-            </div>
-            {/* Copyright */}
-            <p className="text-xl sm:text-lg md:text-base lg:text-sm text-white/80">
-              © {new Date().getFullYear()} Kenya Forest Service. All Rights Reserved.
-            </p>
-          </div>
-        </div>
       </div>
     </footer>
   );

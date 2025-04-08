@@ -20,7 +20,7 @@ const partners = [
 const PartnersSection = () => {
   return (
     <section className="bg-white py-12">
-      <h2 className="text-3xl font-bold text-center mb-8  text-black">Our Partners</h2>
+      <h2 className="text-3xl font-bold text-center mb-8  text-[#0d3c00]">Our Partners</h2>
       <div className="relative overflow-hidden w-full">
         <div className="flex space-x-8 animate-move" style={{ minWidth: "max-content" }}>
           {[...partners, ...partners].map((logo, index) => (

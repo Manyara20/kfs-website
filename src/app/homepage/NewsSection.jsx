@@ -58,7 +58,7 @@ const NewsSection = () => {
           News
         </h1>
         <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-semibold text-green-900 mt-1 sm:mt-2">
-          KFS Latest News
+          Latest News
         </h2>
       </div>
 

@@ -61,7 +61,7 @@ const Moments = [
   {
     title: "Community Engagement",
     description: "Empowering local communities with partner support.",
-    image: "/images/nuseries",
+    image: "/images/nuseries.jpg",
   },
 ];
 
@@ -87,7 +87,7 @@ const MomentsSection = () => {
   const currentMoment = Moments[currentSlide];
 
   return (
-    <section className="bg-[#e6f5e6] py-0">
+    <section className="bg-[#fff] py-4">
       <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
         {/* Small Screens: Image on Top, Text Below */}
         <div className="md:hidden">
@@ -101,7 +101,7 @@ const MomentsSection = () => {
             <div className="flex items-center gap-4 mb-4">
               <button
                 onClick={handlePrevSlide}
-                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+                className="bg-[#e6f5e6] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
               >
                 &lt;
               </button>
@@ -129,7 +129,7 @@ const MomentsSection = () => {
             <div className="flex items-center gap-4 mb-6">
               <button
                 onClick={handlePrevSlide}
-                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
               >
                 &lt;
               </button>
@@ -138,7 +138,7 @@ const MomentsSection = () => {
               </span>
               <button
                 onClick={handleNextSlide}
-                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
               >
                 &gt;
               </button>
@@ -157,7 +157,7 @@ const MomentsSection = () => {
           <img
             src={currentMoment.image}
             alt={currentMoment.title}
-            className="w-full h-[600px] object-cover shadow-md" // Fixed height for medium/large screens
+            className="w-full h-[720px] object-cover shadow-md" // Fixed height for medium/large screens
           />
         </div>
       </div>

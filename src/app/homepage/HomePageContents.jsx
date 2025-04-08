@@ -24,8 +24,8 @@ function HomePageContents() {
       <MissionSection />
       <CodeOfConductSection />
       <Principles />
-      <NewsSection />
       <CoreValues />
+      <NewsSection />
       <PatnersSection />
       <MomentsSection />
       <FeedSection />

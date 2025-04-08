@@ -153,9 +153,9 @@ const KFSFeeds = () => {
   }, [events, notices]);
 
   return (
-    <section className="bg-[#fff] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-6 sm:mb-8 md:mb-12 text-[#0E2E0E]">
-        KFS Updates
+         Updates
       </h2>
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">

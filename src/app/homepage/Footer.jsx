@@ -104,7 +104,7 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full p-3 sm:p-2.5 md:p-2 rounded-md text-black text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
+                  className="w-full p-3 sm:p-2.5 md:p-2 rounded-md text-[#e6f5e6] text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
                 />
               </div>
               <div className="flex justify-start">

@@ -1,21 +1,27 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { Description as DescriptionIcon } from "@mui/icons-material";
+import { IoMdHelpCircle } from "react-icons/io"; // Added for accessibility controls
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
+// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "1rem",
+  display: "flex", // Added to match DFCMPage
+  justifyContent: "center", // Added to match DFCMPage
+  alignItems: "center", // Added to match DFCMPage
+  padding: "2rem", // Updated from 1rem to 2rem to match DFCMPage
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -31,84 +37,118 @@ const PageContainer = styled(Box)({
   },
 });
 
-const ContentWrapper = styled(Box)({
-  maxWidth: "1000px",
-  margin: "0 auto",
-  padding: "2rem 0.5rem",
+const ContentWrapper = styled(motion.div)({
+  background: "rgba(255, 255, 255, 0.95)",
+  padding: "3rem", // Updated from 2rem 0.5rem to 3rem to match DFCMPage
+  maxWidth: "900px", // Updated from 1000px to 900px to match DFCMPage
+  width: "100%",
   position: "relative",
   zIndex: 1,
+  border: "1px solid rgba(255, 255, 255, 0.3)", // Added to match DFCMPage
+  borderRadius: 0, // Removed border radius to match DFCMPage
 });
 
 const HeaderTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
-  color: "#ffffff",
-  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
-  fontSize: "2rem",
-  lineHeight: 1.1,
-  letterSpacing: "0.3px",
-  textAlign: "center",
-  marginBottom: "1.5rem",
+  color: "#0f5a28", // Updated from #ffffff to #0f5a28 to match DFCMPage
+  fontSize: "1.8rem", // Updated from 2rem to 1.8rem
+  lineHeight: 1.3, // Updated from 1.1 to 1.3
+  letterSpacing: "0.5px", // Updated from 0.3px to 0.5px
+  textAlign: "left", // Updated from center to left to match DFCMPage
+  marginBottom: "2rem", // Updated from 1.5rem to 2rem
+  textTransform: "capitalize",
+  textShadow: "none", // Removed textShadow to match DFCMPage
+});
+
+const Description = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 400,
+  color: "#000", // Updated from textSecondary to #000 to match DFCMPage
+  fontSize: "0.9rem",
+  lineHeight: 1.8, // Added to match DFCMPage
+  wordSpacing: "0.15rem", // Added to match DFCMPage
+  marginBottom: "2rem", // Updated to match DFCMPage
+});
+
+const SubHeader = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 700,
+  color: "#0f5a28",
+  fontSize: "1.2rem",
+  marginBottom: "1rem", // Adjusted for better spacing
   textTransform: "capitalize",
 });
 
-const DocumentCard = styled(motion.div)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "8px",
-  padding: "1rem",
+const DocumentCard = styled(Box)({
+  background: "#1a3c34", // Updated to match DFCMPage DepartmentItem
+  padding: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1rem",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "0.5rem",
-  },
+  marginBottom: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
   "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
+    transform: "translateY(-2px)", // Updated from -3px to -2px to match DFCMPage
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Updated to match DFCMPage
   },
-}));
+});
 
 const DocumentInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "0.5rem",
+  gap: "1rem", // Updated from 0.5rem to 1rem for better spacing
 });
 
 const DocumentTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1rem",
+  fontWeight: 500, // Updated from 600 to 500 to match DFCMPage
+  color: "#ffffff", // Updated from #0f5a28 to #ffffff to match DFCMPage
+  fontSize: "0.85rem", // Updated from 1rem to 0.85rem to match DFCMPage
+  lineHeight: 1.6, // Added to match DFCMPage
+  wordSpacing: "0.1rem", // Added to match DFCMPage
   textTransform: "capitalize",
 });
 
 const FileSize = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
-  color: "#666",
-  fontSize: "0.8rem",
+  color: "#cccccc", // Updated to a lighter shade for contrast against #1a3c34 background
+  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
+  lineHeight: 1.6, // Added to match DFCMPage
+  wordSpacing: "0.1rem", // Added to match DFCMPage
 });
 
 const DownloadButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.3rem 1rem",
-  fontSize: "0.8rem",
+  padding: "0.5rem 1.5rem", // Updated from 0.3rem 1rem to 0.5rem 1.5rem for better proportions
+  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
   fontFamily: "'Peugeot', Helvetica, sans-serif",
-  borderRadius: "6px",
+  borderRadius: "8px", // Updated from 6px to 8px to match other document pages
   "&:hover": {
     backgroundColor: "#388e3c",
-    boxShadow: "0 1px 5px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)", // Updated to match other document pages
   },
 });
 
+// Main Page Component
 export default function ForesterMagazinePage() {
+  const [fontSize, setFontSize] = useState(16);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const handleFontSizeChange = (increase) => {
+    setFontSize((prev) => {
+      const newSize = increase ? prev + 1 : prev - 1;
+      return Math.max(12, Math.min(20, newSize));
+    });
+  };
+
   const magazines = [
     {
       title: "Forester January-June 2024",
@@ -123,8 +163,8 @@ export default function ForesterMagazinePage() {
   ];
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Updated duration to match DFCMPage
   };
 
   return (
@@ -132,56 +172,54 @@ export default function ForesterMagazinePage() {
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
-        <ContentWrapper>
+        <ContentWrapper
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={cardVariants}
+        >
           <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
-          <Typography variant="h6" align="center" color="#fff" gutterBottom sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
+          <Description>
             Biannual Forestry Magazine of the Kenya Forest Service
-          </Typography>
+          </Description>
 
-          <Box mt={2} p={2} bgcolor="rgba(255,255,255,0.9)" borderRadius="8px" boxShadow={2}>
-            <Typography variant="h6" color="#0f5a28" fontWeight="bold" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "1.2rem", textTransform: "capitalize" }}>
-              Welcome to the latest edition of our biannual forestry magazine.
-            </Typography>
-            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              As we reflect on the past six months, we’re proud to share the significant strides
-              made in Kenya’s forestry sector. In this issue, we spotlight several key events and
-              initiatives that underscore our commitment to sustainable forest management and
-              conservation.
-            </Typography>
-            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
-              that will guide our efforts in the coming years to enhance forest cover and promote
-              sustainable utilization of forest resources.
-            </Typography>
-            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              We also bring you highlights from the International Day of Forests celebrations, where
-              we joined the global community in recognizing the vital role forests play in our lives
-              and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
-              initiative that saw thousands of Kenyans come together to green our nation.
-            </Typography>
-            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              This edition also features news on various Memoranda of Understanding signed with
-              partner organizations, strengthening our collaborative efforts in forest conservation
-              and management.
-            </Typography>
-            <Typography variant="body1" color="textSecondary" mt={1} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              These stories reflect our ongoing dedication to Kenya’s forests and the communities
-              that depend on them. We hope this issue informs and inspires you to join us in our
-              mission to protect and nurture our precious forest resources.
-            </Typography>
-            <Typography variant="h6" color="#0f5a28" fontWeight="bold" mt={2} sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "1.2rem", textTransform: "capitalize" }}>
-              Happy reading!
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", fontSize: "0.9rem" }}>
-              Anne Kaari, ‘ndc‘ (K)
-            </Typography>
-          </Box>
+          <SubHeader>
+            Welcome to the latest edition of our biannual forestry magazine.
+          </SubHeader>
+          <Description>
+            As we reflect on the past six months, we’re proud to share the significant strides
+            made in Kenya’s forestry sector. In this issue, we spotlight several key events and
+            initiatives that underscore our commitment to sustainable forest management and
+            conservation.
+          </Description>
+          <Description>
+            Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
+            that will guide our efforts in the coming years to enhance forest cover and promote
+            sustainable utilization of forest resources.
+          </Description>
+          <Description>
+            We also bring you highlights from the International Day of Forests celebrations, where
+            we joined the global community in recognizing the vital role forests play in our lives
+            and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
+            initiative that saw thousands of Kenyans come together to green our nation.
+          </Description>
+          <Description>
+            This edition also features news on various Memoranda of Understanding signed with
+            partner organizations, strengthening our collaborative efforts in forest conservation
+            and management.
+          </Description>
+          <Description>
+            These stories reflect our ongoing dedication to Kenya’s forests and the communities
+            that depend on them. We hope this issue informs and inspires you to join us in our
+            mission to protect and nurture our precious forest resources.
+          </Description>
+          <SubHeader>Happy reading!</SubHeader>
+          <Description>Anne Kaari, ‘ndc‘ (K)</Description>
 
-          <Box mt={2}>
+          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
             {magazines.map((magazine, index) => (
-              <DocumentCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
+              <DocumentCard key={index}>
                 <DocumentInfo>
-                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "1.5rem" }} />
+                  <DescriptionIcon sx={{ color: "#ffffff", fontSize: "2rem" }} /> {/* Updated color to #ffffff for contrast */}
                   <Box>
                     <DocumentTitle>{magazine.title}</DocumentTitle>
                     <FileSize>1 file(s) {magazine.fileSize}</FileSize>
@@ -194,6 +232,24 @@ export default function ForesterMagazinePage() {
             ))}
           </Box>
         </ContentWrapper>
+
+        {/* Accessibility Controls */}
+        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+          <button
+            onClick={() => handleFontSizeChange(true)}
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            aria-label="Increase font size"
+          >
+            <IoMdHelpCircle className="text-white text-lg" />
+          </button>
+          <button
+            onClick={() => handleFontSizeChange(false)}
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
+            aria-label="Decrease font size"
+          >
+            <IoMdHelpCircle className="text-white text-lg" />
+          </button>
+        </div>
       </PageContainer>
       <FooterBottom />
     </div>

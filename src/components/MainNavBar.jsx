@@ -49,24 +49,22 @@ const MainNavBar = () => {
     }
   };
 
-  const handleToggle = (index) => {
+  const handleToggle = (key) => {
     setExpandedItems((prev) => ({
       ...prev,
-      [index]: !prev[index],
+      [key]: !prev[key],
     }));
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      setIsSticky(offset > 0);
+      setIsSticky(window.scrollY > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Recursive function to render nested submenus for desktop
+  // Recursive function for desktop submenus
   const renderSubMenu = (items, level = 0) => {
     return items.map((item, idx) => (
       <Box
@@ -81,7 +79,7 @@ const MainNavBar = () => {
       >
         <MenuItem
           sx={{
-            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" }, // 0.65rem * 1.4 = 0.91rem for >14 inches
+            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
             fontFamily: "'Peugeot', Helvetica, sans-serif",
             color: "black",
             "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
@@ -101,7 +99,13 @@ const MainNavBar = () => {
             {item.label}
           </Link>
           {item.subItems && item.subItems.length > 0 && (
-            <ArrowDropDown sx={{ color: "black", fontSize: "1.1rem" }} />
+            <ArrowDropDown
+              sx={{
+                color: "black",
+                fontSize: "1.1rem",
+                marginLeft: level % 2 === 0 ? "auto" : "0", // Right for even levels, left for odd
+              }}
+            />
           )}
         </MenuItem>
         {item.subItems && item.subItems.length > 0 && (
@@ -125,6 +129,65 @@ const MainNavBar = () => {
         )}
       </Box>
     ));
+  };
+
+  // Recursive function for mobile drawer
+  const renderMobileMenu = (items, parentIdx = "", level = 0) => {
+    return items.map((item, idx) => {
+      const key = parentIdx ? `${parentIdx}-${idx}` : `${idx}`;
+      const hasSubItems = item.subItems && item.subItems.length > 0;
+
+      return (
+        <React.Fragment key={key}>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={hasSubItems ? () => handleToggle(key) : null}
+              component={hasSubItems ? "button" : Link}
+              href={hasSubItems ? undefined : item.link || "#"}
+              target={item.isExternal ? "_blank" : "_self"}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+              sx={{
+                color: "#6A961F",
+                padding: "8px 16px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                sx={{
+                  "& .MuiTypography-root": {
+                    fontSize: { xs: "0.85rem", xl: "1.19rem" },
+                    fontFamily: "'Peugeot', Helvetica, sans-serif",
+                    textTransform: "capitalize",
+                  },
+                }}
+              />
+              {hasSubItems && (
+                expandedItems[key] ? (
+                  <ExpandLess sx={{ color: "#6A961F" }} />
+                ) : (
+                  <ExpandMore
+                    sx={{
+                      color: "#6A961F",
+                      marginLeft: level % 2 === 0 ? "auto" : "0", // Right for even levels, left for odd
+                    }}
+                  />
+                )
+              )}
+            </ListItemButton>
+          </ListItem>
+          {hasSubItems && (
+            <Collapse in={expandedItems[key]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding sx={{ pl: 3 }}>
+                {renderMobileMenu(item.subItems, key, level + 1)}
+              </List>
+            </Collapse>
+          )}
+        </React.Fragment>
+      );
+    });
   };
 
   const navigationItems = [
@@ -279,7 +342,6 @@ const MainNavBar = () => {
           alignItems: "center",
         }}
       >
-        {/* Logo */}
         <Box sx={{ flexShrink: 0, paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
           <Link href="/">
             <Image
@@ -287,12 +349,10 @@ const MainNavBar = () => {
               alt="KFS Logo"
               width={50}
               height={35}
-              style={{ marginRight: { xs: "8px", md: "15px" } }}
             />
           </Link>
         </Box>
 
-        {/* Desktop Navigation */}
         {!isMobile && (
           <Box
             sx={{
@@ -323,7 +383,7 @@ const MainNavBar = () => {
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
-                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" }, // 0.75rem * 1.4 = 1.05rem for >14 inches
+                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       fontWeight: 500,
                       padding: { md: "5px 7px", lg: "7px 10px" },
@@ -373,7 +433,7 @@ const MainNavBar = () => {
                 >
                   <Typography
                     sx={{
-                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" }, // 0.75rem * 1.4 = 1.05rem for >14 inches
+                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       fontWeight: 500,
                       textTransform: "capitalize",
@@ -387,7 +447,6 @@ const MainNavBar = () => {
           </Box>
         )}
 
-        {/* Desktop Search Icon */}
         {!isMobile && (
           <Box sx={{ flexShrink: 0 }}>
             <IconButton
@@ -401,12 +460,11 @@ const MainNavBar = () => {
               }}
               onClick={toggleSearchDrawer}
             >
-              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} /> {/* Increased for >14 inches */}
+              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} />
             </IconButton>
           </Box>
         )}
 
-        {/* Mobile Navigation */}
         {isMobile && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
@@ -432,7 +490,6 @@ const MainNavBar = () => {
         )}
       </Toolbar>
 
-      {/* Mobile Drawer Navigation */}
       <Drawer
         anchor="right"
         open={drawerOpen}
@@ -454,82 +511,11 @@ const MainNavBar = () => {
             <MenuIcon />
           </IconButton>
           <List sx={{ paddingTop: "3rem" }}>
-            {navigationItems.map((item, index) => (
-              <React.Fragment key={index}>
-                {item.link && !item.subItems ? (
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      component={Link}
-                      href={item.link}
-                      target={item.isExternal ? "_blank" : "_self"}
-                      rel={item.isExternal ? "noopener noreferrer" : undefined}
-                      sx={{ color: "#6A961F", padding: "8px 16px" }}
-                    >
-                      <ListItemText
-                        primary={item.label}
-                        sx={{
-                          "& .MuiTypography-root": {
-                            fontSize: { xs: "0.85rem", xl: "1.19rem" }, // 0.85rem * 1.4 = 1.19rem for >14 inches
-                            fontFamily: "'Peugeot', Helvetica, sans-serif",
-                            textTransform: "capitalize",
-                          },
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                ) : (
-                  <>
-                    <ListItemButton
-                      onClick={() => handleToggle(index)}
-                      sx={{ color: "#6A961F", padding: "8px 16px" }}
-                    >
-                      <ListItemText
-                        primary={item.label}
-                        sx={{
-                          "& .MuiTypography-root": {
-                            fontSize: { xs: "0.9rem", xl: "1.26rem" }, // 0.9rem * 1.4 = 1.26rem for >14 inches
-                            fontFamily: "'Peugeot', Helvetica, sans-serif",
-                            textTransform: "capitalize",
-                          },
-                        }}
-                      />
-                      {expandedItems[index] ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemButton>
-                    <Collapse in={expandedItems[index]} timeout="auto" unmountOnExit>
-                      <List component="div" disablePadding sx={{ pl: 3 }}>
-                        {item.subItems.map((subItem, subIdx) => (
-                          <ListItem key={subIdx} disablePadding>
-                            <ListItemButton
-                              component={Link}
-                              href={subItem.link || "#"}
-                              target={subItem.isExternal ? "_blank" : "_self"}
-                              rel={item.isExternal ? "noopener noreferrer" : undefined}
-                              sx={{ color: "#6A961F", padding: "6px 16px" }}
-                            >
-                              <ListItemText
-                                primary={subItem.label}
-                                sx={{
-                                  "& .MuiTypography-root": {
-                                    fontSize: { xs: "0.85rem", xl: "1.19rem" }, // 0.85rem * 1.4 = 1.19rem for >14 inches
-                                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                                    textTransform: "capitalize",
-                                  },
-                                }}
-                              />
-                            </ListItemButton>
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Collapse>
-                  </>
-                )}
-              </React.Fragment>
-            ))}
+            {renderMobileMenu(navigationItems)}
           </List>
         </Box>
       </Drawer>
 
-      {/* Search Drawer */}
       <Drawer
         anchor="top"
         open={searchDrawerOpen}
@@ -563,7 +549,7 @@ const MainNavBar = () => {
             variant="h6"
             sx={{
               textAlign: "center",
-              fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" }, // 1rem * 1.4 = 1.4rem for >14 inches
+              fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" },
               fontFamily: "'Peugeot', Helvetica, sans-serif",
               color: "white",
               textTransform: "capitalize",
@@ -579,7 +565,7 @@ const MainNavBar = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "white", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} /> {/* 1.1rem * 1.4 = 1.54rem */}
+                  <SearchIcon sx={{ color: "white", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} />
                 </InputAdornment>
               ),
             }}
@@ -591,7 +577,7 @@ const MainNavBar = () => {
               },
               "& .MuiInputBase-input": {
                 color: "white",
-                fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" }, // 0.9rem * 1.4 = 1.26rem for >14 inches
+                fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" },
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "none",
               },

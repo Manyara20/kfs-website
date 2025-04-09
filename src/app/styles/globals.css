@@ -27,7 +27,6 @@
 /* Typography System */
 html {
   font-size: 1.0rem; /* Default base font size */
-  font-size: clamp(0.9rem, 1vw, 1.0rem); /* Responsive scaling */
 }
 
 body {
@@ -41,7 +40,6 @@ body {
   color: var(--foreground);
   line-height: 1.5; /* Improve readability */
 }
-
 
 /* General Styles */
 .fullscreen-section {
@@ -85,7 +83,6 @@ body {
 /* Style tweet text */
 .twitter-feed-container .timeline-Tweet-text {
   color: #ffffff !important;
-  font-size: clamp(0.875rem, 1.1vw, 1rem) !important; /* 14px to 16px */
   line-height: 1.4 !important;
   margin: 0 !important;
 }
@@ -93,7 +90,6 @@ body {
 /* Style tweet author name */
 .twitter-feed-container .timeline-Tweet-author .TweetAuthor-name {
   color: #ffffff !important;
-  font-size: clamp(1rem, 1.2vw, 1.125rem) !important; /* 16px to 18px */
   font-weight: 500 !important;
 }
 
@@ -101,7 +97,6 @@ body {
 .twitter-feed-container .timeline-Tweet-author .TweetAuthor-screenName,
 .twitter-feed-container .timeline-Tweet-timestamp {
   color: #e0e0e0 !important;
-  font-size: clamp(0.875rem, 1vw, 1rem) !important; /* 14px to 16px */
 }
 
 /* Remove unwanted elements */

@@ -47,7 +47,7 @@ const CoreValuesSection = () => {
   // Placeholder during server-side rendering to avoid hydration mismatch
   if (!isMounted) {
     return (
-      <section className="bg-[#fff] py-12 sm:py-10 md:py-8 px-8 sm:px-6 md:px-4">
+      <section className="bg-[#e6f5e6] py-12 sm:py-10 md:py-8 px-8 sm:px-6 md:px-4">
         <div className="text-center mb-12 sm:mb-10 md:mb-8">
           <h2 className="text-5xl sm:text-4xl md:text-3xl font-black text-[#0E2E0E]">
             Our Core Values
@@ -66,7 +66,7 @@ const CoreValuesSection = () => {
   }
 
   return (
-    <section className="bg-[#fff] py-12 sm:py-10 md:py-8 lg:py-6 px-8 sm:px-6 md:px-4 lg:px-2">
+    <section className="bg-[#e6f5e6] py-12 sm:py-10 md:py-8 lg:py-6 px-8 sm:px-6 md:px-4 lg:px-2">
       {/* Centered Header */}
       <div className="text-center mb-12 sm:mb-10 md:mb-8 lg:mb-6 xl:mb-4">
         <h2 className="text-6xl sm:text-5xl md:text-4xl lg:text-3xl xl:text-2xl font-black text-[#0E2E0E]">

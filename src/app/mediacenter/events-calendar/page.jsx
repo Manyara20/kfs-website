@@ -73,7 +73,6 @@ const SectionTitle = styled(Typography)({
 
 const CalendarWrapper = styled(Box)({
   background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "8px",
   padding: "1.5rem",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   marginBottom: "2rem",
@@ -106,8 +105,7 @@ const DayCell = styled(motion.div, {
   shouldForwardProp: (prop) => prop !== "isToday",
 })(({ isToday }) => ({
   background: isToday ? "#e8f5e9" : "#ffffff",
-  border: isToday ? "2px solid #0f5a28" : "1px solid #e0e0e0",
-  borderRadius: "6px",
+  border: isToday ? "solid #0f5a28" : "1px solid #e0e0e0",
   padding: "0.5rem",
   textAlign: "center",
   height: "90px",
@@ -139,7 +137,6 @@ const EventText = styled(Typography)({
 
 const EventCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "8px",
   padding: "1rem",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   marginBottom: "1rem",

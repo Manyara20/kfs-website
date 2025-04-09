@@ -2,82 +2,155 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-const SignLanguageServiceCharter = () => {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
+// Styled Components
+const PageContainer = styled(Box)({
+  minHeight: "100vh",
+  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "2rem",
+  position: "relative",
+  overflow: "hidden",
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+    opacity: 0.05,
+    zIndex: 0,
+  },
+});
 
+const ContentCard = styled(motion.div)({
+  background: "rgba(255, 255, 255, 0.95)",
+  padding: "3rem",
+  maxWidth: "900px",
+  width: "100%",
+  position: "relative",
+  zIndex: 1,
+  border: "1px solid rgba(255, 255, 255, 0.3)",
+  borderRadius: 0,
+});
+
+const SocialIconsContainer = styled(Box)({
+  position: "absolute",
+  top: "2rem",
+  left: "2rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  zIndex: 20,
+});
+
+const SocialIconButton = styled("button")({
+  backgroundColor: "rgba(255, 255, 255, 0.9)",
+  color: "#0f5a28",
+  padding: "0.5rem",
+  borderRadius: "50%",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    backgroundColor: "#1a3c34",
+    color: "#ffffff",
+    transform: "scale(1.1)",
+  },
+});
+
+const Title = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 700,
+  color: "#0f5a28",
+  fontSize: "1.8rem",
+  lineHeight: 1.3,
+  letterSpacing: "0.5px",
+  marginBottom: "2rem",
+  textTransform: "capitalize",
+});
+
+const Description = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 400,
+  color: "#000",
+  fontSize: "0.9rem",
+  lineHeight: 1.8,
+  wordSpacing: "0.15rem",
+  marginBottom: "2rem",
+});
+
+const VideoContainer = styled(Box)({
+  width: "100%",
+  "& iframe": {
+    width: "100%",
+    height: "300px",
+    borderRadius: "8px",
+    border: "none",
+  },
+  "@media (min-width: 640px)": {
+    "& iframe": {
+      height: "400px",
+    },
+  },
+});
+
+// Main Page Component
+export default function SignLanguageServiceCharter() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  
+
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
+    <div>
       <TopNavBar />
-
-      {/* Main Navigation Bar */}
       <MainNavBar />
+      <PageContainer>
 
-      {/* Page Container */}
-      <div
-        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-4 sm:p-6 md:p-8 relative overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-        }}
-      >
-        {/* Overlay Pattern */}
-        <div
-          className="absolute inset-0 opacity-10 z-0"
-          style={{
-            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-          }}
-        />
-
-        {/* Content Card */}
-        <motion.div
-          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-6 sm:p-8 md:p-12 w-full max-w-2xl relative z-10 border border-white/30 rounded-lg"
+        <ContentCard
           initial="hidden"
-          animate="visible"
+          animate={isLoaded ? "visible" : "hidden"}
           variants={cardVariants}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f5a28] mb-4 sm:mb-6 leading-tight tracking-wide">
-            Sign Language Service Charter
-          </h1>
-          <p className="text-base sm:text-lg text-[#333] leading-relaxed mb-4 sm:mb-6">
+          <Title variant="h1">Sign Language Service Charter</Title>
+          <Description>
             Kenya Forest Service (KFS) is committed to providing accessible services to all, including individuals with hearing impairments. Our Sign Language Service Charter ensures effective communication and inclusion in all our service delivery points.
-          </p>
-          <p className="text-base sm:text-lg text-[#333] leading-relaxed mb-4 sm:mb-6">
+          </Description>
+          <Description>
             Watch Our Sign Language Charter Video:
-          </p>
-          <div className="w-full">
+          </Description>
+          <VideoContainer>
             {isLoaded && (
               <iframe
-                width="100%"
-                height="300"
                 src="https://www.youtube.com/embed/ZXXwvbU-zDA?si=Z8sN8oIYal0arF2-"
                 title="Sign Language Service Charter"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="rounded-lg sm:h-[400px]"
               />
             )}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Footer */}
+          </VideoContainer>
+        </ContentCard>
+      </PageContainer>
       <FooterBottom />
     </div>
   );
-};
-
-export default SignLanguageServiceCharter;
+}

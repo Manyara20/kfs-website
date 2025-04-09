@@ -1,4 +1,3 @@
-// pages/about/senior-management.js
 "use client";
 
 import { Box, Typography, Grid, IconButton, Avatar } from "@mui/material";
@@ -137,13 +136,13 @@ export default function KFSSeniorManagementPage() {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "1.4rem", md: "1.8rem" }, // Further reduced from 1.5rem/2rem
+              fontSize: { xs: "1.4rem", md: "1.8rem" },
               fontWeight: "bold",
               color: "#023011",
-              mb: 0.5, // Reduced from 1
+              mb: 0.5,
               fontFamily: "'Peugeot', Helvetica, sans-serif",
               textTransform: "capitalize",
-              letterSpacing: "0.3px", // Reduced from 0.5px
+              letterSpacing: "0.3px",
             }}
           >
             Senior Management
@@ -152,8 +151,8 @@ export default function KFSSeniorManagementPage() {
             variant="body1"
             sx={{
               color: "#666",
-              fontSize: { xs: "0.85rem", md: "0.9rem" }, // Further reduced from 0.9rem/1rem
-              maxWidth: "600px", // Reduced from 700px
+              fontSize: { xs: "0.85rem", md: "0.9rem" },
+              maxWidth: "600px",
               margin: "0 auto",
               fontFamily: "'Peugeot', Helvetica, sans-serif",
             }}
@@ -167,15 +166,15 @@ export default function KFSSeniorManagementPage() {
           <Box
             sx={{
               backgroundColor: "white",
-              border: "2px solid #e0e0e0",
-              boxShadow: "0 3px 6px rgba(0,0,0,0.1)", // Further reduced shadow
-              width: { xs: "100%", sm: "280px" }, // Reduced from 300px
-              p: 1.5, // Reduced from 2
+              borderRadius: "8px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+              width: { xs: "100%", sm: "300px" },
+              p: 2,
               textAlign: "center",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               "&:hover": {
-                transform: "translateY(-3px)", // Reduced from -5px
-                boxShadow: "0 6px 12px rgba(0,0,0,0.15)", // Further reduced shadow
+                transform: "translateY(-3px)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
               },
             }}
           >
@@ -184,25 +183,25 @@ export default function KFSSeniorManagementPage() {
               sx={{
                 backgroundColor: "#6A961F",
                 color: "white",
-                padding: "0.2rem 0.6rem", // Reduced from 0.3rem 0.8rem
+                padding: "0.2rem 0.6rem",
                 display: "inline-block",
-                mb: 0.5, // Reduced from 1
-                fontSize: "0.75rem", // Reduced from 0.8rem
+                mb: 1,
+                fontSize: "0.75rem",
                 fontWeight: "bold",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "capitalize",
+                textTransform: "uppercase",
               }}
             >
               CCF
             </Typography>
             <Avatar
               sx={{
-                width: 100, // Reduced from 120
-                height: 100, // Reduced from 120
+                width: 120,
+                height: 120,
                 mx: "auto",
-                mb: 0.5, // Reduced from 1
-                border: "2px solid #6A961F",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.1)", // Reduced shadow
+                mb: 1,
+                border: "3px solid #6A961F",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
               }}
               alt={ceo.name}
               src={ceo.image}
@@ -212,10 +211,10 @@ export default function KFSSeniorManagementPage() {
               sx={{
                 fontWeight: 600,
                 color: "#023011",
-                mb: 0.3, // Reduced from 0.5
-                fontSize: "0.9rem", // Reduced from 1rem
+                mb: 0.5,
+                fontSize: "1rem",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "capitalize",
+                textTransform: "uppercase",
               }}
             >
               {ceo.name}
@@ -224,8 +223,8 @@ export default function KFSSeniorManagementPage() {
               variant="body2"
               sx={{
                 color: "#666",
-                mb: 0.5, // Reduced from 1
-                fontSize: "0.7rem", // Reduced from 0.8rem
+                mb: 1,
+                fontSize: "0.8rem",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "capitalize",
               }}
@@ -249,20 +248,20 @@ export default function KFSSeniorManagementPage() {
         </Box>
 
         {/* Board Members Section */}
-        <Grid container spacing={1.5} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center">
           {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={3} lg={3}>
+            <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
               <Box
                 sx={{
                   backgroundColor: "white",
-                  border: "2px solid #e0e0e0",
-                  boxShadow: "0 3px 6px rgba(0,0,0,0.1)", // Further reduced shadow
-                  p: 1.5, // Reduced from 2
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  p: 2,
                   textAlign: "center",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
-                    transform: "translateY(-3px)", // Reduced from -5px
-                    boxShadow: "0 6px 12px rgba(0,0,0,0.15)", // Further reduced shadow
+                    transform: "translateY(-3px)",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                   },
                   height: "100%",
                   display: "flex",
@@ -273,12 +272,12 @@ export default function KFSSeniorManagementPage() {
                 <Box>
                   <Avatar
                     sx={{
-                      width: 90, // Reduced from 100
-                      height: 90, // Reduced from 100
+                      width: 120,
+                      height: 120,
                       mx: "auto",
-                      mb: 0.5, // Reduced from 1
-                      border: "2px solid #6A961F",
-                      boxShadow: "0 1px 2px rgba(0,0,0,0.1)", // Reduced shadow
+                      mb: 1,
+                      border: "3px solid #6A961F",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                     }}
                     alt={member.name}
                     src={member.image}
@@ -288,10 +287,10 @@ export default function KFSSeniorManagementPage() {
                     sx={{
                       fontWeight: 600,
                       color: "#023011",
-                      mb: 0.3, // Reduced from 0.5
-                      fontSize: "0.85rem", // Reduced from 0.9rem
+                      mb: 0.5,
+                      fontSize: "1rem",
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
-                      textTransform: "capitalize",
+                      textTransform: "uppercase",
                     }}
                   >
                     {member.name}
@@ -300,8 +299,8 @@ export default function KFSSeniorManagementPage() {
                     variant="body2"
                     sx={{
                       color: "#666",
-                      fontSize: "0.7rem", // Reduced from 0.75rem
-                      mb: 0.5, // Reduced from 1
+                      fontSize: "0.8rem",
+                      mb: 1,
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       textTransform: "capitalize",
                     }}

@@ -1,4 +1,3 @@
-// pages/flea-assessment.js
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -24,7 +23,7 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "1rem", // Reduced from 2rem
+  padding: "2rem", // Updated to match DFCMPage
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -42,71 +41,76 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "2rem", // Reduced from 3rem
-  maxWidth: "700px", // Reduced from 800px
+  padding: "3rem", // Updated from 2rem to 3rem to match DFCMPage
+  maxWidth: "900px", // Updated from 700px to 900px to match DFCMPage
   width: "100%",
   position: "relative",
   zIndex: 1,
   border: "1px solid rgba(255, 255, 255, 0.3)",
   color: "#ffffff",
+  borderRadius: 0, // Removed border radius
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
-  marginBottom: "1rem", // Reduced from 1.5rem
-  fontSize: "1.8rem", // Reduced from 2.5rem
-  lineHeight: 1.1, // Reduced from 1.2
-  letterSpacing: "0.3px", // Reduced from 0.5px
-  textTransform: "capitalize", // Added
+  marginBottom: "2rem", // Updated from 1rem to 2rem to match DFCMPage
+  fontSize: "1.8rem",
+  lineHeight: 1.3, // Updated from 1.1 to 1.3 to match DFCMPage
+  letterSpacing: "0.5px", // Updated from 0.3px to 0.5px to match DFCMPage
+  textTransform: "capitalize",
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#000000",
-  lineHeight: 1.6, // Reduced from 1.6 (already 1.6, kept for consistency)
-  fontSize: "0.9rem", // Reduced from 1.1rem
-  marginBottom: "1rem", // Reduced from 1.5rem
+  lineHeight: 1.8, // Updated from 1.6 to 1.8 to match DFCMPage
+  wordSpacing: "0.15rem", // Added to match DFCMPage
+  fontSize: "0.9rem",
+  marginBottom: "2rem", // Updated from 1rem to 2rem to match DFCMPage
 });
 
 const SectionList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Reduced from 300px
-  gap: "0.5rem", // Reduced from 1rem
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Updated from 250px to 280px to match DFCMPage
+  gap: "1.5rem", // Updated from 0.5rem to 1.5rem to match DFCMPage
   padding: 0,
 });
 
 const SectionItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "0.5rem", // Reduced from 1rem
+  padding: "1.5rem", // Updated from 0.5rem to 1.5rem to match DFCMPage
   "&:hover": {
-    transform: "translateY(-2px)", // Reduced from -3px
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Reduced shadow
+    transform: "translateY(-2px)",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
   },
 });
 
 const SectionText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Peugeot', Helvetica, sans-serif", // Changed to Peugeot font
+    fontFamily: "'Peugeot', Helvetica, sans-serif",
     fontWeight: 500,
     color: "#ffffff",
-    fontSize: "0.85rem", // Reduced from 1rem
-    textTransform: "capitalize", // Added
+    fontSize: "0.85rem",
+    lineHeight: 1.6, // Added to match DFCMPage
+    wordSpacing: "0.1rem", // Added to match DFCMPage
+    textTransform: "capitalize",
   },
 });
 
 const ImageSliderContainer = styled(Box)({
-  marginTop: "1rem", // Reduced from 2rem
+  marginTop: "1rem",
+  marginBottom: "2rem", // Added to match the spacing style of DFCMPage
   "& .slick-slide": {
-    padding: "0 5px", // Reduced from 0 10px
+    padding: "0 5px",
   },
   "& .slick-prev, & .slick-next": {
     zIndex: 1,
-    width: "30px", // Reduced from 40px
-    height: "30px", // Reduced from 40px
+    width: "30px",
+    height: "30px",
     background: "rgba(0, 0, 0, 0.5)",
     borderRadius: "50%",
     "&:hover": {
@@ -114,16 +118,16 @@ const ImageSliderContainer = styled(Box)({
     },
   },
   "& .slick-prev": {
-    left: "5px", // Reduced from 10px
+    left: "5px",
   },
   "& .slick-next": {
-    right: "5px", // Reduced from 10px
+    right: "5px",
   },
   "& .slick-dots": {
-    bottom: "-20px", // Reduced from -30px
+    bottom: "-20px",
     "& li button:before": {
       color: "#1a3c34",
-      fontSize: "8px", // Reduced dot size
+      fontSize: "8px",
     },
     "& li.slick-active button:before": {
       color: "#00ffff",
@@ -132,11 +136,11 @@ const ImageSliderContainer = styled(Box)({
 });
 
 const ImageItem = styled(Box)({
-  width: "100%", // Already correct
-  height: "200px", // Reduced from 300px
+  width: "100%",
+  height: "200px",
   position: "relative",
   border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "6px", // Reduced from 8px
+  borderRadius: 0, // Removed border radius
   overflow: "hidden",
 });
 
@@ -155,19 +159,19 @@ export default function FLEAAssessmentPage() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true); // Fade-in effect on load
+    setIsVisible(true);
   }, []);
 
   const handleFontSizeChange = (increase) => {
     setFontSize((prev) => {
       const newSize = increase ? prev + 1 : prev - 1;
-      return Math.max(12, Math.min(20, newSize)); // Limit between 12px and 20px
+      return Math.max(12, Math.min(20, newSize));
     });
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Reduced duration from 0.8
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   const sections = ["Background", "Objectives", "Methodology", "Results"];
@@ -179,7 +183,6 @@ export default function FLEAAssessmentPage() {
     toProxyUrl("/images/FLEA-1.jpg"),
   ];
 
-  // Slider settings for react-slick
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -258,26 +261,26 @@ export default function FLEAAssessmentPage() {
               </SectionItem>
             ))}
           </SectionList>
-          <Description className="mt-2"> {/* Reduced from mt-4 */}
+          <Description className="mt-2">
             Stay informed about FLEA progress and KFS updates.
           </Description>
         </ContentCard>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-2 right-2 flex flex-col space-y-1"> {/* Reduced from bottom-4, right-4, space-y-2 */}
+        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" // Reduced padding from p-2 to p-1
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white text-lg" /> {/* Reduced size via class */}
+            <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" // Reduced padding from p-2 to p-1
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white text-lg" /> {/* Reduced size via class */}
+            <IoMdHelpCircle className="text-white text-lg" />
           </button>
         </div>
       </PageContainer>

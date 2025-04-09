@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { IoMdHelpCircle, IoMdAdd, IoMdRemove } from "react-icons/io";
+import { IoMdHelpCircle } from "react-icons/io"; // Updated to match DFCMPage
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
@@ -31,7 +31,7 @@ export default function StrategyPartnershipsPage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Updated duration to match DFCMPage
   };
 
   return (
@@ -59,54 +59,56 @@ export default function StrategyPartnershipsPage() {
 
         {/* Main Content Card */}
         <motion.div
-          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-2xl w-full relative z-10 border border-white/30 rounded-xl"
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 w-full mx-auto relative z-10 border border-white/30 rounded-none" // Updated to match DFCMPage (removed rounded-xl)
+          style={{ maxWidth: "900px" }} // Updated from max-w-2xl to 900px to match DFCMPage
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
-          style={{ fontSize: `${fontSize}px` }}
         >
-          <h1 className="text-4xl font-bold text-[#0f5a28] mb-6 leading-tight tracking-wide">
+          <h1 className="text-[1.8rem] font-bold text-[#0f5a28] mb-8 leading-[1.3] tracking-[0.5px] capitalize">
             Directorate of Strategy, Partnerships & Resource Mobilization
           </h1>
-          <p className="text-lg text-[#000] leading-relaxed mb-6">
+          <p className="text-[0.9rem] text-[#000] leading-[1.8] mb-8" style={{ wordSpacing: "0.15rem" }}>
             The Directorate is responsible for guiding the organization in setting the Strategic direction to take in the execution of her mandate in order to succeed. It guides in establishing priorities and developing corporate strategies which are harmonized with the National Development plans. It ensures that the Service uses current technologies in Forest management and complies with the quality Management standards.
           </p>
-          <p className="text-lg text-[#000] leading-relaxed mb-6">
+          <p className="text-[0.9rem] text-[#000] leading-[1.8] mb-8" style={{ wordSpacing: "0.15rem" }}>
             The directorate will also guide the Service in the implementation of quality management systems under ISO and risk-based strategies. It is further responsible for managing partnerships and mobilizing resources for the Service’ core programmes operations.
           </p>
-          <p className="text-lg text-[#000] leading-relaxed mb-6">
+          <p className="text-[0.9rem] text-[#000] leading-[1.8] mb-8" style={{ wordSpacing: "0.15rem" }}>
             It executes this mandate through the following Departments:
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6"> {/* Updated gap to 1.5rem (gap-6) */}
             {departments.map((dept, index) => (
               <li
                 key={index}
-                className="bg-[#1a3c34] text-white p-4 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                className="bg-[#1a3c34] text-white p-6 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-300 capitalize" // Updated padding to 1.5rem (p-6), hover effects to match DFCMPage
               >
-                {dept}
+                <span className="text-[0.85rem] leading-[1.6]" style={{ wordSpacing: "0.1rem" }}>
+                  {dept}
+                </span>
               </li>
             ))}
           </ul>
-          <p className="text-lg text-[#000] leading-relaxed mt-6">
+          <p className="text-[0.9rem] text-[#000] leading-[1.8] mt-2" style={{ wordSpacing: "0.15rem" }}>
             Explore our ongoing efforts and updates below.
           </p>
         </motion.div>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-20">
+        <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-20"> {/* Updated gap to space-y-2 to match DFCMPage */}
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Increase font size"
           >
-            <IoMdAdd className="w-6 h-6" />
+            <IoMdHelpCircle className="text-white text-lg" /> {/* Updated icon to match DFCMPage */}
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] text-white p-2 rounded-full hover:bg-green-800 transition-all duration-300"
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-all duration-300"
             aria-label="Decrease font size"
           >
-            <IoMdRemove className="w-6 h-6" />
+            <IoMdHelpCircle className="text-white text-lg" /> {/* Updated icon to match DFCMPage */}
           </button>
         </div>
       </div>

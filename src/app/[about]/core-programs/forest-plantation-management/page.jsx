@@ -19,7 +19,7 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "1rem", 
+  padding: "2rem",
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -37,8 +37,8 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "2rem", 
-  maxWidth: "700px", 
+  padding: "3rem",
+  maxWidth: "900px", // Updated from 700px to 900px to match DFCMPage
   width: "100%",
   position: "relative",
   zIndex: 1,
@@ -47,49 +47,52 @@ const ContentCard = styled(motion.div)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", 
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
-  marginBottom: "1rem", 
-  fontSize: "1.8rem", 
-  lineHeight: 1.1,
-  letterSpacing: "0.3px", 
-  textTransform: "capitalize", 
+  marginBottom: "2rem",
+  fontSize: "1.8rem",
+  lineHeight: 1.3,
+  letterSpacing: "0.5px",
+  textTransform: "capitalize",
 });
 
 const Description = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#000",
-  lineHeight: 1.6, 
-  fontSize: "0.9rem", 
-  marginBottom: "1rem", 
+  lineHeight: 1.8,
+  wordSpacing: "0.15rem",
+  fontSize: "0.9rem",
+  marginBottom: "2rem",
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
-  gap: "0.5rem", 
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Increased from 250px to 280px to better utilize the wider card
+  gap: "1rem",
   padding: 0,
 });
 
 const DepartmentItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "0.5rem", 
+  padding: "1rem",
   "&:hover": {
-    transform: "translateY(-2px)", 
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", 
+    transform: "translateY(-2px)",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
   },
 });
 
 const DepartmentText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Peugeot', Helvetica, sans-serif", 
+    fontFamily: "'Peugeot', Helvetica, sans-serif",
     fontWeight: 500,
     color: "#ffffff",
-    fontSize: "0.85rem", 
-    textTransform: "capitalize", 
+    fontSize: "0.85rem",
+    lineHeight: 1.6,
+    wordSpacing: "0.1rem",
+    textTransform: "capitalize",
   },
 });
 
@@ -107,19 +110,19 @@ export default function KFSDivisionsPage() {
   ];
 
   useEffect(() => {
-    setIsVisible(true); 
+    setIsVisible(true);
   }, []);
 
   const handleFontSizeChange = (increase) => {
     setFontSize((prev) => {
       const newSize = increase ? prev + 1 : prev - 1;
-      return Math.max(12, Math.min(20, newSize)); 
+      return Math.max(12, Math.min(20, newSize));
     });
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, 
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
@@ -151,26 +154,26 @@ export default function KFSDivisionsPage() {
               </DepartmentItem>
             ))}
           </DepartmentList>
-          <Description className="mt-2"> 
+          <Description className="mt-2">
             Explore our ongoing efforts and updates below.
           </Description>
         </ContentCard>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-2 right-2 flex flex-col space-y-1"> 
+        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" 
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Increase font size"
           >
-            <IoMdHelpCircle className="text-white text-lg" /> 
+            <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-1 rounded-full hover:bg-green-800" 
+            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Decrease font size"
           >
-            <IoMdHelpCircle className="text-white text-lg" /> 
+            <IoMdHelpCircle className="text-white text-lg" />
           </button>
         </div>
       </PageContainer>

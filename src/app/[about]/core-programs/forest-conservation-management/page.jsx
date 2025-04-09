@@ -1,4 +1,3 @@
-// pages/dfcm.js
 "use client";
 
 import React from "react";
@@ -13,14 +12,14 @@ import FooterBottom from "@/components/FooterBottom";
 // Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+  backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('/images/background-template/background.jpg')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "1rem", 
+  padding: "2rem", 
   position: "relative",
   overflow: "hidden",
   "&:before": {
@@ -39,70 +38,74 @@ const PageContainer = styled(Box)({
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
   backdropFilter: "blur(10px)",
-  boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)", 
-  maxWidth: "700px",
+  boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",
+  maxWidth: "900px",
   width: "100%",
   position: "relative",
   zIndex: 1,
   border: "1px solid rgba(255, 255, 255, 0.3)",
+  padding: "3rem", 
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", 
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1rem", 
-  fontSize: "1.8rem", 
-  lineHeight: 1.1, 
-  letterSpacing: "0.3px", 
-  textTransform: "capitalize", 
+  marginBottom: "2rem", 
+  fontSize: "2.2rem",
+  lineHeight: 1.3, 
+  letterSpacing: "0.5px", 
+  textTransform: "capitalize",
 });
 
 const Description = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", 
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#333",
-  lineHeight: 1.6, 
-  fontSize: "0.9rem", 
-  marginBottom: "1rem", 
+  lineHeight: 1.8, 
+  wordSpacing: "0.15rem", 
+  fontSize: "1rem",
+  marginBottom: "2rem", 
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
-  gap: "0.5rem", 
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gap: "1.5rem", 
   padding: 0,
 });
 
 const DepartmentItem = styled(ListItem)({
-  background: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
+  background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "0.5rem", 
+  padding: "1.5rem", // Increased from 1rem to 1.5rem for more internal spacing
   "&:hover": {
-    transform: "translateY(-3px)", 
-    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.15)", 
+    transform: "translateY(-3px)",
+    boxShadow: "0 3px 10px rgba(0, 0, 0, 0.15)",
     background: "linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%)",
   },
 });
 
 const DepartmentText = styled(ListItemText)({
   "& .MuiTypography-root": {
-    fontFamily: "'Peugeot', Helvetica, sans-serif", 
+    fontFamily: "'Peugeot', Helvetica, sans-serif",
     fontWeight: 500,
     color: "#0D3C00",
-    fontSize: "0.85rem", 
-    textTransform: "capitalize", 
+    fontSize: "0.95rem",
+    lineHeight: 1.6, // Added line height for better readability
+    wordSpacing: "0.1rem", // Added word spacing for better readability
+    textTransform: "capitalize",
   },
 });
 
 const SocialIconsContainer = styled(Box)({
   position: "absolute",
-  top: "1rem", 
-  left: "1rem", 
+  top: "1.5rem", // Increased from 1rem for better positioning
+  left: "1.5rem", // Increased from 1rem for better positioning
   display: "flex",
   flexDirection: "column",
-  gap: "0.5rem", 
+  gap: "0.75rem", // Increased from 0.5rem for more spacing between icons
   zIndex: 2,
 });
 
@@ -110,12 +113,12 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: "rgba(255, 255, 255, 0.9)",
   color: "#0D3C00",
   transition: "all 0.3s ease",
-  padding: "6px", 
+  padding: "8px", // Increased from 6px for better touch area
   "&:hover": {
     backgroundColor: "#0D3C00",
     color: "#fff",
-    transform: "scale(1.05)", 
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", 
+    transform: "scale(1.05)",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
   },
 }));
 
@@ -131,20 +134,6 @@ export default function DFCMPage() {
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
-        <SocialIconsContainer>
-          <SocialIconButton aria-label="Facebook">
-            <Facebook fontSize="small" /> {/* Reduced from default */}
-          </SocialIconButton>
-          <SocialIconButton aria-label="Twitter">
-            <Twitter fontSize="small" /> 
-          </SocialIconButton>
-          <SocialIconButton aria-label="YouTube">
-            <YouTube fontSize="small" /> 
-          </SocialIconButton>
-          <SocialIconButton aria-label="Instagram">
-            <Instagram fontSize="small" /> 
-          </SocialIconButton>
-        </SocialIconsContainer>
         <ContentCard
           initial="hidden"
           animate="visible"

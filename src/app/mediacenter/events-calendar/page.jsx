@@ -181,13 +181,10 @@ export default function EventsCalendarPage() {
   const [calendarDays, setCalendarDays] = useState([]);
 
   const eventsData = {
-    // January
     "2025-01-01": "New Year's Day",
     "2026-01-01": "New Year's Day",
-    // February
     "2025-02-02": "World Wetlands Day",
     "2026-02-02": "World Wetlands Day",
-    // March
     "2025-03-03": "Africa Environment Day\nWangari Maathai Day",
     "2026-03-03": "Africa Environment Day\nWangari Maathai Day",
     "2025-03-21": "International Day of Forests",
@@ -196,19 +193,16 @@ export default function EventsCalendarPage() {
     "2026-03-22": "World Water Day",
     "2025-03-23": "World Meteorological Day",
     "2026-03-23": "World Meteorological Day",
-    // April
     "2025-04-18": "Good Friday",
     "2026-04-18": "Good Friday",
     "2025-04-20": "Easter Monday",
     "2026-04-20": "Easter Monday",
     "2025-04-22": "World Earth Day",
     "2026-04-22": "World Earth Day",
-    // May
     "2025-05-01": "Labour Day",
     "2026-05-01": "Labour Day",
     "2025-05-02": "International Day for Biological Diversity",
     "2026-05-02": "International Day for Biological Diversity",
-    // June
     "2025-06-01": "Madaraka Day",
     "2026-06-01": "Madaraka Day",
     "2025-06-05": "World Environment Day",
@@ -217,17 +211,14 @@ export default function EventsCalendarPage() {
     "2026-06-17": "World Day to Combat Desertification and Drought",
     "2025-06-20": "World Refugees Day",
     "2026-06-20": "World Refugees Day",
-    // October
     "2025-10-10": "Mazingira Day",
     "2026-10-10": "Mazingira Day",
     "2025-10-18": "International Day for the Eradication of Poverty",
     "2026-10-18": "International Day for the Eradication of Poverty",
     "2025-10-20": "World Bamboo Day",
     "2026-10-20": "World Bamboo Day",
-    // November
     "2025-11-27": "National Tree Planting Day",
     "2026-11-27": "National Tree Planting Day",
-    // December
     "2025-12-12": "Jamhuri Day",
     "2026-12-12": "Jamhuri Day",
     "2025-12-25": "Christmas Day",
@@ -293,8 +284,18 @@ export default function EventsCalendarPage() {
   };
 
   const today = new Date();
+  const selectedMonth = currentDate.getMonth();
+  const selectedYear = currentDate.getFullYear();
+
   const upcomingEvents = upcomingEventsData
-    .filter(event => event.date > today)
+    .filter(event => {
+      const eventDate = event.date;
+      return (
+        eventDate >= today && // Event is today or in the future
+        eventDate.getMonth() === selectedMonth && // Event is in the selected month
+        eventDate.getFullYear() === selectedYear // Event is in the selected year
+      );
+    })
     .sort((a, b) => a.date - b.date);
 
   const cardVariants = {
@@ -367,7 +368,7 @@ export default function EventsCalendarPage() {
           </Box>
 
           <Box>
-            <SectionTitle>Upcoming Events</SectionTitle>
+            <SectionTitle>Upcoming Events This Month</SectionTitle>
             <Box maxWidth="700px" mx="auto">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event, index) => (
@@ -392,7 +393,7 @@ export default function EventsCalendarPage() {
                     fontSize: "0.9rem",
                   }}
                 >
-                  No upcoming events.
+                  No upcoming events this month.
                 </Typography>
               )}
             </Box>

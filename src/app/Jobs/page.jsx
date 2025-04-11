@@ -1,15 +1,52 @@
 "use client";
+
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
 export default function JobVacancies() {
-  const [expanded, setExpanded] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const [expandedJobId, setExpandedJobId] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const url = "http://localhost:5000/api/jobs/public";
+      console.log(`Fetching jobs from ${url}`);
+      try {
+        const response = await axios.get(url, {
+          timeout: 5000,
+        });
+        console.log("Response received:", response.status, response.data);
+        setJobs(response.data);
+        setError("");
+      } catch (err) {
+        console.error("Full Axios error:", err);
+        console.error("Axios error details:", {
+          name: err.name,
+          message: err.message,
+          code: err.code,
+          status: err.response?.status,
+          data: err.response?.data,
+          request: err.request ? "Request made, no response" : "No request sent",
+          stack: err.stack,
+        });
+        setError(
+          err.response?.data?.error ||
+          err.message ||
+          "Failed to load jobs. Please check the server."
+        );
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const handleExpandClick = (jobId) => {
+    setExpandedJobId(expandedJobId === jobId ? null : jobId);
   };
 
   return (
@@ -60,68 +97,69 @@ export default function JobVacancies() {
               Available Positions
             </h2>
 
-            <div className="flex justify-between items-center mb-2 p-4 bg-[#245b3c] rounded-lg border border-[#e8ecef] max-w-4xl mx-auto">
-              <h3 className="text-base sm:text-lg font-semibold text-white">
-                Communication Expert KFS Grade 6 (REF KFS/CE/2025) - One (1) Post
-              </h3>
-              <button
-                onClick={handleExpandClick}
-                className="text-white hover:text-white focus:outline-none"
-              >
-                {expanded ? (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-                  </svg>
-                ) : (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                )}
-              </button>
-            </div>
+            {error ? (
+              <p className="text-red-500 text-center">{error}</p>
+            ) : jobs.length === 0 ? (
+              <p className="text-gray-600 text-center">No active job vacancies available at this time.</p>
+            ) : (
+              jobs.map((job) => (
+                <div key={job.id}>
+                  <div className="flex justify-between items-center mb-2 p-4 bg-[#245b3c] rounded-lg border border-[#e8ecef] max-w-4xl mx-auto">
+                    <h3 className="text-base sm:text-lg font-semibold text-white">
+                      {job.title}
+                    </h3>
+                    <button
+                      onClick={() => handleExpandClick(job.id)}
+                      className="text-white hover:text-white focus:outline-none"
+                    >
+                      {expandedJobId === job.id ? (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                        </svg>
+                      ) : (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
 
-            {expanded && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white rounded-lg border border-[#e8ecef] shadow-md max-w-4xl mx-auto">
-                <div>
-                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Job Specification</h4>
-                  <p className="text-sm text-[#444] leading-relaxed mb-4">
-                    The Communication Expert shall report directly to the Project Manager and work in liaison with the Service’s corporate communication department and in collaboration with other Project staff and partners.
-                  </p>
+                  {expandedJobId === job.id && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white rounded-lg border border-[#e8ecef] shadow-md max-w-4xl mx-auto">
+                      <div>
+                        <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Job Specification</h4>
+                        <p className="text-sm text-[#444] leading-relaxed mb-4">
+                          {job.description}
+                        </p>
 
-                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Duties and Responsibilities</h4>
-                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
-                    <li className="py-1">Implement relevant communication strategies.</li>
-                    <li className="py-1">
-                      Facilitate all communication training programs targeting staff, KALRO, FAO, external staff, and other stakeholders within the project area.
-                    </li>
-                    <li className="py-1">Participate and contribute in interdepartmental planning and monitoring project activities.</li>
-                    <li className="py-1">Spearhead effective exchange of information between the project and its publics.</li>
-                    <li className="py-1">
-                      Undertake communication research activities and dissemination of research findings to relevant audience within the project area.
-                    </li>
-                    <li className="py-1">Mentoring and coaching.</li>
-                  </ul>
+                        {job.duties && (
+                          <>
+                            <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Duties and Responsibilities</h4>
+                            <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                              {job.duties.split("\n").map((duty, index) => (
+                                <li key={index} className="py-1">{duty}</li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+
+                      <div>
+                        {job.requirements && (
+                          <>
+                            <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Person Specification</h4>
+                            <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                              {job.requirements.split("\n").map((req, index) => (
+                                <li key={index} className="py-1">{req}</li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
-
-                <div>
-                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Person Specification</h4>
-                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
-                    <li className="py-1">Bachelor’s degree in Communication, Social Sciences, Journalism, International Relations or other related fields of study.</li>
-                    <li className="py-1">Served for at least six (6) years in a relevant position.</li>
-                    <li className="py-1">Member of a professional body such as PRSK.</li>
-                    <li className="py-1">Proficiency in Computer applications.</li>
-                    <li className="py-1">Fulfil the requirements of Chapter Six of the Constitution.</li>
-                  </ul>
-
-                  <h4 className="text-lg font-semibold text-[#0D5602] mb-2 mt-4">Skills and Attributes</h4>
-                  <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
-                    <li className="py-1">Good oral and written communication skills in Kiswahili and English.</li>
-                    <li className="py-1">Time management and proper planning.</li>
-                    <li className="py-1">Good analytical skills.</li>
-                    <li className="py-1">Team player.</li>
-                  </ul>
-                </div>
-              </div>
+              ))
             )}
           </div>
 

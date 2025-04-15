@@ -21,7 +21,7 @@ function PhotoGalleryPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-50" style={{ overflowX: "hidden", width: "100vw" }}>
       {/* Top Navigation Bar */}
       <TopNavBar />
 
@@ -29,24 +29,35 @@ function PhotoGalleryPage() {
       <MainNavBar />
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-12">
+      <main className="flex-grow container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(2rem,5vw,12rem)]">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Photo Gallery</h1>
-          <p className="text-xl text-gray-600">Our Moments Through Photos</p>
+        <div className="text-center mb-[clamp(2rem,5vw,12rem)]">
+          <h1 className="text-[clamp(1.5rem,5vw,5rem)] font-bold text-green-900 mb-[clamp(1rem,2vw,4rem)]">
+            Photo Gallery
+          </h1>
+          <p className="text-[clamp(0.875rem,3vw,1.25rem)] text-gray-600">
+            Our Moments Through Photos
+          </p>
         </div>
 
         {/* Photo Gallery Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[clamp(1rem,2vw,1.5rem)]">
           {photos.map((photo) => (
-            <div key={photo.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div
+              key={photo.id}
+              className="bg-white rounded-lg shadow-lg overflow-hidden"
+              style={{ width: "100%", boxSizing: "border-box" }}
+            >
               <img
                 src={photo.src}
                 alt={photo.caption}
-                className="w-full h-48 object-cover"
+                className="w-full h-[clamp(8rem,25vw,12rem)] object-cover"
+                style={{ maxWidth: "100%" }}
               />
-              <div className="p-4">
-                <p className="text-sm text-gray-700 text-center">{photo.caption}</p>
+              <div className="p-[clamp(0.5rem,1vw,1rem)]">
+                <p className="text-[clamp(0.625rem,1.5vw,0.875rem)] text-gray-700 text-center">
+                  {photo.caption}
+                </p>
               </div>
             </div>
           ))}

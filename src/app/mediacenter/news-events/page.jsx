@@ -80,16 +80,16 @@ const NewsandEvents = () => {
   );
 
   return (
-    <>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
 
       {error ? (
-        <div className="container mx-auto px-4 py-12 text-center text-red-500">
+        <div className="container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(2rem,5vw,12rem)] text-center text-red-500">
           {error}
         </div>
       ) : newsData.length === 0 ? (
-        <div className="container mx-auto px-4 py-12 text-center text-gray-500">
+        <div className="container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(2rem,5vw,12rem)] text-center text-gray-500">
           No news posts available at this time.
         </div>
       ) : (
@@ -108,11 +108,11 @@ const NewsandEvents = () => {
             />
           ))}
 
-          <div className="flex justify-center items-center my-8">
+          <div className="flex justify-center items-center my-[clamp(2rem,4vw,8rem)]">
             <button
               onClick={handlePrevPage}
               disabled={currentPage === 1}
-              className="mx-1 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300 disabled:opacity-50"
+              className="mx-[clamp(0.2rem,0.5vw,1rem)] px-[clamp(1rem,2vw,4rem)] py-[clamp(0.5rem,1vw,2rem)] bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300 disabled:opacity-50"
             >
               ←
             </button>
@@ -120,7 +120,7 @@ const NewsandEvents = () => {
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
-                className={`mx-1 px-4 py-2 ${
+                className={`mx-[clamp(0.2rem,0.5vw,1rem)] px-[clamp(1rem,2vw,4rem)] py-[clamp(0.5rem,1vw,2rem)] ${
                   currentPage === page ? "bg-green-500" : "bg-gray-800"
                 } text-white rounded-full hover:bg-green-600 transition duration-300`}
               >
@@ -130,7 +130,7 @@ const NewsandEvents = () => {
             <button
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
-              className="mx-1 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300 disabled:opacity-50"
+              className="mx-[clamp(0.2rem,0.5vw,1rem)] px-[clamp(1rem,2vw,4rem)] py-[clamp(0.5rem,1vw,2rem)] bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition duration-300 disabled:opacity-50"
             >
               →
             </button>
@@ -139,7 +139,7 @@ const NewsandEvents = () => {
       )}
 
       <FooterBottom />
-    </>
+    </div>
   );
 };
 
@@ -155,43 +155,51 @@ const ZigzagSection = ({
 }) => {
   return (
     <section
-      className={`container mx-auto px-4 py-6 flex flex-col md:flex-row items-center gap-4 ${
+      className={`container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(1.5rem,3vw,6rem)] flex flex-col md:flex-row items-center gap-[clamp(1rem,2vw,4rem)] ${
         reverse ? "md:flex-row-reverse" : ""
       }`}
+      style={{ width: "100%", boxSizing: "border-box" }}
     >
-      <div className="md:w-1/2">
-        <img src={image} alt={title || "News Image"} className="rounded-lg shadow-lg w-full h-auto" />
+      <div className="md:w-1/2 w-full">
+        <img
+          src={image}
+          alt={title || "News Image"}
+          className="rounded-lg shadow-lg w-full h-auto"
+          style={{ maxWidth: "100%", objectFit: "cover" }}
+        />
       </div>
-      <div className="md:w-1/2 text-black">
+      <div className="md:w-1/2 w-full text-black">
         {title && (
           <h2
-            className="text-xl md:text-3xl font-bold font-peugeot text-emerald-950"
+            className="text-[clamp(1rem,3vw,1.5rem)] md:text-[clamp(1.5rem,4vw,3rem)] font-bold font-peugeot text-emerald-950"
             style={{ textTransform: "capitalize" }}
           >
             {title}
           </h2>
         )}
-        <p className="mt-2 md:mt-4 text-sm md:text-base font-peugeot">{text}</p>
+        <p className="mt-[clamp(0.5rem,1vw,1rem)] md:mt-[clamp(1rem,2vw,4rem)] text-[clamp(0.7rem,2vw,0.875rem)] md:text-[clamp(0.875rem,2.5vw,1rem)] font-peugeot">
+          {text}
+        </p>
 
         {/* Metadata */}
-        <div className="flex items-center font-bold gap-4 md:gap-6 text-xs md:text-sm text-black my-2 md:my-4">
+        <div className="flex items-center font-bold gap-[clamp(1rem,2vw,1.5rem)] md:gap-[clamp(1.5rem,3vw,6rem)] text-[clamp(0.625rem,1.5vw,0.75rem)] md:text-[clamp(0.75rem,2vw,0.875rem)] text-black my-[clamp(0.5rem,1vw,1rem)] md:my-[clamp(1rem,2vw,4rem)]">
           <a
             href="/author-profile"
-            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+            className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)] hover:underline hover:text-green-500 font-peugeot"
           >
             <Image src="/icons/user.png" alt="Author" width={14} height={14} />
             {author}
           </a>
           <a
             href="/events-calendar"
-            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+            className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)] hover:underline hover:text-green-500 font-peugeot"
           >
             <Image src="/icons/calendar.png" alt="Date" width={14} height={14} />
             {date}
           </a>
           <a
             href="/comments-section"
-            className="flex items-center gap-1 hover:underline hover:text-green-500 font-peugeot"
+            className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)] hover:underline hover:text-green-500 font-peugeot"
           >
             <Image src="/icons/comment.png" alt="Comments" width={14} height={14} />
             {comments}
@@ -199,7 +207,7 @@ const ZigzagSection = ({
         </div>
         <button
           onClick={onLearnMore}
-          className="mt-4 md:mt-6 bg-emerald-950 text-white px-4 md:px-6 py-1 md:py-2 text-sm md:text-base font-peugeot hover:bg-green-500 transition duration-300"
+          className="mt-[clamp(1rem,2vw,1.5rem)] md:mt-[clamp(1.5rem,3vw,6rem)] bg-emerald-950 text-white px-[clamp(1rem,2vw,1.5rem)] md:px-[clamp(1.5rem,3vw,6rem)] py-[clamp(0.25rem,0.5vw,1rem)] md:py-[clamp(0.5rem,1vw,2rem)] text-[clamp(0.7rem,2vw,0.875rem)] md:text-[clamp(0.875rem,2.5vw,1rem)] font-peugeot hover:bg-green-500 transition duration-300"
         >
           Read More
         </button>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import { styled } from "@mui/system";
 
 const Moments = [
   {
@@ -65,10 +67,108 @@ const Moments = [
   },
 ];
 
+const SectionContainer = styled(Box)({
+  backgroundColor: "#ffffff",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+});
+
+const ContentContainer = styled(Box)(({ theme }) => ({
+  width: "90%",
+  margin: "0 auto",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "clamp(1rem, 2vw, 2rem)", // Responsive gap
+  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "1fr",
+  },
+}));
+
+const MobileContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  [theme.breakpoints.up("md")]: {
+    display: "none",
+  },
+}));
+
+const DesktopTextContainer = styled(Box)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+}));
+
+const ImageContainer = styled(Box)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.up("md")]: {
+    display: "block",
+  },
+}));
+
+const MomentImage = styled("img")(({ theme }) => ({
+  width: "100%",
+  height: "clamp(20rem, 40vw, 25rem)", // Responsive height for mobile
+  objectFit: "cover",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin (mobile only)
+  [theme.breakpoints.up("md")]: {
+    height: "clamp(30rem, 60vw, 45rem)", // Responsive height for desktop
+    marginBottom: 0,
+  },
+}));
+
+const NavigationContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive gap
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
+});
+
+const NavButton = styled(Button)({
+  backgroundColor: "#e6f5e6",
+  color: "#0D3C00",
+  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(0.75rem, 2vw, 1rem)", // Responsive padding
+  borderRadius: "4px",
+  minWidth: "unset",
+  "&:hover": {
+    backgroundColor: "#15803d",
+    color: "#ffffff",
+  },
+});
+
+const SlideIndicator = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  color: "#0D3C00",
+  fontSize: "clamp(0.875rem, 2vw, 1rem)", // Scales with viewport
+});
+
+const MomentTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 700,
+  color: "#0D3C00",
+  fontSize: "clamp(1.25rem, 3vw, 1.875rem)", // Scales with viewport
+  marginBottom: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive margin
+});
+
+const MomentDescription = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  color: "#333",
+  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
+});
+
+const TextContent = styled(Box)({
+  height: "clamp(10rem, 20vw, 12rem)", // Responsive height for mobile text area
+});
+
 const MomentsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === Moments.length - 1 ? 0 : prev + 1));
@@ -87,81 +187,44 @@ const MomentsSection = () => {
   const currentMoment = Moments[currentSlide];
 
   return (
-    <section className="bg-[#fff] py-4">
-      <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
+    <SectionContainer>
+      <ContentContainer>
         {/* Small Screens: Image on Top, Text Below */}
-        <div className="md:hidden">
-          <img
-            src={currentMoment.image}
-            alt={currentMoment.title}
-            className="w-full h-[400px] object-cover shadow-md mb-6" // Fixed height for small screens
-          />
-          <div className="relative flex flex-col justify-center h-48">
-            {/* Navigation for Small Screens */}
-            <div className="flex items-center gap-4 mb-4">
-              <button
-                onClick={handlePrevSlide}
-                className="bg-[#e6f5e6] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &lt;
-              </button>
-              <span className="text-[#0D3C00] font-semibold">
+        <MobileContainer>
+          <MomentImage src={currentMoment.image} alt={currentMoment.title} />
+          <TextContent>
+            <NavigationContainer>
+              <NavButton onClick={handlePrevSlide}>{"<"}</NavButton>
+              <SlideIndicator>
                 {currentSlide + 1} / {Moments.length}
-              </span>
-              <button
-                onClick={handleNextSlide}
-                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &gt;
-              </button>
-            </div>
-            <h2 className="text-2xl font-bold text-[#0D3C00] mb-4">
-              {currentMoment.title}
-            </h2>
-            <p className="text-base text-gray-800">{currentMoment.description}</p>
-          </div>
-        </div>
+              </SlideIndicator>
+              <NavButton onClick={handleNextSlide}>{">"}</NavButton>
+            </NavigationContainer>
+            <MomentTitle>{currentMoment.title}</MomentTitle>
+            <MomentDescription>{currentMoment.description}</MomentDescription>
+          </TextContent>
+        </MobileContainer>
 
         {/* Medium/Large Screens: Left (Text with Navigation), Right (Image) */}
-        <div className="hidden md:flex md:flex-col md:justify-center md:items-start">
-          <div className="relative w-full">
-            {/* Navigation at Top Left */}
-            <div className="flex items-center gap-4 mb-6">
-              <button
-                onClick={handlePrevSlide}
-                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &lt;
-              </button>
-              <span className="text-[#0D3C00] font-semibold">
+        <DesktopTextContainer>
+          <Box sx={{ width: "100%" }}>
+            <NavigationContainer>
+              <NavButton onClick={handlePrevSlide}>{"<"}</NavButton>
+              <SlideIndicator>
                 {currentSlide + 1} / {Moments.length}
-              </span>
-              <button
-                onClick={handleNextSlide}
-                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &gt;
-              </button>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0D3C00] mb-4">
-              {currentMoment.title}
-            </h2>
-            <p className="text-base md:text-lg text-gray-800">
-              {currentMoment.description}
-            </p>
-          </div>
-        </div>
+              </SlideIndicator>
+              <NavButton onClick={handleNextSlide}>{">"}</NavButton>
+            </NavigationContainer>
+            <MomentTitle>{currentMoment.title}</MomentTitle>
+            <MomentDescription>{currentMoment.description}</MomentDescription>
+          </Box>
+        </DesktopTextContainer>
 
-        {/* Right Section: Full-Height Image (Medium/Large Only) */}
-        <div className="hidden md:block">
-          <img
-            src={currentMoment.image}
-            alt={currentMoment.title}
-            className="w-full h-[720px] object-cover shadow-md" // Fixed height for medium/large screens
-          />
-        </div>
-      </div>
-    </section>
+        <ImageContainer>
+          <MomentImage src={currentMoment.image} alt={currentMoment.title} />
+        </ImageContainer>
+      </ContentContainer>
+    </SectionContainer>
   );
 };
 

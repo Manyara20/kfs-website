@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
@@ -15,9 +16,10 @@ const PageContainer = styled(Box)({
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "2rem",
+  padding: "clamp(1rem, 2vw, 2rem)", // Scales with viewport width
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
   "&:before": {
     content: '""',
     position: "absolute",
@@ -32,11 +34,13 @@ const PageContainer = styled(Box)({
 });
 
 const ContentWrapper = styled(Box)({
-  maxWidth: "1200px",
+  width: "90vw", // Takes up 90% of viewport width
+  maxWidth: "100%", // Prevents exceeding viewport
   margin: "0 auto",
-  padding: "3rem 1rem",
+  padding: "clamp(1rem, 3vw, 3rem) clamp(0.5rem, 1vw, 1rem)", // Responsive padding
   position: "relative",
   zIndex: 1,
+  boxSizing: "border-box",
 });
 
 const HeaderTitle = styled(Typography)({
@@ -44,27 +48,29 @@ const HeaderTitle = styled(Typography)({
   fontWeight: 700,
   color: "#ffffff",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-  fontSize: "3rem",
+  fontSize: "clamp(1.5rem, 5vw, 3rem)", // Scales with viewport
   lineHeight: 1.2,
   letterSpacing: "0.5px",
   textAlign: "center",
-  marginBottom: "3rem",
+  marginBottom: "clamp(1rem, 3vw, 3rem)", // Responsive margin
 });
 
 const PressCard = styled(motion.div)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.95)",
   borderRadius: "12px",
-  padding: "1.5rem",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Scales padding
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem",
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
+  width: "100%", // Full width of parent
+  boxSizing: "border-box",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: "1rem",
+    gap: "clamp(0.5rem, 1vw, 1rem)", // Responsive gap
   },
   "&:hover": {
     transform: "translateY(-5px)",
@@ -75,22 +81,22 @@ const PressCard = styled(motion.div)(({ theme }) => ({
 const PressInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "1rem",
+  gap: "clamp(0.5rem, 1vw, 1rem)", // Responsive gap
 });
 
 const PressTitle = styled(Typography)({
   fontFamily: "'Roboto', sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.25rem",
+  fontSize: "clamp(0.875rem, 2.5vw, 1.25rem)", // Scales with viewport
 });
 
 const ReadMoreButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.5rem 1.5rem",
-  fontSize: "0.9rem",
+  padding: "clamp(0.3rem, 0.8vw, 0.5rem) clamp(1rem, 2vw, 1.5rem)", // Scales padding
+  fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
   fontFamily: "'Roboto', sans-serif",
   borderRadius: "8px",
   "&:hover": {
@@ -118,7 +124,7 @@ export default function PressReleasesPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
@@ -133,7 +139,7 @@ export default function PressReleasesPage() {
             {pressReleases.map((press, index) => (
               <PressCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
                 <PressInfo>
-                  <ArticleIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
+                  <ArticleIcon sx={{ color: "#0f5a28", fontSize: "clamp(1.5rem, 4vw, 2rem)" }} />
                   <PressTitle>{press.title}</PressTitle>
                 </PressInfo>
                 <Link href={press.link} target="_blank" rel="noopener noreferrer" passHref>

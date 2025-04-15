@@ -1,7 +1,9 @@
-"use client"; // Required for useState and useEffect in Next.js App Router
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import { styled, keyframes } from "@mui/system";
 
 const principles = [
   {
@@ -30,11 +32,124 @@ const principles = [
   },
 ];
 
-const GuidingPrinciples = () => {
-  const [activeTab, setActiveTab] = useState("ecosystem"); // Default to first tab
-  const [currentIndex, setCurrentIndex] = useState(0); // For slider on small screens
+// Define keyframes for fade-in animation
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
-  // Auto-slide effect for small screens
+const HeaderContainer = styled(Box)({
+  backgroundColor: "#ffffff",
+  borderTopLeftRadius: "1.5rem",
+  borderTopRightRadius: "1.5rem",
+  height: "clamp(3rem, 6vw, 5rem)", // Responsive height
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  zIndex: 10,
+});
+
+const HeaderTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 800,
+  color: "#000000",
+  fontSize: "clamp(1.25rem, 3vw, 1.875rem)", // Scales with viewport
+  textTransform: "uppercase",
+});
+
+const MainSection = styled(Box)(({ background }) => ({
+  position: "relative",
+  width: "100%",
+  height: "clamp(20rem, 40vw, 31.25rem)", // Responsive height
+  backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${background})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  color: "#ffffff",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  transition: "all 0.5s ease",
+}));
+
+const TabsContainer = styled(Box)(({ theme }) => ({
+  display: "none",
+  marginBottom: "clamp(1.5rem, 3vw, 2rem)", // Responsive margin
+  [theme.breakpoints.up("sm")]: {
+    display: "block",
+  },
+}));
+
+const TabList = styled(Box)({
+  display: "flex",
+  flexDirection: "row",
+  gap: "clamp(1rem, 2vw, 1.5rem)", // Responsive gap
+  paddingLeft: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+});
+
+const Tab = styled(Typography)(({ active }) => ({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
+  textTransform: "uppercase",
+  cursor: "pointer",
+  color: active ? "#ffffff" : "#d1d5db",
+  textDecoration: active ? "underline" : "none",
+  textUnderlineOffset: "4px",
+  textDecorationThickness: active ? "4px" : "0",
+  "&:hover": {
+    color: "#ffffff",
+  },
+}));
+
+const ContentContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive gap
+  maxWidth: "100%",
+  paddingLeft: "0",
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: "clamp(30rem, 50vw, 40rem)", // Responsive max-width
+    paddingLeft: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  },
+}));
+
+const PrincipleIcon = styled(Image)({
+  width: "clamp(1.5rem, 3vw, 2rem)", // Responsive width
+  height: "clamp(1.5rem, 3vw, 2rem)", // Responsive height
+  filter: "brightness(0) invert(1)", // Makes icon white
+});
+
+const ContentText = styled(Box)({
+  animation: `${fadeIn} 0.5s ease-in-out`,
+});
+
+const PrincipleTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  fontSize: "clamp(1rem, 2.5vw, 1.25rem)", // Scales with viewport
+  marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
+  textTransform: "uppercase",
+});
+
+const PrincipleDescription = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
+  lineHeight: 1.6,
+});
+
+const GuidingPrinciples = () => {
+  const [activeTab, setActiveTab] = useState("ecosystem");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
     if (isSmallScreen) {
@@ -42,12 +157,11 @@ const GuidingPrinciples = () => {
         setCurrentIndex((prevIndex) =>
           prevIndex === principles.length - 1 ? 0 : prevIndex + 1
         );
-      }, 5000); // Change every 5 seconds
-      return () => clearInterval(interval); // Cleanup on unmount
+      }, 5000);
+      return () => clearInterval(interval);
     }
   }, []);
 
-  // Update activeTab when currentIndex changes (for slider)
   useEffect(() => {
     setActiveTab(principles[currentIndex].id);
   }, [currentIndex]);
@@ -56,76 +170,36 @@ const GuidingPrinciples = () => {
 
   return (
     <>
-      {/* Header */}
-      <div className="bg-white rounded-t-3xl h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
-        <h2 className="text-xl sm:text-3xl text-black font-extrabold uppercase">
-          Guiding Principles
-        </h2>
-      </div>
-
-      {/* Main Section with Dynamic Background and Gradient */}
-      <div
-        className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-white p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activePrinciple.background})`,
-        }}
-      >
-        {/* Tabs (Visible on larger screens) */}
-        <div className="hidden sm:block mb-8">
-          <div className="flex flex-row gap-6 pl-6">
+      <HeaderContainer>
+        <HeaderTitle>Guiding Principles</HeaderTitle>
+      </HeaderContainer>
+      <MainSection background={activePrinciple.background}>
+        <TabsContainer>
+          <TabList>
             {principles.map((principle) => (
-              <div
+              <Tab
                 key={principle.id}
-                className={`cursor-pointer text-lg font-semibold uppercase ${
-                  activeTab === principle.id
-                    ? "underline underline-offset-4 decoration-white decoration-4 text-white"
-                    : "text-gray-300 hover:text-white"
-                }`}
+                active={activeTab === principle.id}
                 onClick={() => setActiveTab(principle.id)}
               >
                 {principle.title}
-              </div>
+              </Tab>
             ))}
-          </div>
-        </div>
-
-        {/* Content (Slider on small screens, static on larger screens) */}
-        <div className="flex items-start gap-3 sm:gap-4 max-w-full sm:max-w-2xl pl-0 sm:pl-6">
-          <Image
+          </TabList>
+        </TabsContainer>
+        <ContentContainer>
+          <PrincipleIcon
             src={activePrinciple.icon}
             alt={activePrinciple.title}
             width={32}
             height={32}
-            className="sm:w-[40px] sm:h-[40px]"
-            style={{ filter: "brightness(0) invert(1)" }} // Makes icon white
           />
-          <div className="animate-fade-in">
-            <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 uppercase">
-              {activePrinciple.title}
-            </h3>
-            <p className="text-sm sm:text-base leading-relaxed">
-              {activePrinciple.description}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Inline Styles */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.5s ease-in-out;
-        }
-      `}</style>
+          <ContentText>
+            <PrincipleTitle>{activePrinciple.title}</PrincipleTitle>
+            <PrincipleDescription>{activePrinciple.description}</PrincipleDescription>
+          </ContentText>
+        </ContentContainer>
+      </MainSection>
     </>
   );
 };

@@ -6,7 +6,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { Description as DescriptionIcon } from "@mui/icons-material";
-import { IoMdHelpCircle } from "react-icons/io"; // Added for accessibility controls
+import { IoMdHelpCircle } from "react-icons/io";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
@@ -18,12 +18,13 @@ const PageContainer = styled(Box)({
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  display: "flex", // Added to match DFCMPage
-  justifyContent: "center", // Added to match DFCMPage
-  alignItems: "center", // Added to match DFCMPage
-  padding: "2rem", // Updated from 1rem to 2rem to match DFCMPage
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "2vw", // Scales with viewport width
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
   "&:before": {
     content: '""',
     position: "absolute",
@@ -39,97 +40,99 @@ const PageContainer = styled(Box)({
 
 const ContentWrapper = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem", // Updated from 2rem 0.5rem to 3rem to match DFCMPage
-  maxWidth: "900px", // Updated from 1000px to 900px to match DFCMPage
-  width: "100%",
+  padding: "clamp(1rem, 3vw, 3rem)", // Scales padding dynamically
+  width: "90vw", // Takes up 90% of viewport width
+  maxWidth: "100%", // Ensures it doesn’t exceed viewport
   position: "relative",
   zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)", // Added to match DFCMPage
-  borderRadius: 0, // Removed border radius to match DFCMPage
+  border: "1px solid rgba(255, 255, 255, 0.3)",
+  borderRadius: 0,
+  boxSizing: "border-box",
 });
 
 const HeaderTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
-  color: "#0f5a28", // Updated from #ffffff to #0f5a28 to match DFCMPage
-  fontSize: "1.8rem", // Updated from 2rem to 1.8rem
-  lineHeight: 1.3, // Updated from 1.1 to 1.3
-  letterSpacing: "0.5px", // Updated from 0.3px to 0.5px
-  textAlign: "left", // Updated from center to left to match DFCMPage
-  marginBottom: "2rem", // Updated from 1.5rem to 2rem
+  color: "#0f5a28",
+  fontSize: "clamp(1.2rem, 4vw, 1.8rem)", // Scales with viewport
+  lineHeight: 1.3,
+  letterSpacing: "0.5px",
+  textAlign: "left",
+  marginBottom: "clamp(1rem, 3vw, 2rem)", // Responsive margin
   textTransform: "capitalize",
-  textShadow: "none", // Removed textShadow to match DFCMPage
 });
 
 const Description = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
-  color: "#000", // Updated from textSecondary to #000 to match DFCMPage
-  fontSize: "0.9rem",
-  lineHeight: 1.8, // Added to match DFCMPage
-  wordSpacing: "0.15rem", // Added to match DFCMPage
-  marginBottom: "2rem", // Updated to match DFCMPage
+  color: "#000",
+  fontSize: "clamp(0.7rem, 2.5vw, 0.9rem)", // Scales with viewport
+  lineHeight: 1.8,
+  wordSpacing: "0.15rem",
+  marginBottom: "clamp(1rem, 3vw, 2rem)", // Responsive margin
 });
 
 const SubHeader = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
-  fontSize: "1.2rem",
-  marginBottom: "1rem", // Adjusted for better spacing
+  fontSize: "clamp(0.9rem, 3vw, 1.2rem)", // Scales with viewport
+  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
   textTransform: "capitalize",
 });
 
 const DocumentCard = styled(Box)({
-  background: "#1a3c34", // Updated to match DFCMPage DepartmentItem
-  padding: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
+  background: "#1a3c34",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Scales padding
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
+  width: "100%", // Full width of parent
+  boxSizing: "border-box",
   "&:hover": {
-    transform: "translateY(-2px)", // Updated from -3px to -2px to match DFCMPage
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Updated to match DFCMPage
+    transform: "translateY(-2px)",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
   },
 });
 
 const DocumentInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "1rem", // Updated from 0.5rem to 1rem for better spacing
+  gap: "clamp(0.5rem, 2vw, 1rem)", // Responsive gap
 });
 
 const DocumentTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 500, // Updated from 600 to 500 to match DFCMPage
-  color: "#ffffff", // Updated from #0f5a28 to #ffffff to match DFCMPage
-  fontSize: "0.85rem", // Updated from 1rem to 0.85rem to match DFCMPage
-  lineHeight: 1.6, // Added to match DFCMPage
-  wordSpacing: "0.1rem", // Added to match DFCMPage
+  fontWeight: 500,
+  color: "#ffffff",
+  fontSize: "clamp(0.7rem, 2vw, 0.85rem)", // Scales with viewport
+  lineHeight: 1.6,
+  wordSpacing: "0.1rem",
   textTransform: "capitalize",
 });
 
 const FileSize = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
-  color: "#cccccc", // Updated to a lighter shade for contrast against #1a3c34 background
-  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
-  lineHeight: 1.6, // Added to match DFCMPage
-  wordSpacing: "0.1rem", // Added to match DFCMPage
+  color: "#cccccc",
+  fontSize: "clamp(0.7rem, 2vw, 0.85rem)", // Scales with viewport
+  lineHeight: 1.6,
+  wordSpacing: "0.1rem",
 });
 
 const DownloadButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.5rem 1.5rem", // Updated from 0.3rem 1rem to 0.5rem 1.5rem for better proportions
-  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
+  padding: "clamp(0.3rem, 1vw, 0.5rem) clamp(1rem, 2vw, 1.5rem)", // Scales padding
+  fontSize: "clamp(0.7rem, 2vw, 0.85rem)", // Scales with viewport
   fontFamily: "'Peugeot', Helvetica, sans-serif",
-  borderRadius: "8px", // Updated from 6px to 8px to match other document pages
+  borderRadius: "8px",
   "&:hover": {
     backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)", // Updated to match other document pages
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
   },
 });
 
@@ -164,11 +167,11 @@ export default function ForesterMagazinePage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Updated duration to match DFCMPage
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
@@ -215,11 +218,11 @@ export default function ForesterMagazinePage() {
           <SubHeader>Happy reading!</SubHeader>
           <Description>Anne Kaari, ‘ndc‘ (K)</Description>
 
-          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
+          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(clamp(200px, 50vw, 280px), 1fr))", gap: "clamp(1rem, 2vw, 1.5rem)", marginTop: "clamp(1rem, 3vw, 2rem)" }}>
             {magazines.map((magazine, index) => (
               <DocumentCard key={index}>
                 <DocumentInfo>
-                  <DescriptionIcon sx={{ color: "#ffffff", fontSize: "2rem" }} /> {/* Updated color to #ffffff for contrast */}
+                  <DescriptionIcon sx={{ color: "#ffffff", fontSize: "clamp(1.5rem, 4vw, 2rem)" }} />
                   <Box>
                     <DocumentTitle>{magazine.title}</DocumentTitle>
                     <FileSize>1 file(s) {magazine.fileSize}</FileSize>

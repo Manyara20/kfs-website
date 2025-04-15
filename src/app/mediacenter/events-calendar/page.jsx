@@ -9,15 +9,17 @@ import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
+// Styled Components
 const PageContainer = styled(Box)({
   minHeight: "100vh",
   backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "1rem",
+  padding: "2vw", // Scales with viewport width
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
   "&:before": {
     content: '""',
     position: "absolute",
@@ -32,11 +34,13 @@ const PageContainer = styled(Box)({
 });
 
 const ContentWrapper = styled(Box)({
-  maxWidth: "1000px",
+  width: "90vw", // Takes up 90% of viewport width
+  maxWidth: "100%", // Prevents exceeding viewport
   margin: "0 auto",
-  padding: "2rem 0.5rem",
+  padding: "clamp(1rem, 3vw, 2rem) clamp(0.5rem, 1vw, 0.5rem)", // Responsive padding
   position: "relative",
   zIndex: 1,
+  boxSizing: "border-box",
 });
 
 const HeaderTitle = styled(Typography)({
@@ -44,11 +48,11 @@ const HeaderTitle = styled(Typography)({
   fontWeight: 700,
   color: "#ffffff",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
-  fontSize: "2rem",
+  fontSize: "clamp(1.2rem, 4vw, 2rem)", // Scales with viewport
   lineHeight: 1.1,
   letterSpacing: "0.3px",
   textAlign: "center",
-  marginBottom: "0.5rem",
+  marginBottom: "clamp(0.3rem, 1vw, 0.5rem)", // Responsive margin
   textTransform: "capitalize",
 });
 
@@ -56,39 +60,42 @@ const HeaderSubtitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#e0e0e0",
-  fontSize: "0.9rem",
+  fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
   textAlign: "center",
-  marginBottom: "1.5rem",
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
 });
 
 const SectionTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#ffffff",
-  fontSize: "1.5rem",
+  fontSize: "clamp(1rem, 3vw, 1.5rem)", // Scales with viewport
   textAlign: "center",
-  marginBottom: "1rem",
+  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
   textTransform: "capitalize",
 });
 
 const CalendarWrapper = styled(Box)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "1.5rem",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Scales padding
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "2rem",
+  marginBottom: "clamp(1rem, 3vw, 2rem)", // Responsive margin
+  width: "100%", // Full width of parent
+  boxSizing: "border-box",
 });
 
 const CalendarHeader = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "1rem",
+  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
 });
 
 const CalendarGrid = styled(Box)({
   display: "grid",
   gridTemplateColumns: "repeat(7, 1fr)",
-  gap: "0.5rem",
+  gap: "clamp(0.3rem, 1vw, 0.5rem)", // Responsive gap
+  width: "100%", // Full width
 });
 
 const DayHeader = styled(Typography)({
@@ -96,8 +103,8 @@ const DayHeader = styled(Typography)({
   fontWeight: 600,
   color: "#0f5a28",
   textAlign: "center",
-  padding: "0.3rem",
-  fontSize: "0.8rem",
+  padding: "clamp(0.2rem, 0.5vw, 0.3rem)", // Scales padding
+  fontSize: "clamp(0.6rem, 1.5vw, 0.8rem)", // Scales with viewport
   textTransform: "capitalize",
 });
 
@@ -106,14 +113,15 @@ const DayCell = styled(motion.div, {
 })(({ isToday }) => ({
   background: isToday ? "#e8f5e9" : "#ffffff",
   border: isToday ? "solid #0f5a28" : "1px solid #e0e0e0",
-  padding: "0.5rem",
+  padding: "clamp(0.3rem, 1vw, 0.5rem)", // Scales padding
   textAlign: "center",
-  height: "90px",
+  height: "clamp(60px, 15vw, 90px)", // Scales height
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
   overflowY: "auto",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  boxSizing: "border-box",
   "&:hover": {
     transform: "translateY(-2px)",
     boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
@@ -124,23 +132,25 @@ const DayNumber = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "0.9rem",
+  fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
 });
 
 const EventText = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "0.7rem",
+  fontSize: "clamp(0.5rem, 1.5vw, 0.7rem)", // Scales with viewport
   whiteSpace: "normal",
 });
 
 const EventCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "1rem",
+  padding: "clamp(0.5rem, 2vw, 1rem)", // Scales padding
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1rem",
+  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  width: "100%", // Full width of parent
+  boxSizing: "border-box",
   "&:hover": {
     transform: "translateY(-3px)",
     boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
@@ -151,8 +161,8 @@ const EventTitle = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.2rem",
-  marginBottom: "0.3rem",
+  fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)", // Scales with viewport
+  marginBottom: "clamp(0.2rem, 0.5vw, 0.3rem)", // Responsive margin
   textTransform: "capitalize",
 });
 
@@ -160,14 +170,14 @@ const EventDate = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "0.85rem",
+  fontSize: "clamp(0.7rem, 2vw, 0.85rem)", // Scales with viewport
 });
 
 const NavButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
-  padding: "0.3rem 0.8rem",
-  fontSize: "0.8rem",
+  padding: "clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.5rem, 1vw, 0.8rem)", // Scales padding
+  fontSize: "clamp(0.6rem, 1.5vw, 0.8rem)", // Scales with viewport
   "&:hover": {
     backgroundColor: "#388e3c",
   },
@@ -301,7 +311,7 @@ export default function EventsCalendarPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
@@ -322,7 +332,7 @@ export default function EventsCalendarPage() {
                 <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
                   Previous
                 </NavButton>
-                <Typography variant="h6" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", color: "#0f5a28", fontSize: "1rem", textTransform: "capitalize" }}>
+                <Typography variant="h6" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", color: "#0f5a28", fontSize: "clamp(0.8rem, 2vw, 1rem)", textTransform: "capitalize" }}>
                   {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
                 </Typography>
                 <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
@@ -366,7 +376,7 @@ export default function EventsCalendarPage() {
 
           <Box>
             <SectionTitle>Upcoming Events This Month</SectionTitle>
-            <Box maxWidth="700px" mx="auto">
+            <Box width="100%" mx="auto">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event, index) => (
                   <EventCard
@@ -387,7 +397,7 @@ export default function EventsCalendarPage() {
                     fontFamily: "'Peugeot', Helvetica, sans-serif",
                     color: "#ffffff",
                     textAlign: "center",
-                    fontSize: "0.9rem",
+                    fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
                   }}
                 >
                   No upcoming events this month.

@@ -5,6 +5,116 @@ import axios from "axios";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
+import { Box, Typography, Button } from "@mui/material";
+import { styled } from "@mui/system";
+import { motion } from "framer-motion";
+
+const PageContainer = styled(Box)({
+  minHeight: "100vh",
+  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",
+  padding: "2vw", // Scales with viewport width
+  position: "relative",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
+  "&:before": {
+    content: "''",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+    opacity: 0.05,
+    zIndex: 0,
+  },
+});
+
+const ContentWrapper = styled(Box)({
+  width: "90vw", // Takes up 90% of viewport width
+  maxWidth: "100%", // Prevents exceeding viewport
+  margin: "0 auto",
+  padding: "clamp(1rem, 3vw, 3rem) clamp(0.5rem, 1vw, 1rem)", // Responsive padding
+  position: "relative",
+  zIndex: 1,
+  boxSizing: "border-box",
+});
+
+const HeaderTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 700,
+  color: "#ffffff",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+  fontSize: "clamp(1.5rem, 6vw, 3rem)", // Scales with viewport
+  lineHeight: 1.2,
+  letterSpacing: "0.5px",
+  textAlign: "center",
+  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
+});
+
+const HeaderSubtitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  color: "#ffffff",
+  fontSize: "clamp(1rem, 3vw, 1.25rem)", // Scales with viewport
+  textAlign: "center",
+  marginBottom: "clamp(1.5rem, 4vw, 3rem)", // Responsive margin
+});
+
+const TenderCard = styled(motion.div)(({ theme }) => ({
+  background: "rgba(255, 255, 255, 0.95)",
+  borderRadius: "12px",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Scales padding
+  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+  transition: "all 0.3s ease",
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
+  width: "100%", // Full width of parent
+  boxSizing: "border-box",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "1rem",
+  },
+  "&:hover": {
+    transform: "translateY(-5px)",
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+  },
+}));
+
+const TenderTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  color: "#0f5a28",
+  fontSize: "clamp(1rem, 3vw, 1.25rem)", // Scales with viewport
+  lineHeight: 1.3,
+  marginBottom: "0.5rem",
+});
+
+const TenderMeta = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  color: "#666",
+  fontSize: "clamp(0.75rem, 2vw, 0.9rem)", // Scales with viewport
+  marginBottom: "0.5rem",
+});
+
+const DownloadButton = styled(Button)({
+  backgroundColor: "#0f5a28",
+  color: "#fff",
+  textTransform: "none",
+  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.75rem)", // Responsive padding
+  fontSize: "clamp(0.8rem, 2vw, 0.95rem)", // Scales with viewport
+  fontFamily: "'Roboto', sans-serif",
+  borderRadius: "8px",
+  fontWeight: 500,
+  minWidth: "clamp(80px, 20vw, 120px)", // Responsive min-width
+  "&:hover": {
+    backgroundColor: "#1b7d3a",
+    transform: "scale(1.03)",
+  },
+});
 
 export default function TendersPage() {
   const [tenders, setTenders] = useState([]);
@@ -44,44 +154,56 @@ export default function TendersPage() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
-      <main className="flex-grow container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Tenders</h1>
-          <p className="text-xl text-gray-600">
+      <PageContainer>
+        <ContentWrapper>
+          <HeaderTitle variant="h1">Tenders</HeaderTitle>
+          <HeaderSubtitle>
             Explore the latest tenders from the Kenya Forest Service.
-          </p>
-        </div>
-        {error ? (
-          <p className="text-red-500 text-center">{error}</p>
-        ) : tenders.length === 0 ? (
-          <p className="text-gray-600 text-center">No active tenders available at this time.</p>
-        ) : (
-          <div className="grid grid-cols-1 gap-6">
-            {tenders.map((tender) => (
-              <div key={tender.id} className="bg-white p-6 rounded-xl shadow-lg">
-                <h2 className="text-xl font-semibold text-green-900 mb-2">
-                  {tender.description}
-                </h2>
-                {tender.id && (
-                  <p className="text-sm text-gray-600 mb-2">Tender ID: {tender.id}</p>
-                )}
-                <p className="text-sm text-gray-600 mb-4">File available for download</p>
-                <a
-                  href={`http://localhost:5000${tender.pdf_url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"
+          </HeaderSubtitle>
+          <Box sx={{ width: "100%", margin: "0 auto" }}>
+            {error ? (
+              <Typography color="error" align="center" sx={{ fontSize: "clamp(1rem, 3vw, 1.25rem)" }}>
+                {error}
+              </Typography>
+            ) : tenders.length === 0 ? (
+              <Typography
+                color="textSecondary"
+                align="center"
+                sx={{ fontSize: "clamp(1rem, 3vw, 1.25rem)" }}
+              >
+                No active tenders available at this time.
+              </Typography>
+            ) : (
+              tenders.map((tender) => (
+                <TenderCard
+                  key={tender.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  Download Tender
-                </a>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
+                  <Box>
+                    <TenderTitle>{tender.description}</TenderTitle>
+                    {tender.id && (
+                      <TenderMeta>Tender ID: {tender.id}</TenderMeta>
+                    )}
+                    <TenderMeta>File available for download</TenderMeta>
+                  </Box>
+                  <a
+                    href={`http://localhost:5000${tender.pdf_url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <DownloadButton variant="contained">Download Tender</DownloadButton>
+                  </a>
+                </TenderCard>
+              ))
+            )}
+          </Box>
+        </ContentWrapper>
+      </PageContainer>
       <FooterBottom />
     </div>
   );

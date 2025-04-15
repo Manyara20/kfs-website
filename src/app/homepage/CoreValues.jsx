@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
 const coreValues = [
   {
@@ -36,71 +38,125 @@ const coreValues = [
   },
 ];
 
+const SectionContainer = styled(Box)({
+  backgroundColor: "#e6f5e6",
+  padding: "clamp(1.5rem, 3vw, 3rem) clamp(0.5rem, 1vw, 2rem)", // Responsive padding
+});
+
+const HeaderContainer = styled(Box)({
+  textAlign: "center",
+  marginBottom: "clamp(1rem, 2vw, 3rem)", // Responsive margin
+});
+
+const HeaderTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 900,
+  color: "#0E2E0E",
+  fontSize: "clamp(1.5rem, 6vw, 3.75rem)", // Scales with viewport
+  lineHeight: 1.2,
+});
+
+const ValuesContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: "clamp(0.5rem, 1vw, 1.5rem)", // Responsive gap
+  width: "100%",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  [theme.breakpoints.down("md")]: {
+    overflowX: "auto",
+    flexWrap: "nowrap",
+    paddingBottom: "1rem",
+  },
+}));
+
+const ValueCard = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "clamp(1rem, 2vw, 3rem)", // Scales padding
+  border: "1px solid #e8ecef",
+  backgroundColor: "#1f5d2f",
+  color: "#ffffff",
+  width: "clamp(14rem, 20vw, 28.125rem)", // Responsive width
+  transition: "all 0.3s ease",
+  "&:hover": {
+    backgroundColor: "#f5f5f5",
+    color: "#000000",
+  },
+  [theme.breakpoints.down("lg")]: {
+    flexShrink: 0,
+  },
+}));
+
+const ValueIconWrapper = styled(Box)({
+  marginBottom: "clamp(0.5rem, 1vw, 1.25rem)", // Responsive margin
+});
+
+const ValueTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 500,
+  fontSize: "clamp(1rem, 3vw, 1.875rem)", // Scales with viewport
+  lineHeight: 1.3,
+});
+
+const ValueDescription = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  fontSize: "clamp(0.75rem, 2vw, 1.5rem)", // Scales with viewport
+  marginTop: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+  lineHeight: 1.5,
+});
+
 const CoreValuesSection = () => {
-  // State to ensure rendering happens only on the client to avoid hydration error
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Placeholder during server-side rendering to avoid hydration mismatch
   if (!isMounted) {
     return (
-      <section className="bg-[#e6f5e6] py-12 sm:py-10 md:py-8 px-8 sm:px-6 md:px-4">
-        <div className="text-center mb-12 sm:mb-10 md:mb-8">
-          <h2 className="text-5xl sm:text-4xl md:text-3xl font-black text-[#0E2E0E]">
-            Our Core Values
-          </h2>
-        </div>
-        <div className="flex md:overflow-x-auto lg:flex-wrap lg:justify-center gap-6 sm:gap-5 md:gap-4 w-full">
+      <SectionContainer>
+        <HeaderContainer>
+          <HeaderTitle>Our Core Values</HeaderTitle>
+        </HeaderContainer>
+        <ValuesContainer>
           {coreValues.map((_, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center text-center p-12 sm:p-10 md:p-8 border border-gray-300 bg-[#1f5d2f] text-white w-[450px] sm:w-[400px] md:w-[350px] lg:w-[calc(20%-1.2rem)]"
-            />
+            <ValueCard key={index} />
           ))}
-        </div>
-      </section>
+        </ValuesContainer>
+      </SectionContainer>
     );
   }
 
   return (
-    <section className="bg-[#e6f5e6] py-12 sm:py-10 md:py-8 lg:py-6 px-8 sm:px-6 md:px-4 lg:px-2">
-      {/* Centered Header */}
-      <div className="text-center mb-12 sm:mb-10 md:mb-8 lg:mb-6 xl:mb-4">
-        <h2 className="text-6xl sm:text-5xl md:text-4xl lg:text-3xl xl:text-2xl font-black text-[#0E2E0E]">
-          Our Core Values
-        </h2>
-      </div>
-
-      {/* Core Values Card Container */}
-      <div className="flex md:overflow-x-auto lg:flex-wrap lg:justify-center gap-6 sm:gap-5 md:gap-4 lg:gap-3 xl:gap-2 w-full pb-4 lg:pb-0">
+    <SectionContainer>
+      <HeaderContainer>
+        <HeaderTitle>Our Core Values</HeaderTitle>
+      </HeaderContainer>
+      <ValuesContainer>
         {coreValues.map((value, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center p-12 sm:p-10 md:p-8 lg:p-6 xl:p-4 border border-gray-300 bg-[#1f5d2f] text-white hover:bg-green-50 hover:text-black transition-colors duration-300 w-[450px] sm:w-[400px] md:w-[350px] lg:w-[calc(20%-0.75rem)] xl:w-[calc(20%-0.5rem)] flex-shrink-0 lg:flex-shrink"
-          >
-            <div className="mb-5 sm:mb-4 md:mb-3 lg:mb-2 xl:mb-1">
+          <ValueCard key={index}>
+            <ValueIconWrapper>
               <Image
                 src={value.icon}
                 alt={value.title}
                 width={64}
                 height={64}
                 priority
-                className="w-16 h-16 sm:w-14 sm:h-14 md:w-12 md:h-12 lg:w-10 lg:h-10 xl:w-8 xl:h-8"
+                style={{
+                  width: "clamp(2rem, 5vw, 4rem)", // Responsive image size
+                  height: "clamp(2rem, 5vw, 4rem)", // Responsive image size
+                }}
               />
-            </div>
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg xl:text-base font-medium">
-              {value.title}
-            </h3>
-            <p className="text-2xl sm:text-xl md:text-lg lg:text-base xl:text-sm mt-4 sm:mt-3 md:mt-2 lg:mt-1">
-              {value.description}
-            </p>
-          </div>
+            </ValueIconWrapper>
+            <ValueTitle>{value.title}</ValueTitle>
+            <ValueDescription>{value.description}</ValueDescription>
+          </ValueCard>
         ))}
-      </div>
-    </section>
+      </ValuesContainer>
+    </SectionContainer>
   );
 };
 

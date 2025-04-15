@@ -2,58 +2,212 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { Box, Typography, Button } from "@mui/material";
+import { styled } from "@mui/system";
 
 // EventCard component
-const EventCard = ({ date, title, time, venue, onClick }) => {
+const EventCard = styled(Button)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: "#0f5a28",
+  color: "#ffffff",
+  borderRadius: "8px",
+  padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+  marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
+  transition: "all 0.2s ease",
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: "#e6f5e6",
+    color: "#000000",
+  },
+  "&:focus": {
+    outline: "none",
+    ring: "2px solid #ff0000",
+    ringOffset: "2px",
+  },
+}));
+
+const EventDateBox = styled(Box)({
+  width: "clamp(2.5rem, 5vw, 3rem)", // Responsive width
+  height: "clamp(2.5rem, 5vw, 3rem)", // Responsive height
+  backgroundColor: "#000000",
+  color: "#ffffff",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "4px",
+  marginRight: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive margin
+});
+
+const EventDay = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 700,
+  fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
+});
+
+const EventMonth = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 400,
+  fontSize: "clamp(0.5rem, 1vw, 0.625rem)", // Scales with viewport
+  textTransform: "uppercase",
+});
+
+const EventDetails = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  textAlign: "left",
+  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)", // Scales with viewport
+});
+
+// NoticeCard component
+const NoticeCard = styled(Button)({
+  width: "100%",
+  backgroundColor: "#0f5a28",
+  color: "#ffffff",
+  borderRadius: "8px",
+  padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+  marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
+  transition: "all 0.2s ease",
+  height: "clamp(5rem, 10vw, 6rem)", // Responsive height
+  overflow: "hidden",
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: "#e6f5e6",
+    color: "#000000",
+  },
+});
+
+const NoticeDetails = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  textAlign: "left",
+  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)", // Scales with viewport
+});
+
+const FileLink = styled("a")({
+  color: "#90caf9",
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});
+
+// X Feed component
+const XFeedContainer = styled(Box)({
+  backgroundColor: "#ffffff",
+  padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+  overflowY: "auto",
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+  scrollbarWidth: "none",
+});
+
+const XFeedTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  color: "#000000",
+  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
+  marginBottom: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive margin
+});
+
+// Main Section
+const SectionContainer = styled(Box)({
+  backgroundColor: "#e6f5e6",
+  padding: "clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem)", // Responsive padding
+});
+
+const SectionTitle = styled(Typography)({
+  fontFamily: "'Poppins', sans-serif",
+  fontWeight: 900,
+  color: "#0E2E0E",
+  fontSize: "clamp(1.5rem, 5vw, 3.125rem)", // Scales with viewport
+  textAlign: "center",
+  marginBottom: "clamp(1.5rem, 3vw, 3rem)", // Responsive margin
+});
+
+const ContentGrid = styled(Box)(({ theme }) => ({
+  width: "100%",
+  maxWidth: "clamp(60rem, 90vw, 87.5rem)", // Responsive max-width
+  margin: "0 auto",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "clamp(1rem, 2vw, 1.5rem)", // Responsive gap
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "1fr",
+  },
+}));
+
+const CardContainer = styled(Box)({
+  backgroundColor: "#ffffff",
+  padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+  border: "2px solid #0d3c00",
+  minHeight: "clamp(20rem, 40vw, 32rem)", // Responsive min-height
+});
+
+const CardTitle = styled(Typography)({
+  fontFamily: "'Roboto', sans-serif",
+  fontWeight: 600,
+  color: "#000000",
+  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
+  marginBottom: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive margin
+});
+
+const ErrorText = styled(Typography)({
+  color: "#f44336",
+  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)", // Scales with viewport
+});
+
+const EmptyText = styled(Typography)({
+  color: "#666",
+  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)", // Scales with viewport
+});
+
+// EventCard Component
+const EventCardComponent = ({ date, title, time, venue, onClick }) => {
   const eventDate = new Date(date);
   const day = eventDate.getDate().toString().padStart(2, "0");
   const month = eventDate.toLocaleString("default", { month: "short" });
 
   return (
-    <button
-      onClick={onClick}
-      className="w-full flex items-center bg-[#0f5a28] text-white rounded p-2 sm:p-3 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff0000]"
-    >
-      <div className="w-10 sm:w-12 h-10 sm:h-12 bg-[#000] text-white flex flex-col items-center justify-center rounded mr-2">
-        <span className="text-sm sm:text-base font-bold">{day}</span>
-        <span className="text-[8px] sm:text-[10px] uppercase">{month}</span>
-      </div>
-      <div className="flex flex-col text-xs sm:text-sm text-left">
-        <p><strong>Title:</strong> {title}</p>
-        <p><strong>Date:</strong> {day} {month}</p>
-        <p><strong>Time:</strong> {time}</p>
-        <p><strong>Venue:</strong> {venue}</p>
-      </div>
-    </button>
+    <EventCard onClick={onClick}>
+      <EventDateBox>
+        <EventDay>{day}</EventDay>
+        <EventMonth>{month}</EventMonth>
+      </EventDateBox>
+      <EventDetails>
+        <Typography><strong>Title:</strong> {title}</Typography>
+        <Typography><strong>Date:</strong> {day} {month}</Typography>
+        <Typography><strong>Time:</strong> {time}</Typography>
+        <Typography><strong>Venue:</strong> {venue}</Typography>
+      </EventDetails>
+    </EventCard>
   );
 };
 
-// NoticeCard component
-const NoticeCard = ({ title, description, file_url, onClick }) => {
+// NoticeCard Component
+const NoticeCardComponent = ({ title, description, file_url, onClick }) => {
   return (
-    <button
-      onClick={onClick}
-      className="w-full bg-[#0f5a28] text-white rounded p-2 sm:p-3 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] h-20 sm:h-24 overflow-hidden"
-    >
-      <div className="flex flex-col text-xs sm:text-sm text-left">
-        <p><strong>Title:</strong> {title}</p>
-        <p><strong>Description:</strong> {description}</p>
+    <NoticeCard onClick={onClick}>
+      <NoticeDetails>
+        <Typography><strong>Title:</strong> {title}</Typography>
+        <Typography><strong>Description:</strong> {description}</Typography>
         {file_url && (
-          <a
+          <FileLink
             href={`http://localhost:5000${file_url}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-300 hover:underline"
           >
             View File
-          </a>
+          </FileLink>
         )}
-      </div>
-    </button>
+      </NoticeDetails>
+    </NoticeCard>
   );
 };
 
-// X Feed component
+// X Feed Component
 const XFeed = ({ containerHeight }) => {
   const xFeedRef = useRef(null);
 
@@ -77,12 +231,8 @@ const XFeed = ({ containerHeight }) => {
   }, [containerHeight]);
 
   return (
-    <div
-      ref={xFeedRef}
-      className="bg-[#ffffff] p-2 sm:p-3 overflow-y-auto no-scrollbar"
-      style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
-    >
-      <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">X Feed</h3>
+    <XFeedContainer sx={{ height: containerHeight ? `${containerHeight}px` : "auto" }}>
+      <XFeedTitle>X Feed</XFeedTitle>
       <a
         className="twitter-timeline"
         href="https://twitter.com/KeForestService?ref_src=twsrc%5Etfw"
@@ -91,7 +241,7 @@ const XFeed = ({ containerHeight }) => {
       >
         Tweets by KeForestService
       </a>
-    </div>
+    </XFeedContainer>
   );
 };
 
@@ -153,65 +303,51 @@ const KFSFeeds = () => {
   }, [events, notices]);
 
   return (
-    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-6 sm:mb-8 md:mb-12 text-[#0E2E0E]">
-         Updates
-      </h2>
-      <div className="w-full max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          <div
-            ref={eventsRef}
-            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
-          >
-            <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
-              Events
-            </h3>
-            {error ? (
-              <p className="text-red-500 text-xs sm:text-sm">{error}</p>
-            ) : events.length === 0 ? (
-              <p className="text-gray-600 text-xs sm:text-sm">No active events available.</p>
-            ) : (
-              events.map((item, index) => (
-                <EventCard
-                  key={index}
-                  date={item.date}
-                  title={item.title}
-                  time={item.time}
-                  venue={item.venue}
-                  onClick={() => console.log(`Clicked Event: ${item.title}`)}
-                />
-              ))
-            )}
-          </div>
-          <div
-            ref={noticeRef}
-            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
-          >
-            <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
-              Notice Board
-            </h3>
-            {error ? (
-              <p className="text-red-500 text-xs sm:text-sm">{error}</p>
-            ) : notices.length === 0 ? (
-              <p className="text-gray-600 text-xs sm:text-sm">No active notices available.</p>
-            ) : (
-              notices.map((item, index) => (
-                <NoticeCard
-                  key={index}
-                  title={item.title}
-                  description={item.description}
-                  file_url={item.file_url}
-                  onClick={() => console.log(`Clicked Notice: ${item.title}`)}
-                />
-              ))
-            )}
-          </div>
-          <div className="bg-[#ffffff] border-2 border-[#0d3c00] min-h-[32rem]">
-            <XFeed containerHeight={maxHeight} />
-          </div>
-        </div>
-      </div>
-    </section>
+    <SectionContainer>
+      <SectionTitle>Updates</SectionTitle>
+      <ContentGrid>
+        <CardContainer ref={eventsRef}>
+          <CardTitle>Events</CardTitle>
+          {error ? (
+            <ErrorText>{error}</ErrorText>
+          ) : events.length === 0 ? (
+            <EmptyText>No active events available.</EmptyText>
+          ) : (
+            events.map((item, index) => (
+              <EventCardComponent
+                key={index}
+                date={item.date}
+                title={item.title}
+                time={item.time}
+                venue={item.venue}
+                onClick={() => console.log(`Clicked Event: ${item.title}`)}
+              />
+            ))
+          )}
+        </CardContainer>
+        <CardContainer ref={noticeRef}>
+          <CardTitle>Notice Board</CardTitle>
+          {error ? (
+            <ErrorText>{error}</ErrorText>
+          ) : notices.length === 0 ? (
+            <EmptyText>No active notices available.</EmptyText>
+          ) : (
+            notices.map((item, index) => (
+              <NoticeCardComponent
+                key={index}
+                title={item.title}
+                description={item.description}
+                file_url={item.file_url}
+                onClick={() => console.log(`Clicked Notice: ${item.title}`)}
+              />
+            ))
+          )}
+        </CardContainer>
+        <CardContainer>
+          <XFeed containerHeight={maxHeight} />
+        </CardContainer>
+      </ContentGrid>
+    </SectionContainer>
   );
 };
 

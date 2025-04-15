@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Typography, List, ListItem, Button } from "@mui/material";
 import { styled } from "@mui/system";
+import DescriptionIcon from "@mui/icons-material/Description"; // Added import
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
@@ -170,7 +171,6 @@ export default function ForestManagementPlansPage() {
 
   const handleDownload = (fileName) => {
     console.log(`Downloading ${fileName}`);
-  
   };
 
   const resources = [
@@ -183,7 +183,6 @@ export default function ForestManagementPlansPage() {
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
-
         <ContentCard
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}

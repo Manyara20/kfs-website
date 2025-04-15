@@ -225,6 +225,32 @@ app.get("/api/documents/policy", async (req, res) => {
   }
 });
 
+// Public jobs route (NEW)
+app.get("/api/jobs/public", async (req, res) => {
+  const pool = new Pool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+  });
+  console.log("Direct handling GET /api/jobs/public");
+  try {
+    const result = await pool.query("SELECT * FROM jobs WHERE archived = FALSE");
+    console.log("Query result:", result.rows);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error in /api/jobs/public:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    res.status(500).json({ error: "Server error", details: error.message });
+  } finally {
+    await pool.end();
+  }
+});
+
 // Authenticated routes
 app.use("/api/posts", authenticateToken, postsRouter);
 app.use("/api/jobs", authenticateToken, jobsRouter);

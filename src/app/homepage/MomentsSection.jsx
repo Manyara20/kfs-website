@@ -141,14 +141,14 @@ const NavButton = styled(Button)({
 });
 
 const SlideIndicator = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0D3C00",
   fontSize: "clamp(0.875rem, 2vw, 1rem)", // Scales with viewport
 });
 
 const MomentTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0D3C00",
   fontSize: "clamp(1.25rem, 3vw, 1.875rem)", // Scales with viewport
@@ -156,7 +156,7 @@ const MomentTitle = styled(Typography)({
 });
 
 const MomentDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#333",
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport

@@ -34,7 +34,7 @@ const SectionContainer = styled(Box)({
 });
 
 const Title = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0d3c00",
   fontSize: "clamp(1.5rem, 4vw, 2rem)", // Scales with viewport

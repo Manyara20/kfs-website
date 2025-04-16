@@ -57,7 +57,7 @@ const LogoWrapper = styled(Box)({
 });
 
 const Tagline = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 300,
   fontStyle: "italic",
   color: "rgba(255, 255, 255, 0.8)",
@@ -66,7 +66,7 @@ const Tagline = styled(Typography)({
 });
 
 const ColumnTitle = styled(Typography)({
-  fontFamily: "' serif'",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#ffffff",
   fontSize: "clamp(1rem, 3vw, 1.875rem)", // Scales with viewport
@@ -74,7 +74,7 @@ const ColumnTitle = styled(Typography)({
 });
 
 const ContactText = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "rgba(255, 255, 255, 0.8)",
   fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
@@ -89,7 +89,7 @@ const Icon = styled(Box)({
 });
 
 const TollFreeNumber = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#ffffff",
   fontSize: "clamp(0.875rem, 2.5vw, 1.5rem)", // Scales with viewport
@@ -105,7 +105,7 @@ const ActionButton = styled(Button)({
   textTransform: "none",
   padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(0.75rem, 2vw, 1rem)", // Responsive padding
   fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   borderRadius: "6px",
   fontWeight: 500,
   "&:hover": {
@@ -123,7 +123,7 @@ const EmailInput = styled(TextField)({
     backgroundColor: "transparent",
     color: "#e6f5e6",
     fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Peugeot', Helvetica, sans-serif",
   },
   "& .MuiInputBase-input": {
     paddingLeft: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding

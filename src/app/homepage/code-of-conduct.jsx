@@ -54,7 +54,7 @@ const HeaderTitle = styled(Typography)({
 });
 
 const IntroText = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#ffffff",
   fontSize: "clamp(1rem, 3vw, 1.125rem)", // Scales with viewport

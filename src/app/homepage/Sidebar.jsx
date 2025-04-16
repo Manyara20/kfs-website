@@ -50,7 +50,7 @@ const MenuButton = styled(Button)({
   textAlign: "left",
   padding: "clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1vw, 1rem)", // Responsive padding
   fontSize: "clamp(0.75rem, 2vw, 1rem)", // Responsive font size
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   color: "#666",
   justifyContent: "flex-start",
   textTransform: "none",

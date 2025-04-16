@@ -30,7 +30,7 @@ const ContentSection = styled(Box)({
 });
 
 const CardTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 800,
   color: "#0D3C00",
   textAlign: "center",
@@ -55,7 +55,7 @@ const MetaItem = styled(Box)({
 });
 
 const CardDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
@@ -63,7 +63,7 @@ const CardDescription = styled(Typography)({
 });
 
 const ReadMoreButton = styled(Button)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 800,
   color: "#000000",
   textTransform: "none",

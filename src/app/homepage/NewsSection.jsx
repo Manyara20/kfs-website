@@ -17,14 +17,14 @@ const HeaderContainer = styled(Box)({
 });
 
 const MainTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 900,
   color: "#0E2E0E",
   fontSize: "clamp(1.5rem, 5vw, 3.125rem)", // Scales with viewport
 });
 
 const SubTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#15803d",
   fontSize: "clamp(1.25rem, 4vw, 2.5rem)", // Scales with viewport

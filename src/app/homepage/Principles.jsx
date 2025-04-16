@@ -57,7 +57,7 @@ const HeaderContainer = styled(Box)({
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 800,
   color: "#000000",
   fontSize: "clamp(1.25rem, 3vw, 1.875rem)", // Scales with viewport
@@ -95,7 +95,7 @@ const TabList = styled(Box)({
 });
 
 const Tab = styled(Typography)(({ active }) => ({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
   textTransform: "uppercase",
@@ -132,7 +132,7 @@ const ContentText = styled(Box)({
 });
 
 const PrincipleTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   fontSize: "clamp(1rem, 2.5vw, 1.25rem)", // Scales with viewport
   marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
@@ -140,7 +140,7 @@ const PrincipleTitle = styled(Typography)({
 });
 
 const PrincipleDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
   lineHeight: 1.6,

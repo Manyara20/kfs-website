@@ -42,13 +42,13 @@ const EventDateBox = styled(Box)({
 });
 
 const EventDay = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
 });
 
 const EventMonth = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   fontSize: "clamp(0.5rem, 1vw, 0.625rem)", // Scales with viewport
   textTransform: "uppercase",
@@ -105,7 +105,7 @@ const XFeedContainer = styled(Box)({
 });
 
 const XFeedTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#000000",
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
@@ -119,7 +119,7 @@ const SectionContainer = styled(Box)({
 });
 
 const SectionTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 900,
   color: "#0E2E0E",
   fontSize: "clamp(1.5rem, 5vw, 3.125rem)", // Scales with viewport
@@ -147,7 +147,7 @@ const CardContainer = styled(Box)({
 });
 
 const CardTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#000000",
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport

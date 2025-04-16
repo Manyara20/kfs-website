@@ -53,7 +53,7 @@ const HeaderContainer = styled(Box)({
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
   fontSize: "clamp(2rem, 5vw, 3.5rem)", // Large for prominence
@@ -111,7 +111,7 @@ const ValueIconWrapper = styled(Box)({
 });
 
 const ValueTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   fontSize: "clamp(1.125rem, 2.8vw, 1.5rem)", // Increased for readability
   color: "#0f5a28",
@@ -119,7 +119,7 @@ const ValueTitle = styled(Typography)({
 });
 
 const ValueDescription = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   fontSize: "clamp(0.875rem, 2vw, 1rem)", // Increased for clarity
   color: "#333",

@@ -84,7 +84,7 @@ const InfoContainer = styled(Box)({
 });
 
 const InfoTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#e6f5e6",
   fontSize: "clamp(1.25rem, 3vw, 1.5rem)", // Scales with viewport
@@ -93,7 +93,7 @@ const InfoTitle = styled(Typography)({
 });
 
 const InfoText = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#ffffff",
   fontSize: "clamp(0.875rem, 2vw, 1.25rem)", // Scales with viewport
@@ -108,7 +108,7 @@ const LearnMoreButton = styled(Button)({
   textTransform: "none",
   padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.5rem)", // Responsive padding
   fontSize: "clamp(0.8rem, 2vw, 1rem)", // Scales with viewport
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   borderRadius: "4px",
   marginTop: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
   "&:hover": {
@@ -122,7 +122,7 @@ const ObjectivesContainer = styled(Box)({
 });
 
 const ObjectivesTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily:"'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#e6f5e6",
   fontSize: "clamp(1.5rem, 4vw, 2rem)", // Scales with viewport
@@ -132,7 +132,7 @@ const ObjectivesTitle = styled(Typography)({
 });
 
 const ObjectivesSubtitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#ffffff",
   fontSize: "clamp(1rem, 3vw, 1.5rem)", // Scales with viewport
@@ -159,7 +159,7 @@ const ObjectiveCard = styled(Box)({
 });
 
 const ObjectiveTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
 });
@@ -173,7 +173,7 @@ const DetailsContainer = styled(Box)({
 });
 
 const DetailText = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
   lineHeight: 1.7,

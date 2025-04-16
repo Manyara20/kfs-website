@@ -28,8 +28,9 @@ const slides = [
 const HeroContainer = styled(Box)({
   position: "relative",
   height: "clamp(40vh, 60vw, 80vh)", // Responsive height
-  width: "100%",
+  width: "100vw", // Full viewport width
   overflow: "hidden",
+  boxSizing: "border-box",
 });
 
 const SlideContainer = styled(Box)(({ image }) => ({
@@ -42,7 +43,9 @@ const SlideContainer = styled(Box)(({ image }) => ({
   justifyContent: "center",
   alignItems: "center",
   padding: "clamp(1rem, 2vw, 2.5rem)", // Responsive padding
-  transition: "all 0.5s ease-in-out",
+  transition: "opacity 0.5s ease-in-out", // Smooth fade transition
+  opacity: 1,
+  width: "100%", // Full width of parent
 }));
 
 const Overlay = styled(Box)({
@@ -55,6 +58,8 @@ const TextContainer = styled(Box)({
   position: "relative",
   textAlign: "center",
   zIndex: 10,
+  width: "90vw", // Responsive width
+  maxWidth: "100%", // Prevent overflow
 });
 
 const SlideTitle = styled(Typography)({
@@ -84,6 +89,7 @@ const IndicatorsContainer = styled(Box)({
   transform: "translateX(-50%)",
   display: "flex",
   gap: "clamp(0.375rem, 1vw, 0.625rem)", // Responsive gap
+  zIndex: 10,
 });
 
 const Indicator = styled(Box)(({ active }) => ({
@@ -92,7 +98,7 @@ const Indicator = styled(Box)(({ active }) => ({
   borderRadius: "50%",
   backgroundColor: active ? "#ffffff" : "rgba(255, 255, 255, 0.5)",
   cursor: "pointer",
-  transition: "all 0.3s ease",
+  transition: "background-color 0.3s ease",
 }));
 
 const HeroSection = () => {
@@ -111,22 +117,36 @@ const HeroSection = () => {
 
   return (
     <HeroContainer>
-      <SlideContainer image={slides[currentSlide].image}>
-        <Overlay />
-        <TextContainer>
-          <SlideTitle>{slides[currentSlide].title}</SlideTitle>
-          <SlideSubtitle>{slides[currentSlide].subtitle}</SlideSubtitle>
-        </TextContainer>
-        <IndicatorsContainer>
-          {slides.map((_, index) => (
-            <Indicator
-              key={index}
-              active={currentSlide === index}
-              onClick={() => handleSlideChange(index)}
-            />
-          ))}
-        </IndicatorsContainer>
-      </SlideContainer>
+      {slides.map((slide, index) => (
+        <SlideContainer
+          key={index}
+          image={slide.image}
+          style={{
+            opacity: currentSlide === index ? 1 : 0,
+            position: currentSlide === index ? "relative" : "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: currentSlide === index ? 5 : 1,
+          }}
+        >
+          <Overlay />
+          <TextContainer>
+            <SlideTitle>{slide.title}</SlideTitle>
+            <SlideSubtitle>{slide.subtitle}</SlideSubtitle>
+          </TextContainer>
+        </SlideContainer>
+      ))}
+      <IndicatorsContainer>
+        {slides.map((_, index) => (
+          <Indicator
+            key={index}
+            active={currentSlide === index}
+            onClick={() => handleSlideChange(index)}
+          />
+        ))}
+      </IndicatorsContainer>
     </HeroContainer>
   );
 };

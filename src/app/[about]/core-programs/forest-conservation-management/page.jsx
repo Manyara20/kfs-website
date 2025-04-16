@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Box, Typography, List, ListItem, ListItemText, IconButton } from "@mui/material";
-import { Facebook, Twitter, YouTube, Instagram } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
@@ -19,9 +18,11 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem", 
+  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
+  boxSizing: "border-box",
   "&:before": {
     content: '""',
     position: "absolute",
@@ -39,12 +40,13 @@ const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
   backdropFilter: "blur(10px)",
   boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",
-  maxWidth: "900px",
-  width: "100%",
+  width: "clamp(90%, 95vw, 100%)", // Responsive width
+  maxWidth: "100%", // Prevent overflow
   position: "relative",
   zIndex: 1,
   border: "1px solid rgba(255, 255, 255, 0.3)",
-  padding: "3rem", 
+  padding: "clamp(1.5rem, 3vw, 3rem)", // Responsive padding
+  boxSizing: "border-box",
 });
 
 const Title = styled(Typography)({
@@ -52,10 +54,10 @@ const Title = styled(Typography)({
   fontWeight: 700,
   color: "#0f5a28",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
-  marginBottom: "2rem", 
-  fontSize: "2.2rem",
-  lineHeight: 1.3, 
-  letterSpacing: "0.5px", 
+  marginBottom: "clamp(1rem, 2vw, 2rem)", // Responsive margin
+  fontSize: "clamp(1.5rem, 4vw, 2.2rem)", // Scales with viewport
+  lineHeight: 1.3,
+  letterSpacing: "0.5px",
   textTransform: "capitalize",
 });
 
@@ -63,23 +65,24 @@ const Description = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#333",
-  lineHeight: 1.8, 
-  wordSpacing: "0.15rem", 
-  fontSize: "1rem",
-  marginBottom: "2rem", 
+  lineHeight: 1.8,
+  wordSpacing: "0.15rem",
+  fontSize: "clamp(0.875rem, 2vw, 1rem)", // Scales with viewport
+  marginBottom: "clamp(1rem, 2vw, 2rem)", // Responsive margin
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "1.5rem", 
+  gridTemplateColumns: "repeat(auto-fit, minmax(clamp(12rem, 25vw, 17.5rem), 1fr))", // Responsive grid
+  gap: "clamp(0.75rem, 1.5vw, 1.5rem)", // Responsive gap
   padding: 0,
+  width: "100%", // Full width of parent
 });
 
 const DepartmentItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1.5rem", // Increased from 1rem to 1.5rem for more internal spacing
+  padding: "clamp(0.75rem, 1.5vw, 1.5rem)", // Responsive padding
   "&:hover": {
     transform: "translateY(-3px)",
     boxShadow: "0 3px 10px rgba(0, 0, 0, 0.15)",
@@ -91,36 +94,13 @@ const DepartmentText = styled(ListItemText)({
   "& .MuiTypography-root": {
     fontFamily: "'Peugeot', Helvetica, sans-serif",
     fontWeight: 500,
-    color: "#0D3C00",
-    fontSize: "0.95rem",
-    lineHeight: 1.6, // Added line height for better readability
-    wordSpacing: "0.1rem", // Added word spacing for better readability
+    color: "#fff",
+    fontSize: "clamp(0.75rem, 1.5vw, 0.95rem)", // Scales with viewport
+    lineHeight: 1.6,
+    wordSpacing: "0.1rem",
     textTransform: "capitalize",
   },
 });
-
-const SocialIconsContainer = styled(Box)({
-  position: "absolute",
-  top: "1.5rem", // Increased from 1rem for better positioning
-  left: "1.5rem", // Increased from 1rem for better positioning
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.75rem", // Increased from 0.5rem for more spacing between icons
-  zIndex: 2,
-});
-
-const SocialIconButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: "rgba(255, 255, 255, 0.9)",
-  color: "#0D3C00",
-  transition: "all 0.3s ease",
-  padding: "8px", // Increased from 6px for better touch area
-  "&:hover": {
-    backgroundColor: "#0D3C00",
-    color: "#fff",
-    transform: "scale(1.05)",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-  },
-}));
 
 // Main Page Component
 export default function DFCMPage() {
@@ -130,7 +110,7 @@ export default function DFCMPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>

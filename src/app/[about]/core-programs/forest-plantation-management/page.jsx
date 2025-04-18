@@ -19,9 +19,11 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
+  boxSizing: "border-box",
   "&:before": {
     content: '""',
     position: "absolute",
@@ -37,21 +39,22 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "900px", // Updated from 700px to 900px to match DFCMPage
-  width: "100%",
+  padding: "clamp(1.5rem, 3vw, 3rem)", // Responsive padding
+  width: "clamp(90%, 95vw, 100%)", // Responsive width
+  maxWidth: "100%", // Prevent overflow
   position: "relative",
   zIndex: 1,
   border: "1px solid rgba(255, 255, 255, 0.3)",
   color: "#ffffff",
+  boxSizing: "border-box",
 });
 
 const Title = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
-  marginBottom: "2rem",
-  fontSize: "1.8rem",
+  marginBottom: "clamp(1rem, 2vw, 2rem)", // Responsive margin
+  fontSize: "clamp(1.25rem, 3.5vw, 1.8rem)", // Scales with viewport
   lineHeight: 1.3,
   letterSpacing: "0.5px",
   textTransform: "capitalize",
@@ -63,21 +66,22 @@ const Description = styled(Typography)({
   color: "#000",
   lineHeight: 1.8,
   wordSpacing: "0.15rem",
-  fontSize: "0.9rem",
-  marginBottom: "2rem",
+  fontSize: "clamp(0.75rem, 1.8vw, 0.9rem)", // Scales with viewport
+  marginBottom: "clamp(1rem, 2vw, 2rem)", // Responsive margin
 });
 
 const DepartmentList = styled(List)({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Increased from 250px to 280px to better utilize the wider card
-  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(clamp(12rem, 25vw, 17.5rem), 1fr))", // Responsive grid
+  gap: "clamp(0.5rem, 1vw, 1rem)", // Responsive gap
   padding: 0,
+  width: "100%", // Full width of parent
 });
 
 const DepartmentItem = styled(ListItem)({
   background: "#1a3c34",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1rem",
+  padding: "clamp(0.5rem, 1vw, 1rem)", // Responsive padding
   "&:hover": {
     transform: "translateY(-2px)",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
@@ -89,10 +93,29 @@ const DepartmentText = styled(ListItemText)({
     fontFamily: "'Peugeot', Helvetica, sans-serif",
     fontWeight: 500,
     color: "#ffffff",
-    fontSize: "0.85rem",
+    fontSize: "clamp(0.7rem, 1.5vw, 0.85rem)", // Scales with viewport
     lineHeight: 1.6,
     wordSpacing: "0.1rem",
     textTransform: "capitalize",
+  },
+});
+
+const AccessibilityControls = styled(Box)({
+  position: "fixed",
+  bottom: "clamp(1rem, 2vw, 4rem)", // Responsive positioning
+  right: "clamp(1rem, 2vw, 4rem)",
+  display: "flex",
+  flexDirection: "column",
+  gap: "clamp(0.5rem, 1vw, 2rem)", // Responsive gap
+});
+
+const AccessibilityButton = styled("button")({
+  backgroundColor: "#1a3c34",
+  padding: "clamp(0.5rem, 1vw, 2rem)", // Responsive padding
+  borderRadius: "50%",
+  transition: "background-color 0.3s ease",
+  "&:hover": {
+    backgroundColor: "#388e3c",
   },
 });
 
@@ -126,7 +149,7 @@ export default function KFSDivisionsPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
@@ -134,6 +157,7 @@ export default function KFSDivisionsPage() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
+          style={{ fontSize: `${fontSize}px` }}
         >
           <Title variant="h1">
             Plantation Division: Managing Kenya’s Forests
@@ -160,22 +184,20 @@ export default function KFSDivisionsPage() {
         </ContentCard>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
-          <button
+        <AccessibilityControls>
+          <AccessibilityButton
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Increase font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
-          </button>
-          <button
+          </AccessibilityButton>
+          <AccessibilityButton
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
             aria-label="Decrease font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
-          </button>
-        </div>
+          </AccessibilityButton>
+        </AccessibilityControls>
       </PageContainer>
       <FooterBottom />
     </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { Description as DescriptionIcon } from "@mui/icons-material";
 import Link from "next/link";
@@ -17,11 +17,12 @@ const PageContainer = styled(Box)({
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
-  padding: "2rem",
+  padding: "2vw",
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden",
+  width: "100vw",
   "&:before": {
-    content: '""',
+    content: "''",
     position: "absolute",
     top: 0,
     left: 0,
@@ -34,35 +35,39 @@ const PageContainer = styled(Box)({
 });
 
 const ContentWrapper = styled(Box)({
-  maxWidth: "1200px",
+  width: "90vw",
+  maxWidth: "100%",
   margin: "0 auto",
-  padding: "3rem 1rem",
+  padding: "clamp(1rem, 3vw, 3rem) clamp(0.5rem, 1vw, 1rem)",
   position: "relative",
   zIndex: 1,
+  boxSizing: "border-box",
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#ffffff",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-  fontSize: "3rem",
+  fontSize: "clamp(1.5rem, 6vw, 3rem)",
   lineHeight: 1.2,
   letterSpacing: "0.5px",
   textAlign: "center",
-  marginBottom: "3rem",
+  marginBottom: "clamp(1.5rem, 4vw, 3rem)",
 });
 
 const DocumentCard = styled(motion.div)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.95)",
   borderRadius: "12px",
-  padding: "1.5rem",
+  padding: "clamp(1rem, 2vw, 1.5rem)",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem",
+  transition: "all 0.3s ease",
+  marginBottom: "clamp(1rem, 2vw, 1.5rem)",
+  width: "100%",
+  boxSizing: "border-box",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
@@ -77,33 +82,45 @@ const DocumentCard = styled(motion.div)(({ theme }) => ({
 const DocumentInfo = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "1rem",
+  gap: "clamp(1rem, 2vw, 1.5rem)",
+  width: "100%",
+  flex: 1,
+});
+
+const DocumentDetails = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
 });
 
 const DocumentTitle = styled(Typography)({
-  fontFamily: "'Peugeot', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
-  fontSize: "1.25rem",
+  fontSize: "clamp(1rem, 3vw, 1.25rem)",
+  lineHeight: 1.3,
+  marginBottom: "0.25rem",
 });
 
 const FileSize = styled(Typography)({
-  fontFamily: "'Peugeot', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
-  fontSize: "0.9rem",
+  fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
 });
 
 const DownloadButton = styled(Button)({
   backgroundColor: "#0f5a28",
   color: "#fff",
   textTransform: "none",
-  padding: "0.5rem 1.5rem",
-  fontSize: "0.9rem",
-  fontFamily: "'Peugeot', sans-serif",
+  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.75rem)",
+  fontSize: "clamp(0.8rem, 2vw, 0.95rem)",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   borderRadius: "8px",
+  fontWeight: 500,
+  minWidth: "clamp(80px, 20vw, 120px)",
   "&:hover": {
     backgroundColor: "#388e3c",
+    transform: "scale(1.03)",
     boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
   },
 });
@@ -124,18 +141,13 @@ export default function NTPCDocumentsPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
         <ContentWrapper>
-          {/* Header Section */}
-          <HeaderTitle variant="h1">
-            NTPC Documents
-          </HeaderTitle>
-
-          {/* Documents Section */}
-          <Box>
+          <HeaderTitle variant="h1">NTPC Documents</HeaderTitle>
+          <Box sx={{ width: "100%", margin: "0 auto" }}>
             {documents.map((document, index) => (
               <DocumentCard
                 key={index}
@@ -144,16 +156,16 @@ export default function NTPCDocumentsPage() {
                 variants={cardVariants}
               >
                 <DocumentInfo>
-                  <DescriptionIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                  <Box>
+                  <DescriptionIcon
+                    sx={{ color: "#0f5a28", fontSize: "clamp(1.5rem, 4vw, 2.25rem)", flexShrink: 0 }}
+                  />
+                  <DocumentDetails>
                     <DocumentTitle>{document.title}</DocumentTitle>
                     <FileSize>1 file(s) {document.fileSize}</FileSize>
-                  </Box>
+                  </DocumentDetails>
                 </DocumentInfo>
                 <Link href={document.link} target="_blank" rel="noopener noreferrer" passHref>
-                  <DownloadButton>
-                    Download Document
-                  </DownloadButton>
+                  <DownloadButton>Download</DownloadButton>
                 </Link>
               </DocumentCard>
             ))}

@@ -1,19 +1,20 @@
-// pages/management/[id].js
-"use client"; // Ensure it's a Client Component
+"use client";
 
 import { useParams } from "next/navigation";
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
 // Placeholder image for fallback
-const placeholderImage = "/images/placeholder.jpg"; // Add a placeholder image in public/images
+const placeholderImage = "/images/placeholder.jpg";
 
 // Management details mapping with local image paths
 const managementDetails = {
   ceo: {
-    image: "/images/Alex Lemarkoko.jpg", // Local path
+    image: "/images/Alex Lemarkoko.jpg",
     name: "Alex Lemarkoko",
     title: "Chief Conservator of Forests",
     bio: "Alex Lemarkoko is the Chief Conservator of Forests with over 20 years of experience...",
@@ -110,6 +111,84 @@ const managementDetails = {
   },
 };
 
+// Styled Components
+const PageContainer = styled(Box)({
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: "#f3f4f6",
+  width: "100vw",
+  overflowX: "hidden",
+  boxSizing: "border-box",
+});
+
+const ContentContainer = styled(Box)({
+  flexGrow: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
+});
+
+const ProfileCard = styled(Box)({
+  backgroundColor: "#ffffff",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+  border: "2px solid #d1d5db",
+  width: "clamp(90%, 95vw, 100%)", // Responsive width
+  maxWidth: "clamp(25rem, 50vw, 31.25rem)", // Responsive max-width
+  padding: "clamp(1.5rem, 3vw, 2rem)", // Responsive padding
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+
+const ErrorCard = styled(Box)({
+  backgroundColor: "#ffffff",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+  border: "2px solid #d1d5db",
+});
+
+const ImageWrapper = styled(Box)({
+  position: "relative",
+  width: "clamp(8rem, 16vw, 10rem)", // Responsive image size
+  height: "clamp(8rem, 16vw, 10rem)",
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+});
+
+const Name = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(1.25rem, 3vw, 1.5rem)", // Scales with viewport
+  fontWeight: "bold",
+  color: "#1f2937",
+  marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
+  textAlign: "center",
+  textTransform: "capitalize",
+});
+
+const Title = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)", // Scales with viewport
+  color: "#4b5563",
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+  textAlign: "center",
+  textTransform: "capitalize",
+});
+
+const Bio = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.75rem, 1.5vw, 0.875rem)", // Scales with viewport
+  color: "#374151",
+  lineHeight: 1.6,
+  textAlign: "center",
+});
+
+const ErrorMessage = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.875rem, 1.5vw, 1rem)", // Scales with viewport
+  color: "#374151",
+});
+
 const ManagementProfile = () => {
   const params = useParams();
   const { id } = params;
@@ -117,56 +196,41 @@ const ManagementProfile = () => {
   // Ensure id is defined and exists in the managementDetails object
   if (!id || !managementDetails[id]) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-        <div className="bg-white p-4 shadow-lg border-2 border-gray-300">
-          <p className="text-gray-700 text-base">Profile not found</p>
-        </div>
-      </div>
+      <PageContainer>
+        <ContentContainer>
+          <ErrorCard>
+            <ErrorMessage>Profile not found</ErrorMessage>
+          </ErrorCard>
+        </ContentContainer>
+      </PageContainer>
     );
   }
 
   const profile = managementDetails[id];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <PageContainer>
       <TopNavBar />
       <MainNavBar />
-      <div className="flex-grow flex items-center justify-center p-4">
-        <div className="bg-white shadow-xl border-2 border-gray-300 w-full max-w-lg p-6">
-          <div className="flex flex-col items-center">
-            <div className="relative w-40 h-40 mb-4">
-              <Image
-                src={profile.image}
-                alt={profile.name}
-                layout="fill"
-                objectFit="cover"
-                className="border-2 border-gray-300"
-                onError={(e) => (e.target.src = placeholderImage)} // Fallback image on error
-              />
-            </div>
-            <h1
-              className="text-2xl font-bold text-gray-800 mb-1 text-center"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
-            >
-              {profile.name}
-            </h1>
-            <h2
-              className="text-lg text-gray-600 mb-4 text-center"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif", textTransform: "capitalize" }}
-            >
-              {profile.title}
-            </h2>
-            <p
-              className="text-gray-700 text-sm leading-relaxed text-center"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-            >
-              {profile.bio || "No biography available."}
-            </p>
-          </div>
-        </div>
-      </div>
+      <ContentContainer>
+        <ProfileCard>
+          <ImageWrapper>
+            <Image
+              src={profile.image}
+              alt={profile.name}
+              layout="fill"
+              objectFit="cover"
+              className="border-2 border-gray-300"
+              onError={(e) => (e.target.src = placeholderImage)}
+            />
+          </ImageWrapper>
+          <Name>{profile.name}</Name>
+          <Title>{profile.title}</Title>
+          <Bio>{profile.bio || "No biography available."}</Bio>
+        </ProfileCard>
+      </ContentContainer>
       <FooterBottom />
-    </div>
+    </PageContainer>
   );
 };
 

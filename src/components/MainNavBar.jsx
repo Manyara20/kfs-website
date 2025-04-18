@@ -244,7 +244,7 @@ const MainNavBar = () => {
           label: "Participatory Forest Management",
           link: "/quick-links/participatory-forest-management",
           subItems: [
-            { label: "Background", link: "/quick-links/participatory-forest-management/Background" },
+            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
             { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/ForestPlans" },
           ],
         },

@@ -1,10 +1,12 @@
-// pages/KFSBoardPage.js
-"use client"; // This is a Client Component
+"use client";
 
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
+import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import Image from "next/image";
 
 const ceo = {
   name: "Mr. Titus Kipkoech Korir",
@@ -24,40 +26,135 @@ const boardMembers = [
   { name: "Alex Lemarkoko", title: "Secretary to the Board", image: "/images/KFS-Board/Alex Lemarkoko.jpg" },
 ];
 
+// Styled Components
+const PageContainer = styled(Box)({
+  minHeight: "100vh",
+  backgroundColor: "#ffffff",
+  padding: "clamp(1rem, 2vw, 4rem)", // Responsive padding
+  width: "100vw", // Full viewport width
+  overflowX: "hidden", // Prevent horizontal overflow
+  boxSizing: "border-box",
+});
+
+const TitleContainer = styled(Box)({
+  textAlign: "center",
+  marginBottom: "clamp(2rem, 4vw, 5rem)", // Responsive margin
+});
+
+const Title = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(1.5rem, 4vw, 2.25rem)", // Scales with viewport
+  color: "#023011",
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+});
+
+const Description = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.875rem, 1.5vw, 1rem)", // Scales with viewport
+  color: "#666666",
+  maxWidth: "clamp(40rem, 80vw, 50rem)", // Responsive max-width
+  margin: "0 auto",
+});
+
+const CEOCard = styled(Box)({
+  backgroundColor: "#ffffff",
+  border: "2px solid #e5e7eb",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+  width: "clamp(15rem, 30vw, 21.875rem)", // Responsive width
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  textAlign: "center",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    transform: "translateY(-4px)",
+    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+  },
+});
+
+const CEOContainer = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  marginBottom: "clamp(2rem, 4vw, 3rem)", // Responsive margin
+});
+
+const ChairmanLabel = styled("span")({
+  display: "inline-block",
+  backgroundColor: "#6A961F",
+  color: "#ffffff",
+  padding: "clamp(0.25rem, 0.5vw, 0.5rem) clamp(0.5rem, 1vw, 1rem)", // Responsive padding
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+  fontSize: "clamp(0.625rem, 1vw, 0.75rem)", // Scales with viewport
+  fontWeight: "bold",
+  textTransform: "uppercase",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+});
+
+const ImageWrapper = styled(Box)({
+  position: "relative",
+  width: "clamp(6rem, 12vw, 9.375rem)", // Responsive image size
+  height: "clamp(6rem, 12vw, 9.375rem)",
+  margin: "0 auto",
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+});
+
+const MemberName = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)", // Scales with viewport
+  fontWeight: 500,
+  color: "#000000",
+  marginBottom: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
+});
+
+const MemberTitle = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)", // Scales with viewport
+  color: "#666666",
+});
+
+const BoardMembersContainer = styled(Box)({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(clamp(12rem, 25vw, 15rem), 1fr))", // Responsive grid
+  gap: "clamp(1rem, 2vw, 1.5rem)", // Responsive gap
+  justifyItems: "center",
+  width: "100%", // Full width
+});
+
+const MemberCard = styled(Box)({
+  backgroundColor: "#ffffff",
+  border: "2px solid #e5e7eb",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  textAlign: "center",
+  transition: "all 0.3s ease",
+  width: "clamp(15rem, 25vw, 21.875rem)", // Responsive width
+  height: "100%", // Ensure consistent height
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  "&:hover": {
+    transform: "translateY(-4px)",
+    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+  },
+});
+
 export default function KFSBoardPage() {
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
-      <div className="p-4 md:p-12 bg-white min-h-screen">
+      <PageContainer>
         {/* Title and Description */}
-        <div className="text-center mb-10">
-          <h1
-            className="text-3xl md:text-4xl mb-4 text-[#023011]"
-            style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-          >
-            KFS Board of Directors
-          </h1>
-          <p
-            className="text-gray-600 mb-8 max-w-[800px] mx-auto"
-            style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-          >
+        <TitleContainer>
+          <Title variant="h1">KFS Board of Directors</Title>
+          <Description>
             This section covers details regarding the board members of KFS.
-          </p>
-        </div>
+          </Description>
+        </TitleContainer>
 
         {/* CEO Section */}
-        <div className="flex justify-center mb-12">
-          <div
-            className="bg-white border-2 border-gray-200 shadow-lg w-full sm:w-[350px] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-          >
-            <span
-              className="inline-block bg-[#6A961F] text-white px-4 py-1 mb-4 text-sm font-bold uppercase"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-            >
-              Chairman
-            </span>
-            <div className="relative w-[150px] h-[150px] mx-auto mb-4">
+        <CEOContainer>
+          <CEOCard>
+            <ChairmanLabel>Chairman</ChairmanLabel>
+            <ImageWrapper>
               <Image
                 src={ceo.image}
                 alt={ceo.name}
@@ -65,31 +162,18 @@ export default function KFSBoardPage() {
                 objectFit="cover"
                 className="rounded-full border-2 border-[#6A961F] shadow-sm"
               />
-            </div>
-            <h6
-              className="text-lg font-medium text-black mb-2"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-            >
-              {ceo.name}
-            </h6>
-            <p
-              className="text-gray-600 text-sm"
-              style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-            >
-              {ceo.title}
-            </p>
-          </div>
-        </div>
+            </ImageWrapper>
+            <MemberName>{ceo.name}</MemberName>
+            <MemberTitle>{ceo.title}</MemberTitle>
+          </CEOCard>
+        </CEOContainer>
 
         {/* Board Members Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+        <BoardMembersContainer>
           {boardMembers.map((member, index) => (
-            <div
-              key={index}
-              className="bg-white border-2 border-gray-200 shadow-lg p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col justify-between w-full max-w-[350px]"
-            >
+            <MemberCard key={index}>
               <div>
-                <div className="relative w-[120px] h-[120px] mx-auto mb-4">
+                <ImageWrapper>
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -97,24 +181,14 @@ export default function KFSBoardPage() {
                     objectFit="cover"
                     className="rounded-full border-2 border-[#6A961F] shadow-sm"
                   />
-                </div>
-                <h6
-                  className="text-lg font-medium text-black mb-2"
-                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-                >
-                  {member.name}
-                </h6>
-                <p
-                  className="text-gray-600 text-sm"
-                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-                >
-                  {member.title}
-                </p>
+                </ImageWrapper>
+                <MemberName>{member.name}</MemberName>
+                <MemberTitle>{member.title}</MemberTitle>
               </div>
-            </div>
+            </MemberCard>
           ))}
-        </div>
-      </div>
+        </BoardMembersContainer>
+      </PageContainer>
       <FooterBottom />
     </div>
   );

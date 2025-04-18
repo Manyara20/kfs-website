@@ -46,7 +46,7 @@ const ContentWrapper = styled(Box)({
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#ffffff",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
@@ -94,7 +94,7 @@ const DocumentDetails = styled(Box)({
 });
 
 const DocumentTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 600,
   color: "#0f5a28",
   fontSize: "clamp(1rem, 3vw, 1.25rem)", // Scales with viewport
@@ -103,7 +103,7 @@ const DocumentTitle = styled(Typography)({
 });
 
 const DocumentSize = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#666",
   fontSize: "clamp(0.75rem, 2vw, 0.9rem)", // Scales with viewport
@@ -115,7 +115,7 @@ const DownloadButton = styled(Button)({
   textTransform: "none",
   padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.75rem)", // Responsive padding
   fontSize: "clamp(0.8rem, 2vw, 0.95rem)", // Scales with viewport
-  fontFamily: "'Roboto', sans-serif",
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
   borderRadius: "8px",
   fontWeight: 500,
   minWidth: "clamp(80px, 20vw, 120px)", // Responsive min-width

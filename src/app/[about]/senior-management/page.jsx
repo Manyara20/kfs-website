@@ -127,19 +127,27 @@ export default function KFSSeniorManagementPage() {
     }));
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
-      <Box sx={{ padding: { xs: "0.5rem", md: "1.5rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      <Box
+        sx={{
+          padding: { xs: "clamp(0.5rem, 1vw, 1rem)", md: "clamp(1rem, 2vw, 1.5rem)" },
+          backgroundColor: "#ffffff",
+          minHeight: "100vh",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
         {/* Title and Description */}
-        <Box sx={{ textAlign: "center", mb: 3 }}>
+        <Box sx={{ textAlign: "center", mb: "clamp(1.5rem, 3vw, 3rem)" }}>
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "1.4rem", md: "1.8rem" },
+              fontSize: { xs: "clamp(1.25rem, 3vw, 1.4rem)", md: "clamp(1.5rem, 4vw, 1.8rem)" },
               fontWeight: "bold",
               color: "#023011",
-              mb: 0.5,
+              mb: "clamp(0.25rem, 0.5vw, 0.5rem)",
               fontFamily: "'Peugeot', Helvetica, sans-serif",
               textTransform: "capitalize",
               letterSpacing: "0.3px",
@@ -151,8 +159,8 @@ export default function KFSSeniorManagementPage() {
             variant="body1"
             sx={{
               color: "#666",
-              fontSize: { xs: "0.85rem", md: "0.9rem" },
-              maxWidth: "600px",
+              fontSize: { xs: "clamp(0.75rem, 1.5vw, 0.85rem)", md: "clamp(0.875rem, 1.5vw, 0.9rem)" },
+              maxWidth: "clamp(30rem, 60vw, 37.5rem)",
               margin: "0 auto",
               fontFamily: "'Peugeot', Helvetica, sans-serif",
             }}
@@ -162,14 +170,14 @@ export default function KFSSeniorManagementPage() {
         </Box>
 
         {/* CEO Section */}
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mb: "clamp(1.5rem, 3vw, 3rem)" }}>
           <Box
             sx={{
               backgroundColor: "white",
               borderRadius: "8px",
               boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              width: { xs: "100%", sm: "300px" },
-              p: 2,
+              width: { xs: "clamp(90%, 95vw, 100%)", sm: "clamp(15rem, 30vw, 18.75rem)" },
+              p: "clamp(1rem, 2vw, 2rem)",
               textAlign: "center",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               "&:hover": {
@@ -183,10 +191,10 @@ export default function KFSSeniorManagementPage() {
               sx={{
                 backgroundColor: "#6A961F",
                 color: "white",
-                padding: "0.2rem 0.6rem",
+                padding: "clamp(0.125rem, 0.25vw, 0.2rem) clamp(0.375rem, 0.75vw, 0.6rem)",
                 display: "inline-block",
-                mb: 1,
-                fontSize: "0.75rem",
+                mb: "clamp(0.5rem, 1vw, 1rem)",
+                fontSize: "clamp(0.625rem, 1vw, 0.75rem)",
                 fontWeight: "bold",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "uppercase",
@@ -196,10 +204,10 @@ export default function KFSSeniorManagementPage() {
             </Typography>
             <Avatar
               sx={{
-                width: 120,
-                height: 120,
+                width: "clamp(6rem, 12vw, 7.5rem)",
+                height: "clamp(6rem, 12vw, 7.5rem)",
                 mx: "auto",
-                mb: 1,
+                mb: "clamp(0.5rem, 1vw, 1rem)",
                 border: "3px solid #6A961F",
                 boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
               }}
@@ -211,8 +219,8 @@ export default function KFSSeniorManagementPage() {
               sx={{
                 fontWeight: 600,
                 color: "#023011",
-                mb: 0.5,
-                fontSize: "1rem",
+                mb: "clamp(0.25rem, 0.5vw, 0.5rem)",
+                fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "uppercase",
               }}
@@ -223,8 +231,8 @@ export default function KFSSeniorManagementPage() {
               variant="body2"
               sx={{
                 color: "#666",
-                mb: 1,
-                fontSize: "0.8rem",
+                mb: "clamp(0.5rem, 1vw, 1rem)",
+                fontSize: "clamp(0.7rem, 1.2vw, 0.8rem)",
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "capitalize",
               }}
@@ -248,15 +256,26 @@ export default function KFSSeniorManagementPage() {
         </Box>
 
         {/* Board Members Section */}
-        <Grid container spacing={2} justifyContent="center">
+        <Grid
+          container
+          spacing={{ xs: "clamp(0.5rem, 1vw, 1rem)", md: "clamp(1rem, 2vw, 2rem)" }}
+          justifyContent="center"
+        >
           {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+            <Grid
+              item
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+            >
               <Box
                 sx={{
                   backgroundColor: "white",
                   borderRadius: "8px",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                  p: 2,
+                  p: "clamp(1rem, 2vw, 2rem)",
                   textAlign: "center",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
@@ -272,10 +291,10 @@ export default function KFSSeniorManagementPage() {
                 <Box>
                   <Avatar
                     sx={{
-                      width: 120,
-                      height: 120,
+                      width: "clamp(6rem, 12vw, 7.5rem)",
+                      height: "clamp(6rem, 12vw, 7.5rem)",
                       mx: "auto",
-                      mb: 1,
+                      mb: "clamp(0.5rem, 1vw, 1rem)",
                       border: "3px solid #6A961F",
                       boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                     }}
@@ -287,8 +306,8 @@ export default function KFSSeniorManagementPage() {
                     sx={{
                       fontWeight: 600,
                       color: "#023011",
-                      mb: 0.5,
-                      fontSize: "1rem",
+                      mb: "clamp(0.25rem, 0.5vw, 0.5rem)",
+                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       textTransform: "uppercase",
                     }}
@@ -299,8 +318,8 @@ export default function KFSSeniorManagementPage() {
                     variant="body2"
                     sx={{
                       color: "#666",
-                      fontSize: "0.8rem",
-                      mb: 1,
+                      fontSize: "clamp(0.7rem, 1.2vw, 0.8rem)",
+                      mb: "clamp(0.5rem, 1vw, 1rem)",
                       fontFamily: "'Peugeot', Helvetica, sans-serif",
                       textTransform: "capitalize",
                     }}

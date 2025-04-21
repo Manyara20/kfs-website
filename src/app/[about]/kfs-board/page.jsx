@@ -1,9 +1,7 @@
 // pages/KFSBoardPage.js
 "use client"; // This is a Client Component
 
-import TopNavBar from "@/components/TopNavBar";
-import MainNavBar from "@/components/MainNavBar";
-import FooterBottom from "@/components/FooterBottom";
+
 import Image from "next/image";
 
 const ceo = {
@@ -27,8 +25,7 @@ const boardMembers = [
 export default function KFSBoardPage() {
   return (
     <div>
-      <TopNavBar />
-      <MainNavBar />
+      
       <div className="p-4 md:p-12 bg-white min-h-screen">
         {/* Title and Description */}
         <div className="text-center mb-10">
@@ -115,7 +112,6 @@ export default function KFSBoardPage() {
           ))}
         </div>
       </div>
-      <FooterBottom />
     </div>
   );
 }

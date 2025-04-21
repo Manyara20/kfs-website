@@ -5,9 +5,6 @@ import { Box, Typography, List, ListItem, ListItemText, IconButton } from "@mui/
 import { Facebook, Twitter, YouTube, Instagram } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
-import MainNavBar from "@/components/MainNavBar";
-import FooterBottom from "@/components/FooterBottom";
 
 // Styled Components
 const PageContainer = styled(Box)({
@@ -131,8 +128,7 @@ export default function DFCMPage() {
 
   return (
     <div>
-      <TopNavBar />
-      <MainNavBar />
+
       <PageContainer>
         <ContentCard
           initial="hidden"
@@ -176,7 +172,6 @@ export default function DFCMPage() {
           </DepartmentList>
         </ContentCard>
       </PageContainer>
-      <FooterBottom />
     </div>
   );
 }

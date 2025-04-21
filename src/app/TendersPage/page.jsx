@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import TopNavBar from "@/components/TopNavBar";
-import MainNavBar from "@/components/MainNavBar";
-import FooterBottom from "@/components/FooterBottom";
+
 
 export default function TendersPage() {
   const [tenders, setTenders] = useState([]);
@@ -45,8 +43,6 @@ export default function TendersPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <TopNavBar />
-      <MainNavBar />
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-green-900 mb-4">Tenders</h1>
@@ -82,7 +78,6 @@ export default function TendersPage() {
           </div>
         )}
       </main>
-      <FooterBottom />
     </div>
   );
 }

@@ -1,29 +1,13 @@
-// src/app/dashboard/layout.jsx
-"use client"; // Mark as client component
-
+"use client";
 import { useState, useEffect } from "react";
-import { useSession, signOut, SessionProvider } from "next-auth/react"; // Import SessionProvider
+import { useSession, signOut, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Menu,
-  MenuItem,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Collapse,
-} from "@mui/material";
 import { FaUser, FaChevronDown, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 
 export default function DashboardLayout({ children }) {
   return (
-    <SessionProvider> {/* Wrap the entire content */}
+    <SessionProvider>
       <DashboardContent>{children}</DashboardContent>
     </SessionProvider>
   );
@@ -40,6 +24,10 @@ function DashboardContent({ children }) {
     documents: false,
     events: false,
     notices: false,
+    public: false,
+    legal: false,
+    policy: false,
+    iso: false,
   });
 
   useEffect(() => {
@@ -54,59 +42,72 @@ function DashboardContent({ children }) {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <div className="flex items-center justify-center h-screen text-white bg-gray-900">Loading...</div>;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <div className="flex min-h-screen">
       {/* Top Navigation */}
-      <AppBar position="fixed"  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "#0D3C00" }}>
-        <Toolbar>
+      <header className="fixed top-0 left-0 right-0 z-20 bg-[#0D3C00] text-white shadow-md">
+        <div className="flex items-center h-16 px-4">
           <Image src="/images/t_logo.png" alt="Logo" width={40} height={40} />
-          <Typography variant="h6" sx={{ flexGrow: 1, ml: 2 }}>
-            Dashboard
-          </Typography>
+          <h1 className="flex-1 ml-2 text-xl font-semibold">Dashboard</h1>
           {session && (
             <>
-              <Box sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-                <Box
-                  sx={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: "50%",
-                    bgcolor: session.user.status === "online" ? "green" : "red",
-                    mr: 1,
-                  }}
-                />
-                <Typography variant="body2">
+              <div className="flex items-center mr-4">
+                <span
+                  className={`w-2.5 h-2.5 rounded-full mr-2 ${
+                    session.user.status === "online" ? "bg-green-500" : "bg-red-500"
+                  }`}
+                ></span>
+                <span className="text-sm">
                   {session.user.status === "online"
                     ? `Online (Logged in: ${new Date(session.user.last_login).toLocaleString()})`
                     : "Offline"}
-                </Typography>
-              </Box>
-              <IconButton color="inherit" onClick={handleMenu}>
+                </span>
+              </div>
+              <button
+                onClick={handleMenu}
+                className="p-2 rounded-full hover:bg-[#15803d] transition-colors"
+                aria-label="User menu"
+              >
                 <FaUser />
-              </IconButton>
-              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem onClick={() => router.push("/dashboard/profile")}>Profile</MenuItem>
-                <MenuItem onClick={() => router.push("/dashboard/profile/view")}>View</MenuItem>
-                <MenuItem onClick={() => router.push("/dashboard/profile/edit")}>Edit</MenuItem>
-                <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
-              </Menu>
+              </button>
+              {anchorEl && (
+                <div className="absolute right-4 top-16 bg-white text-gray-900 shadow-lg rounded-md w-48 z-30">
+                  <button
+                    onClick={() => router.push("/dashboard/profile")}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    onClick={() => router.push("/dashboard/profile/view")}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    View
+                  </button>
+                  <button
+                    onClick={() => router.push("/dashboard/profile/edit")}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={handleSignOut}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              )}
             </>
           )}
-        </Toolbar>
-      </AppBar>
+        </div>
+      </header>
 
       {/* Sidebar */}
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": { width: 240, boxSizing: "border-box", mt: "64px" },
-        }}
-      >
-        <List>
+      <nav className="fixed top-16 left-0 w-60 bg-[#0D3C00] text-white h-[calc(100vh-64px)] overflow-y-auto">
+        <ul className="p-4">
           {[
             { name: "Posts", key: "posts", items: ["Add Posts", "Update", "Delete", "Archive"] },
             { name: "Jobs", key: "jobs", items: ["Add Job", "Update", "Delete", "Archive"] },
@@ -127,79 +128,70 @@ function DashboardContent({ children }) {
               key: "notices",
               items: ["Add Notices", "Update", "Delete", "Archive"],
             },
-            { name: "Users", key: "users" },
+            { name: "Users", key: "user" },
             { name: "Mailing", key: "mailing" },
           ].map((section) => (
-            <div key={section.name}>
-              <ListItem button onClick={() => section.items && toggleDropdown(section.key)}>
-                <ListItemText primary={section.name} />
+            <li key={section.name}>
+              <button
+                onClick={() => section.items && toggleDropdown(section.key)}
+                className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-700 transition-colors"
+              >
+                <span>{section.name}</span>
                 {section.items && (open[section.key] ? <FaChevronDown /> : <FaChevronRight />)}
-              </ListItem>
+              </button>
               {section.items && (
-                <Collapse in={open[section.key]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {section.items.map((item) =>
-                      typeof item === "string" ? (
-                        <ListItem
-                          button
-                          key={item}
-                          sx={{ pl: 4 }}
+                <ul className={`${open[section.key] ? "block" : "hidden"} pl-4`}>
+                  {section.items.map((item) =>
+                    typeof item === "string" ? (
+                      <li key={item}>
+                        <button
                           onClick={() =>
-                            router.push(
-                              `/dashboard/${section.key}/${item.toLowerCase().replace(" ", "-")}`
-                            )
+                            router.push(`/dashboard/${section.key}/${item.toLowerCase().replace(" ", "-")}`)
                           }
+                          className="block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors"
                         >
-                          <ListItemText primary={item} />
-                        </ListItem>
-                      ) : (
-                        <div key={item.name}>
-                          <ListItem
-                            button
-                            onClick={() => toggleDropdown(item.name.toLowerCase())}
-                          >
-                            <ListItemText primary={item.name} sx={{ pl: 4 }} />
-                            {open[item.name.toLowerCase()] ? <FaChevronDown /> : <FaChevronRight />}
-                          </ListItem>
-                          <Collapse
-                            in={open[item.name.toLowerCase()]}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <List component="div" disablePadding>
-                              {item.items.map((subItem) => (
-                                <ListItem
-                                  button
-                                  key={subItem}
-                                  sx={{ pl: 8 }}
-                                  onClick={() =>
-                                    router.push(
-                                      `/dashboard/documents/${item.name.toLowerCase()}/${subItem
-                                        .toLowerCase()
-                                        .replace(" ", "-")}`
-                                    )
-                                  }
-                                >
-                                  <ListItemText primary={subItem} />
-                                </ListItem>
-                              ))}
-                            </List>
-                          </Collapse>
-                        </div>
-                      )
-                    )}
-                  </List>
-                </Collapse>
+                          {item}
+                        </button>
+                      </li>
+                    ) : (
+                      <li key={item.name}>
+                        <button
+                          onClick={() => toggleDropdown(item.name.toLowerCase())}
+                          className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-700 transition-colors"
+                        >
+                          <span>{item.name}</span>
+                          {open[item.name.toLowerCase()] ? <FaChevronDown /> : <FaChevronRight />}
+                        </button>
+                        <ul className={`${open[item.name.toLowerCase()] ? "block" : "hidden"} pl-4`}>
+                          {item.items.map((subItem) => (
+                            <li key={subItem}>
+                              <button
+                                onClick={() =>
+                                  router.push(
+                                    `/dashboard/documents/${item.name.toLowerCase()}/${subItem
+                                      .toLowerCase()
+                                      .replace(" ", "-")}`
+                                  )
+                                }
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors"
+                              >
+                                {subItem}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    )
+                  )}
+                </ul>
               )}
-            </div>
+            </li>
           ))}
-        </List>
-      </Drawer>
+        </ul>
+      </nav>
 
       {/* Main Content */}
-      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: "64px" }}>
-        {children}
-      </Box>
-    </Box>
+      <main className="flex-1 p-6 mt-16 ml-60">{children}</main>
+    </div>
   );
 }

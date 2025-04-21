@@ -44,49 +44,35 @@ const CodeOfConductSection = () => {
   };
 
   return (
-    <div
-      className="py-10 px-4 md:px-16 relative overflow-hidden"
-      style={{
-        backgroundColor: "#0D3C00", // Base dark green color for the entire section
-      }}
-    >
-      {/* Starry Background for the Entire Section */}
+    <section className="relative overflow-hidden bg-[#0D3C00] py-10 px-4 md:px-16">
+      {/* Starry Background */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px),radial-gradient(circle,rgba(255,255,255,0.6)_1px,transparent_1px),radial-gradient(circle,rgba(255,255,255,0.4)_1px,transparent_1px)] opacity-50 z-0"
         style={{
-          backgroundImage: `
-            radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
-            radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
-            radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
-          `,
           backgroundSize: "50px 50px, 30px 30px, 20px 20px",
           backgroundPosition: "0 0, 15px 15px, 25px 25px",
-          opacity: 0.5,
-          zIndex: 0,
         }}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch relative z-10">
-        {/* Left Side: Content without Background */}
-        <div className="w-full h-full">
-          <div className="max-w-[80%] mx-auto mt-4 md:mt-8 p-6 bg-transparent">
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+        {/* Left: About KFS */}
+        <div className="flex items-center">
+          <div className=" mx-auto mt-4 md:mt-8 p-6">
             <h5 className="text-[#e6f5e6] text-xl md:text-2xl font-bold uppercase text-center">
               About Kenya Forest Service
             </h5>
-            <p className="text-white text-[1.2rem] mt-4">
+            <p className="text-white text-lg mt-4">
               In carrying out its mandate, the functions of KFS include among others:
             </p>
-            <p className="text-white text-[1.2rem] mt-4">
+            <p className="text-white text-lg mt-4">
               1. Conserve, protect and manage all Public Forests
             </p>
-            <p className="text-white text-[1.2rem] mt-4">
-              2. Prepare and implement management plans for all public forests, and, where requested, assist in
-              preparation of management plans for community forests or private forests in consultation with the
-              relevant owners
+            <p className="text-white text-lg mt-4">
+              2. Prepare and implement management plans for all public forests, and, where requested, assist in preparation of management plans for community forests or private forests in consultation with the relevant owners
             </p>
-            <p className="text-white text-[1.2rem] mt-4">
-              3. Receive and consider applications for licenses or permits in relation to forest resources or
-              management of forests or any other relevant matter in accordance with the Act
+            <p className="text-white text-lg mt-4">
+              3. Receive and consider applications for licenses or permits in relation to forest resources or management of forests or any other relevant matter in accordance with the Act
             </p>
             <div className="flex justify-center mt-4">
               <button
@@ -99,7 +85,7 @@ const CodeOfConductSection = () => {
           </div>
         </div>
 
-        {/* Right Side: Strategic Objectives */}
+        {/* Right: Strategic Objectives */}
         <div>
           <h3 className="text-3xl font-bold mb-4 text-center text-[#e6f5e6] uppercase">
             Strategic Objectives
@@ -112,12 +98,12 @@ const CodeOfConductSection = () => {
             {objectives.map((item, index) => (
               <div
                 key={index}
-                className="w-full p-4 bg-[#0D3C00] text-white border-4 border-white transition-all duration-300 hover:bg-white hover:border-4 hover:border-[#15803d] hover:text-[#0D3C00] cursor-pointer group"
+                className="p-4 bg-[#0D3C00] text-white border-4 border-white hover:bg-white hover:border-[#15803d] hover:text-[#0D3C00] transition-all duration-300 cursor-pointer group"
               >
                 <h6 className="text-lg font-semibold">{item.title}</h6>
-                <div className="mt-1 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-[1000px]">
+                <div className="mt-1 opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[1000px] transition-all duration-300">
                   {item.details.map((detail, i) => (
-                    <p key={i} className="text-[1rem] text-[#0D3C00] leading-7">
+                    <p key={i} className="text-base text-[#0D3C00] leading-7">
                       {detail}
                     </p>
                   ))}
@@ -127,7 +113,7 @@ const CodeOfConductSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

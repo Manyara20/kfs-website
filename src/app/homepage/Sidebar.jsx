@@ -71,7 +71,7 @@ const FloatingSidebar = () => {
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <div
-          className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl rounded-md transition-all duration-300 cursor-pointer hover:bg-[#2a7a3d]"
+          className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 cursor-pointer hover:bg-[#2a7a3d]"
         >
           <FaWheelchair />
         </div>
@@ -121,7 +121,7 @@ const FloatingSidebar = () => {
         href="https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl rounded-md transition-all duration-300 hover:bg-[#2a7a3d]"
+        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
       >
         <FaEnvelope />
       </Link>
@@ -129,7 +129,7 @@ const FloatingSidebar = () => {
         href="https://enursery.kenyaforestservice.org/"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl rounded-md transition-all duration-300 hover:bg-[#2a7a3d]"
+        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
       >
         <FaIdBadge />
       </Link>
@@ -137,7 +137,7 @@ const FloatingSidebar = () => {
         href="https://sawmillers.kenyaforestservice.org/"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl rounded-md transition-all duration-300 hover:bg-[#2a7a3d]"
+        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
       >
         <FaTree />
       </Link>

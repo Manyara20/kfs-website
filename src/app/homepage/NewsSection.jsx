@@ -51,7 +51,7 @@ const NewsSection = () => {
   };
 
   return (
-    <section className="bg-[#e6f5e6] py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
+    <section className=" py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Centered Headers */}
       <div className="text-center mb-6 sm:mb-8 md:mb-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl bold text-[#0E2E0E] font-black">

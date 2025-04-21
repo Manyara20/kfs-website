@@ -88,7 +88,7 @@ const MomentsSection = () => {
 
   return (
     <section className="bg-[#fff] py-4">
-      <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
+      <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
         {/* Small Screens: Image on Top, Text Below */}
         <div className="md:hidden">
           <img

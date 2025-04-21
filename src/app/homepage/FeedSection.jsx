@@ -161,7 +161,7 @@ const KFSFeeds = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <div
             ref={eventsRef}
-            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
+            className="bg-[#fff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[16rem]"
           >
             <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
               Events
@@ -185,7 +185,7 @@ const KFSFeeds = () => {
           </div>
           <div
             ref={noticeRef}
-            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[32rem]"
+            className="bg-[#ffffff] p-2 sm:p-3 border-2 border-[#0d3c00] min-h-[16rem]"
           >
             <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
               Notice Board
@@ -206,7 +206,7 @@ const KFSFeeds = () => {
               ))
             )}
           </div>
-          <div className="bg-[#ffffff] border-2 border-[#0d3c00] min-h-[32rem]">
+          <div className="bg-[#ffffff] border-2 border-[#0d3c00] min-h-[16rem]">
             <XFeed containerHeight={maxHeight} />
           </div>
         </div>

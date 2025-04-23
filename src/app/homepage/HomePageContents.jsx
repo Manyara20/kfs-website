@@ -1,5 +1,8 @@
 // pages/index.js (or wherever your HomePageContents is located)
 import React from "react";
+import TopNavBar from "@/components/TopNavBar";
+import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 import HeroSection from "@/app/homepage/HeroSection";
 import MissionSection from "@/app/homepage/MissionSection";
 import CodeOfConductSection from "@/app/homepage/CodeofConductSection";
@@ -15,6 +18,8 @@ import MomentsSection from "@/app/homepage/MomentsSection"
 function HomePageContents() {
   return (
     <div>
+      <TopNavBar />
+      <MainNavBar />
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
@@ -25,6 +30,7 @@ function HomePageContents() {
       <MomentsSection />
       <FeedSection />
       <Footer />
+      <FooterBottom />
       <Sidebar/>
     </div>
   );

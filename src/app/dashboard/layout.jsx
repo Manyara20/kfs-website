@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession, signOut, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FaUser, FaChevronDown, FaChevronRight } from "react-icons/fa";
+import { FaUser, FaChevronDown, FaChevronRight, FaBars } from "react-icons/fa";
 import Image from "next/image";
 
 export default function DashboardLayout({ children }) {
@@ -16,7 +16,8 @@ export default function DashboardLayout({ children }) {
 function DashboardContent({ children }) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState({
     posts: false,
     jobs: false,
@@ -34,21 +35,33 @@ function DashboardContent({ children }) {
     if (status === "unauthenticated") router.push("/login");
   }, [status, router]);
 
-  const handleMenu = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleUserMenuToggle = () => setIsUserMenuOpen((prev) => !prev);
   const handleSignOut = () => signOut({ callbackUrl: "/login" });
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   const toggleDropdown = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (status === "loading") return <div className="flex items-center justify-center h-screen text-white bg-gray-900">Loading...</div>;
+  if (status === "loading")
+    return (
+      <div className="flex items-center justify-center h-screen text-white bg-gray-900">
+        Loading...
+      </div>
+    );
 
   return (
     <div className="flex min-h-screen">
       {/* Top Navigation */}
       <header className="fixed top-0 left-0 right-0 z-20 bg-[#0D3C00] text-white shadow-md">
         <div className="flex items-center h-16 px-4">
+          <button
+            className="md:hidden p-2 mr-2"
+            onClick={toggleSidebar}
+            aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+          >
+            <FaBars />
+          </button>
           <Image src="/images/t_logo.png" alt="Logo" width={40} height={40} />
           <h1 className="flex-1 ml-2 text-xl font-semibold">Dashboard</h1>
           {session && (
@@ -66,34 +79,47 @@ function DashboardContent({ children }) {
                 </span>
               </div>
               <button
-                onClick={handleMenu}
+                onClick={handleUserMenuToggle}
                 className="p-2 rounded-full hover:bg-[#15803d] transition-colors"
-                aria-label="User menu"
+                aria-label="Toggle user menu"
+                aria-expanded={isUserMenuOpen}
               >
                 <FaUser />
               </button>
-              {anchorEl && (
+              {isUserMenuOpen && (
                 <div className="absolute right-4 top-16 bg-white text-gray-900 shadow-lg rounded-md w-48 z-30">
                   <button
-                    onClick={() => router.push("/dashboard/profile")}
+                    onClick={() => {
+                      router.push("/dashboard/profile");
+                      setIsUserMenuOpen(false);
+                    }}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     Profile
                   </button>
                   <button
-                    onClick={() => router.push("/dashboard/profile/view")}
+                    onClick={() => {
+                      router.push("/dashboard/profile/view");
+                      setIsUserMenuOpen(false);
+                    }}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     View
                   </button>
                   <button
-                    onClick={() => router.push("/dashboard/profile/edit")}
+                    onClick={() => {
+                      router.push("/dashboard/profile/edit");
+                      setIsUserMenuOpen(false);
+                    }}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     Edit
                   </button>
                   <button
-                    onClick={handleSignOut}
+                    onClick={() => {
+                      handleSignOut();
+                      setIsUserMenuOpen(false);
+                    }}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     Sign Out
@@ -106,83 +132,54 @@ function DashboardContent({ children }) {
       </header>
 
       {/* Sidebar */}
-      <nav className="fixed top-16 left-0 w-60 bg-[#0D3C00] text-white h-[calc(100vh-64px)] overflow-y-auto">
+      <nav
+        className={`fixed top-16 left-0 w-60 bg-[#0D3C00] text-white h-[calc(100vh-64px)] overflow-y-auto transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 md:w-60 z-10`}
+      >
         <ul className="p-4">
           {[
-            { name: "Posts", key: "posts", items: ["Add Posts", "Update", "Delete", "Archive"] },
-            { name: "Jobs", key: "jobs", items: ["Add Job", "Update", "Delete", "Archive"] },
-            { name: "Tenders", key: "tenders", items: ["Add Tender", "Update", "Delete", "Archive"] },
+            { name: "Posts", key: "posts", route: "/dashboard/posts" },
+            { name: "Jobs", key: "jobs", route: "/dashboard/jobs" },
+            { name: "Tenders", key: "tenders", route: "/dashboard/tenders" },
             {
               name: "Documents",
               key: "documents",
               items: [
-                { name: "Public", items: ["Add Document", "Update", "Delete", "Archive"] },
-                { name: "Legal", items: ["Add Document", "Update", "Delete", "Archive"] },
-                { name: "Policy", items: ["Add Document", "Update", "Delete", "Archive"] },
-                { name: "ISO", items: ["Add Document", "Update", "Delete", "Archive"] },
+                { name: "Public", route: "/dashboard/documents?category=public" },
+                { name: "Legal", route: "/dashboard/documents?category=legal" },
+                { name: "Policy", route: "/dashboard/documents?category=policy" },
+                { name: "ISO", route: "/dashboard/documents?category=iso" },
               ],
             },
-            { name: "Events", key: "events", items: ["Add Events", "Update", "Delete", "Archive"] },
-            {
-              name: "Notice Board",
-              key: "notices",
-              items: ["Add Notices", "Update", "Delete", "Archive"],
-            },
-            { name: "Users", key: "user" },
-            { name: "Mailing", key: "mailing" },
+            { name: "Events", key: "events", route: "/dashboard/events" },
+            { name: "Notice Board", key: "notices", route: "/dashboard/notices" },
+            { name: "Users", key: "users", route: "/dashboard/users" },
+            { name: "Mailing", key: "mailing", route: "/dashboard/mailing" },
           ].map((section) => (
             <li key={section.name}>
               <button
-                onClick={() => section.items && toggleDropdown(section.key)}
-                className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-700 transition-colors"
+                onClick={() => {
+                  if (section.items) toggleDropdown(section.key);
+                  else if (section.route) router.push(section.route);
+                }}
+                className="flex items-center justify-between w-full px-4 py-2 hover:bg-[#15803d] transition-colors"
               >
                 <span>{section.name}</span>
                 {section.items && (open[section.key] ? <FaChevronDown /> : <FaChevronRight />)}
               </button>
               {section.items && (
                 <ul className={`${open[section.key] ? "block" : "hidden"} pl-4`}>
-                  {section.items.map((item) =>
-                    typeof item === "string" ? (
-                      <li key={item}>
-                        <button
-                          onClick={() =>
-                            router.push(`/dashboard/${section.key}/${item.toLowerCase().replace(" ", "-")}`)
-                          }
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors"
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ) : (
-                      <li key={item.name}>
-                        <button
-                          onClick={() => toggleDropdown(item.name.toLowerCase())}
-                          className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-700 transition-colors"
-                        >
-                          <span>{item.name}</span>
-                          {open[item.name.toLowerCase()] ? <FaChevronDown /> : <FaChevronRight />}
-                        </button>
-                        <ul className={`${open[item.name.toLowerCase()] ? "block" : "hidden"} pl-4`}>
-                          {item.items.map((subItem) => (
-                            <li key={subItem}>
-                              <button
-                                onClick={() =>
-                                  router.push(
-                                    `/dashboard/documents/${item.name.toLowerCase()}/${subItem
-                                      .toLowerCase()
-                                      .replace(" ", "-")}`
-                                  )
-                                }
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors"
-                              >
-                                {subItem}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    )
-                  )}
+                  {section.items.map((item) => (
+                    <li key={item.name}>
+                      <button
+                        onClick={() => router.push(item.route)}
+                        className="block w-full text-left px-4 py-2 hover:bg-[#15803d] transition-colors"
+                      >
+                        {item.name}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               )}
             </li>
@@ -191,7 +188,13 @@ function DashboardContent({ children }) {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 mt-16 ml-60">{children}</main>
+      <main
+        className={`flex-1 p-6 mt-16 transition-all duration-300 ${
+          isSidebarOpen ? "ml-60" : "ml-0"
+        } md:ml-60 flex justify-start`}
+      >
+        <div className="w-full">{children}</div>
+      </main>
     </div>
   );
 }

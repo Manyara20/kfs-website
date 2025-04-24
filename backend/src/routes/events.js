@@ -110,26 +110,39 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// PATCH /api/events/:id/archive - Archive an event (admin only)
+// PATCH /api/events/:id/archive - Toggle archive status of an event (admin only)
 router.patch("/:id/archive", async (req, res) => {
   try {
     if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
 
-    const { id } = req.params;
+    const  { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid event ID" });
+    }
+
+    console.log("Toggling archive for event ID:", id);
     const result = await pool.query(
-      "UPDATE events SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      "UPDATE events SET archived = NOT archived, updated_at = NOW() WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Event not found or already archived" });
+      return res.status(404).json({ error: "Event not found" });
     }
 
-    res.json({ message: "Event archived successfully", event: result.rows[0] });
+    const action = result.rows[0].archived ? "archived" : "unarchived";
+    res.json({ message: `Event ${action} successfully`, event: result.rows[0] });
   } catch (error) {
-    console.error("Error archiving event:", error);
+    console.error("Error toggling archive:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    if (error.code === "42703") {
+      return res.status(500).json({ error: "Database schema error: Missing column", details: error.message });
+    }
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });

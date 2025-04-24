@@ -4,7 +4,7 @@ import Image from "next/image";
 const data = [
   {
     title: "Mission",
-    image: "/images/OIP.jpg",
+    image: "/images/aerial_forest.jpg",
     description:
       "Conservation, management, development and sustainable utilization of forests and allied resources for current and future generation.",
   },

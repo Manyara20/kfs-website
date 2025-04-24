@@ -12,7 +12,7 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-// Test database connection on startup
+// Test database connection
 pool.connect((err, client, release) => {
   if (err) {
     console.error("Database connection failed:", err.stack);
@@ -22,9 +22,9 @@ pool.connect((err, client, release) => {
   release();
 });
 
-// Multer setup with custom storage
+// Multer setup
 const storage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: "./Uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -34,20 +34,20 @@ const upload = multer({ storage });
 
 // Middleware to log request details
 router.use((req, res, next) => {
-  console.log(`${req.method} /api/tenders${req.path} - User:`, req.user || "Public");
+  console.log(`${req.method} /api/tenders${req.path} - User:`, req.user);
   next();
 });
 
-// GET /api/tenders/public - Retrieve all active tenders (public access, no auth)
-router.get("/public", async (req, res) => {
-  console.log("Handling GET /api/tenders/public");
+// GET /api/tenders - Retrieve all tenders (admin or supply_chain)
+router.get("/", async (req, res) => {
   try {
-    console.log("Executing query: SELECT * FROM tenders WHERE archived = FALSE");
-    const result = await pool.query("SELECT * FROM tenders WHERE archived = FALSE");
-    console.log("Query result:", result.rows);
+    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
+      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    }
+    const result = await pool.query("SELECT * FROM tenders");
     res.json(result.rows);
   } catch (error) {
-    console.error("Error fetching public tenders:", {
+    console.error("Error fetching tenders:", {
       message: error.message,
       stack: error.stack,
       code: error.code,
@@ -56,22 +56,7 @@ router.get("/public", async (req, res) => {
   }
 });
 
-// GET /api/tenders - Retrieve all active tenders (authenticated)
-router.get("/", async (req, res) => {
-  console.log("Handling GET /api/tenders/");
-  try {
-    if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
-    }
-    const result = await pool.query("SELECT * FROM tenders WHERE archived = FALSE");
-    res.json(result.rows);
-  } catch (error) {
-    console.error("Error fetching tenders:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// POST /api/tenders - Create a new tender (authenticated)
+// POST /api/tenders - Create a new tender (admin or supply_chain)
 router.post("/", upload.single("pdf"), async (req, res) => {
   try {
     if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
@@ -79,23 +64,27 @@ router.post("/", upload.single("pdf"), async (req, res) => {
     }
 
     const { description } = req.body;
-    if (!req.file) {
-      return res.status(400).json({ error: "PDF file is required" });
+    if (!description || !req.file) {
+      return res.status(400).json({ error: "Description and PDF file are required" });
     }
 
-    const pdfUrl = `/uploads/${req.file.filename}`;
+    const pdfUrl = `/Uploads/${req.file.filename}`;
     const result = await pool.query(
       "INSERT INTO tenders (pdf_url, description, user_id) VALUES ($1, $2, $3) RETURNING *",
       [pdfUrl, description, req.user.id]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error("Error creating tender:", error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Error creating tender:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PUT /api/tenders/:id - Update an existing tender (authenticated)
+// PUT /api/tenders/:id - Update an existing tender (admin or supply_chain)
 router.put("/:id", upload.single("pdf"), async (req, res) => {
   try {
     if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
@@ -104,25 +93,29 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
 
     const { id } = req.params;
     const { description } = req.body;
-    const pdfUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const pdfUrl = req.file ? `/Uploads/${req.file.filename}` : null;
 
     const result = await pool.query(
-      "UPDATE tenders SET pdf_url = COALESCE($1, pdf_url), description = $2, updated_at = NOW() WHERE id = $3 AND archived = FALSE RETURNING *",
+      "UPDATE tenders SET pdf_url = COALESCE($1, pdf_url), description = $2, updated_at = NOW() WHERE id = $3 RETURNING *",
       [pdfUrl, description, id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Tender not found or already archived" });
+      return res.status(404).json({ error: "Tender not found" });
     }
 
     res.json(result.rows[0]);
   } catch (error) {
-    console.error("Error updating tender:", error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Error updating tender:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// DELETE /api/tenders/:id - Delete a tender (authenticated)
+// DELETE /api/tenders/:id - Delete a tender (admin or supply_chain)
 router.delete("/:id", async (req, res) => {
   try {
     if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
@@ -130,20 +123,24 @@ router.delete("/:id", async (req, res) => {
     }
 
     const { id } = req.params;
-    const result = await pool.query("DELETE FROM tenders WHERE id = $1 AND archived = FALSE", [id]);
+    const result = await pool.query("DELETE FROM tenders WHERE id = $1", [id]);
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Tender not found or already archived" });
+      return res.status(404).json({ error: "Tender not found" });
     }
 
     res.json({ message: "Tender deleted successfully" });
   } catch (error) {
-    console.error("Error deleting tender:", error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Error deleting tender:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PATCH /api/tenders/:id/archive - Archive a tender (authenticated)
+// PATCH /api/tenders/:id/archive - Toggle archive status of a tender (admin or supply_chain)
 router.patch("/:id/archive", async (req, res) => {
   try {
     if (!req.user || (req.user.role !== "admin" && req.user.role !== "supply_chain")) {
@@ -151,19 +148,32 @@ router.patch("/:id/archive", async (req, res) => {
     }
 
     const { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid tender ID" });
+    }
+
+    console.log("Toggling archive for tender ID:", id);
     const result = await pool.query(
-      "UPDATE tenders SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      "UPDATE tenders SET archived = NOT archived, updated_at = NOW() WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Tender not found or already archived" });
+      return res.status(404).json({ error: "Tender not found" });
     }
 
-    res.json({ message: "Tender archived successfully", tender: result.rows[0] });
+    const action = result.rows[0].archived ? "archived" : "unarchived";
+    res.json({ message: `Tender ${action} successfully`, tender: result.rows[0] });
   } catch (error) {
-    console.error("Error archiving tender:", error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Error toggling archive:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    if (error.code === "42703") {
+      return res.status(500).json({ error: "Database schema error: Missing column", details: error.message });
+    }
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 

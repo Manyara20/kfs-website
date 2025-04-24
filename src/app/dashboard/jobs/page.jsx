@@ -20,14 +20,20 @@ export default function Jobs() {
   const fetchJobs = async () => {
     if (!session) return;
     const token = session.user.backendToken;
+    console.log("Fetching jobs for user:", session.user.email, "Role:", session.user.role);
     try {
       const response = await axios.get("http://localhost:5000/api/jobs", {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Jobs fetched:", response.data);
       setJobs(response.data);
       setError("");
     } catch (err) {
-      console.error("Error fetching jobs:", err);
+      console.error("Error fetching jobs:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || "Failed to fetch jobs.");
     }
   };
@@ -67,7 +73,11 @@ export default function Jobs() {
       setEditingJobId(null);
       setError("");
     } catch (err) {
-      console.error(`Error ${editingJobId ? "updating" : "adding"} job:`, err);
+      console.error(`Error ${editingJobId ? "updating" : "adding"} job:`, {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || `Failed to ${editingJobId ? "update" : "add"} job.`);
     }
   };
@@ -78,7 +88,7 @@ export default function Jobs() {
     setIsFormVisible(true);
   };
 
-  const handleArchive = async (id) => {
+  const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
     if (!session || session.user.role !== "admin") {
       setError("Unauthorized access.");
@@ -86,16 +96,24 @@ export default function Jobs() {
     }
 
     const token = session.user.backendToken;
+    console.log("Toggling archive for job ID:", id, "Current archived status:", currentArchivedStatus);
     try {
       const response = await axios.patch(`http://localhost:5000/api/jobs/${id}/archive`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setJobs(jobs.map((job) => (job.id === id ? { ...job, archived: true } : job)));
-      alert("Job archived successfully!");
+      console.log("Archive toggle response:", response.data);
+      setJobs(jobs.map((job) => 
+        job.id === id ? { ...job, archived: response.data.job.archived } : job
+      ));
+      alert(response.data.message);
       setError("");
     } catch (err) {
-      console.error("Error archiving job:", err);
-      setError(err.response?.data?.error || "Failed to archive job.");
+      console.error("Error toggling archive:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
+      setError(err.response?.data?.error || "Failed to toggle archive status.");
     }
   };
 
@@ -115,7 +133,11 @@ export default function Jobs() {
       alert("Job deleted successfully!");
       setError("");
     } catch (err) {
-      console.error("Error deleting job:", err);
+      console.error("Error deleting job:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || "Failed to delete job.");
     }
   };
@@ -258,12 +280,15 @@ export default function Jobs() {
                 Edit
               </button>
               <button
-                onClick={() => handleArchive(job.id)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition-colors"
-                aria-label={`Archive job ${job.title}`}
-                disabled={job.archived}
+                onClick={() => handleArchive(job.id, job.archived)}
+                className={`px-3 py-1 rounded-md text-white transition-colors ${
+                  job.archived
+                    ? "bg-gray-500 hover:bg-gray-600 cursor-pointer"
+                    : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
+                aria-label={`${job.archived ? "Unarchive" : "Archive"} job ${job.title}`}
               >
-                Archive
+                {job.archived ? "Archived" : "Archive"}
               </button>
               <button
                 onClick={() => handleDelete(job.id)}

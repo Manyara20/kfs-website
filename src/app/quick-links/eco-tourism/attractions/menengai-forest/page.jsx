@@ -7,6 +7,9 @@ export default function MenengaiForestPage() {
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900">
       <TopNavBar />
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] bg-[linear-gradient(rgba(0,50,20,0.8),rgba(0,50,20,0.8))] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
 
       <main className="flex-grow container mx-auto px-4 py-8">
         <section className="bg-white shadow-lg rounded-lg p-6">
@@ -97,6 +100,7 @@ export default function MenengaiForestPage() {
           <p className="text-gray-700">Email: zmnakuru@kenyaforestservice.org, info@kenyaforestservice.org, ecotourism@kenyaforestservice.org</p>
         </section>
       </main>
+      </div>
       <FooterBottom />
     </div>
   );

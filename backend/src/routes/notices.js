@@ -70,8 +70,8 @@ router.post("/", upload.single("file"), async (req, res) => {
 
     const fileUrl = req.file ? `/Uploads/${req.file.filename}` : null;
     const result = await pool.query(
-      "INSERT INTO notices (title, description, file_url, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
-      [title, description, fileUrl, req.user.id]
+      "INSERT INTO notices (title, description, file_url, user_id, archived, updated_at) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING *",
+      [title, description, fileUrl, req.user.id, false]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -123,7 +123,7 @@ router.delete("/:id", async (req, res) => {
     }
 
     const { id } = req.params;
-    const result = await pool.query("DELETE FROM notices WHERE id = $1", [id]);
+    const result = await pool.query("DELETE FROM notices WHERE id = $1 RETURNING *", [id]);
 
     if (result.rowCount === 0) {
       return res.status(404).json({ error: "Notice not found" });
@@ -163,7 +163,7 @@ router.patch("/:id/archive", async (req, res) => {
     }
 
     const action = result.rows[0].archived ? "archived" : "unarchived";
-    res.json({ message: `Notice ${action} successfully`, notice: result.rows[0] });
+    res.json({ message: `Notice ${action} successfully`, event: result.rows[0] });
   } catch (error) {
     console.error("Error toggling archive:", {
       message: error.message,

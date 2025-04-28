@@ -14,7 +14,7 @@ export default function Notices() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user.role === "admin") {
+    if (status === "authenticated" && (session?.user.role === "admin" || session?.user.role === "communication_officer")) {
       fetchNotices();
     }
   }, [session, status]);
@@ -52,8 +52,8 @@ export default function Notices() {
   const handleAddOrUpdate = async (e) => {
     e.preventDefault();
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
-      setError("Unauthorized access. Only admins can manage notices.");
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
+      setError("Unauthorized access. Only admins and communication officers can manage notices.");
       return;
     }
 
@@ -120,9 +120,9 @@ export default function Notices() {
     setIsFormVisible(true);
   };
 
-  const handleArchive = async (id) => {
+  const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
       setError("Unauthorized access.");
       return;
     }
@@ -143,20 +143,24 @@ export default function Notices() {
       );
       setNotices(
         notices.map((notice) =>
-          notice.id === id ? { ...notice, archived: true } : notice
+          notice.id === id ? { ...notice, archived: response.data.event.archived } : notice
         )
       );
-      alert("Notice archived successfully!");
+      alert(`Notice ${response.data.event.archived ? "archived" : "unarchived"} successfully!`);
       setError("");
     } catch (err) {
-      console.error("Error archiving notice:", err);
-      setError(err.response?.data?.error || "Failed to archive notice.");
+      console.error("Error toggling archive:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
+      setError(err.response?.data?.error || "Failed to toggle archive status.");
     }
   };
 
   const handleDelete = async (id) => {
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
       setError("Unauthorized access.");
       return;
     }
@@ -189,7 +193,7 @@ export default function Notices() {
 
   if (status === "unauthenticated")
     return <div className="p-6 text-red-500">Please log in to manage notices.</div>;
-  if (session?.user.role !== "admin")
+  if (session?.user.role !== "admin" && session?.user.role !== "communication_officer")
     return <div className="p-6 text-red-500">Unauthorized</div>;
 
   return (
@@ -326,12 +330,15 @@ export default function Notices() {
                 Edit
               </button>
               <button
-                onClick={() => handleArchive(notice.id)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition-colors"
-                aria-label={`Archive notice ${notice.title}`}
-                disabled={notice.archived}
+                onClick={() => handleArchive(notice.id, notice.archived)}
+                className={`px-3 py-1 rounded-md text-white transition-colors ${
+                  notice.archived
+                    ? "bg-gray-500 cursor-pointer"
+                    : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
+                aria-label={`${notice.archived ? "Unarchive" : "Archive"} notice ${notice.title}`}
               >
-                Archive
+                {notice.archived ? "Unarchive" : "Archive"}
               </button>
               <button
                 onClick={() => handleDelete(notice.id)}

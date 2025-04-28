@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -12,21 +13,32 @@ export default function Jobs() {
   const [editingJobId, setEditingJobId] = useState(null);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (status === "authenticated") fetchJobs();
+    if (status === "authenticated") {
+      console.log("Session loaded:", { email: session.user.email, role: session.user.role });
+      fetchJobs();
+    }
   }, [session, status]);
 
   const fetchJobs = async () => {
-    if (!session) return;
+    if (!session || !session.user.backendToken) {
+      console.error("No session or backend token available");
+      setError("Authentication required. Please log in again.");
+      return;
+    }
+
+    setIsLoading(true);
     const token = session.user.backendToken;
-    console.log("Fetching jobs for user:", session.user.email, "Role:", session.user.role);
+    console.log("Fetching jobs with token:", token.slice(0, 10) + "...");
+
     try {
       const response = await axios.get("http://localhost:5000/api/jobs", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("Jobs fetched:", response.data);
-      setJobs(response.data);
+      console.log("Jobs fetched successfully:", response.data);
+      setJobs(response.data || []);
       setError("");
     } catch (err) {
       console.error("Error fetching jobs:", {
@@ -34,13 +46,24 @@ export default function Jobs() {
         data: err.response?.data,
         message: err.message,
       });
-      setError(err.response?.data?.error || "Failed to fetch jobs.");
+      setError(
+        err.response?.data?.error ||
+          `Failed to fetch jobs: ${err.message}. Check console for details.`
+      );
+      setJobs([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const filteredJobs = jobs.filter((job) => {
-    const matchesFilter = filter === "all" || (filter === "active" && !job.archived) || (filter === "archived" && job.archived);
-    const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase()) || job.description.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter =
+      filter === "all" ||
+      (filter === "active" && !job.archived) ||
+      (filter === "archived" && job.archived);
+    const matchesSearch =
+      job.title.toLowerCase().includes(search.toLowerCase()) ||
+      job.description.toLowerCase().includes(search.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
@@ -83,7 +106,12 @@ export default function Jobs() {
   };
 
   const handleEdit = (job) => {
-    setForm({ title: job.title, description: job.description, duties: job.duties, requirements: job.requirements });
+    setForm({
+      title: job.title,
+      description: job.description,
+      duties: job.duties || "",
+      requirements: job.requirements || "",
+    });
     setEditingJobId(job.id);
     setIsFormVisible(true);
   };
@@ -102,10 +130,10 @@ export default function Jobs() {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Archive toggle response:", response.data);
-      setJobs(jobs.map((job) => 
+      setJobs(jobs.map((job) =>
         job.id === id ? { ...job, archived: response.data.job.archived } : job
       ));
-      alert(response.data.message);
+      alert(`Job ${response.data.job.archived ? "archived" : "unarchived"} successfully!`);
       setError("");
     } catch (err) {
       console.error("Error toggling archive:", {
@@ -149,30 +177,34 @@ export default function Jobs() {
     setError("");
   };
 
-  if (status === "unauthenticated") return <div className="p-6 text-red-500">Please log in to manage jobs.</div>;
-  if (session?.user.role !== "admin") return <div className="p-6 text-red-500">Unauthorized</div>;
+  if (status === "unauthenticated")
+    return <div className="p-4 sm:p-6 text-red-500">Please log in to manage jobs.</div>;
+  if (session?.user.role !== "admin")
+    return <div className="p-4 sm:p-6 text-red-500">Unauthorized</div>;
 
   return (
-    <div className="p-6 max-w-4xl w-full">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
-          <h2 className="text-2xl font-bold text-gray-800">Manage Jobs</h2>
+    <div className="p-4 sm:p-6 md:p-8 w-full">
+      <div className="flex flex-col sm:flex-row items-start mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+            Manage Jobs
+          </h2>
           <button
             onClick={() => {
               setIsFormVisible(true);
               setEditingJobId(null);
               setForm({ title: "", description: "", duties: "", requirements: "" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
           >
             Add Job
           </button>
         </div>
-        <div className="flex space-x-4 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -183,17 +215,29 @@ export default function Jobs() {
             placeholder="Search jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
           />
         </div>
       </div>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500 mb-4 text-sm sm:text-base">{error}</p>}
+
+      {isLoading && <p className="text-gray-600 mb-4 text-sm sm:text-base">Loading jobs...</p>}
+
+      {!isLoading && filteredJobs.length === 0 && !error && (
+        <p className="text-gray-600 mb-4 text-sm sm:text-base">No jobs found.</p>
+      )}
 
       {isFormVisible && (
-        <form onSubmit={handleAddOrUpdate} className="mb-6 bg-white p-6 rounded-lg shadow-md">
+        <form
+          onSubmit={handleAddOrUpdate}
+          className="mb-6 bg-white p-4 sm:p-6 rounded-lg shadow-md"
+        >
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Title
             </label>
             <input
@@ -202,12 +246,15 @@ export default function Jobs() {
               placeholder="Enter title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               required
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
               Description
             </label>
             <textarea
@@ -215,13 +262,16 @@ export default function Jobs() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
               required
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="duties" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="duties"
+              className="block text-sm font-medium text-gray-700"
+            >
               Duties
             </label>
             <textarea
@@ -229,12 +279,15 @@ export default function Jobs() {
               placeholder="Enter duties"
               value={form.duties}
               onChange={(e) => setForm({ ...form, duties: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="requirements" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="requirements"
+              className="block text-sm font-medium text-gray-700"
+            >
               Requirements
             </label>
             <textarea
@@ -242,21 +295,21 @@ export default function Jobs() {
               placeholder="Enter requirements"
               value={form.requirements}
               onChange={(e) => setForm({ ...form, requirements: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
             />
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
             >
               {editingJobId ? "Update Job" : "Add Job"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -264,43 +317,48 @@ export default function Jobs() {
         </form>
       )}
 
-      <ul className="space-y-2">
-        {filteredJobs.map((job) => (
-          <li key={job.id} className="flex items-center p-4 bg-white rounded-lg shadow-sm">
-            <span className="text-gray-700">
-              {job.title} - {job.description.substring(0, 50)}
-              {job.description.length > 50 ? "..." : ""} {job.archived ? "(Archived)" : ""}
-            </span>
-            <div className="ml-auto flex space-x-2">
-              <button
-                onClick={() => handleEdit(job)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
-                aria-label={`Edit job ${job.title}`}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleArchive(job.id, job.archived)}
-                className={`px-3 py-1 rounded-md text-white transition-colors ${
-                  job.archived
-                    ? "bg-gray-500 hover:bg-gray-600 cursor-pointer"
-                    : "bg-yellow-500 hover:bg-yellow-600"
-                }`}
-                aria-label={`${job.archived ? "Unarchive" : "Archive"} job ${job.title}`}
-              >
-                {job.archived ? "Archived" : "Archive"}
-              </button>
-              <button
-                onClick={() => handleDelete(job.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
-                aria-label={`Delete job ${job.title}`}
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {!isLoading && filteredJobs.length > 0 && (
+        <ul className="space-y-2">
+          {filteredJobs.map((job) => (
+            <li
+              key={job.id}
+              className="flex flex-col sm:flex-row items-start p-4 bg-white rounded-lg shadow-sm"
+            >
+              <span className="text-gray-700 text-sm sm:text-base flex-1">
+                {job.title} - {job.description.substring(0, 50)}
+                {job.description.length > 50 ? "..." : ""} {job.archived ? "(Archived)" : ""}
+              </span>
+              <div className="mt-4 sm:mt-0 flex flex-wrap space-x-2">
+                <button
+                  onClick={() => handleEdit(job)}
+                  className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors text-sm"
+                  aria-label={`Edit job ${job.title}`}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleArchive(job.id, job.archived)}
+                  className={`px-3 py-1 rounded-md text-white transition-colors text-sm ${
+                    job.archived
+                      ? "bg-gray-500 cursor-pointer hover:bg-gray-600"
+                      : "bg-yellow-500 hover:bg-yellow-600"
+                  }`}
+                  aria-label={`${job.archived ? "Unarchive" : "Archive"} job ${job.title}`}
+                >
+                  {job.archived ? "Unarchive" : "Archive"}
+                </button>
+                <button
+                  onClick={() => handleDelete(job.id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors text-sm"
+                  aria-label={`Delete job ${job.title}`}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

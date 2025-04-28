@@ -19,6 +19,7 @@ function DashboardContent({ children }) {
   const router = useRouter();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [timerSeconds, setTimerSeconds] = useState(3600); // Start at 60 minutes (3600 seconds)
   const [open, setOpen] = useState({
     posts: false,
     jobs: false,
@@ -34,6 +35,23 @@ function DashboardContent({ children }) {
     mailing: false,
   });
 
+  // Timer logic
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimerSeconds((prev) => {
+        if (prev <= 0) {
+          clearInterval(intervalId); // Stop the timer at 0
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000); // Update every second
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // Redirect if unauthenticated
   useEffect(() => {
     if (status === "unauthenticated") router.push("/login");
   }, [status, router]);
@@ -84,6 +102,13 @@ function DashboardContent({ children }) {
     }
   };
 
+  // Format timer as MM:SS
+  const formatTimer = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
+
   if (status === "loading")
     return (
       <div className="flex items-center justify-center h-screen text-white bg-gray-900">
@@ -108,15 +133,9 @@ function DashboardContent({ children }) {
           {session && (
             <>
               <div className="flex items-center mr-4">
-                <span
-                  className={`w-2.5 h-2.5 rounded-full mr-2 ${
-                    session.user.status === "online" ? "bg-green-500" : "bg-red-500"
-                  }`}
-                ></span>
+                <span className="w-2.5 h-2.5 rounded-full mr-2 bg-green-500"></span>
                 <span className="text-sm">
-                  {session.user.status === "online"
-                    ? `Online (Logged in: ${new Date(session.user.last_login).toLocaleString()})`
-                    : "Offline"}
+                  Online (Time Remaining: {formatTimer(timerSeconds)})
                 </span>
               </div>
               <button

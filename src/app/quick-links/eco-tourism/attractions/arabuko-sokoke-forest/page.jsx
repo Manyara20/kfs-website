@@ -7,11 +7,14 @@ function ArabukoSokokeForestPage() {
     <div>
       <TopNavBar />
       <MainNavBar />
-      
-      <main className="container mx-auto px-4 py-8 text-black">
-        <h1 className="text-4xl font-bold text-center mb-8">ARABUKO-SOKOKE FOREST, KENYA</h1>
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] bg-[linear-gradient(rgba(0,50,20,0.8),rgba(0,50,20,0.8))] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
+      <main className=" container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 text-black bg-white ">
+        <h1 className="text-4xl font-bold text-center mb-8  text-green-700">ARABUKO-SOKOKE FOREST, KENYA</h1>
         
-        <section className="mb-12">
+        <section className="mb-12 bg-white">
           <p className="mb-4">
             Arabuko-Sokoke Forest Reserve is a 420 km² coastal forest in Kenya managed by Kenya Forest Service (KFS). 
             It is the largest and most intact coastal forest in East Africa, with 20% of Kenya's bird species, 
@@ -20,11 +23,11 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Attractions</h2>
-          <h3 className="text-xl font-semibold mb-3">Wildlife in Arabuko-Sokoke</h3>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Attractions</h2>
+          <h3 className="text-xl font-semibold mb-3  text-green-700">Wildlife in Arabuko-Sokoke</h3>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Mammals:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Mammals:</h4>
             <p className="mb-4">
               The forest has 40 recorded mammal species including African Elephant, African Buffalo, African Civet, 
               Caracal, Syke's Monkeys, Yellow Baboons and Lesser Galago (or bushbaby). Some of Kenya's rarest mammals 
@@ -33,7 +36,7 @@ function ArabukoSokokeForestPage() {
           </div>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Birds:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Birds:</h4>
             <p className="mb-4">
               There are over 270 species of birds recorded in the forest including several rare and endemic species. 
               The Clarke's Weaver is only found in Arabuko-Sokoke and another area 30 kms further north of Arabuko-Sokoke 
@@ -44,12 +47,12 @@ function ArabukoSokokeForestPage() {
           </div>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Reptiles & amphibians:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Reptiles & amphibians:</h4>
             <p>The forest has 49 reptile and 25 amphibian species.</p>
           </div>
           
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-3">Plants in Arabuko-Sokoke</h3>
+            <h3 className="text-xl font-semibold mb-3  text-green-700">Plants in Arabuko-Sokoke</h3>
             <p className="mb-4">
               Arabuko-Sokoke forest is made up of three different forest types:
             </p>
@@ -74,7 +77,7 @@ function ArabukoSokokeForestPage() {
           </div>
           
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-3">Other areas of special interest in Arabuko-Sokoke forest</h3>
+            <h3 className="text-xl font-semibold mb-3  text-green-700">Other areas of special interest in Arabuko-Sokoke forest</h3>
             <p className="mb-4">
               In addition to the animals and plants mentioned above, Arabuko-Sokoke forest has the following attractions:
             </p>
@@ -96,7 +99,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Activities available</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Activities available</h2>
           <p className="mb-4">
             In Arabuko-Sokoke, one can undertake the following activities:
           </p>
@@ -113,7 +116,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl text-black font-bold mb-4">Getting there & getting around</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Getting there & getting around</h2>
           <p className="mb-4">
             The forest lies along the tarmac Mombasa – Malindi highway, approximately 100 km from Mombasa town and 18 km 
             from Malindi. The entry is clearly signposted and visitor services are available at the offices of KFS's Malindi 
@@ -137,7 +140,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Visiting hours</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Visiting hours</h2>
           <p className="mb-4">
             Entry tickets can be purchased at the point of entry between 6:00 am and 6:00 pm. Those keen to have a particularly 
             early start can purchase tickets the evening before. The best times to visit are early morning or late afternoon as 
@@ -146,7 +149,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">What to wear and carry</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">What to wear and carry</h2>
           <p className="mb-4">
             Wear comfortable walking shoes or trainers and loose-fitting lightweight clothing. A hat, sunglasses and sunscreen 
             may also come in handy. It is also important to carry drinking water, binoculars, camera and wildlife books especially 
@@ -155,7 +158,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Climate</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Climate</h2>
           <p className="mb-4">
             There are two wet seasons: April-June (long rains) and November-December (short rains). The other months will be 
             usually hot and dry. Annual rainfall ranges from 1,000 mm in the east to 600 mm in the northwest.
@@ -163,7 +166,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Important things to remember when visiting Arabuko-Sokoke forest</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Important things to remember when visiting Arabuko-Sokoke forest</h2>
           <ul className="list-disc pl-6">
             <li className="mb-2">Enjoy yourself; in addition to seeing, pause and listen regularly.</li>
             <li className="mb-2">Stop to allow wildlife to move off the tracks before you pass.</li>
@@ -180,7 +183,7 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Arabuko-Sokoke photo gallery</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Arabuko-Sokoke photo gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* You would replace these with actual image components */}
             <div className="border p-2">
@@ -217,14 +220,14 @@ function ArabukoSokokeForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Entry fees:</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Entry fees:</h2>
           <p className="mb-4">
             Forest conservation fee is charged at the point of entry. For current rates, enquire from the contacts given here.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">For reservations and more information, contact:</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">For reservations and more information, contact:</h2>
           <p className="mb-2"><strong>The Forest Manager:</strong></p>
           <p className="mb-2">Arabuko-Sokoke Forest Reserve</p>
           <p className="mb-2">P.O. Box 201 – 80200 Malindi, Kenya.</p>
@@ -233,6 +236,8 @@ function ArabukoSokokeForestPage() {
           <p className="mb-2">Email: zmkilifi@kenyaforestservice.org</p>
         </section>
       </main>
+      </main>
+      </div>
       
       <FooterBottom />
     </div>

@@ -53,6 +53,9 @@ export default function JobVacancies() {
     <div className="bg-[#e8f5e9] min-h-screen">
       <TopNavBar />
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
 
       <div className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* Main Card */}
@@ -197,6 +200,7 @@ export default function JobVacancies() {
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       <FooterBottom />

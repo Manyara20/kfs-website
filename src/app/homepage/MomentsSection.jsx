@@ -4,64 +4,64 @@ import { useEffect, useState } from "react";
 
 const Moments = [
   {
-    title: "Partnership with WWF",
-    description: "Collaborating with WWF to protect Kenya's biodiversity and forests.",
+    title: "Forest Protection and Security",
+    description: "Safeguarding all gazetted forests and forest resources from illegal activities, destruction, and unauthorized access is paramount to maintaining their integrity and ecological functions.",
+    image: "/images/rangers_patrol.jpg",
+  },
+  {
+    title: "Forest Conservation and Management",
+    description: "Implementing sustainable forest management practices to ensure the long-term health, productivity, and biodiversity of forest ecosystems across the country.",
+    image: "/images/trees_lives.png",
+  },
+  {
+    title: "Forest Development and Tree Planting",
+    description: "Expanding Kenya's forest cover through afforestation and reforestation initiatives on public and private lands to enhance environmental benefits and wood production.",
+    image: "/images/planted_site_mau.jpg",
+  },
+  {
+    title: "Sustainable Utilization of Forest Resources",
+    description: "Regulating and promoting the responsible harvesting and utilization of forest products and services to meet socio-economic needs while ensuring ecological sustainability.",
     image: "/images/cypress.JPG",
   },
   {
-    title: "Conservation with AWF",
-    description: "Working with AWF to safeguard wildlife habitats in Kenyan forests.",
-    image: "/images/about.png",
+    title: "Community Participation and Partnerships",
+    description: "Engaging local communities, private sector, and other stakeholders in forest management and conservation efforts to foster ownership, shared responsibility, and equitable benefit sharing.",
+    image: "/images/community.jpeg",
   },
   {
-    title: "UNEP Initiatives",
-    description: "Supporting UNEP’s global environmental efforts in Kenya.",
-    image: "/images/forest.jpg",
+    title: "Forest Research and Innovation",
+    description: "Conducting and promoting research to generate knowledge and innovative solutions for improved forest management, conservation, and sustainable utilization.",
+    image: "/images/kfc.jpeg",
   },
   {
-    title: "USAID Projects",
-    description: "Enhancing forest management with USAID’s support.",
-    image: "/images/forestcover.jpg",
+    title: "Forest Extension Services and Education",
+    description: "Providing technical advice, training, and awareness programs to individuals, communities, and institutions on sustainable forest management practices and the importance of forests.",
+    image: "/images/kfc.jpeg",
   },
   {
-    title: "FAO Collaboration",
-    description: "Promoting sustainable forestry with FAO expertise.",
-    image: "/images/foresty.jpg",
-  },
-  {
-    title: "NEMA Partnership",
-    description: "Aligning with NEMA for environmental regulation and conservation.",
-    image: "/images/blackforest.jpg",
-  },
-  {
-    title: "World Bank Support",
-    description: "Leveraging World Bank funding for forest restoration.",
-    image: "/images/cypress.JPG",
-  },
-  {
-    title: "UNDP Efforts",
-    description: "Partnering with UNDP for climate resilience in forests.",
-    image: "/images/OIP.jpg",
+    title: "Protection of Water Catchment Areas",
+    description: "Managing and conserving forests in critical water catchment areas to ensure a continuous and high-quality supply of water for domestic, agricultural, and industrial use.",
+    image: "/images/planted_site_mau.jpg",
   },
   {
     title: "KEFRI Research",
     description: "Advancing forest science with KEFRI’s research capabilities.",
-    image: "/images/plantation.jpg",
+    image: "/images/waterfall_karura.jpg",
   },
   {
-    title: "Rhino Ark Conservation",
-    description: "Protecting ecosystems with Rhino Ark’s initiatives.",
+    title: "Biodiversity Conservation within Forests",
+    description: "Protecting and conserving the diverse flora and fauna found within forest ecosystems, recognizing their intrinsic value and ecological importance.",
     image: "/images/cypress.JPG",
   },
   {
-    title: "KFS Milestone",
-    description: "Celebrating a key milestone in forest conservation with partners.",
-    image: "/images/tree nusery.jpg",
+    title: "Climate Change Mitigation and Adaptation",
+    description: "Recognizing the role of forests in carbon sequestration and implementing strategies to enhance their contribution to climate change mitigation and build resilience to its impacts.",
+    image: "/images/natural_forest.jpg",
   },
   {
-    title: "Community Engagement",
-    description: "Empowering local communities with partner support.",
-    image: "/images/nuseries.jpg",
+    title: "Collaboration and Partnerships",
+    description: "Establishing and maintaining collaborations with government agencies, international organizations, and other relevant stakeholders to enhance forest management and conservation efforts at national, regional, and global levels.",
+    image: "/images/patners.jpeg",
   },
 ];
 

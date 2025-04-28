@@ -27,9 +27,12 @@ function PhotoGalleryPage() {
 
       {/* Main Navigation Bar */}
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-12">
+      <main className="flex-grow container mx-auto  bg-white px-4 py-12">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-green-900 mb-4">Photo Gallery</h1>
@@ -52,6 +55,7 @@ function PhotoGalleryPage() {
           ))}
         </div>
       </main>
+      </div>
 
       {/* Footer */}
       <FooterBottom />

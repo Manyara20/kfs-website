@@ -20,14 +20,20 @@ export default function Events() {
   const fetchEvents = async () => {
     if (!session) return;
     const token = session.user.backendToken;
+    console.log("Fetching events for user:", session.user.email, "Role:", session.user.role, "Token:", token);
     try {
       const response = await axios.get("http://localhost:5000/api/events", {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Events fetched:", response.data);
       setEvents(response.data);
       setError("");
     } catch (err) {
-      console.error("Error fetching events:", err);
+      console.error("Error fetching events:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || "Failed to fetch events.");
     }
   };
@@ -67,7 +73,11 @@ export default function Events() {
       setEditingEventId(null);
       setError("");
     } catch (err) {
-      console.error(`Error ${editingEventId ? "updating" : "adding"} event:`, err);
+      console.error(`Error ${editingEventId ? "updating" : "adding"} event:`, {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || `Failed to ${editingEventId ? "update" : "add"} event.`);
     }
   };
@@ -78,7 +88,7 @@ export default function Events() {
     setIsFormVisible(true);
   };
 
-  const handleArchive = async (id) => {
+  const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
     if (!session || session.user.role !== "admin") {
       setError("Unauthorized access.");
@@ -86,16 +96,29 @@ export default function Events() {
     }
 
     const token = session.user.backendToken;
+    console.log("Toggling archive for event ID:", id, "Current archived status:", currentArchivedStatus, "Token:", token, "User:", session.user);
+    if (!id || isNaN(id)) {
+      setError("Invalid event ID.");
+      return;
+    }
+
     try {
       const response = await axios.patch(`http://localhost:5000/api/events/${id}/archive`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setEvents(events.map((event) => (event.id === id ? { ...event, archived: true } : event)));
-      alert("Event archived successfully!");
+      console.log("Archive toggle response:", response.data);
+      setEvents(events.map((event) => 
+        event.id === id ? { ...event, archived: response.data.event.archived } : event
+      ));
+      alert(`Event ${response.data.event.archived ? "archived" : "unarchived"} successfully!`);
       setError("");
     } catch (err) {
-      console.error("Error archiving event:", err);
-      setError(err.response?.data?.error || "Failed to archive event.");
+      console.error("Error toggling archive:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
+      setError(err.response?.data?.error || "Failed to toggle archive status.");
     }
   };
 
@@ -115,7 +138,11 @@ export default function Events() {
       alert("Event deleted successfully!");
       setError("");
     } catch (err) {
-      console.error("Error deleting event:", err);
+      console.error("Error deleting event:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       setError(err.response?.data?.error || "Failed to delete event.");
     }
   };
@@ -271,12 +298,15 @@ export default function Events() {
                 Edit
               </button>
               <button
-                onClick={() => handleArchive(event.id)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition-colors"
-                aria-label={`Archive event ${event.title}`}
-                disabled={event.archived}
+                onClick={() => handleArchive(event.id, event.archived)}
+                className={`px-3 py-1 rounded-md text-white transition-colors ${
+                  event.archived
+                    ? "bg-gray-500 cursor-pointer"
+                    : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
+                aria-label={`${event.archived ? "Unarchive" : "Archive"} event ${event.title}`}
               >
-                Archive
+                {event.archived ? "Archived" : "Archive"}
               </button>
               <button
                 onClick={() => handleDelete(event.id)}

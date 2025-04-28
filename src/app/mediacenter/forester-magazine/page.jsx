@@ -2,138 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import { Description as DescriptionIcon } from "@mui/icons-material";
-import { IoMdHelpCircle } from "react-icons/io"; // Added for accessibility controls
+import { IoMdHelpCircle } from "react-icons/io";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  display: "flex", // Added to match DFCMPage
-  justifyContent: "center", // Added to match DFCMPage
-  alignItems: "center", // Added to match DFCMPage
-  padding: "2rem", // Updated from 1rem to 2rem to match DFCMPage
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentWrapper = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem", // Updated from 2rem 0.5rem to 3rem to match DFCMPage
-  maxWidth: "900px", // Updated from 1000px to 900px to match DFCMPage
-  width: "100%",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)", // Added to match DFCMPage
-  borderRadius: 0, // Removed border radius to match DFCMPage
-});
-
-const HeaderTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28", // Updated from #ffffff to #0f5a28 to match DFCMPage
-  fontSize: "1.8rem", // Updated from 2rem to 1.8rem
-  lineHeight: 1.3, // Updated from 1.1 to 1.3
-  letterSpacing: "0.5px", // Updated from 0.3px to 0.5px
-  textAlign: "left", // Updated from center to left to match DFCMPage
-  marginBottom: "2rem", // Updated from 1.5rem to 2rem
-  textTransform: "capitalize",
-  textShadow: "none", // Removed textShadow to match DFCMPage
-});
-
-const Description = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#000", // Updated from textSecondary to #000 to match DFCMPage
-  fontSize: "0.9rem",
-  lineHeight: 1.8, // Added to match DFCMPage
-  wordSpacing: "0.15rem", // Added to match DFCMPage
-  marginBottom: "2rem", // Updated to match DFCMPage
-});
-
-const SubHeader = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#0f5a28",
-  fontSize: "1.2rem",
-  marginBottom: "1rem", // Adjusted for better spacing
-  textTransform: "capitalize",
-});
-
-const DocumentCard = styled(Box)({
-  background: "#1a3c34", // Updated to match DFCMPage DepartmentItem
-  padding: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem", // Updated from 1rem to 1.5rem to match DFCMPage
-  "&:hover": {
-    transform: "translateY(-2px)", // Updated from -3px to -2px to match DFCMPage
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Updated to match DFCMPage
-  },
-});
-
-const DocumentInfo = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  gap: "1rem", // Updated from 0.5rem to 1rem for better spacing
-});
-
-const DocumentTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 500, // Updated from 600 to 500 to match DFCMPage
-  color: "#ffffff", // Updated from #0f5a28 to #ffffff to match DFCMPage
-  fontSize: "0.85rem", // Updated from 1rem to 0.85rem to match DFCMPage
-  lineHeight: 1.6, // Added to match DFCMPage
-  wordSpacing: "0.1rem", // Added to match DFCMPage
-  textTransform: "capitalize",
-});
-
-const FileSize = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#cccccc", // Updated to a lighter shade for contrast against #1a3c34 background
-  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
-  lineHeight: 1.6, // Added to match DFCMPage
-  wordSpacing: "0.1rem", // Added to match DFCMPage
-});
-
-const DownloadButton = styled(Button)({
-  backgroundColor: "#0f5a28",
-  color: "#fff",
-  textTransform: "none",
-  padding: "0.5rem 1.5rem", // Updated from 0.3rem 1rem to 0.5rem 1.5rem for better proportions
-  fontSize: "0.85rem", // Updated from 0.8rem to 0.85rem to match DFCMPage
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  borderRadius: "8px", // Updated from 6px to 8px to match other document pages
-  "&:hover": {
-    backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)", // Updated to match other document pages
-  },
-});
-
-// Main Page Component
 export default function ForesterMagazinePage() {
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);
@@ -164,76 +38,115 @@ export default function ForesterMagazinePage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Updated duration to match DFCMPage
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <TopNavBar />
       <MainNavBar />
-      <PageContainer>
-        <ContentWrapper
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <motion.div
+          className="bg-white bg-opacity-95 p-12 max-w-3xl w-full relative z-10 border border-white/30"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
+          style={{ fontSize: `${fontSize}px` }}
         >
-          <HeaderTitle variant="h1">The Forester Magazine</HeaderTitle>
-          <Description>
+          <h1 className="text-[#0f5a28] font-bold text-3xl text-left mb-8 capitalize tracking-wide leading-relaxed">
+            The Forester Magazine
+          </h1>
+          <p className="text-black text-sm leading-relaxed mb-8">
             Biannual Forestry Magazine of the Kenya Forest Service
-          </Description>
+          </p>
 
-          <SubHeader>
+          <h2 className="text-[#0f5a28] font-bold text-xl mb-4 capitalize">
             Welcome to the latest edition of our biannual forestry magazine.
-          </SubHeader>
-          <Description>
+          </h2>
+          <p className="text-black text-sm leading-relaxed mb-8">
             As we reflect on the past six months, we’re proud to share the significant strides
             made in Kenya’s forestry sector. In this issue, we spotlight several key events and
             initiatives that underscore our commitment to sustainable forest management and
             conservation.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-black text-sm leading-relaxed mb-8">
             Our lead story covers the launch of the Kenya Forest Service Strategic Plan, a roadmap
             that will guide our efforts in the coming years to enhance forest cover and promote
             sustainable utilization of forest resources.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-black text-sm leading-relaxed mb-8">
             We also bring you highlights from the International Day of Forests celebrations, where
             we joined the global community in recognizing the vital role forests play in our lives
             and ecosystems. Additionally, you’ll find coverage of our National Tree Growing Day, an
             initiative that saw thousands of Kenyans come together to green our nation.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-black text-sm leading-relaxed mb-8">
             This edition also features news on various Memoranda of Understanding signed with
             partner organizations, strengthening our collaborative efforts in forest conservation
             and management.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-black text-sm leading-relaxed mb-8">
             These stories reflect our ongoing dedication to Kenya’s forests and the communities
             that depend on them. We hope this issue informs and inspires you to join us in our
             mission to protect and nurture our precious forest resources.
-          </Description>
-          <SubHeader>Happy reading!</SubHeader>
-          <Description>Anne Kaari, ‘ndc‘ (K)</Description>
+          </p>
+          <h2 className="text-[#0f5a28] font-bold text-xl mb-4 capitalize">Happy reading!</h2>
+          <p className="text-black text-sm leading-relaxed mb-8">Anne Kaari, ‘ndc‘ (K)</p>
 
-          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             {magazines.map((magazine, index) => (
-              <DocumentCard key={index}>
-                <DocumentInfo>
-                  <DescriptionIcon sx={{ color: "#ffffff", fontSize: "2rem" }} /> {/* Updated color to #ffffff for contrast */}
-                  <Box>
-                    <DocumentTitle>{magazine.title}</DocumentTitle>
-                    <FileSize>1 file(s) {magazine.fileSize}</FileSize>
-                  </Box>
-                </DocumentInfo>
-                <Link href={magazine.link} target="_blank" rel="noopener noreferrer" passHref>
-                  <DownloadButton>Download</DownloadButton>
+              <div
+                key={index}
+                className="bg-[#1a3c34] p-6 flex justify-between items-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center gap-4">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <div>
+                    <h3 className="text-white font-medium text-sm capitalize leading-relaxed">
+                      {magazine.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      1 file(s) {magazine.fileSize}
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href={magazine.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#0f5a28] text-white py-2 px-6 rounded-lg text-sm hover:bg-[#388e3c] hover:shadow-lg transition-all duration-300"
+                >
+                  Download
                 </Link>
-              </DocumentCard>
+              </div>
             ))}
-          </Box>
-        </ContentWrapper>
+          </div>
+        </motion.div>
 
-        {/* Accessibility Controls */}
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
           <button
             onClick={() => handleFontSizeChange(true)}
@@ -250,7 +163,7 @@ export default function ForesterMagazinePage() {
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
         </div>
-      </PageContainer>
+      </div>
       <FooterBottom />
     </div>
   );

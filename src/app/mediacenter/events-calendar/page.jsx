@@ -1,177 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  padding: "1rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentWrapper = styled(Box)({
-  maxWidth: "1000px",
-  margin: "0 auto",
-  padding: "2rem 0.5rem",
-  position: "relative",
-  zIndex: 1,
-});
-
-const HeaderTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#ffffff",
-  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
-  fontSize: "2rem",
-  lineHeight: 1.1,
-  letterSpacing: "0.3px",
-  textAlign: "center",
-  marginBottom: "0.5rem",
-  textTransform: "capitalize",
-});
-
-const HeaderSubtitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#e0e0e0",
-  fontSize: "0.9rem",
-  textAlign: "center",
-  marginBottom: "1.5rem",
-});
-
-const SectionTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#ffffff",
-  fontSize: "1.5rem",
-  textAlign: "center",
-  marginBottom: "1rem",
-  textTransform: "capitalize",
-});
-
-const CalendarWrapper = styled(Box)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "1.5rem",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "2rem",
-});
-
-const CalendarHeader = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "1rem",
-});
-
-const CalendarGrid = styled(Box)({
-  display: "grid",
-  gridTemplateColumns: "repeat(7, 1fr)",
-  gap: "0.5rem",
-});
-
-const DayHeader = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  textAlign: "center",
-  padding: "0.3rem",
-  fontSize: "0.8rem",
-  textTransform: "capitalize",
-});
-
-const DayCell = styled(motion.div, {
-  shouldForwardProp: (prop) => prop !== "isToday",
-})(({ isToday }) => ({
-  background: isToday ? "#e8f5e9" : "#ffffff",
-  border: isToday ? "solid #0f5a28" : "1px solid #e0e0e0",
-  padding: "0.5rem",
-  textAlign: "center",
-  height: "90px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  overflowY: "auto",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-2px)",
-    boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
-  },
-}));
-
-const DayNumber = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "0.9rem",
-});
-
-const EventText = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#666",
-  fontSize: "0.7rem",
-  whiteSpace: "normal",
-});
-
-const EventCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "1rem",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "1rem",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
-  },
-});
-
-const EventTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1.2rem",
-  marginBottom: "0.3rem",
-  textTransform: "capitalize",
-});
-
-const EventDate = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#666",
-  fontSize: "0.85rem",
-});
-
-const NavButton = styled(Button)({
-  backgroundColor: "#0f5a28",
-  color: "#fff",
-  padding: "0.3rem 0.8rem",
-  fontSize: "0.8rem",
-  "&:hover": {
-    backgroundColor: "#388e3c",
-  },
-});
 
 export default function EventsCalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -288,9 +121,9 @@ export default function EventsCalendarPage() {
     .filter(event => {
       const eventDate = event.date;
       return (
-        eventDate >= today && // Event is today or in the future
-        eventDate.getMonth() === selectedMonth && // Event is in the selected month
-        eventDate.getFullYear() === selectedYear // Event is in the selected year
+        eventDate >= today &&
+        eventDate.getMonth() === selectedMonth &&
+        eventDate.getFullYear() === selectedYear
       );
     })
     .sort((a, b) => a.date - b.date);
@@ -301,39 +134,87 @@ export default function EventsCalendarPage() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <TopNavBar />
       <MainNavBar />
-      <PageContainer>
-        <ContentWrapper>
-          <HeaderTitle variant="h1">
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed p-4 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <div className="max-w-5xl mx-auto px-2 py-8 relative z-10">
+          <h1 className="font-bold text-white text-4xl text-center mb-2 drop-shadow-md capitalize tracking-tight leading-tight">
             Events Calendar
-          </HeaderTitle>
-          <HeaderSubtitle>
+          </h1>
+          <p className="text-gray-200 text-sm text-center mb-6">
             Stay updated with the latest events and activities from the Kenya Forest Service.
-          </HeaderSubtitle>
+          </p>
 
-          <Box mb={4}>
-            <SectionTitle>
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold text-white text-center mb-4 capitalize">
               Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-            </SectionTitle>
-            <CalendarWrapper>
-              <CalendarHeader>
-                <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
+            </h2>
+            <div className="bg-white bg-opacity-95 p-6 shadow-lg rounded-lg">
+              <div className="flex justify-between items-center mb-4">
+                <button
+                  onClick={handlePrevMonth}
+                  className="bg-[#0f5a28] text-white px-4 py-2 rounded text-sm hover:bg-[#388e3c] flex items-center gap-2"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
                   Previous
-                </NavButton>
-                <Typography variant="h6" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", color: "#0f5a28", fontSize: "1rem", textTransform: "capitalize" }}>
+                </button>
+                <span className="text-[#0f5a28] font-semibold text-base capitalize">
                   {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-                </Typography>
-                <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
+                </span>
+                <button
+                  onClick={handleNextMonth}
+                  className="bg-[#0f5a28] text-white px-4 py-2 rounded text-sm hover:bg-[#388e3c] flex items-center gap-2"
+                >
                   Next
-                </NavButton>
-              </CalendarHeader>
-              <CalendarGrid>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="grid grid-cols-7 gap-2">
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-                  <DayHeader key={index}>
+                  <div
+                    key={index}
+                    className="text-[#0f5a28] font-semibold text-center text-sm capitalize p-1"
+                  >
                     {day}
-                  </DayHeader>
+                  </div>
                 ))}
                 {calendarDays.map((dayData, index) => {
                   const isToday =
@@ -342,61 +223,67 @@ export default function EventsCalendarPage() {
                     currentDate.getMonth() === today.getMonth() &&
                     currentDate.getFullYear() === today.getFullYear();
                   return (
-                    <DayCell
+                    <motion.div
                       key={index}
-                      isToday={isToday}
+                      className={`p-2 text-center h-[90px] flex flex-col justify-between overflow-y-auto transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                        isToday
+                          ? "bg-green-50 border-2 border-[#0f5a28]"
+                          : "bg-white border border-gray-200"
+                      }`}
                       initial="hidden"
                       animate="visible"
                       variants={cardVariants}
                     >
                       {dayData.day ? (
                         <>
-                          <DayNumber>{dayData.day}</DayNumber>
+                          <span className="text-[#0f5a28] font-semibold text-sm">
+                            {dayData.day}
+                          </span>
                           {dayData.event && (
-                            <EventText>{dayData.event}</EventText>
+                            <p className="text-gray-600 text-xs whitespace-normal">
+                              {dayData.event}
+                            </p>
                           )}
                         </>
                       ) : null}
-                    </DayCell>
+                    </motion.div>
                   );
                 })}
-              </CalendarGrid>
-            </CalendarWrapper>
-          </Box>
+              </div>
+            </div>
+          </div>
 
-          <Box>
-            <SectionTitle>Upcoming Events This Month</SectionTitle>
-            <Box maxWidth="700px" mx="auto">
+          <div>
+            <h2 className="text-2xl font-semibold text-white text-center mb-4 capitalize">
+              Upcoming Events This Month
+            </h2>
+            <div className="max-w-3xl mx-auto">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event, index) => (
-                  <EventCard
+                  <motion.div
                     key={index}
+                    className="bg-white bg-opacity-95 p-4 shadow-lg rounded-lg mb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
                   >
-                    <EventTitle>{event.event}</EventTitle>
-                    <EventDate>
+                    <h3 className="text-[#0f5a28] font-semibold text-lg mb-1 capitalize">
+                      {event.event}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
                       {event.date.toLocaleDateString()} {event.time && `– ${event.time}`}
-                    </EventDate>
-                  </EventCard>
+                    </p>
+                  </motion.div>
                 ))
               ) : (
-                <Typography
-                  sx={{
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    color: "#ffffff",
-                    textAlign: "center",
-                    fontSize: "0.9rem",
-                  }}
-                >
+                <p className="text-white text-center text-sm">
                   No upcoming events this month.
-                </Typography>
+                </p>
               )}
-            </Box>
-          </Box>
-        </ContentWrapper>
-      </PageContainer>
+            </div>
+          </div>
+        </div>
+      </div>
       <FooterBottom />
     </div>
   );

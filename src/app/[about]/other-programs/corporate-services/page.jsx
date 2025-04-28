@@ -1,103 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import { IoMdHelpCircle } from "react-icons/io"; // Added for accessibility controls
+import { IoMdHelpCircle } from "react-icons/io";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`, // Updated overlay color to match DFCMPage
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05, // Updated opacity to match DFCMPage
-    zIndex: 0,
-  },
-});
-
-const ContentCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "900px", // Updated from 800px to 900px to match DFCMPage
-  width: "100%",
-  position: "relative",
-  zIndex: 1,
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: 0, // Removed border radius to match DFCMPage
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", // Updated font to match DFCMPage
-  fontWeight: 700, // Updated from 400 to 700
-  color: "#0f5a28",
-  marginBottom: "2rem", // Updated from 1.5rem to 2rem
-  fontSize: "1.8rem", // Updated from 2.5rem to 1.8rem
-  lineHeight: 1.3, // Updated from 1.2 to 1.3
-  letterSpacing: "0.5px",
-  textTransform: "capitalize", // Added to match DFCMPage
-  textShadow: "none", // Removed textShadow to match DFCMPage
-});
-
-const Description = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif", // Updated font to match DFCMPage
-  fontWeight: 400,
-  color: "#000", // Updated from #333 to #000
-  lineHeight: 1.8,
-  wordSpacing: "0.15rem", // Added to match DFCMPage
-  fontSize: "0.9rem", // Updated from 1.1rem to 0.9rem
-  marginBottom: "2rem", // Updated from 1.5rem to 2rem
-});
-
-const DepartmentList = styled(List)({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Updated from 300px to 280px to match DFCMPage
-  gap: "1.5rem", // Updated from 1rem to 1.5rem
-  padding: 0,
-});
-
-const DepartmentItem = styled(ListItem)({
-  background: "#1a3c34", // Updated background to match DFCMPage
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  padding: "1.5rem", // Updated from 1rem to 1.5rem
-  "&:hover": {
-    transform: "translateY(-2px)", // Updated from -5px to -2px to match DFCMPage
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Updated to match DFCMPage
-  },
-});
-
-const DepartmentText = styled(ListItemText)({
-  "& .MuiTypography-root": {
-    fontFamily: "'Peugeot', Helvetica, sans-serif", // Updated font to match DFCMPage
-    fontWeight: 500, // Updated from 400 to 500
-    color: "#ffffff", // Updated from #0D3C00 to #ffffff
-    fontSize: "0.85rem", // Updated from 1rem to 0.85rem
-    lineHeight: 1.6, // Added to match DFCMPage
-    wordSpacing: "0.1rem", // Added to match DFCMPage
-    textTransform: "capitalize", // Added to match DFCMPage
-  },
-});
-
-// Main Page Component
 export default function CorporateServicesPage() {
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);
@@ -115,53 +24,79 @@ export default function CorporateServicesPage() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Updated duration to match DFCMPage
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
     <div>
       <TopNavBar />
       <MainNavBar />
-      <PageContainer>
-        {/* Main Content Card */}
-        <ContentCard
+      
+      {/* Main Content */}
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed p-8 relative flex justify-center items-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        {/* Overlay Pattern */}
+        <div
+          className="absolute inset-0 bg-repeat opacity-5"
+          style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/leaf.png')" }}
+        ></div>
+
+        {/* Content Card */}
+        <motion.div
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
+          className="relative bg-white/95 border border-white/30 p-12 max-w-4xl w-full z-10"
         >
-          <Title variant="h1">
+          {/* Title */}
+          <h1 className="font-bold text-3xl text-[#0f5a28] mb-8 capitalize leading-snug tracking-wide">
             Corporate Service
-          </Title>
-          <Description>
+          </h1>
+
+          {/* Description */}
+          <p className="text-black text-[0.9rem] leading-relaxed space-y-6 mb-6">
             Corporate Service Directorate is established to ensure prudent utilization of financial resources, aligning human resources strategy of the organization, infrastructure management, leveraging on ICT technology and enhancing the image and communication of the organization.
-          </Description>
-          <Description>
+          </p>
+          <p className="text-black text-[0.9rem] leading-relaxed space-y-6 mb-6">
             It executes this mandate through the following departments:
-          </Description>
-          <DepartmentList>
-            <DepartmentItem>
-              <DepartmentText primary="Department of Finance and Accounts" />
-            </DepartmentItem>
-            <DepartmentItem>
-              <DepartmentText primary="Department of Human Resource Management" />
-            </DepartmentItem>
-            <DepartmentItem>
-              <DepartmentText primary="Department of Administration and Infrastructure Development" />
-            </DepartmentItem>
-            <DepartmentItem>
-              <DepartmentText primary="Department of Information Communication Technology" />
-            </DepartmentItem>
-            <DepartmentItem>
-              <DepartmentText primary="Department of Corporate Communication" />
-            </DepartmentItem>
-          </DepartmentList>
-          <Description className="mt-2">
-            Explore our ongoing efforts and updates below.
-          </Description>
-        </ContentCard>
+          </p>
+
+          {/* Department List */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="bg-[#1a3c34] text-white p-6 transition transform hover:-translate-y-1 hover:shadow-lg">
+              <p className="font-medium text-[0.85rem] leading-6 tracking-wide capitalize">
+                Department of Finance and Accounts
+              </p>
+            </div>
+            <div className="bg-[#1a3c34] text-white p-6 transition transform hover:-translate-y-1 hover:shadow-lg">
+              <p className="font-medium text-[0.85rem] leading-6 tracking-wide capitalize">
+                Department of Human Resource Management
+              </p>
+            </div>
+            <div className="bg-[#1a3c34] text-white p-6 transition transform hover:-translate-y-1 hover:shadow-lg">
+              <p className="font-medium text-[0.85rem] leading-6 tracking-wide capitalize">
+                Department of Administration and Infrastructure Development
+              </p>
+            </div>
+            <div className="bg-[#1a3c34] text-white p-6 transition transform hover:-translate-y-1 hover:shadow-lg">
+              <p className="font-medium text-[0.85rem] leading-6 tracking-wide capitalize">
+                Department of Information Communication Technology
+              </p>
+            </div>
+            <div className="bg-[#1a3c34] text-white p-6 transition transform hover:-translate-y-1 hover:shadow-lg">
+              <p className="font-medium text-[0.85rem] leading-6 tracking-wide capitalize">
+                Department of Corporate Communication
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Accessibility Controls */}
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-50">
           <button
             onClick={() => handleFontSizeChange(true)}
             className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
@@ -177,7 +112,8 @@ export default function CorporateServicesPage() {
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
         </div>
-      </PageContainer>
+      </div>
+
       <FooterBottom />
     </div>
   );

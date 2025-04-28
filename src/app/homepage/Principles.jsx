@@ -9,7 +9,7 @@ const principles = [
     title: "Ecosystem Approach",
     description:
       "Adoption of an integrated ecosystem approach to conserving and managing forest resources, paying particular attention to ecologically fragile areas.",
-    icon: "/icons/public-service.png",
+    icon: "/icons/ecosystem.png",
     background: "/images/Melia-nursery.jpg",
   },
   {
@@ -17,7 +17,7 @@ const principles = [
     title: "Public Good",
     description:
       "Taking into consideration the multiple roles played by forests, ownership must serve a common good for present and future generations.",
-    icon: "/icons/public-service.png",
+    icon: "/icons/public-relation.png",
     background: "/images/MangroveboatinGazi.jpg",
   },
   {
@@ -25,7 +25,7 @@ const principles = [
     title: "Sustainable Forest Management",
     description:
       "Sustainable management of forest resources to yield social, economic, and ecological goods and services for current and future generations.",
-    icon: "/icons/public-service.png",
+    icon: "/icons/conservation.png",
     background: "/images/MangroverehabilitationTudor.jpg",
   },
 ];

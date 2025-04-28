@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { useSession, signOut, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,8 @@ function DashboardContent({ children }) {
     legal: false,
     policy: false,
     iso: false,
+    users: false,
+    mailing: false,
   });
 
   useEffect(() => {
@@ -41,6 +44,44 @@ function DashboardContent({ children }) {
 
   const toggleDropdown = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  // Define role-based menu items
+  const getMenuItems = (role) => {
+    const allMenuItems = [
+      { name: "Posts", key: "posts", route: "/dashboard/posts" },
+      { name: "Jobs", key: "jobs", route: "/dashboard/jobs" },
+      { name: "Tenders", key: "tenders", route: "/dashboard/tenders" },
+      {
+        name: "Documents",
+        key: "documents",
+        items: [
+          { name: "Public", route: "/dashboard/documents?category=public" },
+          { name: "Legal", route: "/dashboard/documents?category=legal" },
+          { name: "Policy", route: "/dashboard/documents?category=policy" },
+          { name: "ISO", route: "/dashboard/documents?category=iso" },
+        ],
+      },
+      { name: "Events", key: "events", route: "/dashboard/events" },
+      { name: "Notice Board", key: "notices", route: "/dashboard/notices" },
+      { name: "Users", key: "users", route: "/dashboard/users" },
+      { name: "Mailing", key: "mailing", route: "/dashboard/mailing" },
+    ];
+
+    switch (role) {
+      case "admin":
+        return allMenuItems;
+      case "supply_chain":
+        return allMenuItems.filter((item) => item.key === "tenders");
+      case "communication_officer":
+        return allMenuItems.filter((item) =>
+          ["posts", "events", "notices"].includes(item.key)
+        );
+      case "user":
+        return allMenuItems.filter((item) => item.key === "documents");
+      default:
+        return [];
+    }
   };
 
   if (status === "loading")
@@ -138,52 +179,35 @@ function DashboardContent({ children }) {
         } md:translate-x-0 md:w-60 z-10`}
       >
         <ul className="p-4">
-          {[
-            { name: "Posts", key: "posts", route: "/dashboard/posts" },
-            { name: "Jobs", key: "jobs", route: "/dashboard/jobs" },
-            { name: "Tenders", key: "tenders", route: "/dashboard/tenders" },
-            {
-              name: "Documents",
-              key: "documents",
-              items: [
-                { name: "Public", route: "/dashboard/documents?category=public" },
-                { name: "Legal", route: "/dashboard/documents?category=legal" },
-                { name: "Policy", route: "/dashboard/documents?category=policy" },
-                { name: "ISO", route: "/dashboard/documents?category=iso" },
-              ],
-            },
-            { name: "Events", key: "events", route: "/dashboard/events" },
-            { name: "Notice Board", key: "notices", route: "/dashboard/notices" },
-            { name: "Users", key: "users", route: "/dashboard/users" },
-            { name: "Mailing", key: "mailing", route: "/dashboard/mailing" },
-          ].map((section) => (
-            <li key={section.name}>
-              <button
-                onClick={() => {
-                  if (section.items) toggleDropdown(section.key);
-                  else if (section.route) router.push(section.route);
-                }}
-                className="flex items-center justify-between w-full px-4 py-2 hover:bg-[#15803d] transition-colors"
-              >
-                <span>{section.name}</span>
-                {section.items && (open[section.key] ? <FaChevronDown /> : <FaChevronRight />)}
-              </button>
-              {section.items && (
-                <ul className={`${open[section.key] ? "block" : "hidden"} pl-4`}>
-                  {section.items.map((item) => (
-                    <li key={item.name}>
-                      <button
-                        onClick={() => router.push(item.route)}
-                        className="block w-full text-left px-4 py-2 hover:bg-[#15803d] transition-colors"
-                      >
-                        {item.name}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+          {session &&
+            getMenuItems(session.user.role).map((section) => (
+              <li key={section.name}>
+                <button
+                  onClick={() => {
+                    if (section.items) toggleDropdown(section.key);
+                    else if (section.route) router.push(section.route);
+                  }}
+                  className="flex items-center justify-between w-full px-4 py-2 hover:bg-[#15803d] transition-colors"
+                >
+                  <span>{section.name}</span>
+                  {section.items && (open[section.key] ? <FaChevronDown /> : <FaChevronRight />)}
+                </button>
+                {section.items && (
+                  <ul className={`${open[section.key] ? "block" : "hidden"} pl-4`}>
+                    {section.items.map((item) => (
+                      <li key={item.name}>
+                        <button
+                          onClick={() => router.push(item.route)}
+                          className="block w-full text-left px-4 py-2 hover:bg-[#15803d] transition-colors"
+                        >
+                          {item.name}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
         </ul>
       </nav>
 

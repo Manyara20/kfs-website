@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -33,16 +34,27 @@ export default function Posts() {
   };
 
   const filteredPosts = posts.filter((post) => {
-    const matchesFilter = filter === "all" || (filter === "active" && !post.archived) || (filter === "archived" && post.archived);
-    const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase()) || post.content.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter =
+      filter === "all" ||
+      (filter === "active" && !post.archived) ||
+      (filter === "archived" && post.archived);
+    const matchesSearch =
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.content.toLowerCase().includes(search.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
   const handleAddOrUpdate = async (e) => {
     e.preventDefault();
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
-      setError("Unauthorized access. Only admins or communication officers can manage posts.");
+    if (
+      !session ||
+      (session.user.role !== "admin" &&
+        session.user.role !== "communication_officer")
+    ) {
+      setError(
+        "Unauthorized access. Only admins or communication officers can manage posts."
+      );
       return;
     }
 
@@ -60,15 +72,31 @@ export default function Posts() {
     try {
       let response;
       if (editingPostId) {
-        response = await axios.put(`http://localhost:5000/api/posts/${editingPostId}`, formData, {
-          headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-        });
-        setPosts(posts.map((post) => (post.id === editingPostId ? response.data : post)));
+        response = await axios.put(
+          `http://localhost:5000/api/posts/${editingPostId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setPosts(
+          posts.map((post) => (post.id === editingPostId ? response.data : post))
+        );
         alert("Post updated successfully!");
       } else {
-        response = await axios.post("http://localhost:5000/api/posts", formData, {
-          headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-        });
+        response = await axios.post(
+          "http://localhost:5000/api/posts",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         setPosts([...posts, response.data]);
         alert("Post added successfully!");
       }
@@ -78,7 +106,10 @@ export default function Posts() {
       setError("");
     } catch (err) {
       console.error(`Error ${editingPostId ? "updating" : "adding"} post:`, err);
-      setError(err.response?.data?.error || `Failed to ${editingPostId ? "update" : "add"} post.`);
+      setError(
+        err.response?.data?.error ||
+          `Failed to ${editingPostId ? "update" : "add"} post.`
+      );
     }
   };
 
@@ -88,30 +119,50 @@ export default function Posts() {
     setIsFormVisible(true);
   };
 
-  const handleArchive = async (id) => {
+  const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
+    if (
+      !session ||
+      (session.user.role !== "admin" &&
+        session.user.role !== "communication_officer")
+    ) {
       setError("Unauthorized access.");
       return;
     }
 
     const token = session.user.backendToken;
     try {
-      const response = await axios.patch(`http://localhost:5000/api/posts/${id}/archive`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setPosts(posts.map((post) => (post.id === id ? { ...post, archived: true } : post)));
-      alert("Post archived successfully!");
+      const response = await axios.patch(
+        `http://localhost:5000/api/posts/${id}/archive`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setPosts(
+        posts.map((post) =>
+          post.id === id
+            ? { ...post, archived: response.data.post.archived }
+            : post
+        )
+      );
+      alert(
+        `Post ${response.data.post.archived ? "archived" : "unarchived"} successfully!`
+      );
       setError("");
     } catch (err) {
-      console.error("Error archiving post:", err);
-      setError(err.response?.data?.error || "Failed to archive post.");
+      console.error("Error toggling archive:", err);
+      setError(err.response?.data?.error || "Failed to toggle archive status.");
     }
   };
 
   const handleDelete = async (id) => {
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
+    if (
+      !session ||
+      (session.user.role !== "admin" &&
+        session.user.role !== "communication_officer")
+    ) {
       setError("Unauthorized access.");
       return;
     }
@@ -137,31 +188,37 @@ export default function Posts() {
     setError("");
   };
 
-  if (status === "unauthenticated") return <div className="p-6 text-red-500">Please log in to manage posts.</div>;
-  if (session?.user.role !== "admin" && session?.user.role !== "communication_officer")
-    return <div className="p-6 text-red-500">Unauthorized</div>;
+  if (status === "unauthenticated")
+    return <div className="p-4 sm:p-6 text-red-500">Please log in to manage posts.</div>;
+  if (
+    session?.user.role !== "admin" &&
+    session?.user.role !== "communication_officer"
+  )
+    return <div className="p-4 sm:p-6 text-red-500">Unauthorized</div>;
 
   return (
-    <div className="p-6 max-w-4xl w-full">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
-          <h2 className="text-2xl font-bold text-gray-800">Manage Posts</h2>
+    <div className="p-4 sm:p-6 md:p-8 w-full">
+      <div className="flex flex-col sm:flex-row items-start mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+            Manage Posts
+          </h2>
           <button
             onClick={() => {
               setIsFormVisible(true);
               setEditingPostId(null);
               setForm({ image: null, title: "", content: "" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
           >
             Add Post
           </button>
         </div>
-        <div className="flex space-x-4 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -172,17 +229,23 @@ export default function Posts() {
             placeholder="Search posts..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
           />
         </div>
       </div>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500 mb-4 text-sm sm:text-base">{error}</p>}
 
       {isFormVisible && (
-        <form onSubmit={handleAddOrUpdate} className="mb-6 bg-white p-6 rounded-lg shadow-md">
+        <form
+          onSubmit={handleAddOrUpdate}
+          className="mb-6 bg-white p-4 sm:p-6 rounded-lg shadow-md"
+        >
           <div className="mb-4">
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-700"
+            >
               Image (optional)
             </label>
             <input
@@ -190,11 +253,14 @@ export default function Posts() {
               id="image"
               accept="image/*"
               onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-sm"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Title
             </label>
             <input
@@ -203,12 +269,15 @@ export default function Posts() {
               placeholder="Enter title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               required
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700"
+            >
               Content
             </label>
             <textarea
@@ -216,22 +285,22 @@ export default function Posts() {
               placeholder="Enter content"
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
               required
             />
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
             >
               {editingPostId ? "Update Post" : "Add Post"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -241,30 +310,39 @@ export default function Posts() {
 
       <ul className="space-y-2">
         {filteredPosts.map((post) => (
-          <li key={post.id} className="flex items-center p-4 bg-white rounded-lg shadow-sm">
-            <span className="text-gray-700">
+          <li
+            key={post.id}
+            className="flex flex-col sm:flex-row items-start p-4 bg-white rounded-lg shadow-sm"
+          >
+            <span className="text-gray-700 text-sm sm:text-base flex-1">
               {post.title} - {post.content.substring(0, 50)}
-              {post.content.length > 50 ? "..." : ""} {post.archived ? "(Archived)" : ""}
+              {post.content.length > 50 ? "..." : ""}{" "}
+              {post.archived ? "(Archived)" : ""}
             </span>
-            <div className="ml-auto flex space-x-2">
+            <div className="mt-4 sm:mt-0 flex flex-wrap space-x-2">
               <button
                 onClick={() => handleEdit(post)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors text-sm"
                 aria-label={`Edit post ${post.title}`}
               >
                 Edit
               </button>
               <button
-                onClick={() => handleArchive(post.id)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition-colors"
-                aria-label={`Archive post ${post.title}`}
-                disabled={post.archived}
+                onClick={() => handleArchive(post.id, post.archived)}
+                className={`px-3 py-1 rounded-md text-white transition-colors text-sm ${
+                  post.archived
+                    ? "bg-gray-500 cursor-pointer hover:bg-gray-600"
+                    : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
+                aria-label={`${
+                  post.archived ? "Unarchive" : "Archive"
+                } post ${post.title}`}
               >
-                Archive
+                {post.archived ? "Unarchive" : "Archive"}
               </button>
               <button
                 onClick={() => handleDelete(post.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors text-sm"
                 aria-label={`Delete post ${post.title}`}
               >
                 Delete

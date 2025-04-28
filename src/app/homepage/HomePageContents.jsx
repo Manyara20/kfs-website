@@ -25,9 +25,9 @@ function HomePageContents() {
       <CodeOfConductSection />
       <Principles />
       <CoreValues />
-      <NewsSection />
-      <PatnersSection />
       <MomentsSection />
+      <PatnersSection />
+      <NewsSection />
       <FeedSection />
       <Footer />
       <FooterBottom />

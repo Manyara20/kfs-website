@@ -24,7 +24,7 @@ pool.connect((err, client, release) => {
 
 // Multer setup with custom storage
 const storage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: "./Uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -38,17 +38,17 @@ router.use((req, res, next) => {
   next();
 });
 
-// GET /api/documents/:category - Retrieve all active documents in a category (admin only)
+// GET /api/documents/:category - Retrieve all documents in a category (admin or user)
 router.get("/:category", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
+    if (!req.user || !["admin", "user"].includes(req.user.role)) {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
     const { category } = req.params;
     if (!["public", "legal", "policy", "iso"].includes(category)) {
       return res.status(400).json({ error: "Invalid category" });
     }
-    const result = await pool.query("SELECT * FROM documents WHERE category = $1 AND archived = FALSE", [category]);
+    const result = await pool.query("SELECT * FROM documents WHERE category = $1", [category]);
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching documents:", error);
@@ -72,8 +72,11 @@ router.post("/:category", upload.single("pdf"), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "PDF file is required" });
     }
+    if (!description) {
+      return res.status(400).json({ error: "Description is required" });
+    }
 
-    const pdfUrl = `/uploads/${req.file.filename}`;
+    const pdfUrl = `/Uploads/${req.file.filename}`;
     const result = await pool.query(
       "INSERT INTO documents (pdf_url, description, category, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [pdfUrl, description, category, req.user.id]
@@ -93,8 +96,17 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
     }
 
     const { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid document ID" });
+    }
+
     const { description } = req.body;
-    const pdfUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    if (!description) {
+      return res.status(400).json({ error: "Description is required" });
+    }
+
+    const pdfUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    console.log("Updating document ID:", id, "Description:", description, "PDF URL:", pdfUrl);
 
     const result = await pool.query(
       "UPDATE documents SET pdf_url = COALESCE($1, pdf_url), description = $2, updated_at = NOW() WHERE id = $3 AND archived = FALSE RETURNING *",
@@ -107,7 +119,14 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
 
     res.json(result.rows[0]);
   } catch (error) {
-    console.error("Error updating document:", error);
+    console.error("Error updating document:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    if (error.code === "42703") {
+      return res.status(500).json({ error: "Database schema error: Missing column", details: error.message });
+    }
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });
@@ -120,6 +139,10 @@ router.delete("/:id", async (req, res) => {
     }
 
     const { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid document ID" });
+    }
+
     const result = await pool.query("DELETE FROM documents WHERE id = $1 AND archived = FALSE", [id]);
 
     if (result.rowCount === 0) {
@@ -133,7 +156,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// PATCH /api/documents/:id/archive - Archive a document (admin only)
+// PATCH /api/documents/:id/archive - Toggle archive status of a document (admin only)
 router.patch("/:id/archive", async (req, res) => {
   try {
     if (!req.user || req.user.role !== "admin") {
@@ -141,18 +164,31 @@ router.patch("/:id/archive", async (req, res) => {
     }
 
     const { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid document ID" });
+    }
+
+    console.log("Toggling archive for document ID:", id);
     const result = await pool.query(
-      "UPDATE documents SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      "UPDATE documents SET archived = NOT archived, updated_at = NOW() WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Document not found or already archived" });
+      return res.status(404).json({ error: "Document not found" });
     }
 
-    res.json({ message: "Document archived successfully", document: result.rows[0] });
+    const action = result.rows[0].archived ? "archived" : "unarchived";
+    res.json({ message: `Document ${action} successfully`, document: result.rows[0] });
   } catch (error) {
-    console.error("Error archiving document:", error);
+    console.error("Error toggling archive:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    if (error.code === "42703") {
+      return res.status(500).json({ error: "Database schema error: Missing column", details: error.message });
+    }
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });

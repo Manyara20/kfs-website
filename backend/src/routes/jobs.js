@@ -15,13 +15,13 @@ router.use((req, res, next) => {
   next();
 });
 
-// GET /api/jobs - Retrieve all active jobs
+// GET /api/jobs - Retrieve all jobs
 router.get("/", async (req, res) => {
   try {
     if (req.user.role !== "admin") {
       return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
     }
-    const result = await pool.query("SELECT * FROM jobs WHERE archived = FALSE");
+    const result = await pool.query("SELECT * FROM jobs");
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching jobs:", error);
@@ -99,7 +99,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// PATCH /api/jobs/:id/archive - Archive a job
+// PATCH /api/jobs/:id/archive - Toggle archive status of a job
 router.patch("/:id/archive", async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -108,17 +108,18 @@ router.patch("/:id/archive", async (req, res) => {
 
     const { id } = req.params;
     const result = await pool.query(
-      "UPDATE jobs SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      "UPDATE jobs SET archived = NOT archived, updated_at = NOW() WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Job not found or already archived" });
+      return res.status(404).json({ error: "Job not found" });
     }
 
-    res.json({ message: "Job archived successfully", job: result.rows[0] });
+    const action = result.rows[0].archived ? "archived" : "unarchived";
+    res.json({ message: `Job ${action} successfully`, job: result.rows[0] });
   } catch (error) {
-    console.error("Error archiving job:", error);
+    console.error("Error toggling archive:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

@@ -10,126 +10,175 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-// Test database connection on startup
-pool.connect((err, client, release) => {
-  if (err) {
-    console.error("Database connection failed:", err.stack);
-    return;
-  }
-  console.log("Database connected successfully");
-  release();
-});
-
 // Middleware to log request details
 router.use((req, res, next) => {
-  console.log(`${req.method} /api/events${req.path} - User:`, req.user);
+  console.log(`${req.method} /api/jobs${req.path} - User:`, req.user);
   next();
 });
 
-// GET /api/events - Retrieve all active events (admin only)
+// GET /api/jobs - Retrieve all jobs (admin or human_resource)
 router.get("/", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    if (
+      !req.user ||
+      (req.user.role !== "admin" && req.user.role !== "human_resource")
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Insufficient permissions" });
     }
-    const result = await pool.query("SELECT * FROM events WHERE archived = FALSE");
+    const result = await pool.query("SELECT * FROM jobs");
     res.json(result.rows);
   } catch (error) {
-    console.error("Error fetching events:", error);
+    console.error("Error fetching jobs:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// POST /api/events - Create a new event (admin only)
+// POST /api/jobs - Create a new job (admin or human_resource)
 router.post("/", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    if (
+      !req.user ||
+      (req.user.role !== "admin" && req.user.role !== "human_resource")
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Insufficient permissions" });
     }
 
-    const { title, date, time, venue, flag } = req.body;
-    if (!title || !date || !time || !venue) {
-      return res.status(400).json({ error: "Title, date, time, and venue are required" });
+    const { title, description, duties, requirements } = req.body;
+    if (!title || !description) {
+      return res.status(400).json({ error: "Title and description are required" });
     }
 
     const result = await pool.query(
-      "INSERT INTO events (title, date, time, venue, flag, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [title, date, time, venue, flag || "happening", req.user.id]
+      "INSERT INTO jobs (title, description, duties, requirements, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [title, description, duties || null, requirements || null, req.user.id]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error("Error creating event:", error);
+    console.error("Error creating job:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PUT /api/events/:id - Update an existing event (admin only)
+// PUT /api/jobs/:id - Update an existing job (admin or human_resource)
 router.put("/:id", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    if (
+      !req.user ||
+      (req.user.role !== "admin" && req.user.role !== "human_resource")
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Insufficient permissions" });
     }
 
     const { id } = req.params;
-    const { title, date, time, venue, flag } = req.body;
+    const { title, description, duties, requirements } = req.body;
 
     const result = await pool.query(
-      "UPDATE events SET title = $1, date = $2, time = $3, venue = $4, flag = COALESCE($5, flag), updated_at = NOW() WHERE id = $6 AND archived = FALSE RETURNING *",
-      [title, date, time, venue, flag || null, id]
+      "UPDATE jobs SET title = $1, description = $2, duties = COALESCE($3, duties), requirements = COALESCE($4, requirements), updated_at = NOW() WHERE id = $5 RETURNING *",
+      [title, description, duties || null, requirements || null, id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Event not found or already archived" });
+      return res.status(404).json({ error: "Job not found" });
     }
 
     res.json(result.rows[0]);
   } catch (error) {
-    console.error("Error updating event:", error);
+    console.error("Error updating job:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// DELETE /api/events/:id - Delete an event (admin only)
+// DELETE /api/jobs/:id - Delete a job (admin or human_resource)
 router.delete("/:id", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    if (
+      !req.user ||
+      (req.user.role !== "admin" && req.user.role !== "human_resource")
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Insufficient permissions" });
     }
 
     const { id } = req.params;
-    const result = await pool.query("DELETE FROM events WHERE id = $1 AND archived = FALSE", [id]);
+    const result = await pool.query("DELETE FROM jobs WHERE id = $1", [id]);
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Event not found or already archived" });
+      return res.status(404).json({ error: "Job not found" });
     }
 
-    res.json({ message: "Event deleted successfully" });
+    res.json({ message: "Job deleted successfully" });
   } catch (error) {
-    console.error("Error deleting event:", error);
+    console.error("Error deleting job:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
-// PATCH /api/events/:id/archive - Archive an event (admin only)
+// PATCH /api/jobs/:id/archive - Toggle archive status of a job (admin or human_resource)
 router.patch("/:id/archive", async (req, res) => {
   try {
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ error: "Forbidden: Insufficient permissions" });
+    if (
+      !req.user ||
+      (req.user.role !== "admin" && req.user.role !== "human_resource")
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Insufficient permissions" });
     }
 
     const { id } = req.params;
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: "Invalid job ID" });
+    }
+
+    console.log("Toggling archive for job ID:", id);
     const result = await pool.query(
-      "UPDATE events SET archived = TRUE, updated_at = NOW() WHERE id = $1 AND archived = FALSE RETURNING *",
+      "UPDATE jobs SET archived = NOT archived, updated_at = NOW() WHERE id = $1 RETURNING *",
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Event not found or already archived" });
+      return res.status(404).json({ error: "Job not found" });
     }
 
-    res.json({ message: "Event archived successfully", event: result.rows[0] });
+    const action = result.rows[0].archived ? "archived" : "unarchived";
+    res.json({ message: `Job ${action} successfully`, job: result.rows[0] });
   } catch (error) {
-    console.error("Error archiving event:", error);
+    console.error("Error toggling archive:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+    });
+    if (error.code === "42703") {
+      return res
+        .status(500)
+        .json({
+          error: "Database schema error: Missing column",
+          details: error.message,
+        });
+    }
     res.status(500).json({ error: "Server error", details: error.message });
   }
 });

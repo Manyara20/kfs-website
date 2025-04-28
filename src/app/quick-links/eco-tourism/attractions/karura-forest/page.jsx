@@ -8,9 +8,13 @@ function KaruraForestPage() {
     <div>
       <TopNavBar />
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] bg-[linear-gradient(rgba(0,50,20,0.8),rgba(0,50,20,0.8))] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
       
-      <main className="container mx-auto px-4 py-8 text-black">
-        <h1 className="text-4xl font-bold text-center mb-8">KARURA FOREST</h1>
+      <main className=" container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 text-black bg-white">
+        <h1 className="text-4xl font-bold text-center mb-8  text-green-700">KARURA FOREST</h1>
         
         <section className="mb-12">
           <p className="mb-4">
@@ -22,11 +26,11 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Attractions</h2>
-          <h3 className="text-xl font-semibold mb-3">Wildlife in Karura Forest</h3>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Attractions</h2>
+          <h3 className="text-xl font-semibold mb-3  text-green-700">Wildlife in Karura Forest</h3>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Mammals:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Mammals:</h4>
             <p className="mb-4">
               Include Harvey's Duiker, Grimm's Duiker, Bushbucks, Bush pigs, Genet Cats, Civets, 
               Bush babies, Porcupines, Syke's Monkeys, Ground Squirrel, Hares and the Epauletted-bat.
@@ -34,12 +38,12 @@ function KaruraForestPage() {
           </div>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Reptiles:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Reptiles:</h4>
             <p className="mb-4">Include pythons, green snakes and monitor lizards.</p>
           </div>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Birds:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Birds:</h4>
             <p className="mb-4">
               The forest hosts around 200 species of birds including Ayres Hawk-eagle, the African 
               Crowned Eagle, the Silvery-cheeked Hornbill, the Hartlaub's Turaco, the Narina Trogon, 
@@ -48,20 +52,20 @@ function KaruraForestPage() {
           </div>
           
           <div className="mb-6">
-            <h4 className="text-lg font-medium mb-2">Butterflies:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Butterflies:</h4>
             <p>Include the African Queen and Desmond's Green Banded Swallowtail.</p>
           </div>
           
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-3">Plants in Karura Forest</h3>
+            <h3 className="text-xl font-semibold mb-3  text-green-700">Plants in Karura Forest</h3>
             
-            <h4 className="text-lg font-medium mb-2">Plantations:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Plantations:</h4>
             <p className="mb-4">
               Cover 632 hectares. Species found include Araucaria cunninghamii, Eucalyptus saligna, 
               E. globula, Grevillea robusta, Cupressus torulosa and Cupressus lusitanica.
             </p>
             
-            <h4 className="text-lg font-medium mb-2">Indigenous trees:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Indigenous trees:</h4>
             <p className="mb-4">
               Cover 260 hectares. Species include Olea europeae subsp. auspidata, Croton megalocarpus, 
               Warburgia ugandensis (Muthiga), Brachyleana huillensis (Muhugu), Uvaridendron anisatum, 
@@ -70,7 +74,7 @@ function KaruraForestPage() {
               and Dombeya goetzenii.
             </p>
             
-            <h4 className="text-lg font-medium mb-2">Shrubs:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Shrubs:</h4>
             <p className="mb-4">
               Include Strychnos henningsii (Muteta), Erythrococca bongensis (Muharangware), 
               Vangueria madagascariensis (Mubiro), Rhamnus prinoides (Mukarakinga), Caesalpinia 
@@ -78,7 +82,7 @@ function KaruraForestPage() {
               and Rhus natalensis (Muthigio).
             </p>
             
-            <h4 className="text-lg font-medium mb-2">Other plants:</h4>
+            <h4 className="text-lg font-medium mb-2  text-green-700">Other plants:</h4>
             <p className="mb-4">
               There are groves of Arudinaria alpina, Kenya's native bamboo species along the riparian 
               belts of Gitathuro and Ruaka rivers; exotic giant bamboo Dendrocalamus giganteus along 
@@ -87,7 +91,7 @@ function KaruraForestPage() {
           </div>
           
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-3">Other areas of special interest Karura Forest</h3>
+            <h3 className="text-xl font-semibold mb-3  text-green-700">Other areas of special interest Karura Forest</h3>
             <p className="mb-4">
               Other important attractions that visitors to Karura Forest enjoy are:
             </p>
@@ -105,7 +109,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Activities available</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Activities available</h2>
           <p className="mb-4">
             In Karura Forest, one can undertake the following activities:
           </p>
@@ -121,7 +125,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Getting there & getting around</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Getting there & getting around</h2>
           <p className="mb-4">
             <strong>By private transport:</strong> The main entrance to Karura Forest is on the Limuru Road just after the Belgian Embassy. 
             However, one can also use either the KFS main gate which is off Kiambu road and opposite CID Headquaters, 
@@ -142,7 +146,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Visiting hours</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Visiting hours</h2>
           <p className="mb-4">
             Entry tickets can be purchased at the point of entry between 6:00 am and 5:00 pm. For the current entry fees, 
             contact the numbers at the end of this page.
@@ -150,7 +154,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">What to wear and carry</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">What to wear and carry</h2>
           <p className="mb-4">
             Comfortable walking shoes or trainers, drinking water, binoculars, camera and wildlife books especially 
             for birds and butterflies.
@@ -158,7 +162,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Climate</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Climate</h2>
           <p className="mb-4">
             There are two wet seasons: April-June (long rains) and October-December (short rains). In between, 
             days are sunny and dry except for July and August which is usually cool and cloudy. The average 
@@ -167,7 +171,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Important things to remember when visiting Karura forest</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Important things to remember when visiting Karura forest</h2>
           <ul className="list-disc pl-6">
             <li className="mb-2">Enjoy yourself; in addition to seeing, pause and listen regularly.</li>
             <li className="mb-2">Stop to allow wildlife to move off the tracks before you pass.</li>
@@ -182,7 +186,7 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Karura Forest photo gallery</h2>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">Karura Forest photo gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Example image - replace with your actual images */}
             <div className="relative h-64 rounded-lg overflow-hidden">
@@ -228,8 +232,8 @@ function KaruraForestPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">For reservations and more information, contact:</h2>
-          <p className="mb-2"><strong>The Forester-in-Charge</strong></p>
+          <h2 className="text-2xl font-bold mb-4  text-green-700">For reservations and more information, contact:</h2>
+          <p className="mb-2  "><strong > The Forester-in-Charge</strong></p>
           <p className="mb-2">Karura Forest Reserve</p>
           <p className="mb-2">P.O. Box 30513 – 00100 Nairobi, Kenya</p>
           <p className="mb-2">Tel (mobile phones): +254 (0) 727 818 960</p>
@@ -238,6 +242,8 @@ function KaruraForestPage() {
           <p className="mb-2">Website: www.kenyaforestservice.org</p>
         </section>
       </main>
+      </main>
+      </div>
       
       <FooterBottom />
     </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -33,16 +34,26 @@ export default function Tenders() {
   };
 
   const filteredTenders = tenders.filter((tender) => {
-    const matchesFilter = filter === "all" || (filter === "active" && !tender.archived) || (filter === "archived" && tender.archived);
-    const matchesSearch = tender.description.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter =
+      filter === "all" ||
+      (filter === "active" && !tender.archived) ||
+      (filter === "archived" && tender.archived);
+    const matchesSearch = tender.description
+      .toLowerCase()
+      .includes(search.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
   const handleAddOrUpdate = async (e) => {
     e.preventDefault();
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
-      setError("Unauthorized access. Only admins or supply chain can manage tenders.");
+    if (
+      !session ||
+      (session.user.role !== "admin" && session.user.role !== "supply_chain")
+    ) {
+      setError(
+        "Unauthorized access. Only admins or supply chain can manage tenders."
+      );
       return;
     }
 
@@ -54,15 +65,33 @@ export default function Tenders() {
     try {
       let response;
       if (editingTenderId) {
-        response = await axios.put(`http://localhost:5000/api/tenders/${editingTenderId}`, formData, {
-          headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-        });
-        setTenders(tenders.map((tender) => (tender.id === editingTenderId ? response.data : tender)));
+        response = await axios.put(
+          `http://localhost:5000/api/tenders/${editingTenderId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setTenders(
+          tenders.map((tender) =>
+            tender.id === editingTenderId ? response.data : tender
+          )
+        );
         alert("Tender updated successfully!");
       } else {
-        response = await axios.post("http://localhost:5000/api/tenders", formData, {
-          headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-        });
+        response = await axios.post(
+          "http://localhost:5000/api/tenders",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         setTenders([...tenders, response.data]);
         alert("Tender added successfully!");
       }
@@ -72,7 +101,10 @@ export default function Tenders() {
       setError("");
     } catch (err) {
       console.error(`Error ${editingTenderId ? "updating" : "adding"} tender:`, err);
-      setError(err.response?.data?.error || `Failed to ${editingTenderId ? "update" : "add"} tender.`);
+      setError(
+        err.response?.data?.error ||
+          `Failed to ${editingTenderId ? "update" : "add"} tender.`
+      );
     }
   };
 
@@ -82,30 +114,48 @@ export default function Tenders() {
     setIsFormVisible(true);
   };
 
-  const handleArchive = async (id) => {
+  const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
+    if (
+      !session ||
+      (session.user.role !== "admin" && session.user.role !== "supply_chain")
+    ) {
       setError("Unauthorized access.");
       return;
     }
 
     const token = session.user.backendToken;
     try {
-      const response = await axios.patch(`http://localhost:5000/api/tenders/${id}/archive`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTenders(tenders.map((tender) => (tender.id === id ? { ...tender, archived: true } : tender)));
-      alert("Tender archived successfully!");
+      const response = await axios.patch(
+        `http://localhost:5000/api/tenders/${id}/archive`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setTenders(
+        tenders.map((tender) =>
+          tender.id === id
+            ? { ...tender, archived: response.data.tender.archived }
+            : tender
+        )
+      );
+      alert(
+        `Tender ${response.data.tender.archived ? "archived" : "unarchived"} successfully!`
+      );
       setError("");
     } catch (err) {
-      console.error("Error archiving tender:", err);
-      setError(err.response?.data?.error || "Failed to archive tender.");
+      console.error("Error toggling archive:", err);
+      setError(err.response?.data?.error || "Failed to toggle archive status.");
     }
   };
 
   const handleDelete = async (id) => {
     if (status === "loading") return;
-    if (!session || (session.user.role !== "admin" && session.user.role !== "supply_chain")) {
+    if (
+      !session ||
+      (session.user.role !== "admin" && session.user.role !== "supply_chain")
+    ) {
       setError("Unauthorized access.");
       return;
     }
@@ -131,31 +181,37 @@ export default function Tenders() {
     setError("");
   };
 
-  if (status === "unauthenticated") return <div className="p-6 text-red-500">Please log in to manage tenders.</div>;
-  if (session?.user.role !== "admin" && session?.user.role !== "supply_chain")
-    return <div className="p-6 text-red-500">Unauthorized</div>;
+  if (status === "unauthenticated")
+    return <div className="p-4 sm:p-6 text-red-500">Please log in to manage tenders.</div>;
+  if (
+    session?.user.role !== "admin" &&
+    session?.user.role !== "supply_chain"
+  )
+    return <div className="p-4 sm:p-6 text-red-500">Unauthorized</div>;
 
   return (
-    <div className="p-6 max-w-4xl w-full">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
-          <h2 className="text-2xl font-bold text-gray-800">Manage Tenders</h2>
+    <div className="p-4 sm:p-6 md:p-8 w-full">
+      <div className="flex flex-col sm:flex-row items-start mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+            Manage Tenders
+          </h2>
           <button
             onClick={() => {
               setIsFormVisible(true);
               setEditingTenderId(null);
               setForm({ pdf: null, description: "" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
           >
             Add Tender
           </button>
         </div>
-        <div className="flex space-x-4 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -166,17 +222,23 @@ export default function Tenders() {
             placeholder="Search tenders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
           />
         </div>
       </div>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500 mb-4 text-sm sm:text-base">{error}</p>}
 
       {isFormVisible && (
-        <form onSubmit={handleAddOrUpdate} className="mb-6 bg-white p-6 rounded-lg shadow-md">
+        <form
+          onSubmit={handleAddOrUpdate}
+          className="mb-6 bg-white p-4 sm:p-6 rounded-lg shadow-md"
+        >
           <div className="mb-4">
-            <label htmlFor="pdf" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="pdf"
+              className="block text-sm font-medium text-gray-700"
+            >
               PDF (optional)
             </label>
             <input
@@ -184,11 +246,14 @@ export default function Tenders() {
               id="pdf"
               accept="application/pdf"
               onChange={(e) => setForm({ ...form, pdf: e.target.files[0] })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-sm"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
               Description
             </label>
             <textarea
@@ -196,22 +261,22 @@ export default function Tenders() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
               required
             />
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
             >
               {editingTenderId ? "Update Tender" : "Add Tender"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -221,35 +286,48 @@ export default function Tenders() {
 
       <ul className="space-y-2">
         {filteredTenders.map((tender) => (
-          <li key={tender.id} className="flex items-center p-4 bg-white rounded-lg shadow-sm">
-            <span className="text-gray-700">
+          <li
+            key={tender.id}
+            className="flex flex-col sm:flex-row items-start p-4 bg-white rounded-lg shadow-sm"
+          >
+            <span className="text-gray-700 text-sm sm:text-base flex-1">
               {tender.description.substring(0, 50)}
-              {tender.description.length > 50 ? "..." : ""} {tender.archived ? "(Archived)" : ""}
+              {tender.description.length > 50 ? "..." : ""}{" "}
+              {tender.archived ? "(Archived)" : ""}
               {tender.pdf_url && (
-                <a href={tender.pdf_url} target="_blank" className="text-blue-500 ml-2">
+                <a
+                  href={tender.pdf_url}
+                  target="_blank"
+                  className="text-blue-500 ml-2 text-sm"
+                >
                   View PDF
                 </a>
               )}
             </span>
-            <div className="ml-auto flex space-x-2">
+            <div className="mt-4 sm:mt-0 flex flex-wrap space-x-2">
               <button
                 onClick={() => handleEdit(tender)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors text-sm"
                 aria-label={`Edit tender ${tender.description}`}
               >
                 Edit
               </button>
               <button
-                onClick={() => handleArchive(tender.id)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition-colors"
-                aria-label={`Archive tender ${tender.description}`}
-                disabled={tender.archived}
+                onClick={() => handleArchive(tender.id, tender.archived)}
+                className={`px-3 py-1 rounded-md text-white transition-colors text-sm ${
+                  tender.archived
+                    ? "bg-gray-500 cursor-pointer hover:bg-gray-600"
+                    : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
+                aria-label={`${
+                  tender.archived ? "Unarchive" : "Archive"
+                } tender ${tender.description}`}
               >
-                Archive
+                {tender.archived ? "Unarchive" : "Archive"}
               </button>
               <button
                 onClick={() => handleDelete(tender.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors text-sm"
                 aria-label={`Delete tender ${tender.description}`}
               >
                 Delete

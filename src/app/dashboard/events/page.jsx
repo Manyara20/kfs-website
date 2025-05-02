@@ -14,7 +14,9 @@ export default function Events() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (status === "authenticated") fetchEvents();
+    if (status === "authenticated" && (session?.user.role === "admin" || session?.user.role === "communication_officer")) {
+      fetchEvents();
+    }
   }, [session, status]);
 
   const fetchEvents = async () => {
@@ -47,8 +49,8 @@ export default function Events() {
   const handleAddOrUpdate = async (e) => {
     e.preventDefault();
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
-      setError("Unauthorized access. Only admins can manage events.");
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
+      setError("Unauthorized access. Only admins and communication officers can manage events.");
       return;
     }
 
@@ -90,7 +92,7 @@ export default function Events() {
 
   const handleArchive = async (id, currentArchivedStatus) => {
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
       setError("Unauthorized access.");
       return;
     }
@@ -124,7 +126,7 @@ export default function Events() {
 
   const handleDelete = async (id) => {
     if (status === "loading") return;
-    if (!session || session.user.role !== "admin") {
+    if (!session || (session.user.role !== "admin" && session.user.role !== "communication_officer")) {
       setError("Unauthorized access.");
       return;
     }
@@ -155,7 +157,9 @@ export default function Events() {
   };
 
   if (status === "unauthenticated") return <div className="p-6 text-red-500">Please log in to manage events.</div>;
-  if (session?.user.role !== "admin") return <div className="p-6 text-red-500">Unauthorized</div>;
+  if (session?.user.role !== "admin" && session?.user.role !== "communication_officer") {
+    return <div className="p-6 text-red-500">Unauthorized</div>;
+  }
 
   return (
     <div className="p-6 max-w-4xl w-full">

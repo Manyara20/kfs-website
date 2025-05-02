@@ -3,135 +3,237 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaTwitter, FaFacebookF, FaInstagram, FaSkype, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import { Box, Typography, Button, TextField } from "@mui/material";
+import { styled } from "@mui/system";
+
+const FooterContainer = styled(Box)({
+  backgroundColor: "#0D3C00",
+  color: "#ffffff",
+  padding: "clamp(1.5rem, 3vw, 3rem) 0", // Responsive padding
+  width: "100%",
+  borderTop: "4px solid #1f5d2f",
+  position: "relative",
+  overflow: "hidden",
+});
+
+const BackgroundOverlay = styled(Box)({
+  position: "absolute",
+  inset: 0,
+  opacity: 0.1,
+  backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+  backgroundSize: "clamp(6rem, 20vw, 12.5rem)", // Responsive background size
+  backgroundRepeat: "repeat",
+});
+
+const GradientOverlay = styled(Box)({
+  position: "absolute",
+  inset: 0,
+  background: "linear-gradient(to bottom, rgba(13, 60, 0, 0.8), rgba(31, 93, 47, 0.8))",
+});
+
+const ContentContainer = styled(Box)({
+  position: "relative",
+  padding: "0 clamp(0.5rem, 2vw, 2rem)", // Responsive padding
+});
+
+const GridContainer = styled(Box)(({ theme }) => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(4, 1fr)",
+  gap: "clamp(0.75rem, 2vw, 1.5rem)", // Responsive gap
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "repeat(2, 1fr)",
+  },
+  [theme.breakpoints.down("sm")]: {
+    gridTemplateColumns: "1fr",
+  },
+}));
+
+const Column = styled(Box)({
+  padding: "clamp(0.75rem, 2vw, 1.5rem)", // Responsive padding
+});
+
+const LogoWrapper = styled(Box)({
+  marginBottom: "clamp(0.75rem, 2vw, 1.5rem)", // Responsive margin
+});
+
+const Tagline = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 300,
+  fontStyle: "italic",
+  color: "rgba(255, 255, 255, 0.8)",
+  fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
+  marginBottom: "clamp(0.75rem, 2vw, 1.5rem)", // Responsive margin
+});
+
+const ColumnTitle = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 700,
+  color: "#ffffff",
+  fontSize: "clamp(1rem, 3vw, 1.875rem)", // Scales with viewport
+  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
+});
+
+const ContactText = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 400,
+  color: "rgba(255, 255, 255, 0.8)",
+  fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
+  padding: "clamp(0.25rem, 0.5vw, 0.5rem) 0", // Responsive padding
+  display: "flex",
+  alignItems: "center",
+  gap: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive gap
+});
+
+const Icon = styled(Box)({
+  color: "#1f5d2f",
+});
+
+const TollFreeNumber = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 600,
+  color: "#ffffff",
+  fontSize: "clamp(0.875rem, 2.5vw, 1.5rem)", // Scales with viewport
+  marginBottom: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive margin
+  display: "flex",
+  alignItems: "center",
+  gap: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive gap
+});
+
+const ActionButton = styled(Button)({
+  backgroundColor: "#1f5d2f",
+  color: "#ffffff",
+  textTransform: "none",
+  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(0.75rem, 2vw, 1rem)", // Responsive padding
+  fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  borderRadius: "6px",
+  fontWeight: 500,
+  "&:hover": {
+    backgroundColor: "#ffffff",
+    color: "#0D3C00",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  },
+});
+
+const EmailInput = styled(TextField)({
+  width: "100%",
+  "& .MuiInputBase-root": {
+    padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+    borderRadius: "6px",
+    backgroundColor: "transparent",
+    color: "#e6f5e6",
+    fontSize: "clamp(0.75rem, 2vw, 1.25rem)", // Scales with viewport
+    fontFamily: "'Peugeot', Helvetica, sans-serif",
+  },
+  "& .MuiInputBase-input": {
+    paddingLeft: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#ffffff",
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#ffffff",
+  },
+  "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#1f5d2f",
+    boxShadow: "0 0 0 2px rgba(31, 93, 47, 0.5)",
+  },
+});
+
+const SocialIcon = styled("a")({
+  color: "#ffffff",
+  fontSize: "clamp(1rem, 2.5vw, 1.5rem)", // Scales with viewport
+  "&:hover": {
+    color: "#1f5d2f",
+    transform: "scale(1.1) rotate(12deg)",
+  },
+});
 
 const Footer = () => {
-  // State to ensure rendering happens only on the client to avoid hydration error
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Placeholder during server-side rendering to avoid hydration mismatch
   if (!isMounted) {
     return (
-      <footer className="bg-[#0D3C00] text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
-        <div className="px-8 sm:px-6 md:px-4 lg:px-2"></div>
-      </footer>
+      <FooterContainer>
+        <ContentContainer />
+      </FooterContainer>
     );
   }
 
   return (
-    <footer className="bg-[#0D3C00] text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
-      {/* Background Overlay with Forest Theme */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-          backgroundSize: "200px 200px",
-          backgroundRepeat: "repeat",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D3C00]/80 to-[#1f5d2f]/80"></div>
-
-      <div className="relative px-8 sm:px-6 md:px-4 lg:px-2">
-        {/* Main Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-6 md:gap-4 lg:gap-3">
+    <FooterContainer>
+      <BackgroundOverlay />
+      <GradientOverlay />
+      <ContentContainer>
+        <GridContainer>
           {/* Column 1: Logo, Tagline */}
-          <div className="p-6 sm:p-4 md:p-3 flex flex-col items-start">
-            <div className="mb-6 sm:mb-4 md:mb-3">
+          <Column sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            <LogoWrapper>
               <Image
                 src="/images/t_logo_edited.png"
                 alt="Kenya Forest Service Logo"
                 width={80}
                 height={56}
                 priority
-                className="w-16 h-auto sm:w-14 md:w-12 lg:w-10"
+                style={{ width: "clamp(2.5rem, 5vw, 5rem)", height: "auto" }} // Responsive image size
               />
-            </div>
-            <p className="text-xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-6 sm:mb-4 md:mb-3 font-light italic">
+            </LogoWrapper>
+            <Tagline>
               To be an internationally recognized organisation for excellence in knowledge-based sustainable forest resources management and conservation.
-            </p>
-          </div>
+            </Tagline>
+          </Column>
 
           {/* Column 2: Contact Info */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-              Contact Us
-            </h3>
-            <div className="grid grid-cols-1 gap-3 sm:gap-2 text-white/80">
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaEnvelope className="text-[#1f5d2f]" />
-                info@kenyaforestservice.org
-              </p>
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaMapMarkerAlt className="text-[#1f5d2f]" />
-                P.O BOX 30513 - 00100 NAIROBI - KENYA
-              </p>
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaClock className="text-[#1f5d2f]" />
-                Mon - Fri (8am - 5pm) Sat & Sun CLOSED
-              </p>
-            </div>
-          </div>
+          <Column>
+            <ColumnTitle>Contact Us</ColumnTitle>
+            <Box sx={{ display: "grid", gap: "clamp(0.5rem, 1vw, 0.75rem)" }}>
+              <ContactText><Icon as={FaEnvelope} /> info@kenyaforestservice.org</ContactText>
+              <ContactText><Icon as={FaMapMarkerAlt} /> P.O BOX 30513 - 00100 NAIROBI - KENYA</ContactText>
+              <ContactText><Icon as={FaClock} /> Mon - Fri (8am - 5pm) Sat & Sun CLOSED</ContactText>
+            </Box>
+          </Column>
 
           {/* Column 3: Toll-Free */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-              Toll Free
-            </h3>
-            <div className="flex items-center gap-3 sm:gap-2 text-2xl sm:text-xl md:text-lg lg:text-base font-semibold text-white mb-3 sm:mb-2">
-              <FaPhone className="text-white rotate-180" />
-              <span>0800 721 277</span>
-            </div>
-            <p className="text-xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              Toll Free Number (For Anticorruption and Complaints)
-            </p>
-            <div className="flex justify-start">
-              <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2 rounded-md text-xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
-                Call Now
-              </button>
-            </div>
-          </div>
+          <Column>
+            <ColumnTitle>Toll Free</ColumnTitle>
+            <TollFreeNumber><FaPhone style={{ transform: "rotate(180deg)" }} /> 0800 721 277</TollFreeNumber>
+            <Tagline>Toll Free Number (For Anticorruption and Complaints)</Tagline>
+            <ActionButton>Call Now</ActionButton>
+          </Column>
 
           {/* Column 4: Subscribe */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-              Subscribe to The Forester Magazine
-            </h3>
-            <div className="flex flex-col gap-4 sm:gap-3 md:gap-2">
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full p-3 sm:p-2.5 md:p-2 rounded-md text-[#e6f5e6] text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
-                />
-              </div>
-              <div className="flex justify-start">
-                <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2 rounded-md text-xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
-                  Subscribe
-                </button>
-              </div>
-              <div className="flex gap-4 sm:gap-3 md:gap-2">
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                  <FaTwitter className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                  <FaFacebookF className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  <FaInstagram className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-                <a href="skype:user?call" target="_blank" rel="noopener noreferrer">
-                  <FaSkype className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </footer>
+          <Column>
+            <ColumnTitle>Subscribe to The Forester Magazine</ColumnTitle>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
+              <EmailInput
+                type="email"
+                placeholder="Enter your email"
+                variant="outlined"
+              />
+              <ActionButton>Subscribe</ActionButton>
+              <Box sx={{ display: "flex", gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
+                <SocialIcon href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                  <FaTwitter />
+                </SocialIcon>
+                <SocialIcon href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                  <FaFacebookF />
+                </SocialIcon>
+                <SocialIcon href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram />
+                </SocialIcon>
+                <SocialIcon href="skype:user?call" target="_blank" rel="noopener noreferrer">
+                  <FaSkype />
+                </SocialIcon>
+              </Box>
+            </Box>
+          </Column>
+        </GridContainer>
+      </ContentContainer>
+    </FooterContainer>
   );
 };
 

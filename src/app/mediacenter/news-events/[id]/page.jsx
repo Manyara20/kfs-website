@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
@@ -267,43 +268,63 @@ export default function NewsDetailPage({ params }) {
   const newsItem = newsData.find((item) => item.id === parseInt(id));
 
   if (!newsItem) {
-    return <div className="container mx-auto px-4 py-6 text-center text-lg font-peugeot">News item not found</div>;
+    return (
+      <div
+        className="container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(1.5rem,3vw,6rem)] text-center text-[clamp(1rem,3vw,1.125rem)] font-peugeot"
+        style={{ width: "100vw", overflowX: "hidden" }}
+      >
+        News item not found
+      </div>
+    );
   }
 
   return (
-    <>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
-      <section className="container mx-auto px-4 py-6">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-2xl font-bold text-emerald-950 mb-4 font-peugeot" style={{ textTransform: "capitalize" }}>{newsItem.title}</h1>
-          <div className="mb-4">
+      <section
+        className="container mx-auto px-[clamp(1rem,2vw,4rem)] py-[clamp(1.5rem,3vw,6rem)]"
+        style={{ width: "100%", boxSizing: "border-box" }}
+      >
+        <div className="w-[clamp(90%,95vw,100%)] mx-auto">
+          <h1
+            className="text-[clamp(1.25rem,4vw,2rem)] font-bold text-emerald-950 mb-[clamp(1rem,2vw,4rem)] font-peugeot"
+            style={{ textTransform: "capitalize" }}
+          >
+            {newsItem.title}
+          </h1>
+          <div className="mb-[clamp(1rem,2vw,4rem)]">
             <img
               src={newsItem.image}
               alt={newsItem.title}
               className="rounded-lg shadow-md w-full h-auto"
+              style={{ maxWidth: "100%", objectFit: "cover" }}
             />
           </div>
-          <div className="flex items-center gap-4 text-xs text-black mb-4 font-peugeot">
-            <div className="flex items-center gap-1">
+          <div
+            className="flex items-center gap-[clamp(1rem,2vw,4rem)] text-[clamp(0.625rem,1.5vw,0.75rem)] text-black mb-[clamp(1rem,2vw,4rem)] font-peugeot"
+          >
+            <div className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)]">
               <Image src="/icons/user.png" alt="Author" width={14} height={14} />
               <span>{newsItem.author}</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)]">
               <Image src="/icons/calendar.png" alt="Date" width={14} height={14} />
               <span>{newsItem.date}</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-[clamp(0.25rem,0.5vw,1rem)]">
               <Image src="/icons/comment.png" alt="Comments" width={14} height={14} />
               <span>{newsItem.comments}</span>
             </div>
           </div>
-          <div className="text-emerald-700 leading-relaxed font-peugeot text-sm">
+          <div
+            className="text-emerald-700 leading-relaxed font-peugeot text-[clamp(0.7rem,2vw,0.875rem)]"
+          >
             <p>{newsItem.text}</p>
           </div>
         </div>
       </section>
       <FooterBottom />
-    </>
+    </div>
   );
 }

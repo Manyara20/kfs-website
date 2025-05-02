@@ -18,9 +18,10 @@ const PageContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "2vw", // Relative to viewport width
   position: "relative",
-  overflow: "hidden",
+  overflowX: "hidden", // Prevent horizontal overflow
+  width: "100vw", // Full viewport width
   "&:before": {
     content: '""',
     position: "absolute",
@@ -36,19 +37,20 @@ const PageContainer = styled(Box)({
 
 const ContentCard = styled(motion.div)({
   background: "rgba(255, 255, 255, 0.95)",
-  padding: "3rem",
-  maxWidth: "900px",
-  width: "100%",
+  padding: "clamp(1rem, 3vw, 3rem)", // Scales padding dynamically
+  width: "90vw", // Takes up 90% of viewport width
+  maxWidth: "100%", // Ensures it doesn’t exceed viewport
   position: "relative",
   zIndex: 1,
   border: "1px solid rgba(255, 255, 255, 0.3)",
   borderRadius: 0,
+  boxSizing: "border-box", // Includes padding in width calculation
 });
 
 const SocialIconsContainer = styled(Box)({
   position: "absolute",
-  top: "2rem",
-  left: "2rem",
+  top: "2vw",
+  left: "2vw",
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
@@ -72,7 +74,7 @@ const Title = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,
   color: "#0f5a28",
-  fontSize: "1.8rem",
+  fontSize: "clamp(1.2rem, 4vw, 1.8rem)", // Scales with viewport
   lineHeight: 1.3,
   letterSpacing: "0.5px",
   marginBottom: "2rem",
@@ -83,7 +85,7 @@ const Description = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 400,
   color: "#000",
-  fontSize: "0.9rem",
+  fontSize: "clamp(0.8rem, 2.5vw, 0.9rem)", // Scales with viewport
   lineHeight: 1.8,
   wordSpacing: "0.15rem",
   marginBottom: "2rem",
@@ -93,13 +95,15 @@ const VideoContainer = styled(Box)({
   width: "100%",
   "& iframe": {
     width: "100%",
-    height: "300px",
+    height: "auto", // Let height adjust naturally
+    minHeight: "200px", // Minimum height for small screens
+    aspectRatio: "16/9", // Maintains video aspect ratio
     borderRadius: "8px",
     border: "none",
   },
   "@media (min-width: 640px)": {
     "& iframe": {
-      height: "400px",
+      minHeight: "300px", // Larger height on bigger screens
     },
   },
 });
@@ -117,13 +121,11 @@ export default function AudioServiceCharter() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
-
   return (
-    <div>
+    <div style={{ overflowX: "hidden", width: "100vw" }}>
       <TopNavBar />
       <MainNavBar />
       <PageContainer>
-
         <ContentCard
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
@@ -140,7 +142,7 @@ export default function AudioServiceCharter() {
             {isLoaded && (
               <iframe
                 src="https://www.youtube.com/embed/674CgQpSzOk?si=0uD8HSaohm-nPCzx"
-                title="Sign Language Service Charter"
+                title="Audio Service Charter"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

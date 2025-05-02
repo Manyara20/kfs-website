@@ -1,5 +1,8 @@
-// components/MissionVisionGoal.js
+"use client";
+
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
 const data = [
   {
@@ -22,46 +25,94 @@ const data = [
   },
 ];
 
+const Container = styled(Box)({
+  width: "100%",
+  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
+  backgroundColor: "#f5f5f5",
+});
+
+const GridContainer = styled(Box)(({ theme }) => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "clamp(1rem, 2vw, 1.5rem)", // Responsive gap
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: "repeat(2, 1fr)",
+  },
+  [theme.breakpoints.down("sm")]: {
+    gridTemplateColumns: "1fr",
+  },
+}));
+
+const Card = styled(Box)({
+  display: "flex",
+  height: "clamp(20rem, 40vw, 25rem)", // Responsive height
+  flexDirection: "column",
+  justifyContent: "space-between",
+  width: "100%",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  borderRadius: "0",
+});
+
+const ImageContainer = styled(Box)({
+  position: "relative",
+  height: "clamp(12rem, 25vw, 15.625rem)", // Responsive height
+  overflow: "hidden",
+});
+
+const Overlay = styled(Box)({
+  position: "absolute",
+  bottom: 0,
+  width: "100%",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  color: "#ffffff",
+  textAlign: "center",
+  padding: "clamp(0.5rem, 1vw, 0.75rem)", // Responsive padding
+});
+
+const Title = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 700,
+  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
+});
+
+const DescriptionContainer = styled(Box)({
+  flexGrow: 1,
+  display: "flex",
+  alignItems: "center",
+  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
+});
+
+const Description = styled(Typography)({
+  fontFamily: "'Peugeot', Helvetica, sans-serif",
+  fontWeight: 400,
+  color: "#666",
+  fontSize: "clamp(0.875rem, 2vw, 1rem)", // Scales with viewport
+  textAlign: "center",
+});
+
 export default function MissionVisionGoal() {
   return (
-    <div className="w-full p-4 md:p-6 bg-[#f5f5f5]">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <Container>
+      <GridContainer>
         {data.map((item, index) => (
-          <div
-            key={index}
-            className="flex"
-          >
-            <div className="relative h-[400px] flex flex-col justify-between w-full shadow-lg rounded-none">
-              {/* Image Section */}
-              <div className="relative h-[250px] overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-                <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-2">
-                  <h6
-                    className="text-lg font-bold"
-                    style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-                  >
-                    {item.title}
-                  </h6>
-                </div>
-              </div>
-              {/* Description Section */}
-              <div className="flex-grow flex items-center px-4 lg:px-8">
-                <p
-                  className="text-gray-600 text-base text-center"
-                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
-                >
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          </div>
+          <Card key={index}>
+            <ImageContainer>
+              <Image
+                src={item.image}
+                alt={item.title}
+                layout="fill"
+                objectFit="cover"
+              />
+              <Overlay>
+                <Title>{item.title}</Title>
+              </Overlay>
+            </ImageContainer>
+            <DescriptionContainer>
+              <Description>{item.description}</Description>
+            </DescriptionContainer>
+          </Card>
         ))}
-      </div>
-    </div>
+      </GridContainer>
+    </Container>
   );
 }

@@ -27,8 +27,9 @@ export default function GreenZonesProjectPage() {
 
   return (
     <div>
-      <MainNavBar />
       <TopNavBar />
+      <MainNavBar />
+      
       <div
         className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
         style={{

@@ -90,10 +90,11 @@ function DashboardContent({ children }) {
       case "admin":
         return allMenuItems;
       case "supply_chain":
-        return allMenuItems.filter((item) => item.key === "tenders");
+        return allMenuItems.filter((item) => 
+        ["tenders","documents"].includes(item.key));
       case "communication_officer":
         return allMenuItems.filter((item) =>
-          ["posts", "events", "notices"].includes(item.key)
+          ["posts", "events", "notices","documents"].includes(item.key)
         );
       case "user":
         return allMenuItems.filter((item) => item.key === "documents");

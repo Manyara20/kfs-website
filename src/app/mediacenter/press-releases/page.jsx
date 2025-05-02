@@ -1,103 +1,11 @@
 "use client";
+
 import Link from "next/link";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
-import { Article as ArticleIcon } from "@mui/icons-material";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  padding: "2rem",
-  position: "relative",
-  overflow: "hidden",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentWrapper = styled(Box)({
-  maxWidth: "1200px",
-  margin: "0 auto",
-  padding: "3rem 1rem",
-  position: "relative",
-  zIndex: 1,
-});
-
-const HeaderTitle = styled(Typography)({
-  fontFamily: "'Poppins', sans-serif",
-  fontWeight: 700,
-  color: "#ffffff",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-  fontSize: "3rem",
-  lineHeight: 1.2,
-  letterSpacing: "0.5px",
-  textAlign: "center",
-  marginBottom: "3rem",
-});
-
-const PressCard = styled(motion.div)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.95)",
-  borderRadius: "12px",
-  padding: "1.5rem",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  marginBottom: "1.5rem",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "1rem",
-  },
-  "&:hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
-  },
-}));
-
-const PressInfo = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  gap: "1rem",
-});
-
-const PressTitle = styled(Typography)({
-  fontFamily: "'Roboto', sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "1.25rem",
-});
-
-const ReadMoreButton = styled(Button)({
-  backgroundColor: "#0f5a28",
-  color: "#fff",
-  textTransform: "none",
-  padding: "0.5rem 1.5rem",
-  fontSize: "0.9rem",
-  fontFamily: "'Roboto', sans-serif",
-  borderRadius: "8px",
-  "&:hover": {
-    backgroundColor: "#388e3c",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-  },
-});
 
 export default function PressReleasesPage() {
   const pressReleases = [
@@ -119,33 +27,58 @@ export default function PressReleasesPage() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
-      <PageContainer>
-        <ContentWrapper>
-          {/* Header Section */}
-          <HeaderTitle variant="h1">
+      <TopNavBar />
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('/images/background-template/background.jpg')`,
+        }}
+      >
+        <div
+          className="absolute inset-0 bg-no-repeat opacity-10 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+        >
+          <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#ffffff] drop-shadow-md mb-12 text-[3rem] text-center capitalize">
             Press Releases
-          </HeaderTitle>
-
-          {/* Press Releases Section */}
-          <Box>
+          </h1>
+          <div>
             {pressReleases.map((press, index) => (
-              <PressCard key={index} initial="hidden" animate="visible" variants={cardVariants}>
-                <PressInfo>
-                  <ArticleIcon sx={{ color: "#0f5a28", fontSize: "2rem" }} />
-                  <PressTitle>{press.title}</PressTitle>
-                </PressInfo>
-                <Link href={press.link} target="_blank" rel="noopener noreferrer" passHref>
-                  <ReadMoreButton>
-                    Read More
-                  </ReadMoreButton>
+              <motion.div
+                key={index}
+                className="bg-white bg-opacity-95 rounded-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl mb-6 md:flex-row flex-col gap-4"
+                initial="hidden"
+                animate="visible"
+                variants={cardVariants}
+              >
+                <div className="flex items-center gap-4">
+                  <IoDocumentTextOutline className="text-[#0f5a28] text-4xl" />
+                  <div>
+                    <h2 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-xl text-[#0f5a28] mb-1">
+                      {press.title}
+                    </h2>
+                    <p className="font-['Peugeot',Helvetica,sans-serif] text-sm text-gray-600">
+                      1 file(s)
+                    </p>
+                  </div>
+                </div>
+                <Link href={press.link} target="_blank" rel="noopener noreferrer">
+                  <button className="bg-[#0f5a28] text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg hover:bg-[#388e3c] hover:shadow-md transition-all">
+                    Download
+                  </button>
                 </Link>
-              </PressCard>
+              </motion.div>
             ))}
-          </Box>
-        </ContentWrapper>
-      </PageContainer>
+          </div>
+        </motion.div>
+      </div>
       <FooterBottom />
     </div>
   );

@@ -55,8 +55,7 @@ export default function KFSDivisionsPage() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
-          className="bg-white/95 p-12 max-w-[900px] w-full relative z-10 border border-white/30 text-white"
-        >
+          className="bg-white bg-opacity-75 p-12 shadow-lg rounded-none">
           <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-8 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize">
             Plantation Divion: Managing Kenya's Forests
           </h1>
@@ -88,12 +87,7 @@ export default function KFSDivisionsPage() {
               </li>
             ))}
           </ul>
-          <p
-            className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-2 mb-8"
-            style={{ fontSize: `${fontSize * 0.9}px` }}
-          >
-            Explore our ongoing efforts and updates below.
-          </p>
+
         </motion.div>
 
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2">

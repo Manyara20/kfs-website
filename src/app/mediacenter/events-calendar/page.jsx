@@ -1,187 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-
-// Styled Components
-const PageContainer = styled(Box)({
-  minHeight: "100vh",
-  backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundAttachment: "fixed",
-  padding: "2vw", // Scales with viewport width
-  position: "relative",
-  overflowX: "hidden", // Prevent horizontal overflow
-  width: "100vw", // Full viewport width
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-    opacity: 0.05,
-    zIndex: 0,
-  },
-});
-
-const ContentWrapper = styled(Box)({
-  width: "90vw", // Takes up 90% of viewport width
-  maxWidth: "100%", // Prevents exceeding viewport
-  margin: "0 auto",
-  padding: "clamp(1rem, 3vw, 2rem) clamp(0.5rem, 1vw, 0.5rem)", // Responsive padding
-  position: "relative",
-  zIndex: 1,
-  boxSizing: "border-box",
-});
-
-const HeaderTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#ffffff",
-  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
-  fontSize: "clamp(1.2rem, 4vw, 2rem)", // Scales with viewport
-  lineHeight: 1.1,
-  letterSpacing: "0.3px",
-  textAlign: "center",
-  marginBottom: "clamp(0.3rem, 1vw, 0.5rem)", // Responsive margin
-  textTransform: "capitalize",
-});
-
-const HeaderSubtitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#e0e0e0",
-  fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
-  textAlign: "center",
-  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
-});
-
-const SectionTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#ffffff",
-  fontSize: "clamp(1rem, 3vw, 1.5rem)", // Scales with viewport
-  textAlign: "center",
-  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
-  textTransform: "capitalize",
-});
-
-const CalendarWrapper = styled(Box)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "clamp(1rem, 2vw, 1.5rem)", // Scales padding
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "clamp(1rem, 3vw, 2rem)", // Responsive margin
-  width: "100%", // Full width of parent
-  boxSizing: "border-box",
-});
-
-const CalendarHeader = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
-});
-
-const CalendarGrid = styled(Box)({
-  display: "grid",
-  gridTemplateColumns: "repeat(7, 1fr)",
-  gap: "clamp(0.3rem, 1vw, 0.5rem)", // Responsive gap
-  width: "100%", // Full width
-});
-
-const DayHeader = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  textAlign: "center",
-  padding: "clamp(0.2rem, 0.5vw, 0.3rem)", // Scales padding
-  fontSize: "clamp(0.6rem, 1.5vw, 0.8rem)", // Scales with viewport
-  textTransform: "capitalize",
-});
-
-const DayCell = styled(motion.div, {
-  shouldForwardProp: (prop) => prop !== "isToday",
-})(({ isToday }) => ({
-  background: isToday ? "#e8f5e9" : "#ffffff",
-  border: isToday ? "solid #0f5a28" : "1px solid #e0e0e0",
-  padding: "clamp(0.3rem, 1vw, 0.5rem)", // Scales padding
-  textAlign: "center",
-  height: "clamp(60px, 15vw, 90px)", // Scales height
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  overflowY: "auto",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  boxSizing: "border-box",
-  "&:hover": {
-    transform: "translateY(-2px)",
-    boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
-  },
-}));
-
-const DayNumber = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
-});
-
-const EventText = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#666",
-  fontSize: "clamp(0.5rem, 1.5vw, 0.7rem)", // Scales with viewport
-  whiteSpace: "normal",
-});
-
-const EventCard = styled(motion.div)({
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "clamp(0.5rem, 2vw, 1rem)", // Scales padding
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "clamp(0.5rem, 2vw, 1rem)", // Responsive margin
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  width: "100%", // Full width of parent
-  boxSizing: "border-box",
-  "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
-  },
-});
-
-const EventTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0f5a28",
-  fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)", // Scales with viewport
-  marginBottom: "clamp(0.2rem, 0.5vw, 0.3rem)", // Responsive margin
-  textTransform: "capitalize",
-});
-
-const EventDate = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#666",
-  fontSize: "clamp(0.7rem, 2vw, 0.85rem)", // Scales with viewport
-});
-
-const NavButton = styled(Button)({
-  backgroundColor: "#0f5a28",
-  color: "#fff",
-  padding: "clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.5rem, 1vw, 0.8rem)", // Scales padding
-  fontSize: "clamp(0.6rem, 1.5vw, 0.8rem)", // Scales with viewport
-  "&:hover": {
-    backgroundColor: "#388e3c",
-  },
-});
 
 export default function EventsCalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -242,7 +65,7 @@ export default function EventsCalendarPage() {
     { date: new Date("2025-05-02"), event: "International Day for Biological Diversity" },
     { date: new Date("2025-06-01"), event: "Madaraka Day" },
     { date: new Date("2025-06-05"), event: "World Environment Day" },
-    { date: new Date("2025-06-17"), event: "World Day to Combat Desertification and Drought" },
+    { date: new Date("2025-06-17"), event: "World Day to Combat Desertification and Drought-xs" },
     { date: new Date("2025-06-20"), event: "World Refugees Day" },
     { date: new Date("2025-10-10"), event: "Mazingira Day" },
     { date: new Date("2025-10-18"), event: "International Day for the Eradication of Poverty" },
@@ -298,9 +121,9 @@ export default function EventsCalendarPage() {
     .filter(event => {
       const eventDate = event.date;
       return (
-        eventDate >= today && // Event is today or in the future
-        eventDate.getMonth() === selectedMonth && // Event is in the selected month
-        eventDate.getFullYear() === selectedYear // Event is in the selected year
+        eventDate >= today &&
+        eventDate.getMonth() === selectedMonth &&
+        eventDate.getFullYear() === selectedYear
       );
     })
     .sort((a, b) => a.date - b.date);
@@ -311,102 +134,163 @@ export default function EventsCalendarPage() {
   };
 
   return (
-    <div style={{ overflowX: "hidden", width: "100vw" }}>
+    <div>
       <TopNavBar />
-      <MainNavBar />
-      <PageContainer>
-        <ContentWrapper>
-          <HeaderTitle variant="h1">
-            Events Calendar
-          </HeaderTitle>
-          <HeaderSubtitle>
-            Stay updated with the latest events and activities from the Kenya Forest Service.
-          </HeaderSubtitle>
+     <MainNavBar />
+      <div
+        className="min-h-screen bg-cover bg-center bg-fixed p-4 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
+      >
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <div className="max-w-5xl mx-auto px-2 py-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={cardVariants}
+            className="bg-white bg-opacity-95 p-12 max-w-5xl w-full shadow-lg rounded-none"
+          >
+            <h1 className="font-bold text-[#0f5a28] text-4xl text-center mb-2 drop-shadow-md capitalize tracking-tight leading-tight">
+              Events Calendar
+            </h1>
+            <p className="text-black-200 text-sm text-center mb-6">
+              Stay updated with the latest events and activities from the Kenya Forest Service.
+            </p>
 
-          <Box mb={4}>
-            <SectionTitle>
-              Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-            </SectionTitle>
-            <CalendarWrapper>
-              <CalendarHeader>
-                <NavButton onClick={handlePrevMonth} startIcon={<ArrowBackIos />}>
-                  Previous
-                </NavButton>
-                <Typography variant="h6" sx={{ fontFamily: "'Peugeot', Helvetica, sans-serif", color: "#0f5a28", fontSize: "clamp(0.8rem, 2vw, 1rem)", textTransform: "capitalize" }}>
-                  {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-                </Typography>
-                <NavButton onClick={handleNextMonth} endIcon={<ArrowForwardIos />}>
-                  Next
-                </NavButton>
-              </CalendarHeader>
-              <CalendarGrid>
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-                  <DayHeader key={index}>
-                    {day}
-                  </DayHeader>
-                ))}
-                {calendarDays.map((dayData, index) => {
-                  const isToday =
-                    dayData.day &&
-                    dayData.day === today.getDate() &&
-                    currentDate.getMonth() === today.getMonth() &&
-                    currentDate.getFullYear() === today.getFullYear();
-                  return (
-                    <DayCell
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-white text-center mb-4 capitalize">
+                Events in {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+              </h2>
+              <div className="bg-white bg-opacity-95 p-6 shadow-lg rounded-none">
+                <div className="flex justify-between items-center mb-4">
+                  <button
+                    onClick={handlePrevMonth}
+                    className="bg-[#0f5a28] text-white px-4 py-2 rounded text-sm hover:bg-[#2e5b4f] flex items-center gap-2"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                    Previous
+                  </button>
+                  <span className="text-[#0f5a28] font-semibold text-base capitalize">
+                    {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                  </span>
+                  <button
+                    onClick={handleNextMonth}
+                    className="bg-[#0f5a28] text-white px-4 py-2 rounded text-sm hover:bg-[#2e5b4f] flex items-center gap-2"
+                  >
+                    Next
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div className="grid grid-cols-7 gap-2">
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
+                    <div
                       key={index}
-                      isToday={isToday}
+                      className="text-[#0f5a28] font-semibold text-center text-sm capitalize p-1"
+                    >
+                      {day}
+                    </div>
+                  ))}
+                  {calendarDays.map((dayData, index) => {
+                    const isToday =
+                      dayData.day &&
+                      dayData.day === today.getDate() &&
+                      currentDate.getMonth() === today.getMonth() &&
+                      currentDate.getFullYear() === today.getFullYear();
+                    return (
+                      <motion.div
+                        key={index}
+                        className={`p-2 text-center h-[90px] flex flex-col justify-between overflow-y-auto transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                          isToday
+                            ? "bg-green-50 border-2 border-[#0f5a28]"
+                            : "bg-white border border-gray-200"
+                        }`}
+                        initial="hidden"
+                        animate="visible"
+                        variants={cardVariants}
+                      >
+                        {dayData.day ? (
+                          <>
+                            <span className="text-[#0f5a28] font-semibold text-sm">
+                              {dayData.day}
+                            </span>
+                            {dayData.event && (
+                              <p className="text-gray-600 text-xs whitespace-normal">
+                                {dayData.event}
+                              </p>
+                            )}
+                          </>
+                        ) : null}
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold text-white text-center mb-4 capitalize">
+                Upcoming Events This Month
+              </h2>
+              <div className="max-w-3xl mx-auto">
+                {upcomingEvents.length > 0 ? (
+                  upcomingEvents.map((event, index) => (
+                    <motion.div
+                      key={index}
+                      className="bg-white bg-opacity-95 p-4 shadow-lg rounded-none mb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                       initial="hidden"
                       animate="visible"
                       variants={cardVariants}
                     >
-                      {dayData.day ? (
-                        <>
-                          <DayNumber>{dayData.day}</DayNumber>
-                          {dayData.event && (
-                            <EventText>{dayData.event}</EventText>
-                          )}
-                        </>
-                      ) : null}
-                    </DayCell>
-                  );
-                })}
-              </CalendarGrid>
-            </CalendarWrapper>
-          </Box>
-
-          <Box>
-            <SectionTitle>Upcoming Events This Month</SectionTitle>
-            <Box width="100%" mx="auto">
-              {upcomingEvents.length > 0 ? (
-                upcomingEvents.map((event, index) => (
-                  <EventCard
-                    key={index}
-                    initial="hidden"
-                    animate="visible"
-                    variants={cardVariants}
-                  >
-                    <EventTitle>{event.event}</EventTitle>
-                    <EventDate>
-                      {event.date.toLocaleDateString()} {event.time && `– ${event.time}`}
-                    </EventDate>
-                  </EventCard>
-                ))
-              ) : (
-                <Typography
-                  sx={{
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    color: "#ffffff",
-                    textAlign: "center",
-                    fontSize: "clamp(0.7rem, 2vw, 0.9rem)", // Scales with viewport
-                  }}
-                >
-                  No upcoming events this month.
-                </Typography>
-              )}
-            </Box>
-          </Box>
-        </ContentWrapper>
-      </PageContainer>
+                      <h3 className="text-[#0f5a28] font-semibold text-lg mb-1 capitalize">
+                        {event.event}
+                      </h3>
+                      <p className="text-gray-600 text-sm">
+                        {event.date.toLocaleDateString()} {event.time && `– ${event.time}`}
+                      </p>
+                    </motion.div>
+                  ))
+                ) : (
+                  <p className="text-white text-center text-sm">
+                    No upcoming events this month.
+                  </p>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
       <FooterBottom />
     </div>
   );

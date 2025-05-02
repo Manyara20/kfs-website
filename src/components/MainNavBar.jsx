@@ -319,7 +319,7 @@ const MainNavBar = () => {
       ],
     },
     { label: "Tenders", link: "/TendersPage" },
-    { label: "Jobs", link: "/Jobs" },
+    { label: "Careers", link: "/careers" },
   ];
 
   return (

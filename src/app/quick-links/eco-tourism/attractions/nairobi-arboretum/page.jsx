@@ -8,8 +8,11 @@ function NairobiArboretumPage() {
     <div className="bg-white text-gray-800">
       <TopNavBar />
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] bg-[linear-gradient(rgba(0,50,20,0.8),rgba(0,50,20,0.8))] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 bg-white py-8">
         {/* Hero Section */}
         <section className="mb-12">
           <h1 className="text-4xl font-bold text-green-800 mb-2">Nairobi Arboretum</h1>
@@ -344,6 +347,7 @@ function NairobiArboretumPage() {
           </div>
         </section>
       </main>
+      </div>
       
       <FooterBottom />
     </div>

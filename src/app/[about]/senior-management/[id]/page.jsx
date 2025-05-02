@@ -13,8 +13,7 @@ const placeholderImage = "/images/placeholder.jpg"; // Add a placeholder image i
 // Management details mapping with local image paths
 const managementDetails = {
   ceo: {
-    image: "/images/Alex Lemarkoko.jpg", // Local path
-    name: "Alex Lemarkoko",
+    image: "/images/Alex Lemarkoko.jpg", 
     title: "Chief Conservator of Forests",
     bio: "Alex Lemarkoko is the Chief Conservator of Forests with over 20 years of experience...",
   },

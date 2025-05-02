@@ -1,10 +1,12 @@
 // pages/KFSBoardPage.js
 "use client"; // This is a Client Component
 
+
+import Image from "next/image";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import Image from "next/image";
+
 
 const ceo = {
   name: "Mr. Titus Kipkoech Korir",
@@ -116,6 +118,7 @@ export default function KFSBoardPage() {
         </div>
       </div>
       <FooterBottom />
+
     </div>
   );
 }

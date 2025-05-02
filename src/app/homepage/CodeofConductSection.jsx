@@ -1,9 +1,6 @@
 "use client";
-
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 
 const objectives = [
   {
@@ -39,205 +36,116 @@ const objectives = [
   },
 ];
 
-const SectionContainer = styled(Box)({
-  padding: "clamp(2rem, 4vw, 2.5rem) clamp(1rem, 2vw, 4rem)", // Responsive padding
-  backgroundColor: "#0D3C00",
-  position: "relative",
-  overflow: "hidden",
-});
-
-const StarryBackground = styled(Box)({
-  position: "absolute",
-  inset: 0,
-  backgroundImage: `
-    radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
-  `,
-  backgroundSize: "clamp(1rem, 5vw, 3.125rem) clamp(1rem, 5vw, 3.125rem), clamp(0.75rem, 3vw, 1.875rem) clamp(0.75rem, 3vw, 1.875rem), clamp(0.5rem, 2vw, 1.25rem) clamp(0.5rem, 2vw, 1.25rem)", // Responsive background size
-  backgroundPosition: "0 0, clamp(0.5rem, 1vw, 0.9375rem) clamp(0.5rem, 1vw, 0.9375rem), clamp(0.75rem, 1.5vw, 1.5625rem) clamp(0.75rem, 1.5vw, 1.5625rem)",
-  opacity: 0.5,
-  zIndex: 0,
-});
-
-const ContentGrid = styled(Box)(({ theme }) => ({
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "clamp(1rem, 2vw, 1.5rem)", // Responsive gap
-  position: "relative",
-  zIndex: 10,
-  [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: "1fr",
-  },
-}));
-
-const LeftContent = styled(Box)({
-  width: "100%",
-  height: "100%",
-});
-
-const InfoContainer = styled(Box)({
-  maxWidth: "80%",
-  margin: "clamp(1rem, 2vw, 2rem) auto 0", // Responsive margin
-  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
-  backgroundColor: "transparent",
-});
-
-const InfoTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#e6f5e6",
-  fontSize: "clamp(1.25rem, 3vw, 1.5rem)", // Scales with viewport
-  textTransform: "uppercase",
-  textAlign: "center",
-});
-
-const InfoText = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#ffffff",
-  fontSize: "clamp(0.875rem, 2vw, 1.25rem)", // Scales with viewport
-  marginTop: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
-  lineHeight: 1.6,
-});
-
-const LearnMoreButton = styled(Button)({
-  backgroundColor: "#0D3C00",
-  color: "#ffffff",
-  border: "1px solid #4A7C12",
-  textTransform: "none",
-  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.5rem)", // Responsive padding
-  fontSize: "clamp(0.8rem, 2vw, 1rem)", // Scales with viewport
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  borderRadius: "4px",
-  marginTop: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
-  "&:hover": {
-    backgroundColor: "#ffffff",
-    color: "#4A7C12",
-  },
-});
-
-const ObjectivesContainer = styled(Box)({
-  width: "100%",
-});
-
-const ObjectivesTitle = styled(Typography)({
-  fontFamily:"'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#e6f5e6",
-  fontSize: "clamp(1.5rem, 4vw, 2rem)", // Scales with viewport
-  textAlign: "center",
-  textTransform: "uppercase",
-  marginBottom: "clamp(0.5rem, 1vw, 1rem)", // Responsive margin
-});
-
-const ObjectivesSubtitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#ffffff",
-  fontSize: "clamp(1rem, 3vw, 1.5rem)", // Scales with viewport
-  textAlign: "center",
-  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
-});
-
-const ObjectiveCard = styled(Box)({
-  width: "100%",
-  padding: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive padding
-  backgroundColor: "#0D3C00",
-  border: "4px solid #ffffff",
-  color: "#ffffff",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    backgroundColor: "#ffffff",
-    borderColor: "#15803d",
-    color: "#0D3C00",
-    "& .details": {
-      opacity: 1,
-      maxHeight: "1000px",
-    },
-  },
-});
-
-const ObjectiveTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
-});
-
-const DetailsContainer = styled(Box)({
-  marginTop: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
-  opacity: 0,
-  maxHeight: 0,
-  overflow: "hidden",
-  transition: "all 0.3s ease",
-});
-
-const DetailText = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  fontSize: "clamp(0.75rem, 2vw, 1rem)", // Scales with viewport
-  lineHeight: 1.7,
-});
-
 const CodeOfConductSection = () => {
   const router = useRouter();
+  const [openIndexes, setOpenIndexes] = useState([]);
+
+  const toggleDetails = (index) => {
+    setOpenIndexes((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index]
+    );
+  };
 
   const navigateToCodeOfConduct = () => {
     router.push("/homepage/code-of-conduct");
   };
 
   return (
-    <SectionContainer>
-      <StarryBackground />
-      <ContentGrid>
-        {/* Left Side: About KFS */}
-        <LeftContent>
-          <InfoContainer>
-            <InfoTitle>About Kenya Forest Service</InfoTitle>
-            <InfoText>
-              In carrying out its mandate, the functions of KFS include among others:
-            </InfoText>
-            <InfoText>
-              1. Conserve, protect and manage all Public Forests
-            </InfoText>
-            <InfoText>
-              2. Prepare and implement management plans for all public forests, and, where requested, assist in
-              preparation of management plans for community forests or private forests in consultation with the
-              relevant owners
-            </InfoText>
-            <InfoText>
-              3. Receive and consider applications for licenses or permits in relation to forest resources or
-              management of forests or any other relevant matter in accordance with the Act
-            </InfoText>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <LearnMoreButton onClick={navigateToCodeOfConduct}>
-                Learn More
-              </LearnMoreButton>
-            </Box>
-          </InfoContainer>
-        </LeftContent>
+    <section className="relative overflow-hidden bg-[#0D3C00] py-10 px-4 md:px-16">
+      {/* Starry Background */}
+      <div
+        className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px),radial-gradient(circle,rgba(255,255,255,0.6)_1px,transparent_1px),radial-gradient(circle,rgba(255,255,255,0.4)_1px,transparent_1px)] opacity-30 z-0"
+        style={{
+          backgroundSize: "50px 50px, 30px 30px, 20px 20px",
+          backgroundPosition: "0 0, 15px 15px, 25px 25px",
+        }}
+      />
 
-        {/* Right Side: Strategic Objectives */}
-        <ObjectivesContainer>
-          <ObjectivesTitle>Strategic Objectives</ObjectivesTitle>
-          <ObjectivesSubtitle>
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+        {/* Left: About KFS */}
+        <div className="flex items-center">
+          <div className="mx-auto mt-4 md:mt-8 p-6">
+            <h5 className="text-[#e6f5e6] text-xl md:text-2xl font-bold uppercase text-center">
+              About Kenya Forest Service
+            </h5>
+            <p className="text-white text-lg mt-4">
+              In carrying out its mandate, the functions of KFS include among others:
+            </p>
+            <p className="text-white text-lg mt-4">
+              1. Conserve, protect and manage all Public Forests
+            </p>
+            <p className="text-white text-lg mt-4">
+              2. Prepare and implement management plans for all public forests, and, where requested, assist in preparation of management plans for community forests or private forests in consultation with the relevant owners
+            </p>
+            <p className="text-white text-lg mt-4">
+              3. Receive and consider applications for licenses or permits in relation to forest resources or management of forests or any other relevant matter in accordance with the Act
+            </p>
+            <div className="flex justify-center mt-6">
+              <button
+                className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300"
+                onClick={navigateToCodeOfConduct}
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Strategic Objectives */}
+        <div>
+          <h3 className="text-3xl font-bold mb-4 text-center text-[#e6f5e6] uppercase">
+            Strategic Objectives
+          </h3>
+          <p className="text-2xl mb-6 text-center text-white">
             The Strategic Objectives serve as a roadmap to achieve the Kenya Forest Service’s mission and vision.
-          </ObjectivesSubtitle>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "clamp(0.5rem, 1vw, 0.5rem)" }}>
+          </p>
+
+          <div className="flex flex-col gap-4">
             {objectives.map((item, index) => (
-              <ObjectiveCard key={index}>
-                <ObjectiveTitle>{item.title}</ObjectiveTitle>
-                <DetailsContainer className="details">
-                  {item.details.map((detail, i) => (
-                    <DetailText key={i}>{detail}</DetailText>
-                  ))}
-                </DetailsContainer>
-              </ObjectiveCard>
+              <div
+                key={index}
+                className="p-4 bg-[#0D3C00] text-white border-4 border-white rounded-md hover:bg-white hover:border-[#15803d] hover:text-[#0D3C00] transition-all duration-300 cursor-pointer group"
+                onClick={() => toggleDetails(index)}
+              >
+                <h6 className="text-lg font-semibold">{item.title}</h6>
+
+                {/* Large Screens: Hover to show details */}
+                <div className="hidden md:block">
+                  <div className="mt-2 opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[1000px] transition-all duration-300">
+                    {item.details.map((detail, i) => (
+                      <p key={i} className="text-base mt-2">
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Small Screens: Click to toggle details */}
+                <div className="block md:hidden">
+                  <div
+                    className={`mt-2 overflow-hidden transition-all duration-300 ${
+                      openIndexes.includes(index)
+                        ? "max-h-[1000px] opacity-100"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    {item.details.map((detail, i) => (
+                      <p key={i} className="text-base mt-2">
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
-          </Box>
-        </ObjectivesContainer>
-      </ContentGrid>
-    </SectionContainer>
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 };
 

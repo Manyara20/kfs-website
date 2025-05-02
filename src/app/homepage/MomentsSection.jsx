@@ -1,174 +1,74 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { styled } from "@mui/system";
 
 const Moments = [
   {
-    title: "Partnership with WWF",
-    description: "Collaborating with WWF to protect Kenya's biodiversity and forests.",
+    title: "Forest Protection and Security",
+    description: "Safeguarding all gazetted forests and forest resources from illegal activities, destruction, and unauthorized access is paramount to maintaining their integrity and ecological functions.",
+    image: "/images/rangers_patrol.jpg",
+  },
+  {
+    title: "Forest Conservation and Management",
+    description: "Implementing sustainable forest management practices to ensure the long-term health, productivity, and biodiversity of forest ecosystems across the country.",
+    image: "/images/trees_lives.png",
+  },
+  {
+    title: "Forest Development and Tree Planting",
+    description: "Expanding Kenya's forest cover through afforestation and reforestation initiatives on public and private lands to enhance environmental benefits and wood production.",
+    image: "/images/planted_site_mau.jpg",
+  },
+  {
+    title: "Sustainable Utilization of Forest Resources",
+    description: "Regulating and promoting the responsible harvesting and utilization of forest products and services to meet socio-economic needs while ensuring ecological sustainability.",
     image: "/images/cypress.JPG",
   },
   {
-    title: "Conservation with AWF",
-    description: "Working with AWF to safeguard wildlife habitats in Kenyan forests.",
-    image: "/images/about.png",
+    title: "Community Participation and Partnerships",
+    description: "Engaging local communities, private sector, and other stakeholders in forest management and conservation efforts to foster ownership, shared responsibility, and equitable benefit sharing.",
+    image: "/images/community.jpeg",
   },
   {
-    title: "UNEP Initiatives",
-    description: "Supporting UNEP’s global environmental efforts in Kenya.",
-    image: "/images/forest.jpg",
+    title: "Forest Research and Innovation",
+    description: "Conducting and promoting research to generate knowledge and innovative solutions for improved forest management, conservation, and sustainable utilization.",
+    image: "/images/kfc.jpeg",
   },
   {
-    title: "USAID Projects",
-    description: "Enhancing forest management with USAID’s support.",
-    image: "/images/forestcover.jpg",
+    title: "Forest Extension Services and Education",
+    description: "Providing technical advice, training, and awareness programs to individuals, communities, and institutions on sustainable forest management practices and the importance of forests.",
+    image: "/images/kfc.jpeg",
   },
   {
-    title: "FAO Collaboration",
-    description: "Promoting sustainable forestry with FAO expertise.",
-    image: "/images/foresty.jpg",
-  },
-  {
-    title: "NEMA Partnership",
-    description: "Aligning with NEMA for environmental regulation and conservation.",
-    image: "/images/blackforest.jpg",
-  },
-  {
-    title: "World Bank Support",
-    description: "Leveraging World Bank funding for forest restoration.",
-    image: "/images/cypress.JPG",
-  },
-  {
-    title: "UNDP Efforts",
-    description: "Partnering with UNDP for climate resilience in forests.",
-    image: "/images/OIP.jpg",
+    title: "Protection of Water Catchment Areas",
+    description: "Managing and conserving forests in critical water catchment areas to ensure a continuous and high-quality supply of water for domestic, agricultural, and industrial use.",
+    image: "/images/planted_site_mau.jpg",
   },
   {
     title: "KEFRI Research",
     description: "Advancing forest science with KEFRI’s research capabilities.",
-    image: "/images/plantation.jpg",
+    image: "/images/waterfall_karura.jpg",
   },
   {
-    title: "Rhino Ark Conservation",
-    description: "Protecting ecosystems with Rhino Ark’s initiatives.",
+    title: "Biodiversity Conservation within Forests",
+    description: "Protecting and conserving the diverse flora and fauna found within forest ecosystems, recognizing their intrinsic value and ecological importance.",
     image: "/images/cypress.JPG",
   },
   {
-    title: "KFS Milestone",
-    description: "Celebrating a key milestone in forest conservation with partners.",
-    image: "/images/tree nusery.jpg",
+    title: "Climate Change Mitigation and Adaptation",
+    description: "Recognizing the role of forests in carbon sequestration and implementing strategies to enhance their contribution to climate change mitigation and build resilience to its impacts.",
+    image: "/images/natural_forest.jpg",
   },
   {
-    title: "Community Engagement",
-    description: "Empowering local communities with partner support.",
-    image: "/images/nuseries.jpg",
+    title: "Collaboration and Partnerships",
+    description: "Establishing and maintaining collaborations with government agencies, international organizations, and other relevant stakeholders to enhance forest management and conservation efforts at national, regional, and global levels.",
+    image: "/images/patners.jpeg",
   },
 ];
-
-const SectionContainer = styled(Box)({
-  backgroundColor: "#ffffff",
-  padding: "clamp(1rem, 2vw, 1.5rem)", // Responsive padding
-});
-
-const ContentContainer = styled(Box)(({ theme }) => ({
-  width: "90%",
-  margin: "0 auto",
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "clamp(1rem, 2vw, 2rem)", // Responsive gap
-  padding: "clamp(1rem, 2vw, 2rem)", // Responsive padding
-  [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: "1fr",
-  },
-}));
-
-const MobileContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  [theme.breakpoints.up("md")]: {
-    display: "none",
-  },
-}));
-
-const DesktopTextContainer = styled(Box)(({ theme }) => ({
-  display: "none",
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-}));
-
-const ImageContainer = styled(Box)(({ theme }) => ({
-  display: "none",
-  [theme.breakpoints.up("md")]: {
-    display: "block",
-  },
-}));
-
-const MomentImage = styled("img")(({ theme }) => ({
-  width: "100%",
-  height: "clamp(20rem, 40vw, 25rem)", // Responsive height for mobile
-  objectFit: "cover",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin (mobile only)
-  [theme.breakpoints.up("md")]: {
-    height: "clamp(30rem, 60vw, 45rem)", // Responsive height for desktop
-    marginBottom: 0,
-  },
-}));
-
-const NavigationContainer = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  gap: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive gap
-  marginBottom: "clamp(1rem, 2vw, 1.5rem)", // Responsive margin
-});
-
-const NavButton = styled(Button)({
-  backgroundColor: "#e6f5e6",
-  color: "#0D3C00",
-  padding: "clamp(0.4rem, 1vw, 0.6rem) clamp(0.75rem, 2vw, 1rem)", // Responsive padding
-  borderRadius: "4px",
-  minWidth: "unset",
-  "&:hover": {
-    backgroundColor: "#15803d",
-    color: "#ffffff",
-  },
-});
-
-const SlideIndicator = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#0D3C00",
-  fontSize: "clamp(0.875rem, 2vw, 1rem)", // Scales with viewport
-});
-
-const MomentTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#0D3C00",
-  fontSize: "clamp(1.25rem, 3vw, 1.875rem)", // Scales with viewport
-  marginBottom: "clamp(0.75rem, 1.5vw, 1rem)", // Responsive margin
-});
-
-const MomentDescription = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 400,
-  color: "#333",
-  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
-});
-
-const TextContent = styled(Box)({
-  height: "clamp(10rem, 20vw, 12rem)", // Responsive height for mobile text area
-});
 
 const MomentsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === Moments.length - 1 ? 0 : prev + 1));
@@ -187,44 +87,81 @@ const MomentsSection = () => {
   const currentMoment = Moments[currentSlide];
 
   return (
-    <SectionContainer>
-      <ContentContainer>
+    <section className="bg-[#fff] py-4">
+      <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
         {/* Small Screens: Image on Top, Text Below */}
-        <MobileContainer>
-          <MomentImage src={currentMoment.image} alt={currentMoment.title} />
-          <TextContent>
-            <NavigationContainer>
-              <NavButton onClick={handlePrevSlide}>{"<"}</NavButton>
-              <SlideIndicator>
+        <div className="md:hidden">
+          <img
+            src={currentMoment.image}
+            alt={currentMoment.title}
+            className="w-full h-[400px] object-cover shadow-md mb-6" // Fixed height for small screens
+          />
+          <div className="relative flex flex-col justify-center h-48">
+            {/* Navigation for Small Screens */}
+            <div className="flex items-center gap-4 mb-4">
+              <button
+                onClick={handlePrevSlide}
+                className="bg-[#e6f5e6] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+              >
+                &lt;
+              </button>
+              <span className="text-[#0D3C00] font-semibold">
                 {currentSlide + 1} / {Moments.length}
-              </SlideIndicator>
-              <NavButton onClick={handleNextSlide}>{">"}</NavButton>
-            </NavigationContainer>
-            <MomentTitle>{currentMoment.title}</MomentTitle>
-            <MomentDescription>{currentMoment.description}</MomentDescription>
-          </TextContent>
-        </MobileContainer>
+              </span>
+              <button
+                onClick={handleNextSlide}
+                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+              >
+                &gt;
+              </button>
+            </div>
+            <h2 className="text-2xl font-bold text-[#0D3C00] mb-4">
+              {currentMoment.title}
+            </h2>
+            <p className="text-base text-gray-800">{currentMoment.description}</p>
+          </div>
+        </div>
 
         {/* Medium/Large Screens: Left (Text with Navigation), Right (Image) */}
-        <DesktopTextContainer>
-          <Box sx={{ width: "100%" }}>
-            <NavigationContainer>
-              <NavButton onClick={handlePrevSlide}>{"<"}</NavButton>
-              <SlideIndicator>
+        <div className="hidden md:flex md:flex-col md:justify-center md:items-start">
+          <div className="relative w-full">
+            {/* Navigation at Top Left */}
+            <div className="flex items-center gap-4 mb-6">
+              <button
+                onClick={handlePrevSlide}
+                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+              >
+                &lt;
+              </button>
+              <span className="text-[#0D3C00] font-semibold">
                 {currentSlide + 1} / {Moments.length}
-              </SlideIndicator>
-              <NavButton onClick={handleNextSlide}>{">"}</NavButton>
-            </NavigationContainer>
-            <MomentTitle>{currentMoment.title}</MomentTitle>
-            <MomentDescription>{currentMoment.description}</MomentDescription>
-          </Box>
-        </DesktopTextContainer>
+              </span>
+              <button
+                onClick={handleNextSlide}
+                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
+              >
+                &gt;
+              </button>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#0D3C00] mb-4">
+              {currentMoment.title}
+            </h2>
+            <p className="text-base md:text-lg text-gray-800">
+              {currentMoment.description}
+            </p>
+          </div>
+        </div>
 
-        <ImageContainer>
-          <MomentImage src={currentMoment.image} alt={currentMoment.title} />
-        </ImageContainer>
-      </ContentContainer>
-    </SectionContainer>
+        {/* Right Section: Full-Height Image (Medium/Large Only) */}
+        <div className="hidden md:block">
+          <img
+            src={currentMoment.image}
+            alt={currentMoment.title}
+            className="w-full h-[720px] object-cover shadow-md" // Fixed height for medium/large screens
+          />
+        </div>
+      </div>
+    </section>
   );
 };
 

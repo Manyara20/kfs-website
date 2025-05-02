@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import { styled, css, keyframes } from "@mui/system";
+import { useEffect, useState } from "react";
 
 const partners = [
   "https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png",
@@ -15,68 +14,39 @@ const partners = [
   "https://whatthelogo.com/storage/logos/undp-136787.png",
   "https://www.kefri.org/assets/images/kefri_logo.png",
   "https://www.rhinoark.org/wp-content/uploads/2021/12/cropped-rhino-ark-logo-2.png",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxmDPqcVy-UyLi-DX0pMl0zEV51gSoq6ap-w&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxmDPqcVy-UyLi-DX0pMl0zEV51gSoq6ap-w&s"
 ];
-
-// Define keyframes using MUI's keyframes utility
-const move = keyframes`
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-`;
-
-const SectionContainer = styled(Box)({
-  backgroundColor: "#ffffff",
-  padding: "clamp(2rem, 4vw, 3rem) 0", // Responsive padding
-});
-
-const Title = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 700,
-  color: "#0d3c00",
-  fontSize: "clamp(1.5rem, 4vw, 2rem)", // Scales with viewport
-  textAlign: "center",
-  marginBottom: "clamp(1.5rem, 3vw, 2rem)", // Responsive margin
-});
-
-const SliderContainer = styled(Box)({
-  position: "relative",
-  overflow: "hidden",
-  width: "100%",
-});
-
-const LogoStrip = styled(Box)({
-  display: "flex",
-  gap: "clamp(1rem, 2vw, 2rem)", // Responsive gap
-  minWidth: "max-content",
-  animation: `${move} 12s linear infinite`, // Apply animation
-});
-
-const PartnerLogo = styled("img")({
-  width: "clamp(4rem, 10vw, 6rem)", // Responsive width
-  height: "clamp(4rem, 10vw, 6rem)", // Responsive height
-  objectFit: "contain",
-});
 
 const PartnersSection = () => {
   return (
-    <SectionContainer>
-      <Title>Our Partners</Title>
-      <SliderContainer>
-        <LogoStrip>
+    <section className="bg-[#e6f5e6] py-12">
+      <h2 className="text-3xl font-bold text-center mb-8  text-[#0d3c00]">Our Partners</h2>
+      <div className="relative overflow-hidden w-full">
+        <div className="flex space-x-8 animate-move" style={{ minWidth: "max-content" }}>
           {[...partners, ...partners].map((logo, index) => (
-            <PartnerLogo
+            <img
               key={index}
               src={logo}
               alt={`Partner ${index % partners.length}`}
+              className="w-24 h-24 object-contain"
             />
           ))}
-        </LogoStrip>
-      </SliderContainer>
-    </SectionContainer>
+        </div>
+      </div>
+      <style jsx>{`
+        @keyframes move {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-move {
+          animation: move 12s linear infinite;
+        }
+      `}</style>
+    </section>
   );
 };
 

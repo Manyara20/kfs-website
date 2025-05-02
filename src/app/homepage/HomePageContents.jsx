@@ -2,6 +2,7 @@
 import React from "react";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
+import FooterBottom from "@/components/FooterBottom";
 import HeroSection from "@/app/homepage/HeroSection";
 import MissionSection from "@/app/homepage/MissionSection";
 import CodeOfConductSection from "@/app/homepage/CodeofConductSection";
@@ -11,9 +12,8 @@ import Footer from "@/app/homepage/Footer";
 import FeedSection from "@/app/homepage/FeedSection";
 import Principles from "@/app/homepage/Principles";
 import PatnersSection from "@/app/homepage/Patners";
-import FooterBottom from "@/components/FooterBottom";
-import Sidebar from "@/app/homepage/Sidebar";
-import MomentsSection from "@/app/homepage/MomentsSection";
+import Sidebar from "@/app/homepage/Sidebar"
+import MomentsSection from "@/app/homepage/MomentsSection"
 
 function HomePageContents() {
   return (
@@ -25,9 +25,9 @@ function HomePageContents() {
       <CodeOfConductSection />
       <Principles />
       <CoreValues />
-      <NewsSection />
-      <PatnersSection />
       <MomentsSection />
+      <PatnersSection />
+      <NewsSection />
       <FeedSection />
       <Footer />
       <FooterBottom />

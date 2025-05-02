@@ -3,73 +3,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "@/app/homepage/NewsCard";
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
-
-const SectionContainer = styled(Box)({
-  backgroundColor: "#e6f5e6",
-  padding: "clamp(1.5rem, 3vw, 3rem) clamp(0.5rem, 2vw, 2rem)", // Responsive padding
-});
-
-const HeaderContainer = styled(Box)({
-  textAlign: "center",
-  marginBottom: "clamp(1.5rem, 3vw, 3rem)", // Responsive margin
-});
-
-const MainTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 900,
-  color: "#0E2E0E",
-  fontSize: "clamp(1.5rem, 5vw, 3.125rem)", // Scales with viewport
-});
-
-const SubTitle = styled(Typography)({
-  fontFamily: "'Peugeot', Helvetica, sans-serif",
-  fontWeight: 600,
-  color: "#15803d",
-  fontSize: "clamp(1.25rem, 4vw, 2.5rem)", // Scales with viewport
-  marginTop: "clamp(0.25rem, 0.5vw, 0.5rem)", // Responsive margin
-});
-
-const NewsContainer = styled(Box)(({ theme }) => ({
-  width: "100%",
-  overflow: "hidden",
-  [theme.breakpoints.up("sm")]: {
-    overflow: "visible",
-  },
-}));
-
-const SliderContainer = styled(Box)(({ currentIndex }) => ({
-  display: "flex",
-  gap: "clamp(0.75rem, 1.5vw, 1.5rem)", // Responsive gap
-  transition: "transform 0.5s ease-in-out",
-  transform: `translateX(-${currentIndex * (100 + 2)}%)`, // Adjusted for gap
-  [theme.breakpoints.up("sm")]: {
-    transform: "none",
-    transition: "none",
-  },
-}));
-
-const NewsItem = styled(Box)(({ theme }) => ({
-  minWidth: "100%",
-  flexShrink: 0,
-  [theme.breakpoints.up("sm")]: {
-    minWidth: 0,
-    flexShrink: 1,
-  },
-}));
-
-const ErrorText = styled(Typography)({
-  color: "#f44336",
-  textAlign: "center",
-  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
-});
-
-const EmptyText = styled(Typography)({
-  color: "#666",
-  textAlign: "center",
-  fontSize: "clamp(0.875rem, 2vw, 1.125rem)", // Scales with viewport
-});
 
 const NewsSection = () => {
   const [newsData, setNewsData] = useState([]);
@@ -98,6 +31,7 @@ const NewsSection = () => {
     fetchNews();
   }, []);
 
+  // Auto-slide effect only for small screens
   useEffect(() => {
     if (window.innerWidth < 640 && newsData.length > 1) {
       const interval = setInterval(() => {
@@ -105,7 +39,7 @@ const NewsSection = () => {
           prevIndex === displayedNews.length - 1 ? 0 : prevIndex + 1
         );
       }, 3000); // Slide every 3 seconds
-      return () => clearInterval(interval);
+      return () => clearInterval(interval); // Cleanup on unmount
     }
   }, [newsData]);
 
@@ -117,21 +51,37 @@ const NewsSection = () => {
   };
 
   return (
-    <SectionContainer>
-      <HeaderContainer>
-        <MainTitle>News</MainTitle>
-        <SubTitle>Latest News</SubTitle>
-      </HeaderContainer>
+    <section className=" py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
+      {/* Centered Headers */}
+      <div className="text-center mb-6 sm:mb-8 md:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl bold text-[#0E2E0E] font-black">
+          News
+        </h1>
+        <h2 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-semibold text-green-900 mt-1 sm:mt-2">
+          Latest News
+        </h2>
+      </div>
 
+      {/* News Card Container */}
       {error ? (
-        <ErrorText>{error}</ErrorText>
+        <p className="text-red-500 text-center text-base xl:text-lg">{error}</p>
       ) : newsData.length === 0 ? (
-        <EmptyText>No news available at this time.</EmptyText>
+        <p className="text-gray-600 text-center text-base xl:text-lg">
+          No news available at this time.
+        </p>
       ) : (
-        <NewsContainer>
-          <SliderContainer currentIndex={currentIndex}>
+        <div className="w-full overflow-hidden sm:overflow-visible">
+          <div
+            className="flex gap-3 sm:gap-4 md:gap-6 transition-transform duration-500 ease-in-out sm:transition-none"
+            style={{
+              transform: window.innerWidth < 640 ? `translateX(-${currentIndex * (100 + 2)}%)` : "none", // Adjusted for gap
+            }}
+          >
             {displayedNews.map((item, index) => (
-              <NewsItem key={index}>
+              <div
+                key={index}
+                className="min-w-full sm:min-w-0 flex-shrink-0 sm:flex-shrink"
+              >
                 <NewsCard
                   title={item.title}
                   description={truncateContent(item.content)}
@@ -149,12 +99,12 @@ const NewsSection = () => {
                   comments={item.comments || 0}
                   className="rounded-none"
                 />
-              </NewsItem>
+              </div>
             ))}
-          </SliderContainer>
-        </NewsContainer>
+          </div>
+        </div>
       )}
-    </SectionContainer>
+    </section>
   );
 };
 

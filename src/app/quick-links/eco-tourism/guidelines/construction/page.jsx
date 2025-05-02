@@ -7,9 +7,12 @@ function ConstructionPage() {
     <div className="min-h-screen flex flex-col ">
       <TopNavBar />
       <MainNavBar />
+      <div
+        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] bg-[linear-gradient(rgba(0,50,20,0.8),rgba(0,50,20,0.8))] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+      >
       
       <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto bg-white">
           <h1 className="text-3xl font-bold text-green-800 mb-6">
             Guidelines for Constructing Ecotourism & Recreational Facilities in Public Forests
           </h1>
@@ -78,6 +81,7 @@ function ConstructionPage() {
           </div>
         </div>
       </main>
+      </div>
       
       <FooterBottom />
     </div>

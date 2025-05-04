@@ -57,7 +57,9 @@ const Footer = () => {
           {/* Column 2: Contact Info */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
               Contact Us
+              </p>
             </h3>
             <div className="grid grid-cols-1 gap-3 sm:gap-2 text-white/80">
               <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
@@ -78,7 +80,9 @@ const Footer = () => {
           {/* Column 3: Toll-Free */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
               Toll Free
+              </p>
             </h3>
             <div className="flex items-center gap-3 sm:gap-2 text-2xl sm:text-xl md:text-lg lg:text-base font-semibold text-white mb-3 sm:mb-2">
               <FaPhone className="text-white rotate-180" />
@@ -97,7 +101,9 @@ const Footer = () => {
           {/* Column 4: Subscribe */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
               Subscribe to The Forester Magazine
+              </p>
             </h3>
             <div className="flex flex-col gap-4 sm:gap-3 md:gap-2">
               <div className="relative">

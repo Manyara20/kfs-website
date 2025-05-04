@@ -18,12 +18,12 @@ export default function ForesterMagazinePage() {
     {
       title: "Field Manual for Biophysical Forest Resources Assessment in Kenya",
       fileSize: "1.5 MB",
-      link: "/path/to/field-manual-biophysical.pdf",
+      link: "/Documents/Forester-January-June-2024-1.pdf",
     },
     {
       title: "Field Manual for Tree Volume and Biomass Modelling",
       fileSize: "1.2 MB",
-      link: "/path/to/field-manual-tree-volume.pdf",
+      link: "/Documents/Forester-by-KFS-Issue-35.pdf",
     },
   ];
 
@@ -52,7 +52,7 @@ export default function ForesterMagazinePage() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
-          className="bg-white bg-opacity-50 p-12 shadow-lg rounded-none"
+          className="bg-white/95 p-12 max-w-[900px] w-full relative z-10 border border-white/30"
         >
           <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-8 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize">
             The Forester Magazine
@@ -115,8 +115,8 @@ export default function ForesterMagazinePage() {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        strokeLinecap="square"
+                        strokeLinejoin="square"
                         strokeWidth="2"
                         d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
                       />
@@ -136,7 +136,7 @@ export default function ForesterMagazinePage() {
                     rel="noopener noreferrer"
                     className="bg-[#0f5a28] text-white py-2 px-6 rounded-lg text-sm mt-4 inline-block hover:bg-[#2e5b4f] transition-all duration-300"
                   >
-                    Download
+                    View
                   </Link>
                 </div>
               </div>

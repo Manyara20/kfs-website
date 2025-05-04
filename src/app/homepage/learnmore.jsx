@@ -2,7 +2,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-export default function CodeOfConduct() {
+export default function Learnmore() {
   return (
     <div className="container mx-auto p-6 min-h-screen flex flex-col items-center">
       <Head>

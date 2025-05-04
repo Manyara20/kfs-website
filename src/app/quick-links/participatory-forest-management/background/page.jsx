@@ -47,29 +47,6 @@ const ContentCard = styled(motion.div)({
   borderRadius: 0,
 });
 
-const SocialIconsContainer = styled(Box)({
-  position: "absolute",
-  top: "2rem",
-  left: "2rem",
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
-  zIndex: 20,
-});
-
-const SocialIconButton = styled("button")({
-  backgroundColor: "rgba(255, 255, 255, 0.9)",
-  color: "#0f5a28",
-  padding: "0.5rem",
-  borderRadius: "50%",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    backgroundColor: "#1a3c34",
-    color: "#ffffff",
-    transform: "scale(1.1)",
-  },
-});
-
 const Title = styled(Typography)({
   fontFamily: "'Peugeot', Helvetica, sans-serif",
   fontWeight: 700,

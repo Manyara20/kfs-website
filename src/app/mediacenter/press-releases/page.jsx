@@ -1,28 +1,53 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
+import { motion } from "framer-motion";
 
 export default function PressReleasesPage() {
   const pressReleases = [
-    { title: "Public Views on Disposal (Harvesting) Of Forest Plantation Materials in Public Forests", link: "#" },
-    { title: "Public Notice Call for Public Views on Disposal (Harvesting) Of Forest Plantation Materials in Public Forests", link: "#" },
-    { title: "Forest Plantation Management and Development", link: "#" },
-    { title: "Clarification on The Use of Movement Permits to Regulate Harvesting of Trees in The Country", link: "#" },
-    { title: "Revocation of Illegal Forest Title Deeds", link: "#" },
-    { title: "KFS Board invites EACC to look into Forest Destruction", link: "#" },
-    { title: "Amendment of FCMA", link: "#" },
-    { title: "Press Release – 2021 Mangrove Day", link: "#" },
-    { title: "PRESS STATEMENT UPON DEATH OF JOANNA STUCHBURRY", link: "#" },
+    {
+      title: "Public Views on Disposal (Harvesting) Of Forest Plantation Materials in Public Forests",
+      link: "/Documents/Public-Views-Collection-Form_KFS-2023.pdf",
+    },
+    {
+      title: "Public Notice Call for Public Views on Disposal (Harvesting) Of Forest Plantation Materials in Public Forests",
+      link: "/Documents/PUBLIC-NOTICE-ON-ENVIRONMENTAL-AUDIT-FOR-FOREST-PLANTATION-MANAGEMENT1.pdf",
+    },
+    {
+      title: "Forest Plantation Management and Development",
+      link: "/Documents/Public-Views-Collection-Form_KFS-2023.pdf",
+    },
+    {
+      title: "Clarification on The Use of Movement Permits to Regulate Harvesting of Trees in The Country",
+      link: "#",
+    },
+    {
+      title: "Revocation of Illegal Forest Title Deeds",
+      link: "#",
+    },
+    {
+      title: "KFS Board invites EACC to look into Forest Destruction",
+      link: "#",
+    },
+    {
+      title: "Amendment of FCMA",
+      link: "#",
+    },
+    {
+      title: "Press Release – 2021 Mangrove Day",
+      link: "#",
+    },
+    {
+      title: "PRESS STATEMENT UPON DEATH OF JOANNA STUCHBURRY",
+      link: "#",
+    },
   ];
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  const handleLinkClick = (link, title) => {
+    console.log(`Link clicked for: ${title}, Link: ${link}`);
   };
 
   return (
@@ -42,9 +67,10 @@ export default function PressReleasesPage() {
           }}
         ></div>
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10"
         >
           <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#ffffff] drop-shadow-md mb-12 text-[3rem] text-center capitalize">
             Press Releases
@@ -53,10 +79,10 @@ export default function PressReleasesPage() {
             {pressReleases.map((press, index) => (
               <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
                 className="bg-white bg-opacity-95 rounded-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl mb-6 md:flex-row flex-col gap-4"
-                initial="hidden"
-                animate="visible"
-                variants={cardVariants}
               >
                 <div className="flex items-center gap-4">
                   <IoDocumentTextOutline className="text-[#0f5a28] text-4xl" />
@@ -69,11 +95,24 @@ export default function PressReleasesPage() {
                     </p>
                   </div>
                 </div>
-                <Link href={press.link} target="_blank" rel="noopener noreferrer">
-                  <button className="bg-[#0f5a28] text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg hover:bg-[#388e3c] hover:shadow-md transition-all">
-                    Download
+                {press.link !== "#" ? (
+                  <a
+                    href={press.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#0f5a28] text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg hover:bg-[#388e3c] hover:shadow-md transition-all cursor-pointer"
+                    onClick={() => handleLinkClick(press.link, press.title)}
+                  >
+                    View
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    className="bg-gray-400 text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg cursor-not-allowed opacity-50"
+                  >
+                    View
                   </button>
-                </Link>
+                )}
               </motion.div>
             ))}
           </div>

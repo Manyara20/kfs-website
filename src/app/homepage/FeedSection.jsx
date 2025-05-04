@@ -55,58 +55,25 @@ const NoticeCard = ({ title, description, file_url, onClick }) => {
 
 // XFeed component
 const XFeed = ({ containerHeight }) => {
-  const xFeedRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const loadTwitterWidget = () => {
-      if (window.twttr) {
-        window.twttr.widgets.load(xFeedRef.current);
-        setLoaded(true);
-      } else {
-        const script = document.createElement("script");
-        script.src = "https://platform.twitter.com/widgets.js";
-        script.async = true;
-        script.onload = () => {
-          if (window.twttr) {
-            window.twttr.widgets.load(xFeedRef.current);
-            setLoaded(true);
-          }
-        };
-        document.body.appendChild(script);
-      }
-    };
-
-    loadTwitterWidget();
-
-    return () => {
-      // Optionally clean up
-    };
-  }, []);
-
   return (
     <div
-      ref={xFeedRef}
       className="bg-[#ffffff] p-2 sm:p-3 overflow-y-auto no-scrollbar"
       style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
     >
       <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-black">
         X Feed
       </h3>
-
+      <p className="text-gray-600 text-xs sm:text-sm mb-4">
+        Follow us on X for the latest updates from Kenya Forest Service.
+      </p>
       <a
-        className="twitter-timeline"
-        data-theme="light"
-        data-chrome="noheader nofooter noborders transparent"
-        data-height={containerHeight}
-        href="https://twitter.com/KeForestService"
+        href="https://x.com/KeForestService"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block bg-[#0f5a28] text-white px-4 py-2 rounded hover:bg-[#e6f5e6] hover:text-[#000] transition-all duration-200"
       >
-        Tweets by KeForestService
+        Visit @KeForestService on X
       </a>
-
-      {!loaded && (
-        <p className="text-gray-500 text-xs mt-2">Loading feed...</p>
-      )}
     </div>
   );
 };

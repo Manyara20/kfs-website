@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const objectives = [
   {
@@ -37,7 +37,6 @@ const objectives = [
 ];
 
 const CodeOfConductSection = () => {
-  const router = useRouter();
   const [openIndexes, setOpenIndexes] = useState([]);
 
   const toggleDetails = (index) => {
@@ -46,10 +45,6 @@ const CodeOfConductSection = () => {
         ? prev.filter((i) => i !== index)
         : [...prev, index]
     );
-  };
-
-  const navigateToCodeOfConduct = () => {
-    router.push("/homepage/code-of-conduct");
   };
 
   return (
@@ -84,12 +79,11 @@ const CodeOfConductSection = () => {
               3. Receive and consider applications for licenses or permits in relation to forest resources or management of forests or any other relevant matter in accordance with the Act
             </p>
             <div className="flex justify-center mt-6">
-              <button
-                className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300"
-                onClick={navigateToCodeOfConduct}
-              >
-                Learn More
-              </button>
+              <Link href="/about/learnmore">
+                <button className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300">
+                  Learn More
+                </button>
+              </Link>
             </div>
           </div>
         </div>

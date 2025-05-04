@@ -24,7 +24,7 @@ pool.connect((err, client, release) => {
 
 // Multer setup with custom storage
 const storage = multer.diskStorage({
-  destination: "./Uploads/",
+  destination: "./uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -76,7 +76,7 @@ router.post("/:category", upload.single("pdf"), async (req, res) => {
       return res.status(400).json({ error: "Description is required" });
     }
 
-    const pdfUrl = `/Uploads/${req.file.filename}`;
+    const pdfUrl = `/uploads/${req.file.filename}`;
     const result = await pool.query(
       "INSERT INTO documents (pdf_url, description, category, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [pdfUrl, description, category, req.user.id]
@@ -105,7 +105,7 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
       return res.status(400).json({ error: "Description is required" });
     }
 
-    const pdfUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const pdfUrl = req.file ? `/uploads/${req.file.filename}` : null;
     console.log("Updating document ID:", id, "Description:", description, "PDF URL:", pdfUrl);
 
     const result = await pool.query(

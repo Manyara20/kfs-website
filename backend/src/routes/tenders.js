@@ -24,7 +24,7 @@ pool.connect((err, client, release) => {
 
 // Multer setup
 const storage = multer.diskStorage({
-  destination: "./Uploads/",
+  destination: "./uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -68,7 +68,7 @@ router.post("/", upload.single("pdf"), async (req, res) => {
       return res.status(400).json({ error: "Description and PDF file are required" });
     }
 
-    const pdfUrl = `/Uploads/${req.file.filename}`;
+    const pdfUrl = `/uploads/${req.file.filename}`;
     const result = await pool.query(
       "INSERT INTO tenders (pdf_url, description, user_id) VALUES ($1, $2, $3) RETURNING *",
       [pdfUrl, description, req.user.id]
@@ -93,7 +93,7 @@ router.put("/:id", upload.single("pdf"), async (req, res) => {
 
     const { id } = req.params;
     const { description } = req.body;
-    const pdfUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const pdfUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await pool.query(
       "UPDATE tenders SET pdf_url = COALESCE($1, pdf_url), description = $2, updated_at = NOW() WHERE id = $3 RETURNING *",

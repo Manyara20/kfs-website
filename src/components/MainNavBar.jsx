@@ -176,7 +176,7 @@ const MainNavBar = () => {
         { label: "Documents Archive", link: "/e-documents/archive" },
       ],
     },
-    { label: "Tenders", link: "/TendersPage" },
+    { label: "Tenders", link: "/tenders" },
     { label: "Careers", link: "/careers" },
   ];
 

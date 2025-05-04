@@ -1,10 +1,78 @@
+"use client";
 import React from 'react';
-import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa'; // Correct import
+import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
 import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 
+// Dynamically import MapComponent with SSR disabled
+const MapComponent = dynamic(
+  () => import('@/components/MapComponent'),
+  { ssr: false, loading: () => <div className="w-full h-[400px] bg-gray-200  flex items-center justify-center"><p>Loading map...</p></div> }
+);
+
 const ContactUsPage = () => {
+  // Map center (Kenya) and locations
+  const mapCenter = [0, 37.5]; // Approximate geographic center of Kenya
+  const locations = [
+    {
+      name: 'KFS Headquarters',
+      position: [-1.233, 36.833], // Karura Forest, Nairobi
+      isHeadquarters: true,
+    },
+    {
+      name: 'Nairobi Conservancy',
+      position: [-1.2833, 36.8167], // Nairobi (Karen)
+      isHeadquarters: false,
+    },
+    {
+      name: 'Central Highlands Conservancy',
+      position: [-0.4167, 36.9500], // Nyeri
+      isHeadquarters: false,
+    },
+    {
+      name: 'Eastern Conservancy',
+      position: [-0.5333, 37.4500], // Embu
+      isHeadquarters: false,
+    },
+    {
+      name: 'North Eastern Conservancy',
+      position: [-0.4667, 39.6500], // Garissa
+      isHeadquarters: false,
+    },
+    {
+      name: 'Ewaso North Conservancy',
+      position: [0.6167, 37.6167], // Isiolo
+      isHeadquarters: false,
+    },
+    {
+      name: 'Coast Conservancy',
+      position: [-4.0500, 39.6667], // Mombasa
+      isHeadquarters: false,
+    },
+    {
+      name: 'Mau Conservancy',
+      position: [-0.3000, 35.9333], // Nakuru
+      isHeadquarters: false,
+    },
+    {
+      name: 'North Rift Conservancy',
+      position: [0.5167, 35.2833], // Eldoret
+      isHeadquarters: false,
+    },
+    {
+      name: 'Western Conservancy',
+      position: [0.2833, 34.7500], // Kakamega
+      isHeadquarters: false,
+    },
+    {
+      name: 'Nyanza Conservancy',
+      position: [-0.1000, 34.7500], // Kisumu
+      isHeadquarters: false,
+    },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Top Navigation Bar */}
@@ -21,12 +89,12 @@ const ContactUsPage = () => {
           <p className="text-xl text-gray-600">We are here to help! Reach out to us for any inquiries or support.</p>
         </div>
 
-        {/* Grid Layout for Contact Information and Form */}
+        {/* Grid Layout for Contact Information and Map */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column: Contact Information */}
           <div className="space-y-8">
             {/* Headquarters Card */}
-            <div className="bg-white p-8 rounded-xl shadow-lg">
+            <div className="bg-white p-8 shadow-lg">
               <h2 className="text-2xl font-semibold text-green-900 mb-6">Kenya Forest Service Headquarters</h2>
               <div className="space-y-4 text-gray-700 break-words">
                 <p>Karura Forest, Off Kiambu Road</p>
@@ -54,7 +122,7 @@ const ContactUsPage = () => {
             </div>
 
             {/* Social Media Card */}
-            <div className="bg-white p-8 rounded-xl shadow-lg">
+            <div className="bg-white p-8 shadow-lg">
               <h2 className="text-2xl font-semibold text-green-900 mb-6">Follow Us</h2>
               <div className="flex gap-4">
                 <a
@@ -97,49 +165,12 @@ const ContactUsPage = () => {
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
-          <div className="bg-white p-8 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-semibold text-green-900 mb-6">Send Us a Message</h2>
-            <form className="space-y-6">
-              <div>
-                <label className="block text-gray-700 mb-2">Name*</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Email*</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Phone Number*</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Case Detail*</label>
-                <textarea
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300"
-              >
-                SUBMIT QUOTE
-              </button>
-            </form>
+          {/* Right Column: Map */}
+          <div className="bg-white p-8 shadow-lg">
+            <h2 className="text-2xl font-semibold text-green-900 mb-6">Our Locations</h2>
+            <div className="w-full h-[400px]">
+              <MapComponent mapCenter={mapCenter} locations={locations} />
+            </div>
           </div>
         </div>
 
@@ -148,7 +179,7 @@ const ContactUsPage = () => {
           <h2 className="text-3xl font-bold text-green-900 text-center mb-8">Our Conservancies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {conservancies.map((conservancy, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg break-words">
+              <div key={index} className="bg-white p-6  shadow-lg break-words">
                 <h3 className="text-xl font-semibold text-green-900 mb-4">{conservancy.name}</h3>
                 <div className="space-y-2 text-gray-700">
                   <p>{conservancy.address}</p>

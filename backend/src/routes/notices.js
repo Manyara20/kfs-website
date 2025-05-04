@@ -24,7 +24,7 @@ pool.connect((err, client, release) => {
 
 // Multer setup with custom storage
 const storage = multer.diskStorage({
-  destination: "./Uploads/",
+  destination: "./uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -68,7 +68,7 @@ router.post("/", upload.single("file"), async (req, res) => {
       return res.status(400).json({ error: "Title and description are required" });
     }
 
-    const fileUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
     const result = await pool.query(
       "INSERT INTO notices (title, description, file_url, user_id, archived, updated_at) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING *",
       [title, description, fileUrl, req.user.id, false]
@@ -93,7 +93,7 @@ router.put("/:id", upload.single("file"), async (req, res) => {
 
     const { id } = req.params;
     const { title, description } = req.body;
-    const fileUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await pool.query(
       "UPDATE notices SET title = $1, description = $2, file_url = COALESCE($3, file_url), updated_at = NOW() WHERE id = $4 RETURNING *",

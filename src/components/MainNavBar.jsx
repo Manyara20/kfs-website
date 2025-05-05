@@ -308,6 +308,7 @@ const MainNavBar = () => {
         { label: "Public Documents", link: "/e-documents/public" },
         { label: "Legal Documents", link: "/e-documents/legal" },
         { label: "Policy Documents", link: "/e-documents/policy" },
+        { label: "Staff Documents", link: "/e-documents/staff-documents" },
         {
           label: "Video Documentation",
           subItems: [

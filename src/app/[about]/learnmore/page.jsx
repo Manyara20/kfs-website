@@ -11,16 +11,25 @@ export default function LearnMore() {
     <>
     <TopNavBar />
     <MainNavBar />
-    <div className="container mx-auto p-6 min-h-screen flex flex-col items-center">
-      
+    <div className="flex-col  bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 50, 20, 0.8), rgba(0, 50, 20, 0.8)), url('/images/background-template/background.jpg')`,
+        }}
+      >
+        <div
+          className="absolute inset-0 bg-no-repeat opacity-10 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
       <Head>
         <title>About Kenya Forest Service</title>
         <meta name="description" content="Learn about the mandate and functions of the Kenya Forest Service for sustainable forest management." />
       </Head>
 
-      <h1 className="text-3xl font-bold text-center mb-6 text-[#0D3C00]">About Kenya Forest Service</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-[#fff]">About Kenya Forest Service</h1>
 
-      <div className="mt-8 w-full max-w-3xl bg-white p-6 shadow-lg rounded-lg">
+      <div className="mt-8 w-full max-w-3xl bg-white p-6 shadow-lg squared-lg">
         <h2 className="text-2xl font-bold mb-4 text-[#0D3C00]">Mandate and Functions of the Kenya Forest Service</h2>
         <p className="text-lg text-gray-700 mb-4">
           Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.

@@ -32,6 +32,7 @@ const MainNavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
   const [isSticky, setIsSticky] = useState(false);
   const theme = useTheme();
@@ -40,154 +41,11 @@ const MainNavBar = () => {
   const toggleDrawer = (open) => () => setDrawerOpen(open);
   const toggleSearchDrawer = () => setSearchDrawerOpen((prev) => !prev);
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Search query:", searchQuery);
-      setSearchDrawerOpen(false);
-      setSearchQuery("");
-    }
-  };
-
   const handleToggle = (key) => {
     setExpandedItems((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Recursive function for desktop submenus
-  const renderSubMenu = (items, level = 0) => {
-    return items.map((item, idx) => (
-      <Box
-        key={idx}
-        sx={{
-          position: "relative",
-          "&:hover > .MuiBox-root": {
-            visibility: "visible",
-            opacity: 1,
-          },
-        }}
-      >
-        <MenuItem
-          sx={{
-            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
-            fontFamily: "'Peugeot', Helvetica, sans-serif",
-            color: "black",
-            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
-            padding: "0.5rem 0.6rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            textTransform: "capitalize",
-          }}
-        >
-          <Link
-            href={item.link || "#"}
-            target={item.isExternal ? "_blank" : "_self"}
-            rel={item.isExternal ? "noopener noreferrer" : undefined}
-            style={{ textDecoration: "none", color: "inherit", display: "block" }}
-          >
-            {item.label}
-          </Link>
-          {item.subItems && item.subItems.length > 0 && (
-            <ArrowDropDown
-              sx={{
-                color: "black",
-                fontSize: "1.1rem",
-                marginLeft: level % 2 === 0 ? "auto" : "0", // Right for even levels, left for odd
-              }}
-            />
-          )}
-        </MenuItem>
-        {item.subItems && item.subItems.length > 0 && (
-          <Box
-            sx={{
-              visibility: "hidden",
-              opacity: 0,
-              position: "absolute",
-              top: "100%",
-              left: "100%",
-              backgroundColor: "white",
-              minWidth: "180px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-              borderRadius: "4px",
-              zIndex: 1000 + level,
-              transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
-            }}
-          >
-            {renderSubMenu(item.subItems, level + 1)}
-          </Box>
-        )}
-      </Box>
-    ));
-  };
-
-  // Recursive function for mobile drawer
-  const renderMobileMenu = (items, parentIdx = "", level = 0) => {
-    return items.map((item, idx) => {
-      const key = parentIdx ? `${parentIdx}-${idx}` : `${idx}`;
-      const hasSubItems = item.subItems && item.subItems.length > 0;
-
-      return (
-        <React.Fragment key={key}>
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={hasSubItems ? () => handleToggle(key) : null}
-              component={hasSubItems ? "button" : Link}
-              href={hasSubItems ? undefined : item.link || "#"}
-              target={item.isExternal ? "_blank" : "_self"}
-              rel={item.isExternal ? "noopener noreferrer" : undefined}
-              sx={{
-                color: "#6A961F",
-                padding: "8px 16px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <ListItemText
-                primary={item.label}
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: { xs: "0.85rem", xl: "1.19rem" },
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    textTransform: "capitalize",
-                  },
-                }}
-              />
-              {hasSubItems && (
-                expandedItems[key] ? (
-                  <ExpandLess sx={{ color: "#6A961F" }} />
-                ) : (
-                  <ExpandMore
-                    sx={{
-                      color: "#6A961F",
-                      marginLeft: level % 2 === 0 ? "auto" : "0", // Right for even levels, left for odd
-                    }}
-                  />
-                )
-              )}
-            </ListItemButton>
-          </ListItem>
-          {hasSubItems && (
-            <Collapse in={expandedItems[key]} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding sx={{ pl: 3 }}>
-                {renderMobileMenu(item.subItems, key, level + 1)}
-              </List>
-            </Collapse>
-          )}
-        </React.Fragment>
-      );
-    });
   };
 
   const navigationItems = [
@@ -211,13 +69,13 @@ const MainNavBar = () => {
           link: "/about/other-programs",
           subItems: [
             { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy Patnerships Resource Mobilizations", link: "/about/other-programs/strategy-patnerships" },
+            { label: "Strategy Partnerships Resource Mobilizations", link: "/about/other-programs/strategy-partnerships" },
             { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
           ],
         },
         {
           label: "Projects",
-          link: "about/projects",
+          link: "/about/projects",
           subItems: [
             { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
             { label: "NTPC", link: "/about/projects/NTPC" },
@@ -322,6 +180,168 @@ const MainNavBar = () => {
     { label: "Tenders", link: "/tenders" },
     { label: "Careers", link: "/careers" },
   ];
+
+  // Flatten navigation items for search
+  const flattenItems = (items, parentPath = []) => {
+    let flatItems = [];
+    items.forEach((item) => {
+      const currentPath = [...parentPath, item.label];
+      if (item.link) {
+        flatItems.push({ label: currentPath.join(" > "), link: item.link, isExternal: item.isExternal });
+      }
+      if (item.subItems?.length > 0) {
+        flatItems = flatItems.concat(flattenItems(item.subItems, currentPath));
+      }
+    });
+    return flatItems;
+  };
+
+  const flatNavigationItems = flattenItems(navigationItems);
+
+  // Search filter effect
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const lowerQuery = searchQuery.toLowerCase().trim();
+      const filtered = flatNavigationItems.filter((item) =>
+        item.label.toLowerCase().includes(lowerQuery)
+      );
+      setFilteredItems(filtered);
+    } else {
+      setFilteredItems([]);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const renderSubMenu = (items, level = 0) => {
+    return items.map((item, idx) => (
+      <Box
+        key={idx}
+        sx={{
+          position: "relative",
+          "&:hover > .MuiBox-root": {
+            visibility: "visible",
+            opacity: 1,
+          },
+        }}
+      >
+        <MenuItem
+          sx={{
+            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
+            fontFamily: "'Peugeot', Helvetica, sans-serif",
+            color: "#6A961F",
+            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
+            padding: "0.5rem 0.6rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            textTransform: "capitalize",
+          }}
+        >
+          <Link
+            href={item.link || "#"}
+            target={item.isExternal ? "_blank" : "_self"}
+            rel={item.isExternal ? "noopener noreferrer" : undefined}
+            style={{ textDecoration: "none", color: "inherit", display: "block" }}
+          >
+            {item.label}
+          </Link>
+          {item.subItems?.length > 0 && (
+            <ArrowDropDown
+              sx={{
+                color: "#6A961F",
+                fontSize: "1.1rem",
+                marginLeft: level % 2 === 0 ? "auto" : "0",
+              }}
+            />
+          )}
+        </MenuItem>
+        {item.subItems?.length > 0 && (
+          <Box
+            sx={{
+              visibility: "hidden",
+              opacity: 0,
+              position: "absolute",
+              top: "100%",
+              left: "100%",
+              backgroundColor: "white",
+              minWidth: "180px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+              borderRadius: "4px",
+              zIndex: 1000 + level,
+              transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
+            }}
+          >
+            {renderSubMenu(item.subItems, level + 1)}
+          </Box>
+        )}
+      </Box>
+    ));
+  };
+
+  const renderMobileMenu = (items, parentIdx = "", level = 0) => {
+    return items.map((item, idx) => {
+      const key = parentIdx ? `${parentIdx}-${idx}` : `${idx}`;
+      const hasSubItems = item.subItems?.length > 0;
+
+      return (
+        <React.Fragment key={key}>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={hasSubItems ? () => handleToggle(key) : null}
+              component={hasSubItems ? "button" : Link}
+              href={hasSubItems ? undefined : item.link || "#"}
+              target={item.isExternal ? "_blank" : "_self"}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+              sx={{
+                color: "#6A961F",
+                padding: "8px 16px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                sx={{
+                  "& .MuiTypography-root": {
+                    fontSize: { xs: "0.85rem", xl: "1.19rem" },
+                    fontFamily: "'Peugeot', Helvetica, sans-serif",
+                    textTransform: "capitalize",
+                  },
+                }}
+              />
+              {hasSubItems && (
+                expandedItems[key] ? (
+                  <ExpandLess sx={{ color: "#6A961F" }} />
+                ) : (
+                  <ExpandMore
+                    sx={{
+                      color: "#6A961F",
+                      marginLeft: level % 2 === 0 ? "auto" : "0",
+                    }}
+                  />
+                )
+              )}
+            </ListItemButton>
+          </ListItem>
+          {hasSubItems && (
+            <Collapse in={expandedItems[key]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding sx={{ pl: 3 }}>
+                {renderMobileMenu(item.subItems, key, level + 1)}
+              </List>
+            </Collapse>
+          )}
+        </React.Fragment>
+      );
+    });
+  };
 
   return (
     <AppBar
@@ -511,9 +531,7 @@ const MainNavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <List sx={{ paddingTop: "3rem" }}>
-            {renderMobileMenu(navigationItems)}
-          </List>
+          <List sx={{ paddingTop: "3rem" }}>{renderMobileMenu(navigationItems)}</List>
         </Box>
       </Drawer>
 
@@ -527,17 +545,16 @@ const MainNavBar = () => {
             color: "white",
             height: "auto",
             width: "100%",
-            maxHeight: "180px",
+            maxHeight: "70vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             p: 3,
+            overflowY: "auto",
           },
         }}
       >
         <Box
-          component="form"
-          onSubmit={handleSearchSubmit}
           sx={{
             width: { xs: "90%", sm: "70%", md: "50%" },
             maxWidth: "600px",
@@ -584,6 +601,53 @@ const MainNavBar = () => {
               },
             }}
           />
+          {filteredItems.length > 0 && (
+            <List sx={{ mt: 2, bgcolor: "white", borderRadius: "4px", maxHeight: "50vh", overflowY: "auto" }}>
+              {filteredItems.map((item, idx) => (
+                <ListItem key={idx} disablePadding>
+                  <ListItemButton
+                    component={Link}
+                    href={item.link}
+                    target={item.isExternal ? "_blank" : "_self"}
+                    rel={item.isExternal ? "noopener noreferrer" : undefined}
+                    sx={{
+                      color: "#6A961F",
+                      padding: "8px 16px",
+                      "&:hover": { bgcolor: "rgba(106,150,31,0.1)" },
+                    }}
+                    onClick={() => {
+                      setSearchDrawerOpen(false);
+                      setSearchQuery("");
+                    }}
+                  >
+                    <ListItemText
+                      primary={item.label}
+                      sx={{
+                        "& .MuiTypography-root": {
+                          fontSize: { xs: "0.85rem", xl: "1.19rem" },
+                          fontFamily: "'Peugeot', Helvetica, sans-serif",
+                          textTransform: "capitalize",
+                        },
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          )}
+          {searchQuery.trim() && filteredItems.length === 0 && (
+            <Typography
+              sx={{
+                color: "white",
+                textAlign: "center",
+                mt: 2,
+                fontSize: { xs: "0.85rem", sm: "1rem" },
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+              }}
+            >
+              No results found.
+            </Typography>
+          )} 
         </Box>
       </Drawer>
     </AppBar>

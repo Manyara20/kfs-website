@@ -125,7 +125,7 @@ export default function PublicDocumentsPage() {
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/documents/public");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/public`);
         setDocuments(response.data);
         setError("");
       } catch (err) {

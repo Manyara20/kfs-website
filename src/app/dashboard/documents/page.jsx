@@ -25,7 +25,7 @@ export default function Documents() {
     const category = form.category || "public";
     console.log("Fetching documents for category:", category, "Token:", token, "Role:", session.user.role);
     try {
-      const response = await axios.get(`http://localhost:5000/api/documents/${category}`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/${category}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Documents fetched:", response.data);
@@ -63,13 +63,13 @@ export default function Documents() {
     try {
       let response;
       if (editingDocumentId) {
-        response = await axios.put(`http://localhost:5000/api/documents/${editingDocumentId}`, formData, {
+        response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/${editingDocumentId}`, formData, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
         });
         setDocuments(documents.map((doc) => (doc.id === editingDocumentId ? response.data : doc)));
         alert("Document updated successfully!");
       } else {
-        response = await axios.post(`http://localhost:5000/api/documents/${form.category}`, formData, {
+        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/${form.category}`, formData, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
         });
         setDocuments([...documents, response.data]);
@@ -110,7 +110,7 @@ export default function Documents() {
     }
 
     try {
-      const response = await axios.patch(`http://localhost:5000/api/documents/${id}/archive`, {}, {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/${id}/archive`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Archive toggle response:", response.data);
@@ -138,7 +138,7 @@ export default function Documents() {
 
     const token = session.user.backendToken;
     try {
-      await axios.delete(`http://localhost:5000/api/documents/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDocuments(documents.filter((doc) => doc.id !== id));

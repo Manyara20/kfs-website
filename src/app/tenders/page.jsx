@@ -14,7 +14,7 @@ export default function TendersPage() {
 
   useEffect(() => {
     const fetchTenders = async () => {
-      const url = "http://localhost:5000/api/tenders/public";
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/tenders/public`;
       console.log(`Fetching tenders from ${url}`);
       try {
         const response = await axios.get(url, {
@@ -110,7 +110,7 @@ export default function TendersPage() {
                   )}
                   <p className="text-sm text-gray-600 mb-4">File available for download</p>
                   <a
-                    href={`http://localhost:5000${tender.pdf_url}`}
+                    href={`${process.env.NEXT_PUBLIC_API_URL.replace('/api', '')}${tender.pdf_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"

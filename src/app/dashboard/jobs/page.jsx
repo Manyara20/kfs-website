@@ -34,7 +34,7 @@ export default function Jobs() {
     console.log("Fetching jobs with token:", token.slice(0, 10) + "...");
 
     try {
-      const response = await axios.get("http://localhost:5000/api/jobs", {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Jobs fetched successfully:", response.data);
@@ -79,13 +79,13 @@ export default function Jobs() {
     try {
       let response;
       if (editingJobId) {
-        response = await axios.put(`http://localhost:5000/api/jobs/${editingJobId}`, form, {
+        response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/${editingJobId}`, form, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
         setJobs(jobs.map((job) => (job.id === editingJobId ? response.data : job)));
         alert("Job updated successfully!");
       } else {
-        response = await axios.post("http://localhost:5000/api/jobs", form, {
+        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs`, form, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
         setJobs([...jobs, response.data]);
@@ -126,7 +126,7 @@ export default function Jobs() {
     const token = session.user.backendToken;
     console.log("Toggling archive for job ID:", id, "Current archived status:", currentArchivedStatus);
     try {
-      const response = await axios.patch(`http://localhost:5000/api/jobs/${id}/archive`, {}, {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/${id}/archive`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Archive toggle response:", response.data);
@@ -154,7 +154,7 @@ export default function Jobs() {
 
     const token = session.user.backendToken;
     try {
-      await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(jobs.filter((job) => job.id !== id));

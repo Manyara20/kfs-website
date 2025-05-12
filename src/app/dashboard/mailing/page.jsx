@@ -24,7 +24,7 @@ export default function Mailing() {
       return;
     }
     try {
-      const response = await axios.get("http://localhost:5000/api/mailing", {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/mailing`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmails(response.data);
@@ -58,7 +58,7 @@ export default function Mailing() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/mailing",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/mailing`,
         { email },
         {
           headers: {
@@ -100,7 +100,7 @@ export default function Mailing() {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/mailing/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/mailing/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

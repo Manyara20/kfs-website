@@ -16,7 +16,7 @@ const mailingRouter = require("./routes/mailing");
 const { Pool } = require("pg");
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://192.168.5.89:3000" }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 

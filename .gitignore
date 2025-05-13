@@ -4,6 +4,7 @@
 /backend/node_modules
 /backend/.env
 /backend/uploads
+/backend/Uploads
 /node_modules
 /.env.local
 /.pnp

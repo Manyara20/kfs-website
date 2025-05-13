@@ -159,7 +159,7 @@ const MainNavBar = () => {
         },
       ],
     },
-    { label: "Contact Us", link: "/ContactUsPage" },
+    { label: "Contact Us", link: "/contacts" },
     {
       label: "E-Documents",
       subItems: [
@@ -273,7 +273,6 @@ const MainNavBar = () => {
               backgroundColor: "white",
               minWidth: "180px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-              borderRadius: "4px",
               zIndex: 1000 + level,
               transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
             }}

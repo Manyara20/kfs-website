@@ -4,14 +4,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const postsRouter = require("./routes/posts");
-const jobsRouter = require("./routes/jobs");
-const tendersRouter = require("./routes/tenders");
-const documentsRouter = require("./routes/documents");
-const eventsRouter = require("./routes/events");
-const noticesRouter = require("./routes/notices");
-const usersRouter = require("./routes/users");
-const mailingRouter = require("./routes/mailing");
+const postsRouter = require("./src/routes/posts");
+const jobsRouter = require("./src/routes/jobs");
+const tendersRouter = require("./src/routes/tenders");
+const documentsRouter = require("./src/routes/documents");
+const eventsRouter = require("./src/routes/events");
+const noticesRouter = require("./src/routes/notices");
+const usersRouter = require("./src/routes/users");
+const mailingRouter = require("./src/routes/mailing");
 
 const { Pool } = require("pg");
 

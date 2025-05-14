@@ -14,7 +14,7 @@ export default function TendersPage() {
 
   useEffect(() => {
     const fetchTenders = async () => {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/tenders/public`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/tenders/public`;
       console.log(`Fetching tenders from ${url}`);
       try {
         const response = await axios.get(url, {

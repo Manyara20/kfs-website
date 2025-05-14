@@ -13,7 +13,7 @@ export default function JobVacancies() {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/jobs/public`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/jobs/public`;
       console.log(`Fetching jobs from ${url}`);
       try {
         const response = await axios.get(url, {

@@ -122,7 +122,7 @@ export default function LegalDocumentsPage() {
   useEffect(() => {
     const fetchLegalDocuments = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/legal`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/documents/legal`);
         console.log("Legal documents fetched:", response.data);
         setLegalDocuments(response.data);
         setError("");

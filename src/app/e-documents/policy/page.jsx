@@ -125,7 +125,7 @@ export default function PolicyDocumentsPage() {
   useEffect(() => {
     const fetchPolicyDocuments = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/policy`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/documents/policy`);
         setPolicyDocuments(response.data);
         setError("");
       } catch (err) {

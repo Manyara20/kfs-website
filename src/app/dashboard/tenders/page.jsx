@@ -22,7 +22,7 @@ export default function Tenders() {
     if (!session) return;
     const token = session.user.backendToken;
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/tenders`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tenders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTenders(response.data);
@@ -66,7 +66,7 @@ export default function Tenders() {
       let response;
       if (editingTenderId) {
         response = await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/tenders/${editingTenderId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/tenders/${editingTenderId}`,
           formData,
           {
             headers: {
@@ -83,7 +83,7 @@ export default function Tenders() {
         alert("Tender updated successfully!");
       } else {
         response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/tenders`,
+          `${process.env.NEXT_PUBLIC_API_URL}/tenders`,
           formData,
           {
             headers: {
@@ -127,7 +127,7 @@ export default function Tenders() {
     const token = session.user.backendToken;
     try {
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/tenders/${id}/archive`,
+        `${process.env.NEXT_PUBLIC_API_URL}/tenders/${id}/archive`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -162,7 +162,7 @@ export default function Tenders() {
 
     const token = session.user.backendToken;
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tenders/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/tenders/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTenders(tenders.filter((tender) => tender.id !== id));

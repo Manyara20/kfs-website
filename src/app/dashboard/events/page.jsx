@@ -24,7 +24,7 @@ export default function Events() {
     const token = session.user.backendToken;
     console.log("Fetching events for user:", session.user.email, "Role:", session.user.role, "Token:", token);
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/events`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Events fetched:", response.data);
@@ -58,13 +58,13 @@ export default function Events() {
     try {
       let response;
       if (editingEventId) {
-        response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/events/${editingEventId}`, form, {
+        response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/events/${editingEventId}`, form, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
         setEvents(events.map((event) => (event.id === editingEventId ? response.data : event)));
         alert("Event updated successfully!");
       } else {
-        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/events`, form, {
+        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/events`, form, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
         setEvents([...events, response.data]);
@@ -105,7 +105,7 @@ export default function Events() {
     }
 
     try {
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/${id}/archive`, {}, {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}/archive`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Archive toggle response:", response.data);
@@ -133,7 +133,7 @@ export default function Events() {
 
     const token = session.user.backendToken;
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/events/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEvents(events.filter((event) => event.id !== id));

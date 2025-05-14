@@ -27,7 +27,7 @@ export default function Notices() {
       return;
     }
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/notices`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notices`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotices(response.data);
@@ -72,7 +72,7 @@ export default function Notices() {
       let response;
       if (editingNoticeId) {
         response = await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/notices/${editingNoticeId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/notices/${editingNoticeId}`,
           formData,
           {
             headers: {
@@ -88,7 +88,7 @@ export default function Notices() {
         );
         alert("Notice updated successfully!");
       } else {
-        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/notices`, formData, {
+        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notices`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
@@ -135,7 +135,7 @@ export default function Notices() {
 
     try {
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notices/${id}/archive`,
+        `${process.env.NEXT_PUBLIC_API_URL}/notices/${id}/archive`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -172,7 +172,7 @@ export default function Notices() {
     }
 
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/notices/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notices/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotices(notices.filter((notice) => notice.id !== id));

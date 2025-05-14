@@ -25,7 +25,7 @@ export default function Users() {
       return;
     }
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
@@ -63,7 +63,7 @@ export default function Users() {
       if (editingUserId) {
         // Update user
         response = await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/users/${editingUserId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/users/${editingUserId}`,
           form,
           {
             headers: {
@@ -80,7 +80,7 @@ export default function Users() {
         alert("User updated successfully!");
       } else {
         // Add user
-        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, form, {
+        response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, form, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export default function Users() {
     }
 
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(users.filter((user) => user.id !== id));

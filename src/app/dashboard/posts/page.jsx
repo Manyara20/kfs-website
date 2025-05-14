@@ -22,7 +22,7 @@ export default function Posts() {
     if (!session) return;
     const token = session.user.backendToken;
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts(response.data);
@@ -73,7 +73,7 @@ export default function Posts() {
       let response;
       if (editingPostId) {
         response = await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${editingPostId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/posts/${editingPostId}`,
           formData,
           {
             headers: {
@@ -88,7 +88,7 @@ export default function Posts() {
         alert("Post updated successfully!");
       } else {
         response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/posts`,
+          `${process.env.NEXT_PUBLIC_API_URL}/posts`,
           formData,
           {
             headers: {
@@ -133,7 +133,7 @@ export default function Posts() {
     const token = session.user.backendToken;
     try {
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}/archive`,
+        `${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/archive`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -169,7 +169,7 @@ export default function Posts() {
 
     const token = session.user.backendToken;
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts(posts.filter((post) => post.id !== id));

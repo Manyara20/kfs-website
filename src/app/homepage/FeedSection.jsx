@@ -90,7 +90,7 @@ const KFSFeeds = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/events/public`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/public`);
         setEvents(response.data);
         setError("");
       } catch (err) {
@@ -101,7 +101,7 @@ const KFSFeeds = () => {
 
     const fetchNotices = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/notices/public`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notices/public`);
         setNotices(response.data);
         setError("");
       } catch (err) {

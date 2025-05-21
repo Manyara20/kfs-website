@@ -40,16 +40,13 @@ const Footer = () => {
           {/* Column 1: Logo, Tagline */}
           <div className="p-6 sm:p-4 md:p-3 flex flex-col items-start">
             <div className="mb-6 sm:mb-4 md:mb-3">
-              <Image
-                src="/images/t_logo_edited.png"
-                alt="Kenya Forest Service Logo"
-                width={80}
-                height={56}
-                priority
-                className="w-16 h-auto sm:w-14 md:w-12 lg:w-10"
-              />
+            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
+             <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+              Kenya Forest Service
+              </p>
+            </h3>
             </div>
-            <p className="text-xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-6 sm:mb-4 md:mb-3 font-light italic">
+            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-6 sm:mb-4 md:mb-3 font-light italic">
               To be an internationally recognized organisation for excellence in knowledge-based sustainable forest resources management and conservation.
             </p>
           </div>
@@ -57,7 +54,7 @@ const Footer = () => {
           {/* Column 2: Contact Info */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Contact Us
               </p>
             </h3>
@@ -80,7 +77,7 @@ const Footer = () => {
           {/* Column 3: Toll-Free */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Toll Free
               </p>
             </h3>
@@ -92,7 +89,7 @@ const Footer = () => {
               Toll Free Number (For Anticorruption and Complaints)
             </p>
             <div className="flex justify-start">
-              <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2 rounded-md text-xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
+              <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2 text-xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
                 Call Now
               </button>
             </div>
@@ -101,7 +98,7 @@ const Footer = () => {
           {/* Column 4: Subscribe */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1rem] mb-8">
+            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Subscribe to The Forester Magazine
               </p>
             </h3>
@@ -110,26 +107,26 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full p-3 sm:p-2.5 md:p-2 rounded-md text-[#e6f5e6] text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
+                  className="w-full p-3 sm:p-2.5 md:p-2  text-[#e6f5e6] text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
                 />
               </div>
               <div className="flex justify-start">
-                <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2 rounded-md text-xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
+                <button className="bg-[#1f5d2f] text-white py-4 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2  text-2xl sm:text-lg md:text-base lg:text-sm font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
                   Subscribe
                 </button>
               </div>
               <div className="flex gap-4 sm:gap-3 md:gap-2">
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                  <FaTwitter className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
+                  <FaTwitter className="text-white text-4xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                  <FaFacebookF className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
+                  <FaFacebookF className="text-white text-4xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
                 </a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  <FaInstagram className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
+                  <FaInstagram className="text-white text-4xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
                 </a>
                 <a href="skype:user?call" target="_blank" rel="noopener noreferrer">
-                  <FaSkype className="text-white text-2xl sm:text-xl md:text-lg lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
+                  <FaSkype className="text-white text-4xl sm:text-4xl md:text-4xl lg:text-base hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
                 </a>
               </div>
             </div>

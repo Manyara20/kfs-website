@@ -148,7 +148,7 @@ function DashboardContent({ children }) {
                 <FaUser />
               </button>
               {isUserMenuOpen && (
-                <div className="absolute right-4 top-16 bg-white text-gray-900 shadow-lg rounded-md w-48 z-30">
+                <div className="absolute right-4 top-16 bg-white text-gray-900 shadow-lg   w-48 z-30">
                   <button
                     onClick={() => {
                       router.push("/dashboard/profile");

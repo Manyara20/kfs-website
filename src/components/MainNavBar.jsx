@@ -69,7 +69,7 @@ const MainNavBar = () => {
           link: "/about/other-programs",
           subItems: [
             { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy Partnerships Resource Mobilizations", link: "/about/other-programs/strategy-partnerships" },
+            { label: "Strategy Partnerships Resource Mobilizations", link: "/about/other-programs/strategy-patnerships" },
             { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
           ],
         },
@@ -115,23 +115,6 @@ const MainNavBar = () => {
             { label: "Fees & Charges", link: "/quick-links/eco-tourism/fees-charges" },
             { label: "Investment Opportunities", link: "/quick-links/eco-tourism/investment-opportunities" },
             {
-              label: "Attractions",
-              link: "/quick-links/eco-tourism/attractions",
-              subItems: [
-                { label: "Menengai Forest", link: "/quick-links/eco-tourism/attractions/menengai-forest" },
-                { label: "Arabuko Sokoke Forest", link: "/quick-links/eco-tourism/attractions/arabuko-sokoke-forest" },
-                { label: "Karura Forest", link: "/quick-links/eco-tourism/attractions/karura-forest" },
-                { label: "Ngong Hills Forest", link: "/quick-links/eco-tourism/attractions/ngong-hills-forest" },
-                { label: "Ngare Ndare Forest", link: "/quick-links/eco-tourism/attractions/ngare-ndare-forest" },
-                { label: "Mt Kenya Forest Reserve", link: "/quick-links/eco-tourism/attractions/mt-kenya-forest-reserve" },
-                { label: "Hombe Forest Guesthouse", link: "/quick-links/eco-tourism/attractions/hombe-forest-guesthouse" },
-                { label: "Ndaragwa Nature Trail", link: "/quick-links/eco-tourism/attractions/ndaragwa-nature-trail" },
-                { label: "Nairobi Arboretum", link: "/quick-links/eco-tourism/attractions/nairobi-arboretum" },
-                { label: "Community Eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
-                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/eco-tourism/attractions/kfc-guesthouse-conference-centre" },
-              ],
-            },
-            {
               label: "Guidelines & Code of Conduct",
               link: "/quick-links/eco-tourism/guidelines",
               subItems: [
@@ -145,6 +128,23 @@ const MainNavBar = () => {
             },
             { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/eco-tourism/why-visit" },
           ],
+        },
+        { label:"Eco-Tourism Sites",
+          link: "/quick-links/eco-tourism/attractions",
+              subItems: [
+                { label: "Menengai Forest", link: "/quick-links/eco-tourism/attractions/menengai-forest" },
+                { label: "Arabuko Sokoke Forest", link: "/quick-links/eco-tourism/attractions/arabuko-sokoke-forest" },
+                { label: "Karura Forest", link: "/quick-links/eco-tourism/attractions/karura-forest" },
+                { label: "Ngong Hills Forest", link: "/quick-links/eco-tourism/attractions/ngong-hills-forest" },
+                { label: "Ngare Ndare Forest", link: "/quick-links/eco-tourism/attractions/ngare-ndare-forest" },
+                { label: "Mt Kenya Forest Reserve", link: "/quick-links/eco-tourism/attractions/mt-kenya-forest-reserve" },
+                { label: "Hombe Forest Guesthouse", link: "/quick-links/eco-tourism/attractions/hombe-forest-guesthouse" },
+                { label: "Ndaragwa Nature Trail", link: "/quick-links/eco-tourism/attractions/ndaragwa-nature-trail" },
+                { label: "Nairobi Arboretum", link: "/quick-links/eco-tourism/attractions/nairobi-arboretum" },
+                { label: "Community Eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
+                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/eco-tourism/attractions/kfc-guesthouse-conference-centre" },
+              ],
+
         },
         {
           label: "Online Systems",
@@ -408,7 +408,6 @@ const MainNavBar = () => {
                       fontWeight: 500,
                       padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                      borderRadius: "4px",
                       transition: "color 0.3s ease",
                       textTransform: "capitalize",
                     }}
@@ -426,7 +425,6 @@ const MainNavBar = () => {
                       backgroundColor: "white",
                       minWidth: "180px",
                       boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                      borderRadius: "4px",
                       zIndex: 1000,
                       transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
                     }}
@@ -445,7 +443,6 @@ const MainNavBar = () => {
                     textDecoration: "none",
                     padding: { md: "5px 7px", lg: "7px 10px" },
                     "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                    borderRadius: "4px",
                     display: "flex",
                     alignItems: "center",
                     transition: "color 0.3s ease",
@@ -475,7 +472,6 @@ const MainNavBar = () => {
                 fontWeight: "bold",
                 padding: { md: "5px", lg: "7px" },
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
-                borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
@@ -499,7 +495,6 @@ const MainNavBar = () => {
                 fontWeight: "bold",
                 padding: "5px",
                 "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
-                borderRadius: "4px",
                 transition: "color 0.3s ease",
               }}
               onClick={toggleSearchDrawer}
@@ -601,7 +596,7 @@ const MainNavBar = () => {
             }}
           />
           {filteredItems.length > 0 && (
-            <List sx={{ mt: 2, bgcolor: "white", borderRadius: "4px", maxHeight: "50vh", overflowY: "auto" }}>
+            <List sx={{ mt: 2, bgcolor: "white",  maxHeight: "50vh", overflowY: "auto" }}>
               {filteredItems.map((item, idx) => (
                 <ListItem key={idx} disablePadding>
                   <ListItemButton

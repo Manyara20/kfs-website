@@ -175,7 +175,7 @@ export default function Documents() {
                 setEditingDocumentId(null);
                 setForm({ pdf: null, description: "", category: form.category });
               }}
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
             >
               Add Document
             </button>
@@ -185,7 +185,7 @@ export default function Documents() {
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
           >
             <option value="public">Public</option>
             <option value="legal">Legal</option>
@@ -195,7 +195,7 @@ export default function Documents() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -206,7 +206,7 @@ export default function Documents() {
             placeholder="Search documents..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
           />
         </div>
       </div>
@@ -223,7 +223,7 @@ export default function Documents() {
               id="category"
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               disabled={editingDocumentId !== null}
             >
               <option value="public">Public</option>
@@ -241,7 +241,7 @@ export default function Documents() {
               id="pdf"
               accept="application/pdf"
               onChange={(e) => setForm({ ...form, pdf: e.target.files[0] })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 border border-gray-300  "
             />
           </div>
           <div className="mb-4">
@@ -253,7 +253,7 @@ export default function Documents() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               rows="4"
               required
             />
@@ -261,14 +261,14 @@ export default function Documents() {
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
             >
               {editingDocumentId ? "Update Document" : "Add Document"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors"
             >
               Cancel
             </button>
@@ -293,14 +293,14 @@ export default function Documents() {
                 <>
                   <button
                     onClick={() => handleEdit(doc)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                    className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors"
                     aria-label={`Edit document ${doc.description}`}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleArchive(doc.id, doc.archived)}
-                    className={`px-3 py-1 rounded-md text-white transition-colors ${
+                    className={`px-3 py-1   text-white transition-colors ${
                       doc.archived
                         ? "bg-gray-500 cursor-pointer"
                         : "bg-yellow-500 hover:bg-yellow-600"
@@ -311,7 +311,7 @@ export default function Documents() {
                   </button>
                   <button
                     onClick={() => handleDelete(doc.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                    className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors"
                     aria-label={`Delete document ${doc.description}`}
                   >
                     Delete
@@ -322,7 +322,7 @@ export default function Documents() {
                   <a
                     href={doc.pdf_url}
                     download
-                    className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 transition-colors"
+                    className="bg-green-500 text-white px-3 py-1   hover:bg-green-600 transition-colors"
                     aria-label={`Download document ${doc.description}`}
                   >
                     Download

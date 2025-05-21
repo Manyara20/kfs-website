@@ -1,4 +1,5 @@
 "use client";
+
 import React from 'react';
 import { FaTwitter, FaFacebookF, FaInstagram, FaSkype } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
@@ -9,7 +10,7 @@ import FooterBottom from '@/components/FooterBottom';
 // Dynamically import MapComponent with SSR disabled
 const MapComponent = dynamic(
   () => import('@/components/MapComponent'),
-  { ssr: false, loading: () => <div className="w-full h-[400px] bg-gray-200  flex items-center justify-center"><p>Loading map...</p></div> }
+  { ssr: false, loading: () => <div className="w-full h-[400px] bg-gray-200 flex items-center justify-center"><p>Loading map...</p></div> }
 );
 
 const ContactUsPage = () => {
@@ -178,24 +179,43 @@ const ContactUsPage = () => {
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-green-900 text-center mb-8">Our Conservancies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {conservancies.map((conservancy, index) => (
-              <div key={index} className="bg-white p-6  shadow-lg break-words">
-                <h3 className="text-xl font-semibold text-green-900 mb-4">{conservancy.name}</h3>
-                <div className="space-y-2 text-gray-700">
-                  <p>{conservancy.address}</p>
-                  <p>
-                    Email:{" "}
-                    <a
-                      href={`mailto:${conservancy.email}`}
-                      className="text-green-600 hover:underline break-all"
-                    >
-                      {conservancy.email}
-                    </a>
-                  </p>
-                  <p>Tel: {conservancy.phone}</p>
+            {conservancies.map((conservancy, index) => {
+              // Find matching location for coordinates
+              const location = locations.find(loc => loc.name === conservancy.name);
+              const googleMapsUrl = location
+                ? `https://www.google.com/maps?q=${location.position[0]},${location.position[1]}`
+                : '#';
+
+              return (
+                <div key={index} className="bg-white p-6 shadow-lg break-words">
+                  <h3 className="text-xl font-semibold text-green-900 mb-4">{conservancy.name}</h3>
+                  <div className="space-y-2 text-gray-700">
+                    <p>{conservancy.address}</p>
+                    <p>
+                      Email:{" "}
+                      <a
+                        href={`mailto:${conservancy.email}`}
+                        className="text-green-600 hover:underline break-all"
+                      >
+                        {conservancy.email}
+                      </a>
+                    </p>
+                    <p>Tel: {conservancy.phone}</p>
+                    <p>
+                      Location:{" "}
+                      <a
+                        href={googleMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:underline break-all"
+                      >
+                        View on Google Maps
+                      </a>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </main>

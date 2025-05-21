@@ -202,7 +202,7 @@ export default function Tenders() {
               setEditingTenderId(null);
               setForm({ pdf: null, description: "" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
+            className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors text-sm sm:text-base"
           >
             Add Tender
           </button>
@@ -211,7 +211,7 @@ export default function Tenders() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -222,7 +222,7 @@ export default function Tenders() {
             placeholder="Search tenders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
           />
         </div>
       </div>
@@ -246,7 +246,7 @@ export default function Tenders() {
               id="pdf"
               accept="application/pdf"
               onChange={(e) => setForm({ ...form, pdf: e.target.files[0] })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300   text-sm"
             />
           </div>
           <div className="mb-4">
@@ -261,7 +261,7 @@ export default function Tenders() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
               required
             />
@@ -269,14 +269,14 @@ export default function Tenders() {
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors text-sm sm:text-base"
             >
               {editingTenderId ? "Update Tender" : "Add Tender"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm sm:text-base"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -307,14 +307,14 @@ export default function Tenders() {
             <div className="mt-4 sm:mt-0 flex flex-wrap space-x-2">
               <button
                 onClick={() => handleEdit(tender)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors text-sm"
+                className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors text-sm"
                 aria-label={`Edit tender ${tender.description}`}
               >
                 Edit
               </button>
               <button
                 onClick={() => handleArchive(tender.id, tender.archived)}
-                className={`px-3 py-1 rounded-md text-white transition-colors text-sm ${
+                className={`px-3 py-1   text-white transition-colors text-sm ${
                   tender.archived
                     ? "bg-gray-500 cursor-pointer hover:bg-gray-600"
                     : "bg-yellow-500 hover:bg-yellow-600"
@@ -327,7 +327,7 @@ export default function Tenders() {
               </button>
               <button
                 onClick={() => handleDelete(tender.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors text-sm"
+                className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors text-sm"
                 aria-label={`Delete tender ${tender.description}`}
               >
                 Delete

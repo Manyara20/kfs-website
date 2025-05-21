@@ -38,7 +38,7 @@ export default function NTPCDocumentsPage() {
             backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
           }}
         ></div>
-        <div className="max-w-[1200px] mx-auto p-[3rem_1rem] relative z-10">
+        <div className="max-w-6xl mx-auto p-[3rem_1rem] relative z-10">
           <h1 className="font-['Poppins',sans-serif] font-bold text-5xl text-white text-center mb-12 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.3)] leading-[1.2] tracking-[0.5px]">
             NTPC Documents
           </h1>

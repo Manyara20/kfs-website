@@ -175,7 +175,7 @@ export default function Users() {
             setEditingUserId(null);
             setForm({ name: "", email: "", password: "", role: "user" });
           }}
-          className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+          className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
         >
           Add User
         </button>
@@ -195,7 +195,7 @@ export default function Users() {
               placeholder="Enter name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -209,7 +209,7 @@ export default function Users() {
               placeholder="Enter email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -223,7 +223,7 @@ export default function Users() {
               placeholder="Enter password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required={!editingUserId}
             />
           </div>
@@ -235,7 +235,7 @@ export default function Users() {
               id="role"
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
             >
               <option value="admin">Admin</option>
               <option value="supply_chain">Supply Chain</option>
@@ -246,14 +246,14 @@ export default function Users() {
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
             >
               {editingUserId ? "Update User" : "Add User"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors"
             >
               Cancel
             </button>
@@ -273,13 +273,13 @@ export default function Users() {
             <div className="ml-auto flex space-x-2">
               <button
                 onClick={() => handleEdit(user)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(user.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors"
               >
                 Delete
               </button>

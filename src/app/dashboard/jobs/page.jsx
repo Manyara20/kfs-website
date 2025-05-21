@@ -195,7 +195,7 @@ export default function Jobs() {
               setEditingJobId(null);
               setForm({ title: "", description: "", duties: "", requirements: "" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
+            className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors text-sm sm:text-base"
           >
             Add Job
           </button>
@@ -204,7 +204,7 @@ export default function Jobs() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-32"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -215,7 +215,7 @@ export default function Jobs() {
             placeholder="Search jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base w-full sm:w-48"
           />
         </div>
       </div>
@@ -246,7 +246,7 @@ export default function Jobs() {
               placeholder="Enter title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               required
             />
           </div>
@@ -262,7 +262,7 @@ export default function Jobs() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
               required
             />
@@ -279,7 +279,7 @@ export default function Jobs() {
               placeholder="Enter duties"
               value={form.duties}
               onChange={(e) => setForm({ ...form, duties: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
             />
           </div>
@@ -295,21 +295,21 @@ export default function Jobs() {
               placeholder="Enter requirements"
               value={form.requirements}
               onChange={(e) => setForm({ ...form, requirements: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] text-sm sm:text-base"
               rows="4"
             />
           </div>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors text-sm sm:text-base"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors text-sm sm:text-base"
             >
               {editingJobId ? "Update Job" : "Add Job"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors text-sm sm:text-base"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -331,14 +331,14 @@ export default function Jobs() {
               <div className="mt-4 sm:mt-0 flex flex-wrap space-x-2">
                 <button
                   onClick={() => handleEdit(job)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors text-sm"
+                  className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors text-sm"
                   aria-label={`Edit job ${job.title}`}
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleArchive(job.id, job.archived)}
-                  className={`px-3 py-1 rounded-md text-white transition-colors text-sm ${
+                  className={`px-3 py-1   text-white transition-colors text-sm ${
                     job.archived
                       ? "bg-gray-500 cursor-pointer hover:bg-gray-600"
                       : "bg-yellow-500 hover:bg-yellow-600"
@@ -349,7 +349,7 @@ export default function Jobs() {
                 </button>
                 <button
                   onClick={() => handleDelete(job.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors text-sm"
+                  className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors text-sm"
                   aria-label={`Delete job ${job.title}`}
                 >
                   Delete

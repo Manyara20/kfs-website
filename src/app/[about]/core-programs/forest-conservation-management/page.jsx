@@ -33,7 +33,7 @@ export default function DFCMPage() {
           initial="hidden"
           animate="visible"
           variants={cardVariants}
-          className="bg-white/95 p-12 max-w-[900px] w-full relative z-10 border border-white/30">
+          className="bg-white/95 p-12 max-w-6xl w-full relative z-10 border border-white/30">
           <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-8 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize">
             The Directorate of Forest Conservation and Management (DFCM)
           </h1>

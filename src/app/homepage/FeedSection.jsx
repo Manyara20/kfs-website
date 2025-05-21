@@ -67,7 +67,7 @@ const XFeed = ({ containerHeight }) => {
         Follow us on X for the latest updates from Kenya Forest Service.
       </p>
       <a
-        href="https://x.com/KeForestService"
+        href="https://x.com/KeForestService?ref_src=twsrc%5Etfw"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-block bg-[#0f5a28] text-white px-4 py-2 rounded hover:bg-[#e6f5e6] hover:text-[#000] transition-all duration-200"

@@ -67,6 +67,8 @@ const CodeOfConductSection = () => {
               About Kenya Forest Service
             </h5>
             <p className="text-white text-lg mt-4">
+              Kenya Forest Service is a state corporation that was created through the Forest Act, 2005 (now repealed). 
+              The Service derives her mandate from the Forest Conservation and Management Act (FCMA), 2016.
               In carrying out its mandate, the functions of KFS include among others:
             </p>
             <p className="text-white text-lg mt-4">
@@ -78,9 +80,9 @@ const CodeOfConductSection = () => {
             <p className="text-white text-lg mt-4">
               3. Receive and consider applications for licenses or permits in relation to forest resources or management of forests or any other relevant matter in accordance with the Act
             </p>
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-6 ">
               <Link href="/about/learnmore">
-                <button className="text-white border border-[#4A7C12] bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300">
+                <button className="text-white border border-white bg-[#0D3C00] hover:bg-white hover:text-[#4A7C12] px-4 py-2 transition-colors duration-300 mt-4">
                   Learn More
                 </button>
               </Link>
@@ -101,7 +103,7 @@ const CodeOfConductSection = () => {
             {objectives.map((item, index) => (
               <div
                 key={index}
-                className="p-4 bg-[#0D3C00] text-white border-4 border-white rounded-md hover:bg-white hover:border-[#15803d] hover:text-[#0D3C00] transition-all duration-300 cursor-pointer group"
+                className="p-4 bg-[#0D3C00] text-white border-4 border-white  hover:bg-white hover:border-[#15803d] hover:text-[#0D3C00] transition-all duration-300 cursor-pointer group"
                 onClick={() => toggleDetails(index)}
               >
                 <h6 className="text-lg font-semibold">{item.title}</h6>

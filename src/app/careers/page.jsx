@@ -1,6 +1,8 @@
 "use client";
+
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
@@ -8,7 +10,6 @@ import FooterBottom from "@/components/FooterBottom";
 
 export default function JobVacancies() {
   const [jobs, setJobs] = useState([]);
-  const [expandedJobId, setExpandedJobId] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -44,8 +45,17 @@ export default function JobVacancies() {
     fetchJobs();
   }, []);
 
-  const handleJobClick = (jobId) => {
-    setExpandedJobId(expandedJobId === jobId ? null : jobId);
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.08,
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    }),
   };
 
   return (
@@ -53,9 +63,18 @@ export default function JobVacancies() {
       <TopNavBar />
       <MainNavBar />
       <div
-        className="flex-grow bg-cover bg-center bg-fixed bg-[url('/images/background-template/background.jpg')] p-8 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('https://www.transparenttextures.com/patterns/leaf.png')] before:opacity-10 before:z-0"
+        className="min-h-screen bg-cover bg-center bg-fixed p-8 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+        }}
       >
-        <div className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div
+          className="absolute inset-0 opacity-5 z-0"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <div className="max-w-7xl mx-auto py-12 px-4 relative z-10">
           {/* Main Card */}
           <div className="bg-gradient-to-br from-white to-[#f9f9f9] shadow-lg border border-[#e8ecef] mb-10 overflow-hidden">
             {/* Hero Section */}
@@ -85,7 +104,9 @@ export default function JobVacancies() {
                 About Kenya Forest Service
               </h2>
               <p className="text-sm sm:text-base text-[#333] leading-relaxed max-w-3xl mx-auto">
-                Kenya Forest Service (KFS) is a State Corporation established under the Forest Conservation & Management Act (FCMA), 2016. The Mandate of KFS is to protect, conserve, develop and sustainably manage forests and allied resources for environmental stability and social-economic benefits for the present and future generations. KFS has partnered with the Global Environment Facility (GEF-7) through Food and Agricultural Organization of the United Nation (FAO) to support implementation of the Integrated Landscape Management for Conservation and Restoration of Mt. Elgon Ecosystem Project in Western Kenya. The Service wishes to recruit qualified personnel for a one-year renewable temporary contract.
+                Kenya Forest Service (KFS) is a State Corporation established under the Forest Conservation & Management Act (FCMA), 2016. 
+                The Mandate of KFS is to protect, conserve, develop and sustainably manage forests and allied resources for environmental stability and social-economic 
+                benefits for the present and future generations. 
               </p>
             </div>
 
@@ -94,61 +115,82 @@ export default function JobVacancies() {
 
             {/* Job Listings Section */}
             <div className="p-8 text-center">
-              <h2 className="text-xl sm:text-2xl font-semibold text-[#0D5602] mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12 text-shadow-lg tracking-wide">
                 Available Positions
               </h2>
 
               {error ? (
-                <p className="text-red-500 text-center">{error}</p>
+                <p className="text-red-500 text-center text-lg">{error}</p>
               ) : jobs.length === 0 ? (
-                <p className="text-gray-600 text-center">No active job vacancies available at this time.</p>
+                <p className="text-gray-300 text-center text-lg">
+                  No active job vacancies available at this time.
+                </p>
               ) : (
-                jobs.map((job) => (
-                  <div key={job.id}>
-                    <div className="flex justify-between items-center mb-2 p-4 bg-[#245b3c] rounded-lg border border-[#e8ecef] max-w-4xl mx-auto">
-                      <h3
-                        className="text-base sm:text-lg font-semibold text-white cursor-pointer hover:text-gray-200"
-                        onClick={() => handleJobClick(job.id)}
+                jobs.map((job, index) => (
+                  <motion.div
+                    key={job.id}
+                    className="bg-white bg-opacity-95  p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 mb-6 md:flex-row flex-col gap-4"
+                    custom={index}
+                    initial="hidden"
+                    animate="visible"
+                    variants={cardVariants}
+                    whileHover={{ scale: 1.01 }}
+                  >
+                    <div className="flex items-left gap-6 flex-1">
+                      <svg
+                        className="w-9 h-9 text-[#0f5a28] flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        {job.title}
-                      </h3>
-                    </div>
-
-                    {expandedJobId === job.id && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white rounded-lg border border-[#e8ecef] shadow-md max-w-4xl mx-auto">
-                        <div>
-                          <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Job Specification</h4>
-                          <p className="text-sm text-[#444] leading-relaxed mb-4">
-                            {job.description}
-                          </p>
-
-                          {job.duties && (
-                            <>
-                              <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Duties and Responsibilities</h4>
-                              <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
-                                {job.duties.split("\n").map((duty, index) => (
-                                  <li key={index} className="py-1">{duty}</li>
-                                ))}
-                              </ul>
-                            </>
-                          )}
-                        </div>
-
-                        <div>
-                          {job.requirements && (
-                            <>
-                              <h4 className="text-lg font-semibold text-[#0D5602] mb-2">Person Specification</h4>
-                              <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
-                                {job.requirements.split("\n").map((req, index) => (
-                                  <li key={index} className="py-1">{req}</li>
-                                ))}
-                              </ul>
-                            </>
-                          )}
-                        </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                        />
+                      </svg>
+                      <div className="flex flex-col items-start">
+                        <h3 className="text-xl font-semibold text-[#0f5a28] leading-tight">
+                          {job.title}
+                        </h3>
+                        <p className="text-sm text-[#666] mt-2">Open Application</p>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="text-lg text-left font-semibold text-[#0f5a28] mb-2">
+                        Job Specification
+                      </h4>
+                      <p className="text-sm text-left text-[#444] leading-relaxed mb-4">
+                        {job.description}
+                      </p>
+                      {job.duties && (
+                        <>
+                          <h4 className="text-lg text-left font-semibold text-[#0f5a28] mb-2">
+                            Duties and Responsibilities
+                          </h4>
+                          <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                            {job.duties.split("\n").map((duty, index) => (
+                              <li key={index} className="py-1">{duty}</li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                      {job.requirements && (
+                        <>
+                          <h4 className="text-lg text-left font-semibold text-[#0f5a28] mb-2">
+                            Person Specification
+                          </h4>
+                          <ul className="list-disc text-sm text-[#444] leading-relaxed text-left pl-5">
+                            {job.requirements.split("\n").map((req, index) => (
+                              <li key={index} className="py-1">{req}</li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </div>
+                  </motion.div>
                 ))
               )}
             </div>
@@ -161,11 +203,13 @@ export default function JobVacancies() {
               <div className="bg-[#FFFFE0] p-5 w-full max-w-sm text-center shadow-lg rounded-lg border border-[#d4d4d4] relative">
                 <div className="absolute -top-4 left-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
                 <div className="absolute -top-4 right-5 w-8 h-8 bg-[#1a1a1a] border-2 border-[#333] rounded shadow-md transform rotate-45"></div>
-                <h3 className="text-lg sm:text-xl font-semibold text-[#333] mb-4">How to Apply</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-[#333] mb-4">
+                  How to Apply
+                </h3>
                 <p className="text-sm text-[#333] mb-4">
-                  <strong>Step 1:</strong> Visit the official Kenya Forest Service website:
+                  <strong>Step 1:</strong> Visit Online Application Portal:
                 </p>
-                <Link href="https://www.kenyaforestservice.org" className="inline-block">
+                <Link href="https://recruitment.kenyaforestservice.org/" className="inline-block" target="_blank">
                   <button className="bg-gradient-to-r from-[#0D5602] to-[#1a6b1a] text-white py-2 px-6 font-semibold text-sm rounded-lg shadow-md hover:from-[#0A4201] hover:to-[#145214] hover:-translate-y-0.5 hover:shadow-lg transition-all">
                     Apply Online
                   </button>

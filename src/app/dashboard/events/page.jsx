@@ -172,7 +172,7 @@ export default function Events() {
               setEditingEventId(null);
               setForm({ title: "", date: "", time: "", venue: "", flag: "happening" });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+            className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
           >
             Add Event
           </button>
@@ -181,7 +181,7 @@ export default function Events() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -192,7 +192,7 @@ export default function Events() {
             placeholder="Search events..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
           />
         </div>
       </div>
@@ -211,7 +211,7 @@ export default function Events() {
               placeholder="Enter title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -224,7 +224,7 @@ export default function Events() {
               id="date"
               value={form.date}
               onChange={(e) => setForm({ ...form, date: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -237,7 +237,7 @@ export default function Events() {
               id="time"
               value={form.time}
               onChange={(e) => setForm({ ...form, time: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -251,7 +251,7 @@ export default function Events() {
               placeholder="Enter venue"
               value={form.venue}
               onChange={(e) => setForm({ ...form, venue: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -263,7 +263,7 @@ export default function Events() {
               id="flag"
               value={form.flag}
               onChange={(e) => setForm({ ...form, flag: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
             >
               <option value="happening">Happening</option>
               <option value="postponed">Postponed</option>
@@ -272,14 +272,14 @@ export default function Events() {
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
             >
               {editingEventId ? "Update Event" : "Add Event"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors"
             >
               Cancel
             </button>
@@ -296,14 +296,14 @@ export default function Events() {
             <div className="ml-auto flex space-x-2">
               <button
                 onClick={() => handleEdit(event)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors"
                 aria-label={`Edit event ${event.title}`}
               >
                 Edit
               </button>
               <button
                 onClick={() => handleArchive(event.id, event.archived)}
-                className={`px-3 py-1 rounded-md text-white transition-colors ${
+                className={`px-3 py-1   text-white transition-colors ${
                   event.archived
                     ? "bg-gray-500 cursor-pointer"
                     : "bg-yellow-500 hover:bg-yellow-600"
@@ -314,7 +314,7 @@ export default function Events() {
               </button>
               <button
                 onClick={() => handleDelete(event.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors"
                 aria-label={`Delete event ${event.title}`}
               >
                 Delete

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 const Moments = [
   {
@@ -67,86 +68,95 @@ const Moments = [
 
 const MomentsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(null); // Track direction: 'left' or 'right'
 
   // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection('right');
       setCurrentSlide((prev) => (prev === Moments.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 500000);
     return () => clearInterval(interval);
   }, []);
 
   const handleNextSlide = () => {
+    setDirection('right');
     setCurrentSlide((prev) => (prev === Moments.length - 1 ? 0 : prev + 1));
   };
 
   const handlePrevSlide = () => {
+    setDirection('left');
     setCurrentSlide((prev) => (prev === 0 ? Moments.length - 1 : prev - 1));
   };
 
   const currentMoment = Moments[currentSlide];
 
+  // Animation classes based on direction
+  const slideClass = direction === 'left'
+    ? 'transform translate-x-[-100%] opacity-0 transition-all duration-1000 ease-in-out'
+    : direction === 'right'
+      ? 'transform translate-x-[100%] opacity-0 transition-all duration-1000 ease-in-out'
+      : 'transform translate-x-0 opacity-100 transition-all duration-1000 ease-in-out';
+
+  // Reset transform after animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDirection(null); // Reset direction to remove transform
+    }, 500); // Match transition duration
+    return () => clearTimeout(timer);
+  }, [currentSlide]);
+
   return (
     <section className="bg-[#fff] py-4">
-      <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8 relative">
+        {/* Navigation Bar (Fixed Position) */}
+        <div className="flex items-center gap-4 mb-4 md:absolute md:top-65 md:left-10 z-10">
+          <button
+            onClick={handlePrevSlide}
+            className="bg-[#e6f5e6] text-[#0D3C00] p-2 rounded-full hover:bg-[#15803d] hover:text-white transition-colors duration-200"
+            aria-label="Previous Slide"
+          >
+            <GoChevronLeft size={20} />
+          </button>
+          <span className="text-[#0D3C00] font-semibold">
+            {currentSlide + 1} / {Moments.length}
+          </span>
+          <button
+            onClick={handleNextSlide}
+            className="bg-[#e6f5e6] text-[#0D3C00] p-2 rounded-full hover:bg-[#15803d] hover:text-white transition-colors duration-200"
+            aria-label="Next Slide"
+          >
+            <GoChevronRight size={20} />
+          </button>
+        </div>
+
         {/* Small Screens: Image on Top, Text Below */}
         <div className="md:hidden">
-          <img
-            src={currentMoment.image}
-            alt={currentMoment.title}
-            className="w-full h-[400px] object-cover shadow-md mb-6" // Fixed height for small screens
-          />
+          <div className="relative w-full h-[400px]">
+            <img
+              key={currentSlide}
+              src={currentMoment.image}
+              alt={currentMoment.title}
+              className={`w-full h-full object-cover shadow-md mb-6 ${slideClass}`}
+            />
+          </div>
           <div className="relative flex flex-col justify-center h-48">
-            {/* Navigation for Small Screens */}
-            <div className="flex items-center gap-4 mb-4">
-              <button
-                onClick={handlePrevSlide}
-                className="bg-[#e6f5e6] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &lt;
-              </button>
-              <span className="text-[#0D3C00] font-semibold">
-                {currentSlide + 1} / {Moments.length}
-              </span>
-              <button
-                onClick={handleNextSlide}
-                className="bg-[#0D3C00] text-white px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &gt;
-              </button>
-            </div>
-            <h2 className="text-2xl font-bold text-[#0D3C00] mb-4">
+            <h2 className={`text-2xl font-bold text-[#0D3C00] mb-4 ${slideClass}`}>
               {currentMoment.title}
             </h2>
-            <p className="text-base text-gray-800">{currentMoment.description}</p>
+            <p className={`text-base text-gray-800 ${slideClass}`}>
+              {currentMoment.description}
+            </p>
           </div>
         </div>
 
-        {/* Medium/Large Screens: Left (Text with Navigation), Right (Image) */}
+        {/* Medium/Large Screens: Left (Text), Right (Image) */}
         <div className="hidden md:flex md:flex-col md:justify-center md:items-start">
-          <div className="relative w-full">
-            {/* Navigation at Top Left */}
-            <div className="flex items-center gap-4 mb-6">
-              <button
-                onClick={handlePrevSlide}
-                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &lt;
-              </button>
-              <span className="text-[#0D3C00] font-semibold">
-                {currentSlide + 1} / {Moments.length}
-              </span>
-              <button
-                onClick={handleNextSlide}
-                className="bg-[#e6f5e6] text-[#0D3C00] px-4 py-2 rounded hover:bg-[#15803d] transition-colors"
-              >
-                &gt;
-              </button>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0D3C00] mb-4">
+          <div className="relative w-full pt-12"> {/* Offset for fixed navigation */}
+            <h2 className={`text-2xl md:text-3xl font-bold text-[#0D3C00] mb-4 ${slideClass}`}>
               {currentMoment.title}
             </h2>
-            <p className="text-base md:text-lg text-gray-800">
+            <p className={`text-base md:text-lg text-gray-800 ${slideClass}`}>
               {currentMoment.description}
             </p>
           </div>
@@ -154,11 +164,14 @@ const MomentsSection = () => {
 
         {/* Right Section: Full-Height Image (Medium/Large Only) */}
         <div className="hidden md:block">
-          <img
-            src={currentMoment.image}
-            alt={currentMoment.title}
-            className="w-full h-[720px] object-cover shadow-md" // Fixed height for medium/large screens
-          />
+          <div className="relative w-full h-[720px]">
+            <img
+              key={currentSlide}
+              src={currentMoment.image}
+              alt={currentMoment.title}
+              className={`w-full h-full object-cover shadow-md ${slideClass}`}
+            />
+          </div>
         </div>
       </div>
     </section>

@@ -66,7 +66,7 @@ const KFCGuesthousePage = () => {
             </p>
             <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8">
               <Image
-                src="/kfc-guesthouse-exterior.jpg"
+                src="/images/Eco-tourism/KFCGuestHouseandConference/Interior-of-the-ensuite-rooms-1-300x225.jpg"
                 alt="KFC Guesthouse and Conference Centre exterior"
                 width={900}
                 height={600}
@@ -197,7 +197,7 @@ const KFCGuesthousePage = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="relative h-64 rounded-lg overflow-hidden order-last md:order-first">
                 <Image
-                  src="/kfc-additional-rooms.jpg"
+                  src="/images/Eco-tourism/KFCGuestHouseandConference/The-Lounge-Area-1-300x225.jpg"
                   alt="Additional accommodation units"
                   width={300}
                   height={225}
@@ -324,8 +324,8 @@ const KFCGuesthousePage = () => {
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { src: '/images/Eco-tourism/KFCGuestHouseandConference/The-Lounge-Area-1-300x225.jpg', alt: 'The Lounge Area' },
-                { src: '/kfc-guesthouse-exterior-2.jpg', alt: 'Guest house and Conference Centre' },
-                { src: '/kfc-viewpoint.jpg', alt: 'Panoramic view of Masaita Forest' },
+                { src: '/images/Eco-tourism/KFCGuestHouseandConference/The-Lounge-Area-1-300x225.jpg', alt: 'Guest house and Conference Centre' },
+                { src: '/images/Eco-tourism/KFCGuestHouseandConference/The-Lounge-Area-1-300x225.jpg', alt: 'Panoramic view of Masaita Forest' },
               ].map((image, index) => (
                 <div key={index} className="relative h-48 rounded-lg overflow-hidden">
                   <Image

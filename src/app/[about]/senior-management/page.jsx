@@ -1,11 +1,10 @@
 "use client";
 
-import { Box, Typography, Grid, IconButton, Avatar } from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
 import Link from "next/link";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
+import InfoIcon from "@mui/icons-material/Info";
 
 // Management Details Object
 const managementDetails = {
@@ -130,202 +129,77 @@ export default function KFSSeniorManagementPage() {
     <div>
       <TopNavBar />
       <MainNavBar />
-      <Box sx={{ padding: { xs: "0.5rem", md: "1.5rem" }, backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      <div className="bg-white min-h-screen px-4 md:px-6 py-4">
         {/* Title and Description */}
-        <Box sx={{ textAlign: "center", mb: 3 }}>
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: "1.4rem", md: "1.8rem" },
-              fontWeight: "bold",
-              color: "#023011",
-              mb: 0.5,
-              fontFamily: "'Peugeot', Helvetica, sans-serif",
-              textTransform: "capitalize",
-              letterSpacing: "0.3px",
-            }}
-          >
+        <div className="text-center mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#023011] mb-2 font-['Peugeot',Helvetica,sans-serif] capitalize tracking-tight">
             Senior Management
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: "#666",
-              fontSize: { xs: "0.85rem", md: "0.9rem" },
-              maxWidth: "600px",
-              margin: "0 auto",
-              fontFamily: "'Peugeot', Helvetica, sans-serif",
-            }}
-          >
+          </h1>
+          <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto font-['Peugeot',Helvetica,sans-serif]">
             Meet the dedicated leaders of the Kenya Forest Service, committed to sustainable forest management and conservation.
-          </Typography>
-        </Box>
+          </p>
+        </div>
 
         {/* CEO Section */}
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
-          <Box
-            sx={{
-              backgroundColor: "white",
-              borderRadius: "8px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              width: { xs: "100%", sm: "300px" },
-              p: 2,
-              textAlign: "center",
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              "&:hover": {
-                transform: "translateY(-3px)",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-              },
-            }}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                backgroundColor: "#6A961F",
-                color: "white",
-                padding: "0.2rem 0.6rem",
-                display: "inline-block",
-                mb: 1,
-                fontSize: "0.75rem",
-                fontWeight: "bold",
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "uppercase",
-              }}
-            >
+        <div className="flex justify-center mb-6">
+          <div className="bg-white rounded-lg shadow-md w-full sm:w-80 p-4 text-center transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <span className="inline-block bg-[#6A961F] text-white text-xs font-bold uppercase px-3 py-1 mb-2 font-['Peugeot',Helvetica,sans-serif]">
               CCF
-            </Typography>
-            <Avatar
-              sx={{
-                width: 120,
-                height: 120,
-                mx: "auto",
-                mb: 1,
-                border: "3px solid #6A961F",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-              }}
+            </span>
+            <img
+              className="w-54 h-54 rounded-full mx-auto mb-2 border-4 border-[#6A961F] shadow-sm object-cover"
               alt={ceo.name}
               src={ceo.image}
             />
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 600,
-                color: "#023011",
-                mb: 0.5,
-                fontSize: "1rem",
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "uppercase",
-              }}
-            >
+            <h6 className="text-base font-semibold text-[#023011] mb-1 uppercase font-['Peugeot',Helvetica,sans-serif]">
               {ceo.name}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: "#666",
-                mb: 1,
-                fontSize: "0.8rem",
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "capitalize",
-              }}
-            >
+            </h6>
+            <p className="text-gray-600 text-sm mb-2 capitalize font-['Peugeot',Helvetica,sans-serif]">
               {ceo.title}
-            </Typography>
+            </p>
             <Link href={`/about/senior-management/${ceo.id}`} passHref>
-              <IconButton
-                sx={{
-                  color: "#6A961F",
-                  "&:hover": {
-                    backgroundColor: "rgba(106, 150, 31, 0.1)",
-                  },
-                }}
+              <button
+                className="text-[#6A961F] hover:bg-[#6A961F]/10 p-2 rounded-full transition-colors duration-200"
                 aria-label="View Profile"
               >
                 <InfoIcon fontSize="small" />
-              </IconButton>
+              </button>
             </Link>
-          </Box>
-        </Box>
+          </div>
+        </div>
 
         {/* Board Members Section */}
-        <Grid container spacing={2} justifyContent="center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {boardMembers.map((member, index) => (
-            <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
-              <Box
-                sx={{
-                  backgroundColor: "white",
-                  borderRadius: "8px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                  p: 2,
-                  textAlign: "center",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                  },
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Avatar
-                    sx={{
-                      width: 120,
-                      height: 120,
-                      mx: "auto",
-                      mb: 1,
-                      border: "3px solid #6A961F",
-                      boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-                    }}
-                    alt={member.name}
-                    src={member.image}
-                  />
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 600,
-                      color: "#023011",
-                      mb: 0.5,
-                      fontSize: "1rem",
-                      fontFamily: "'Peugeot', Helvetica, sans-serif",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {member.name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "#666",
-                      fontSize: "0.8rem",
-                      mb: 1,
-                      fontFamily: "'Peugeot', Helvetica, sans-serif",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {member.title}
-                  </Typography>
-                </Box>
-                <Link href={`/about/senior-management/${member.id}`} passHref>
-                  <IconButton
-                    sx={{
-                      color: "#6A961F",
-                      "&:hover": {
-                        backgroundColor: "rgba(106, 150, 31, 0.1)",
-                      },
-                    }}
-                    aria-label="View Profile"
-                  >
-                    <InfoIcon fontSize="small" />
-                  </IconButton>
-                </Link>
-              </Box>
-            </Grid>
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md p-4 text-center transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
+            >
+              <div>
+                <img
+                  className="w-54 h-54 rounded-full mx-auto mb-2 border-4 border-[#0D3C00] shadow-sm object-cover"
+                  alt={member.name}
+                  src={member.image}
+                />
+                <h6 className="text-base font-semibold text-[#023011] mb-1 uppercase font-['Peugeot',Helvetica,sans-serif]">
+                  {member.name}
+                </h6>
+                <p className="text-gray-600 text-sm mb-2 capitalize font-['Peugeot',Helvetica,sans-serif]">
+                  {member.title}
+                </p>
+              </div>
+              <Link href={`/about/senior-management/${member.id}`} passHref>
+                <button
+                  className="text-[#0D3C00] hover:bg-[#6A961F]/10 p-2 rounded-full transition-colors duration-200"
+                  aria-label="View Profile"
+                >
+                  <InfoIcon fontSize="small" />
+                </button>
+              </Link>
+            </div>
           ))}
-        </Grid>
-      </Box>
+        </div>
+      </div>
       <FooterBottom />
     </div>
   );

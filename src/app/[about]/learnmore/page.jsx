@@ -29,7 +29,7 @@ export default function LearnMore() {
 
       <h1 className="text-3xl font-bold text-center mb-6 text-[#fff]">About Kenya Forest Service</h1>
 
-      <div className="mt-8 w-full max-w-3xl bg-white p-6 shadow-lg squared-lg">
+      <div className="mt-8 w-full max-w-6xl bg-white p-6 shadow-lg squared-lg">
         <h2 className="text-2xl font-bold mb-4 text-[#0D3C00]">Mandate and Functions of the Kenya Forest Service</h2>
         <p className="text-lg text-gray-700 mb-4">
           Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.

@@ -141,7 +141,7 @@ const BackgroundPage = () => {
                   href="/path/to/application-form.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1a3c34] text-white px-4 py-2 rounded-md hover:bg-green-800"
+                  className="bg-[#1a3c34] text-white px-4 py-2   hover:bg-green-800"
                 >
                   Download
                 </a>

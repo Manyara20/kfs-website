@@ -5,15 +5,17 @@ import { motion } from "framer-motion";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
+import Image from 'next/image';
+
 
 export default function GreenZonesProjectPage() {
   const [isVisible, setIsVisible] = useState(false);
 
   const sections = [
-    "Afforestation and Reforestation Programs",
+    "Forest conservation and livelihood support for climate change resilience.",
     "Community Empowerment and Livelihood Support",
-    "Watershed Management and Soil Conservation",
-    "Sustainable Agroforestry Practices",
+    "Sustainable and inclusive value chain development.",
+    "Project management and coordination.",
   ];
 
   useEffect(() => {
@@ -46,13 +48,15 @@ export default function GreenZonesProjectPage() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
-          className="bg-white/95 p-12 max-w-[900px] w-full relative z-10 border border-white/30"
+          className="bg-white/95 p-12 max-w-6xl w-full relative z-10 border border-white/30"
         >
           <h1 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-8 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize">
-            Green Zones Development Support Project
+            GREEN ZONES DEVELOPMENT SUPPORT PROJECT PHASE 2
           </h1>
           <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-[#333] leading-[1.8] text-[1rem] mb-8">
-            The Green Zones Development Support Project aims to promote conservation and sustainable management of forest resources while improving the livelihoods of communities living around forests.
+            The African Development Bank Board approved Green Zones Development Support Project (GZDSP II) Phase II on 3rd December 2019.
+            Kenya Forest Service undertook this intricate initiative to not only rehabilitate degraded forests but also ensure that forested
+            lands are conserved and protected in a sustainable manner.The project has three main components namely;
           </p>
           <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-[#333] leading-[1.8] text-[1rem] mb-8">
             It focuses on the following key areas:
@@ -69,7 +73,59 @@ export default function GreenZonesProjectPage() {
               </li>
             ))}
           </ul>
+          <section className="mt-12 mb-12">
+                    <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4">GreenZones II photo gallery</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        {
+                          src: '/images/gz/GT1.jpg',
+                          alt: 'Scenic waterfall in Karura Forest',
+                          caption: 'Farmer Fish pond ',
+                        },
+                        {
+                          src: '/images/Eco-tourism/KaruraForest/Yellow-breasted-Apalis_Karura-Forest-scaled.jpg',
+                          alt: 'Bird watching in Karura Forest',
+                          caption: 'Bird watching in Karura Forest',
+                        },
+                        {
+                          src: '/images/Eco-tourism/KaruraForest/Karura+Forest+Cave.jpeg',
+                          alt: 'Mau Mau caves in Karura Forest',
+                          caption: 'Mau Mau caves in Karura Forest',
+                        },
+                        {
+                          src: '/images/gz/GT1.jpg',
+                          alt: 'Scenic waterfall in Karura Forest',
+                          caption: 'Farmer Fish pond ',
+                        },
+                        {
+                          src: '/images/Eco-tourism/KaruraForest/Yellow-breasted-Apalis_Karura-Forest-scaled.jpg',
+                          alt: 'Bird watching in Karura Forest',
+                          caption: 'Bird watching in Karura Forest',
+                        },
+                        {
+                          src: '/images/Eco-tourism/KaruraForest/Karura+Forest+Cave.jpeg',
+                          alt: 'Mau Mau caves in Karura Forest',
+                          caption: 'Mau Mau caves in Karura Forest',
+                        },
+                      ].map((image, index) => (
+                        <div key={index} className="relative h-64  overflow-hidden">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={300}
+                            height={225}
+                            className="w-full h-full object-cover"
+                            unoptimized
+                          />
+                          <p className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
+                            {image.caption}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
         </motion.div>
+        
       </div>
       <FooterBottom />
     </div>

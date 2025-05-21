@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 const partners = [
-  "https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png",
   "https://whatthelogo.com/storage/logos/wwf-world-wildlife-fund-51730.png",
   "https://whatthelogo.com/storage/logos/african-wildlife-foundation-225883.png",
   "https://whatthelogo.com/storage/logos/the-united-nations-environment-programme-96813.png",

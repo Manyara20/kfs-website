@@ -48,7 +48,7 @@ const NdaragwaNatureTrailPage = () => {
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={cardVariants}
-          className="bg-white/95 p-12 max-w-[900px] w-full relative z-10 border border-white/30"
+          className="bg-white/95 p-12 max-w-6xl w-full relative z-10 border border-white/30"
         >
           {/* Page Header */}
           <header className="mb-8 text-center">

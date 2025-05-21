@@ -207,7 +207,7 @@ export default function Notices() {
               setEditingNoticeId(null);
               setForm({ title: "", description: "", file: null });
             }}
-            className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+            className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
           >
             Add Notice
           </button>
@@ -216,7 +216,7 @@ export default function Notices() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
           >
             <option value="all">All</option>
             <option value="active">Active</option>
@@ -227,7 +227,7 @@ export default function Notices() {
             placeholder="Search notices..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
+            className="p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00] w-full sm:w-48"
           />
         </div>
       </div>
@@ -252,7 +252,7 @@ export default function Notices() {
               placeholder="Enter title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               required
             />
           </div>
@@ -268,7 +268,7 @@ export default function Notices() {
               placeholder="Enter description"
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0D3C00] focus:border-[#0D3C00]"
+              className="mt-1 block w-full p-2 border border-gray-300   focus:ring-[#0D3C00] focus:border-[#0D3C00]"
               rows="4"
               required
             />
@@ -284,20 +284,20 @@ export default function Notices() {
               type="file"
               id="file"
               onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 border border-gray-300  "
             />
           </div>
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="bg-[#0D3C00] text-white px-4 py-2 rounded-md hover:bg-[#15803d] transition-colors"
+              className="bg-[#0D3C00] text-white px-4 py-2   hover:bg-[#15803d] transition-colors"
             >
               {editingNoticeId ? "Update Notice" : "Add Notice"}
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-4 py-2   hover:bg-gray-600 transition-colors"
             >
               Cancel
             </button>
@@ -324,14 +324,14 @@ export default function Notices() {
             <div className="ml-auto flex space-x-2">
               <button
                 onClick={() => handleEdit(notice)}
-                className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white px-3 py-1   hover:bg-blue-600 transition-colors"
                 aria-label={`Edit notice ${notice.title}`}
               >
                 Edit
               </button>
               <button
                 onClick={() => handleArchive(notice.id, notice.archived)}
-                className={`px-3 py-1 rounded-md text-white transition-colors ${
+                className={`px-3 py-1   text-white transition-colors ${
                   notice.archived
                     ? "bg-gray-500 cursor-pointer"
                     : "bg-yellow-500 hover:bg-yellow-600"
@@ -342,7 +342,7 @@ export default function Notices() {
               </button>
               <button
                 onClick={() => handleDelete(notice.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                className="bg-red-500 text-white px-3 py-1   hover:bg-red-600 transition-colors"
                 aria-label={`Delete notice ${notice.title}`}
               >
                 Delete

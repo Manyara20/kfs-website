@@ -1,12 +1,12 @@
 'use client';
-
-import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
 import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
+import { useEffect, useState } from "react";
+
 
 const KaruraForestPage = () => {
   const [fontSize, setFontSize] = useState(16);

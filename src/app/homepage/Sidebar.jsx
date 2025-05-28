@@ -63,17 +63,17 @@ const FloatingSidebar = () => {
   };
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3 md:gap-4 z-[1000]">
-      {/* Accessibility Button with Hover Menu */}
+    <>
+      {/* Accessibility Button (Positioned 120px from top) */}
       <div
-        className="relative"
+        className="fixed right-0 top-[120px] z-[1000]"
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <div
-          className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 cursor-pointer hover:bg-[#2a7a3d]"
+          className="bg-transparent border border-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 cursor-pointer hover:bg-[#2a7a3d]"
         >
-          <FaWheelchair />
+          <FaWheelchair className="text-white animate-colorTransition" />
         </div>
         {isMenuOpen && (
           <div className="absolute right-12 sm:right-14 md:right-16 top-0 bg-white border border-gray-300 shadow-lg w-40 sm:w-48 md:w-56 z-[1001]">
@@ -116,32 +116,34 @@ const FloatingSidebar = () => {
         )}
       </div>
 
-      {/* Other Sidebar Links */}
-      <Link
-        href="https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
-      >
-        <FaEnvelope />
-      </Link>
-      <Link
-        href="https://enursery.kenyaforestservice.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
-      >
-        <FaIdBadge />
-      </Link>
-      <Link
-        href="https://sawmillers.kenyaforestservice.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#1f5d2f] text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
-      >
-        <FaTree />
-      </Link>
-    </div>
+      {/* Other Sidebar Links (Centered Vertically) */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3 md:gap-4 z-[1000]">
+        <Link
+          href="https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-transparent border border-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
+        >
+          <FaEnvelope className="text-white animate-colorTransition" />
+        </Link>
+        <Link
+          href="https://enursery.kenyaforestservice.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-transparent border border-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
+        >
+          <FaIdBadge className="text-white animate-colorTransition" />
+        </Link>
+        <Link
+          href="https://sawmillers.kenyaforestservice.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-transparent border border-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex justify-center items-center text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:bg-[#2a7a3d]"
+        >
+          <FaTree className="text-white animate-colorTransition" />
+        </Link>
+      </div>
+    </>
   );
 };
 

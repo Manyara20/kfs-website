@@ -18,8 +18,6 @@ import MomentsSection from "@/app/homepage/MomentsSection"
 function HomePageContents() {
   return (
     <div>
-      <TopNavBar />
-      <MainNavBar />
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />

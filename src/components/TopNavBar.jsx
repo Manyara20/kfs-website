@@ -1,23 +1,10 @@
 "use client";
 
-import React, { memo } from "react";
-import {
-  Email,
-  Call,
-  AccountBox,
-  Assignment,
-  AccessTime,
-} from "@mui/icons-material";
-import { FaTwitter, FaFacebookF, FaInstagram, FaSkype, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { Email, Call, AccessTime } from "@mui/icons-material";
 
-
-const TopNavBar = memo(() => {
-  // Menu items split into two groups
-  const group1 = [
-    { icon: <Email />, text: "Staff Email", priority: 2 },
-    { icon: <Assignment />, text: "E-Registration", priority: 3 },
-    { icon: <AccountBox />, text: "Research License", priority: 3 },
-  ];
+const OfficeHoursPopup = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
   const group2 = [
     { icon: <Call />, text: "0800 123 456 - Toll Free", priority: 1 },
@@ -29,59 +16,72 @@ const TopNavBar = memo(() => {
     { icon: <Email />, text: "info@kenyaforestservice.org", priority: 1 },
   ];
 
-  return (
-    <nav className="bg-[#0D3C00] w-full shadow-md relative hidden md:block">
-      <div className="max-w-8xl mx-auto px-4 sm:px-2 md:px-3 lg:px-4">
-        {/* Desktop/Tablet View (md and above) */}
-        <div className="flex justify-between items-center py-1.5">
-          
-          {/* Group 1 */}
-          <div className="flex items-center space-x-1 tracking-wider flex-shrink-0">
-            {group1.map((item, index) => (
-              <div key={index} className="flex items-center">
-                <div className="text-white p-1">
-                  {React.cloneElement(item.icon, {
-                    className: "text-white w-3 h-3 md:w-4 md:h-4 lg:w-4 lg:h-4",
-                  })}
-                </div>
-                <span
-                  className="text-white text-[0.55rem] md:text-[0.6rem] lg:text-[0.65rem] font-['Peugeot',Helvetica,sans-serif] capitalize whitespace-nowrap"
-                >
-                  {item.text}
-                </span>
-                {index < group1.length - 1 && (
-                  <div className="w-px h-2 md:h-3 lg:h-3 bg-white mx-0.5 md:mx-1 lg:mx-1" />
-                )}
-              </div>
-            ))}
-          </div>
+  useEffect(() => {
+    // Show popup after 5 seconds
+    const showTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 5000);
 
-          {/* Group 2 */}
-          <div className="flex items-center space-x-1 tracking-wider flex-shrink-0">
-            {group2.map((item, index) => (
-              <div key={index} className="flex items-center">
-                <div className="text-white p-0.5">
-                  {React.cloneElement(item.icon, {
-                    className: "text-white w-3 h-3 md:w-4 md:h-4 lg:w-4 lg:h-4",
-                  })}
+    // Hide popup after 10 seconds if not manually closed
+    const hideTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, 15000); // 5000ms (show) + 10000ms (visible duration)
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <div className="fixed top-4 right-4 z-50 animate-fadeIn">
+          <div className="bg-white shadow-lg rounded-lg p-4 max-w-xs w-full relative">
+            <button
+              onClick={handleClose}
+              className="absolute top-2 right-2 text-[#0D3C00] hover:text-gray-700 focus:outline-none"
+              aria-label="Close popup"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <h2 className="text-lg font-bold text-[#0D3C00] mb-3">Office Hours</h2>
+            <div className="space-y-2">
+              {group2.map((item, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                  <div className="text-[#0D3C00]">
+                    {React.cloneElement(item.icon, {
+                      className: "w-4 h-4",
+                    })}
+                  </div>
+                  <span className="text-[#0D3C00] text-sm font-['Peugeot',Helvetica,sans-serif]">
+                    {item.text}
+                  </span>
                 </div>
-                <span
-                  className="text-white tracking-wider text-[0.55rem] md:text-[0.6rem] lg:text-[0.65rem] font-['Peugeot',Helvetica,sans-serif] whitespace-nowrap"
-                >
-                  {item.text}
-                </span>
-                {index < group2.length - 1 && (
-                  <div className="w-px h-2 md:h-3 lg:h-3 bg-white mx-0.5 md:mx-1 lg:mx-1" />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
-});
+};
 
-TopNavBar.displayName = "TopNavBar";
-
-export default TopNavBar;
+export default OfficeHoursPopup;

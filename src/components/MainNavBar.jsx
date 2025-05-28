@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import {
   AppBar,
@@ -17,6 +18,7 @@ import {
   useMediaQuery,
   TextField,
   InputAdornment,
+  Button,
 } from "@mui/material";
 import {
   ArrowDropDown,
@@ -24,9 +26,13 @@ import {
   Search as SearchIcon,
   ExpandLess,
   ExpandMore,
+  Twitter,
+  Facebook,
+  Instagram, // Using Instagram icon as a placeholder for TikTok
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
+import navigationItems from "./navigationItems";
 
 const MainNavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -48,140 +54,6 @@ const MainNavBar = () => {
     }));
   };
 
-  const navigationItems = [
-    { label: "Home", link: "/" },
-    {
-      label: "About",
-      subItems: [
-        { label: "KFS Board", link: "/about/kfs-board" },
-        { label: "Senior Management", link: "/about/senior-management" },
-        {
-          label: "Core Programs",
-          link: "/about/core-programs",
-          subItems: [
-            { label: "Forest Conservation and Management", link: "/about/core-programs/forest-conservation-management" },
-            { label: "Forest Plantation and Management", link: "/about/core-programs/forest-plantation-management" },
-            { label: "Forest Protection and Security", link: "/about/core-programs/forest-protection-security" },
-          ],
-        },
-        {
-          label: "Other Programs",
-          link: "/about/other-programs",
-          subItems: [
-            { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-            { label: "Strategy Partnerships Resource Mobilizations", link: "/about/other-programs/strategy-patnerships" },
-            { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
-          ],
-        },
-        {
-          label: "Projects",
-          link: "/about/projects",
-          subItems: [
-            { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
-            { label: "NTPC", link: "/about/projects/NTPC" },
-            { label: "IC-FRA Documents", link: "/about/projects/ICFRADocs" },
-          ],
-        },
-      ],
-    },
-    {
-      label: "Media Center",
-      subItems: [
-        { label: "News & Events", link: "/mediacenter/news-events" },
-        { label: "Photo Gallery", link: "/mediacenter/photo-gallery" },
-        { label: "Events Calendar", link: "/mediacenter/events-calendar" },
-        { label: "The Forester Magazine", link: "/mediacenter/forester-magazine" },
-        { label: "Press Releases", link: "/mediacenter/press-releases" },
-      ],
-    },
-    {
-      label: "Quick Links",
-      subItems: [
-        { label: "Tree Planting", link: "/quick-links/tree-planting" },
-        {
-          label: "Participatory Forest Management",
-          link: "/quick-links/participatory-forest-management",
-          subItems: [
-            { label: "Background", link: "/quick-links/participatory-forest-management/background" },
-            { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/ForestPlans" },
-          ],
-        },
-        { label: "Customer Feedback", link: "/quick-links/CustomerFeedback" },
-        {
-          label: "Eco-tourism",
-          link: "/quick-links/eco-tourism",
-          subItems: [
-            { label: "Background", link: "/quick-links/eco-tourism/background" },
-            { label: "Fees & Charges", link: "/quick-links/eco-tourism/fees-charges" },
-            { label: "Investment Opportunities", link: "/quick-links/eco-tourism/investment-opportunities" },
-            {
-              label: "Guidelines & Code of Conduct",
-              link: "/quick-links/eco-tourism/guidelines",
-              subItems: [
-                { label: "Code of Conduct for Forest Adjacent Communities", link: "/quick-links/eco-tourism/guidelines/forest-adjacent-communities" },
-                { label: "Code of Conduct for Private Investors in Eco-tourism & Recreation Facilities", link: "/quick-links/eco-tourism/guidelines/private-investors" },
-                { label: "Code of Conduct for Tour Leaders", link: "/quick-links/eco-tourism/guidelines/tour-leaders" },
-                { label: "Code of Conduct for Visitors to Eco-tourism", link: "/quick-links/eco-tourism/guidelines/visitors" },
-                { label: "Guidelines for Constructing Eco-tourism & Recreational Facilities", link: "/quick-links/eco-tourism/guidelines/construction" },
-                { label: "Guidelines for Decommissioning Eco-tourism Facilities", link: "/quick-links/eco-tourism/guidelines/decommissioning" },
-              ],
-            },
-            { label: "Why You Should Keep Visiting Public Forests in Kenya", link: "/quick-links/eco-tourism/why-visit" },
-          ],
-        },
-        { label:"Eco-Tourism Sites",
-          link: "/quick-links/eco-tourism/attractions",
-              subItems: [
-                { label: "Menengai Forest", link: "/quick-links/eco-tourism/attractions/menengai-forest" },
-                { label: "Arabuko Sokoke Forest", link: "/quick-links/eco-tourism/attractions/arabuko-sokoke-forest" },
-                { label: "Karura Forest", link: "/quick-links/eco-tourism/attractions/karura-forest" },
-                { label: "Ngong Hills Forest", link: "/quick-links/eco-tourism/attractions/ngong-hills-forest" },
-                { label: "Ngare Ndare Forest", link: "/quick-links/eco-tourism/attractions/ngare-ndare-forest" },
-                { label: "Mt Kenya Forest Reserve", link: "/quick-links/eco-tourism/attractions/mt-kenya-forest-reserve" },
-                { label: "Hombe Forest Guesthouse", link: "/quick-links/eco-tourism/attractions/hombe-forest-guesthouse" },
-                { label: "Ndaragwa Nature Trail", link: "/quick-links/eco-tourism/attractions/ndaragwa-nature-trail" },
-                { label: "Nairobi Arboretum", link: "/quick-links/eco-tourism/attractions/nairobi-arboretum" },
-                { label: "Community Eco-tourism Facilities", link: "/quick-links/eco-tourism/attractions/community-eco-tourism-facilities" },
-                { label: "KFC Guesthouse & Conference Centre", link: "/quick-links/eco-tourism/attractions/kfc-guesthouse-conference-centre" },
-              ],
-
-        },
-        {
-          label: "Online Systems",
-          link: "/quick-links/online-systems",
-          subItems: [
-            { label: "Staff Mail", link: "https://mail.kenyaforestservice.org/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.kenyaforestservice.org%2fowa%2f", isExternal: true },
-            { label: "E-Registration", link: "https://sawmillers.kenyaforestservice.org/", isExternal: true },
-            { label: "E-Nursery", link: "https://enursery.kenyaforestservice.org/", isExternal: true },
-            { label: "Research License", link: "/quick-links/online-systems/research-license", isExternal: false },
-            { label: "Monitoring and Evaluation", link: "http://monitoring.kenyaforestservice.org/#/home", isExternal: true },
-          ],
-        },
-      ],
-    },
-    { label: "Contact Us", link: "/contacts" },
-    {
-      label: "E-Documents",
-      subItems: [
-        { label: "Public Documents", link: "/e-documents/public" },
-        { label: "Legal Documents", link: "/e-documents/legal" },
-        { label: "Policy Documents", link: "/e-documents/policy" },
-        { label: "Staff Documents", link: "/e-documents/staff-documents" },
-        {
-          label: "Video Documentation",
-          subItems: [
-            { label: "Sign Language Service Charter", link: "/e-documents/video/Sign-Language" },
-            { label: "Audio Service Charter", link: "/e-documents/video/Audio-Service" },
-          ],
-        },
-        { label: "Documents Archive", link: "/e-documents/archive" },
-      ],
-    },
-    { label: "Tenders", link: "/tenders" },
-    { label: "Careers", link: "/careers" },
-  ];
-
-  // Flatten navigation items for search
   const flattenItems = (items, parentPath = []) => {
     let flatItems = [];
     items.forEach((item) => {
@@ -198,7 +70,6 @@ const MainNavBar = () => {
 
   const flatNavigationItems = flattenItems(navigationItems);
 
-  // Search filter effect
   useEffect(() => {
     if (searchQuery.trim()) {
       const lowerQuery = searchQuery.toLowerCase().trim();
@@ -213,9 +84,11 @@ const MainNavBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
+      const topNavHeight = 28;
+      setIsSticky(window.scrollY > topNavHeight);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -235,8 +108,8 @@ const MainNavBar = () => {
           sx={{
             fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
             fontFamily: "'Peugeot', Helvetica, sans-serif",
-            color: "#6A961F",
-            "&:hover": { backgroundColor: "rgba(106,150,31,0.1)" },
+            color: isSticky ? "white" : "#6A961F",
+            "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
             padding: "0.5rem 0.6rem",
             display: "flex",
             alignItems: "center",
@@ -255,7 +128,7 @@ const MainNavBar = () => {
           {item.subItems?.length > 0 && (
             <ArrowDropDown
               sx={{
-                color: "#6A961F",
+                color: isSticky ? "rgba(0,0,0,0.3)" : "#6A961F",
                 fontSize: "1.1rem",
                 marginLeft: level % 2 === 0 ? "auto" : "0",
               }}
@@ -270,9 +143,9 @@ const MainNavBar = () => {
               position: "absolute",
               top: "100%",
               left: "100%",
-              backgroundColor: "white",
+              backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "0,0,0,0.1",
               minWidth: "180px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
               zIndex: 1000 + level,
               transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
             }}
@@ -299,10 +172,10 @@ const MainNavBar = () => {
               target={item.isExternal ? "_blank" : "_self"}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               sx={{
-                color: "#6A961F",
+                color: isSticky ? "rgba(0,0,0,0.1)" : "#6A961F",
                 padding: "8px 16px",
                 display: "flex",
-                justifyContent: "space-between",
+                justifyContent: " esthenticate",
                 alignItems: "center",
               }}
             >
@@ -318,11 +191,11 @@ const MainNavBar = () => {
               />
               {hasSubItems && (
                 expandedItems[key] ? (
-                  <ExpandLess sx={{ color: "#6A961F" }} />
+                  <ExpandLess sx={{ color: isSticky ? "white" : "#6A961F" }} />
                 ) : (
                   <ExpandMore
                     sx={{
-                      color: "#6A961F",
+                      color: isSticky ? "white" : "#6A961F",
                       marginLeft: level % 2 === 0 ? "auto" : "0",
                     }}
                   />
@@ -346,164 +219,193 @@ const MainNavBar = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: isSticky ? "#0D3C00" : "white",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        transition: "background-color 0.3s ease",
+        backgroundColor: isSticky ? "rgba(0,0,0,0.1)" : "rgba(0,0,0,0.1)",
+        backdropFilter: "blur(8px)",
+        boxShadow: isSticky ? "0 2px 5px rgba(0,0,0,0.1)" : "none",
+        top: { xs: 0, md: 48 },
+        zIndex: 20,
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
       }}
     >
-      <Toolbar
+      <Box
         sx={{
-          width: { xs: "95%", sm: "90%", lg: "85%" },
+          width: { xs: "95%", sm: "90%", lg: "85%", xl: "80%" },
+          maxWidth: "1600px",
           margin: "auto",
-          minHeight: "auto !important",
-          padding: "0 !important",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          backgroundColor: isSticky ? "rgba(0,0,0,0)" : "rgba(0,0,0,0)",
+          borderRadius: "8px",
+          padding: "0.5rem 1rem",
+          boxShadow: "0 2px 4px rgba(0,0,0,0)",
         }}
       >
-        <Box sx={{ flexShrink: 0, paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
-          <Link href="/">
-            <Image
-              src="https://whatthelogo.com/storage/logos/kenya-forest-service-96842.png"
-              alt="KFS Logo"
-              width={50}
-              height={35}
-            />
-          </Link>
-        </Box>
+        <Toolbar
+          sx={{
+            minHeight: "auto !important",
+            padding: "0 !important",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ flexShrink: 0, paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
+            <Link href="/">
+              <Image
+                src="/images/kfs_logo.png"
+                alt="KFS Logo"
+                width={50}
+                height={35}
+              />
+            </Link>
+          </Box>
 
-        {!isMobile && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexGrow: 1,
-              gap: { md: 1, lg: 2 },
-              flexWrap: "nowrap",
-              alignItems: "center",
-            }}
-          >
-            {navigationItems.map((item, index) =>
-              item.subItems ? (
-                <Box
-                  key={index}
-                  sx={{
-                    position: "relative",
-                    "&:hover > .MuiBox-root": {
-                      visibility: "visible",
-                      opacity: 1,
-                    },
-                  }}
-                >
-                  <Typography
-                    variant="body1"
+          {!isMobile && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexGrow: 1,
+                gap: { md: 1, lg: 2 },
+                flexWrap: "nowrap",
+                alignItems: "center",
+              }}
+            >
+              {navigationItems.map((item, index) =>
+                item.subItems ? (
+                  <Box
+                    key={index}
                     sx={{
-                      color: isSticky ? "white" : "#6A961F",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                      fontFamily: "'Peugeot', Helvetica, sans-serif",
-                      fontWeight: 500,
+                      position: "relative",
+                      "&:hover > .MuiBox-root": {
+                        visibility: "visible",
+                        opacity: 1,
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: isSticky ? "white" : "white", //text
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
+                        fontFamily: "'Peugeot', Helvetica, sans-serif",
+                        fontWeight: 500,
+                        padding: { md: "5px 7px", lg: "7px 10px" },
+                        "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {item.label}
+                      <ArrowDropDown sx={{ color: isSticky ? "white" : "white", fontSize: "1.1rem" }} />
+                    </Typography>
+                    <Box
+                      sx={{
+                        visibility: "hidden",
+                        opacity: 0,
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "white",
+                        minWidth: "180px",
+                        boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                        zIndex: 1000,
+                        transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
+                      }}
+                    >
+                      {renderSubMenu(item.subItems)}
+                    </Box>
+                  </Box>
+                ) : (
+                  <Link
+                    key={index}
+                    href={item.link}
+                    target={item.isExternal ? "_blank" : "_self"}
+                    rel={item.isExternal ? "noopener noreferrer" : undefined}
+                    sx={{
+                      color: isSticky ? "white" : "white",
+                      textDecoration: "none",
                       padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                      transition: "color 0.3s ease",
-                      textTransform: "capitalize",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
-                    {item.label}
-                    <ArrowDropDown sx={{ color: isSticky ? "white" : "#6A961F", fontSize: "1.1rem" }} />
-                  </Typography>
-                  <Box
-                    sx={{
-                      visibility: "hidden",
-                      opacity: 0,
-                      position: "absolute",
-                      top: "100%",
-                      left: 0,
-                      backgroundColor: "white",
-                      minWidth: "180px",
-                      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                      zIndex: 1000,
-                      transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
-                    }}
-                  >
-                    {renderSubMenu(item.subItems)}
-                  </Box>
-                </Box>
-              ) : (
-                <Link
-                  key={index}
-                  href={item.link}
-                  target={item.isExternal ? "_blank" : "_self"}
-                  rel={item.isExternal ? "noopener noreferrer" : undefined}
-                  sx={{
-                    color: isSticky ? "white" : "#6A961F",
-                    textDecoration: "none",
-                    padding: { md: "5px 7px", lg: "7px 10px" },
-                    "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                    display: "flex",
-                    alignItems: "center",
-                    transition: "color 0.3s ease",
-                  }}
+                    <Typography
+                      sx={{
+                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
+                        fontFamily: "'Peugeot', Helvetica, sans-serif",
+                        fontWeight: 500,
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                  </Link>
+                )
+              )}
+            </Box>
+          )}
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            {!isMobile && (
+              <IconButton
+                sx={{
+                  color: isSticky ? "white" : "black",
+                  fontWeight: "bold",
+                  padding: { md: "5px", lg: "7px" },
+                  "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
+                }}
+                onClick={toggleSearchDrawer}
+              >
+                <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} />
+              </IconButton>
+            )}
+
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: isSticky ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.3)",
+                color: isSticky ? "white" : "white",
+                borderRadius: "20px",
+                padding: { xs: "6px 12px", md: "8px 16px" },
+                display: "flex",
+                gap: 1,
+                "&:hover": {
+                  backgroundColor: isSticky ? "rgba(255,255,255,0.3)" : "#5A851A",
+                },
+              }}
+            >
+              <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
+                <Twitter sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+              </Link>
+              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <Facebook sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+              </Link>
+              <Link href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                <Instagram sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} /> {/* Placeholder for TikTok */}
+              </Link>
+            </Button>
+
+            {isMobile && (
+              <>
+                <IconButton
+                  sx={{ color: isSticky ? "white" : "black", padding: "5px" }}
+                  onClick={toggleSearchDrawer}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                      fontFamily: "'Peugeot', Helvetica, sans-serif",
-                      fontWeight: 500,
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {item.label}
-                  </Typography>
-                </Link>
-              )
+                  <SearchIcon sx={{ fontSize: "1.4rem" }} />
+                </IconButton>
+                <IconButton
+                  sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px" }}
+                  onClick={toggleDrawer(true)}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </>
             )}
           </Box>
-        )}
-
-        {!isMobile && (
-          <Box sx={{ flexShrink: 0 }}>
-            <IconButton
-              sx={{
-                color: isSticky ? "white" : "black",
-                fontWeight: "bold",
-                padding: { md: "5px", lg: "7px" },
-                "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
-                transition: "color 0.3s ease",
-              }}
-              onClick={toggleSearchDrawer}
-            >
-              <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} />
-            </IconButton>
-          </Box>
-        )}
-
-        {isMobile && (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton
-              sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px", transition: "color 0.3s ease" }}
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <IconButton
-              sx={{
-                color: isSticky ? "white" : "black",
-                fontWeight: "bold",
-                padding: "5px",
-                "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
-                transition: "color 0.3s ease",
-              }}
-              onClick={toggleSearchDrawer}
-            >
-              <SearchIcon sx={{ fontSize: "1.4rem" }} />
-            </IconButton>
-          </Box>
-        )}
-      </Toolbar>
+        </Toolbar>
+      </Box>
 
       <Drawer
         anchor="right"
@@ -513,7 +415,8 @@ const MainNavBar = () => {
           "& .MuiDrawer-paper": {
             width: { xs: "80%", sm: "60%" },
             maxWidth: "300px",
-            backgroundColor: "#fff",
+            backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "white",
+            color: isSticky ? "white" : "#6A961F",
             padding: "1rem",
           },
         }}
@@ -521,7 +424,7 @@ const MainNavBar = () => {
         <Box sx={{ width: "100%" }}>
           <IconButton
             onClick={toggleDrawer(false)}
-            sx={{ position: "absolute", top: "1rem", right: "1rem", color: "#6A961F" }}
+            sx={{ position: "absolute", top: "1rem", right: "1rem", color: isSticky ? "white" : "#6A961F" }}
           >
             <MenuIcon />
           </IconButton>
@@ -535,7 +438,7 @@ const MainNavBar = () => {
         onClose={toggleSearchDrawer}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "rgba(0, 0, 0, 0.85)",
             color: "white",
             height: "auto",
             width: "100%",
@@ -596,7 +499,7 @@ const MainNavBar = () => {
             }}
           />
           {filteredItems.length > 0 && (
-            <List sx={{ mt: 2, bgcolor: "white",  maxHeight: "50vh", overflowY: "auto" }}>
+            <List sx={{ mt: 2, bgcolor: isSticky ? "rgba(13,60,0,0.9)" : "white", maxHeight: "50vh", overflowY: "auto" }}>
               {filteredItems.map((item, idx) => (
                 <ListItem key={idx} disablePadding>
                   <ListItemButton
@@ -605,9 +508,9 @@ const MainNavBar = () => {
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
                     sx={{
-                      color: "#6A961F",
+                      color: isSticky ? "white" : "#6A961F",
                       padding: "8px 16px",
-                      "&:hover": { bgcolor: "rgba(106,150,31,0.1)" },
+                      "&:hover": { bgcolor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                     }}
                     onClick={() => {
                       setSearchDrawerOpen(false);
@@ -641,7 +544,7 @@ const MainNavBar = () => {
             >
               No results found.
             </Typography>
-          )} 
+          )}
         </Box>
       </Drawer>
     </AppBar>

@@ -8,7 +8,7 @@ import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
-export default function ForestManagementPage() {
+export default function coreprograms() {
   const [activeTab, setActiveTab] = useState("conservation");
   const [fontSize, setFontSize] = useState(16);
   const [isVisible, setIsVisible] = useState(false);

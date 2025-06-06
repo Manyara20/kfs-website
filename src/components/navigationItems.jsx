@@ -3,35 +3,12 @@ const navigationItems = [
   {
     label: "About",
     subItems: [
+      { label: "Organizational Structure", link: "/about/organizational-structure"},
       { label: "KFS Board", link: "/about/kfs-board" },
       { label: "Senior Management", link: "/about/senior-management" },
-      {
-        label: "Core Programs",
-        link: "/about/core-programs",
-        subItems: [
-          { label: "Forest Conservation and Management", link: "/about/core-programs/forest-conservation-management" },
-          { label: "Forest Plantation and Management", link: "/about/core-programs/forest-plantation-management" },
-          { label: "Forest Protection and Security", link: "/about/core-programs/forest-protection-security" },
-        ],
-      },
-      {
-        label: "Other Programs",
-        link: "/about/other-programs",
-        subItems: [
-          { label: "Organizational Structure", link: "/about/other-programs/organizational-structure" },
-          { label: "Strategy Partnerships Resource Mobilizations", link: "/about/other-programs/strategy-patnerships" },
-          { label: "Corporate Services", link: "/about/other-programs/corporate-services" },
-        ],
-      },
-      {
-        label: "Projects",
-        link: "/about/projects",
-        subItems: [
-          { label: "GZDSP II", link: "/about/projects/GZDSP-II" },
-          { label: "NTPC", link: "/about/projects/NTPC" },
-          { label: "IC-FRA Documents", link: "/about/projects/ICFRADocs" },
-        ],
-      },
+      { label: "Core Programs", link: "/about/core-programs" },
+      { label: "Other Programs", link: "/about/other-programs" },
+      { label: "Projects", link: "/about/projects" },
     ],
   },
   {

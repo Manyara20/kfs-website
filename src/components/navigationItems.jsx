@@ -25,14 +25,7 @@ const navigationItems = [
     label: "Quick Links",
     subItems: [
       { label: "Tree Planting", link: "/quick-links/tree-planting" },
-      {
-        label: "Participatory Forest Management",
-        link: "/quick-links/participatory-forest-management",
-        subItems: [
-          { label: "Background", link: "/quick-links/participatory-forest-management/background" },
-          { label: "Forest Management Plans", link: "/quick-links/participatory-forest-management/ForestPlans" },
-        ],
-      },
+      { label: "Participatory Forest Management", link: "/quick-links/participatory-forest-management" },
       { label: "Customer Feedback", link: "/quick-links/CustomerFeedback" },
       {
         label: "Eco-tourism",
@@ -94,13 +87,7 @@ const navigationItems = [
       { label: "Legal Documents", link: "/e-documents/legal" },
       { label: "Policy Documents", link: "/e-documents/policy" },
       { label: "Staff Documents", link: "/e-documents/staff-documents" },
-      {
-        label: "Video Documentation",
-        subItems: [
-          { label: "Sign Language Service Charter", link: "/e-documents/video/Sign-Language" },
-          { label: "Audio Service Charter", link: "/e-documents/video/Audio-Service" },
-        ],
-      },
+      { label: "Video Documentation", link: "/e-documents/video" },
       { label: "Documents Archive", link: "/e-documents/archive" },
     ],
   },

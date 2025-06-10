@@ -9,9 +9,9 @@ const HeroSection = () => {
 
   const slides = [
     {
-      title: "Kenya Forest Service",
+      title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
       subtitle:
-        "Provide for the development and sustainable management, including conservation and rational utilization of all forest resources for the socio-economic development of the country and for connected purposes.",
+          "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
       image: "/images/cypress.JPG",
       ctaText: "Explore Our Forests",
       ctaLink: "#forests", // Replace with actual link as needed

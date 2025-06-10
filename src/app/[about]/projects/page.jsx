@@ -99,7 +99,6 @@ export default function projects() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
 
       <div

@@ -97,7 +97,6 @@ export default function otherprograms() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
 
       <div

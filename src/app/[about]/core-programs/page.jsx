@@ -198,7 +198,6 @@ export default function coreprograms() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       <div
         className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
@@ -238,23 +237,7 @@ export default function coreprograms() {
           </div>
           {tabs.find((tab) => tab.id === activeTab)?.content}
         </motion.div>
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
-          <button
-            onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
-            aria-label="Increase font size"
-          >
-            <IoMdHelpCircle className="text-white text-lg" />
-          </button>
-          <button
-            onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
-            aria-label="Decrease font size"
-          >
-            <IoMdHelpCircle className="text-white text-lg" />
-          </button>
         </div>
-      </div>
       <FooterBottom />
     </div>
   );

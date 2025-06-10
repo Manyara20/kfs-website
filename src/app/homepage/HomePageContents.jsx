@@ -5,14 +5,14 @@ import HeroSection from "@/app/homepage/HeroSection";
 import MissionSection from "@/app/homepage/MissionSection";
 import CodeOfConductSection from "@/app/homepage/CodeofConductSection";
 import NewsSection from "@/app/homepage/NewsSection";
-import CoreValues from "@/app/homepage/CoreValues";
 import Footer from "@/app/homepage/Footer";
 import FeedSection from "@/app/homepage/FeedSection";
 import Principles from "@/app/homepage/Principles";
 import PatnersSection from "@/app/homepage/Patners";
 import Sidebar from "@/app/homepage/Sidebar";
-import MomentsSection from "@/app/homepage/MomentsSection";
 import Exploreourforests from "@/components/Exploreourforests";
+import Exploreournuseries from "@/components/Exploreournuseries";
+
 
 function HomePageContents() {
   return (
@@ -22,10 +22,9 @@ function HomePageContents() {
       <CodeOfConductSection />
       <Exploreourforests/>
       <Principles />
-      <CoreValues />
-      <MomentsSection />
       <PatnersSection />
       <NewsSection />
+      <Exploreournuseries/>
       <FeedSection />
       <Footer />
       <FooterBottom />

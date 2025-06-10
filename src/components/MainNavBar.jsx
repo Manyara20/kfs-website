@@ -365,30 +365,30 @@ const MainNavBar = () => {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: isSticky ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.3)",
-                color: isSticky ? "#fff" : "#0D3C00",
-                borderRadius: "20px",
-                padding: { xs: "6px 12px", md: "8px 16px" },
+                backgroundColor: isSticky ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
+                color: isSticky ? "#fff" : "#fff",
+                borderRadius: "4px",
+                padding: { xs: "6px 14px", md: "8px 18px" },
                 display: "flex",
                 gap: 1,
                 "&:hover": {
-                  backgroundColor: isSticky ? "rgba(255,255,255,0.3)" : "#5A851A",
+                  backgroundColor: isSticky ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.2)",
                 },
               }}
             >
               <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
-                <Typography sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" }, fontWeight: "bold" }}>
+                <Typography sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "1.68rem" }, fontWeight: "bold" }}>
                   X
                 </Typography>
               </Link>
               <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Facebook sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+                <Facebook sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2.2rem" } }} />
               </Link>
               <Link href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-                <Instagram sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+                <Instagram sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2rem" } }} />
               </Link>
               <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <YouTube sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+                <YouTube sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2rem" } }} />
               </Link>
             </Button>
 

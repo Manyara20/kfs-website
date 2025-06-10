@@ -256,7 +256,6 @@ export default function KFSOrgStructurePage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Top Navigation Bar */}
-      <TopNavBar />
 
       {/* Main Navigation Bar */}
       <MainNavBar />

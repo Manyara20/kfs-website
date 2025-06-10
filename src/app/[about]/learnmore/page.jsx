@@ -9,7 +9,6 @@ import FooterBottom from "@/components/FooterBottom";
 export default function LearnMore() {
   return (
     <>
-    <TopNavBar />
     <MainNavBar />
     <div className="flex-col  bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
         style={{

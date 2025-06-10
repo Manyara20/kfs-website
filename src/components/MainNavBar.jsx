@@ -26,9 +26,9 @@ import {
   Search as SearchIcon,
   ExpandLess,
   ExpandMore,
-  Twitter,
   Facebook,
-  Instagram, // Using Instagram icon as a placeholder for TikTok
+  YouTube,
+  Instagram,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
@@ -84,8 +84,7 @@ const MainNavBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const topNavHeight = 28;
-      setIsSticky(window.scrollY > topNavHeight);
+      setIsSticky(window.scrollY > 0);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -108,7 +107,7 @@ const MainNavBar = () => {
           sx={{
             fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
             fontFamily: "'Peugeot', Helvetica, sans-serif",
-            color: isSticky ? "white" : "#6A961F",
+            color: isSticky ? "#fff" : "#0D3C00",
             "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
             padding: "0.5rem 0.6rem",
             display: "flex",
@@ -128,7 +127,7 @@ const MainNavBar = () => {
           {item.subItems?.length > 0 && (
             <ArrowDropDown
               sx={{
-                color: isSticky ? "rgba(0,0,0,0.3)" : "#6A961F",
+                color: isSticky ? "#fff" : "#0D3C00",
                 fontSize: "1.1rem",
                 marginLeft: level % 2 === 0 ? "auto" : "0",
               }}
@@ -143,7 +142,7 @@ const MainNavBar = () => {
               position: "absolute",
               top: "100%",
               left: "100%",
-              backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "0,0,0,0.1",
+              backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
               minWidth: "180px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
               zIndex: 1000 + level,
@@ -172,10 +171,10 @@ const MainNavBar = () => {
               target={item.isExternal ? "_blank" : "_self"}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               sx={{
-                color: isSticky ? "rgba(0,0,0,0.1)" : "#6A961F",
+                color: isSticky ? "#fff" : "#0D3C00",
                 padding: "8px 16px",
                 display: "flex",
-                justifyContent: " esthenticate",
+                justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
@@ -191,11 +190,11 @@ const MainNavBar = () => {
               />
               {hasSubItems && (
                 expandedItems[key] ? (
-                  <ExpandLess sx={{ color: isSticky ? "white" : "#6A961F" }} />
+                  <ExpandLess sx={{ color: isSticky ? "#fff" : "#0D3C00" }} />
                 ) : (
                   <ExpandMore
                     sx={{
-                      color: isSticky ? "white" : "#6A961F",
+                      color: isSticky ? "#fff" : "#0D3C00",
                       marginLeft: level % 2 === 0 ? "auto" : "0",
                     }}
                   />
@@ -219,12 +218,13 @@ const MainNavBar = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: isSticky ? "rgba(0,0,0,0.1)" : "rgba(0,0,0,0.1)",
-        backdropFilter: "blur(8px)",
+        backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
+        backdropFilter: isSticky ? "none" : "blur(8px)",
         boxShadow: isSticky ? "0 2px 5px rgba(0,0,0,0.1)" : "none",
-        top: { xs: 0, md: 48 },
+        top: 0,
         zIndex: 20,
-        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease",
+        marginTop: "5px",
       }}
     >
       <Box
@@ -232,10 +232,10 @@ const MainNavBar = () => {
           width: { xs: "95%", sm: "90%", lg: "85%", xl: "80%" },
           maxWidth: "1600px",
           margin: "auto",
-          backgroundColor: isSticky ? "rgba(0,0,0,0)" : "rgba(0,0,0,0)",
+          backgroundColor: "transparent",
           borderRadius: "8px",
           padding: "0.5rem 1rem",
-          boxShadow: "0 2px 4px rgba(0,0,0,0)",
+          boxShadow: "none",
         }}
       >
         <Toolbar
@@ -284,7 +284,7 @@ const MainNavBar = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: isSticky ? "white" : "white", //text
+                        color: isSticky ? "#fff" : "#0D3C00",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
@@ -297,7 +297,7 @@ const MainNavBar = () => {
                       }}
                     >
                       {item.label}
-                      <ArrowDropDown sx={{ color: isSticky ? "white" : "white", fontSize: "1.1rem" }} />
+                      <ArrowDropDown sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: "1.1rem" }} />
                     </Typography>
                     <Box
                       sx={{
@@ -306,7 +306,7 @@ const MainNavBar = () => {
                         position: "absolute",
                         top: "100%",
                         left: 0,
-                        backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "white",
+                        backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
                         minWidth: "180px",
                         boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
                         zIndex: 1000,
@@ -323,7 +323,7 @@ const MainNavBar = () => {
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
                     sx={{
-                      color: isSticky ? "white" : "white",
+                      color: isSticky ? "#fff" : "#0D3C00",
                       textDecoration: "none",
                       padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
@@ -351,10 +351,10 @@ const MainNavBar = () => {
             {!isMobile && (
               <IconButton
                 sx={{
-                  color: isSticky ? "white" : "black",
+                  color: isSticky ? "#fff" : "#0D3C00",
                   fontWeight: "bold",
                   padding: { md: "5px", lg: "7px" },
-                  "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
+                  "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                 }}
                 onClick={toggleSearchDrawer}
               >
@@ -366,7 +366,7 @@ const MainNavBar = () => {
               variant="contained"
               sx={{
                 backgroundColor: isSticky ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.3)",
-                color: isSticky ? "white" : "white",
+                color: isSticky ? "#fff" : "#0D3C00",
                 borderRadius: "20px",
                 padding: { xs: "6px 12px", md: "8px 16px" },
                 display: "flex",
@@ -377,26 +377,31 @@ const MainNavBar = () => {
               }}
             >
               <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
-                <Twitter sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+                <Typography sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" }, fontWeight: "bold" }}>
+                  X
+                </Typography>
               </Link>
               <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Facebook sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+                <Facebook sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
               </Link>
               <Link href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-                <Instagram sx={{ color: "white", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} /> {/* Placeholder for TikTok */}
+                <Instagram sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
+              </Link>
+              <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <YouTube sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.2rem", xl: "1.68rem" } }} />
               </Link>
             </Button>
 
             {isMobile && (
               <>
                 <IconButton
-                  sx={{ color: isSticky ? "white" : "black", padding: "5px" }}
+                  sx={{ color: isSticky ? "#fff" : "#0D3C00", padding: "5px" }}
                   onClick={toggleSearchDrawer}
                 >
                   <SearchIcon sx={{ fontSize: "1.4rem" }} />
                 </IconButton>
                 <IconButton
-                  sx={{ color: isSticky ? "white" : "#6A961F", padding: "5px" }}
+                  sx={{ color: isSticky ? "#fff" : "#0D3C00", padding: "5px" }}
                   onClick={toggleDrawer(true)}
                 >
                   <MenuIcon />
@@ -415,8 +420,8 @@ const MainNavBar = () => {
           "& .MuiDrawer-paper": {
             width: { xs: "80%", sm: "60%" },
             maxWidth: "300px",
-            backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "white",
-            color: isSticky ? "white" : "#6A961F",
+            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
+            color: isSticky ? "#fff" : "#0D3C00",
             padding: "1rem",
           },
         }}
@@ -424,7 +429,7 @@ const MainNavBar = () => {
         <Box sx={{ width: "100%" }}>
           <IconButton
             onClick={toggleDrawer(false)}
-            sx={{ position: "absolute", top: "1rem", right: "1rem", color: isSticky ? "white" : "#6A961F" }}
+            sx={{ position: "absolute", top: "1rem", right: "1rem", color: isSticky ? "#fff" : "#0D3C00" }}
           >
             <MenuIcon />
           </IconButton>
@@ -438,8 +443,8 @@ const MainNavBar = () => {
         onClose={toggleSearchDrawer}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: isSticky ? "rgba(13,60,0,0.9)" : "rgba(0, 0, 0, 0.85)",
-            color: "white",
+            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.85)",
+            color: isSticky ? "#fff" : "#0D3C00",
             height: "auto",
             width: "100%",
             maxHeight: "70vh",
@@ -466,7 +471,7 @@ const MainNavBar = () => {
               textAlign: "center",
               fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" },
               fontFamily: "'Peugeot', Helvetica, sans-serif",
-              color: "white",
+              color: isSticky ? "#fff" : "#0D3C00",
               textTransform: "capitalize",
             }}
           >
@@ -480,18 +485,18 @@ const MainNavBar = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "white", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} />
+                  <SearchIcon sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} />
                 </InputAdornment>
               ),
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "white" },
-                "&:hover fieldset": { borderColor: "white" },
-                "&.Mui-focused fieldset": { borderColor: "white" },
+                "& fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
+                "&:hover fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
+                "&.Mui-focused fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
               },
               "& .MuiInputBase-input": {
-                color: "white",
+                color: isSticky ? "#fff" : "#0D3C00",
                 fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" },
                 fontFamily: "'Peugeot', Helvetica, sans-serif",
                 textTransform: "none",
@@ -499,7 +504,7 @@ const MainNavBar = () => {
             }}
           />
           {filteredItems.length > 0 && (
-            <List sx={{ mt: 2, bgcolor: isSticky ? "rgba(13,60,0,0.9)" : "white", maxHeight: "50vh", overflowY: "auto" }}>
+            <List sx={{ mt: 2, bgcolor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)", maxHeight: "50vh", overflowY: "auto" }}>
               {filteredItems.map((item, idx) => (
                 <ListItem key={idx} disablePadding>
                   <ListItemButton
@@ -508,7 +513,7 @@ const MainNavBar = () => {
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
                     sx={{
-                      color: isSticky ? "white" : "#6A961F",
+                      color: isSticky ? "#fff" : "#0D3C00",
                       padding: "8px 16px",
                       "&:hover": { bgcolor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                     }}
@@ -535,7 +540,7 @@ const MainNavBar = () => {
           {searchQuery.trim() && filteredItems.length === 0 && (
             <Typography
               sx={{
-                color: "white",
+                color: isSticky ? "#fff" : "#0D3C00",
                 textAlign: "center",
                 mt: 2,
                 fontSize: { xs: "0.85rem", sm: "1rem" },

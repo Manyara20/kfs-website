@@ -29,7 +29,6 @@ const boardMembers = [
 export default function KFSBoardPage() {
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       <div className="bg-white min-h-screen px-4 md:px-6 py-4">
         {/* Title and Description */}

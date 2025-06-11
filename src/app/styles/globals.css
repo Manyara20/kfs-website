@@ -5,11 +5,13 @@
 
 /* Custom Fonts */
 @font-face {
-  font-family: 'Peugeot';
+  font-family: 'Futura';
   font-style: normal;
-  font-weight: 400; /* Regular */
-  src: local('Peugeot New Regular'), url('/fonts/PeugeotNewRegular.woff') format('woff');
+  font-weight: 400;
+  src: url('/fonts/Futura.woff2') format('woff2'),
+       url('/fonts/Futura.woff') format('woff');
 }
+
 
 /* Define CSS custom properties for colors */
 :root {
@@ -26,7 +28,7 @@
 
 /* Typography System */
 html {
-  font-size: 1.0rem; /* Default base font size */
+  font-size: 1.0rem;
 }
 
 body {
@@ -35,10 +37,10 @@ body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  font-family: 'Peugeot', Helvetica, sans-serif;
+  font-family: 'Futura', Helvetica, sans-serif;
   background: var(--background);
   color: var(--foreground);
-  line-height: 1.5; /* Improve readability */
+  line-height: 1.5;
 }
 
 /* General Styles */
@@ -64,7 +66,6 @@ body {
   background-color: #ffffff;
 }
 
-/* Override X timeline container */
 .twitter-feed-container .twitter-timeline,
 .twitter-feed-container .twitter-timeline-rendered {
   background-color: #fff !important;
@@ -72,7 +73,6 @@ body {
   width: 100% !important;
 }
 
-/* Style individual tweets */
 .twitter-feed-container .timeline-TweetList-tweet {
   background-color: #ffffff !important;
   border: none !important;
@@ -80,37 +80,31 @@ body {
   margin-bottom: 0.5rem !important;
 }
 
-/* Style tweet text */
 .twitter-feed-container .timeline-Tweet-text {
   color: #ffffff !important;
   line-height: 1.4 !important;
   margin: 0 !important;
 }
 
-/* Style tweet author name */
 .twitter-feed-container .timeline-Tweet-author .TweetAuthor-name {
   color: #ffffff !important;
   font-weight: 500 !important;
 }
 
-/* Style tweet handle and timestamp */
 .twitter-feed-container .timeline-Tweet-author .TweetAuthor-screenName,
 .twitter-feed-container .timeline-Tweet-timestamp {
   color: #e0e0e0 !important;
 }
 
-/* Remove unwanted elements */
 .twitter-feed-container .timeline-Header,
 .twitter-feed-container .timeline-Footer {
   display: none !important;
 }
 
-/* Ensure tweet cards have no rounded corners */
 .twitter-feed-container .timeline-TweetList-tweet {
   border-radius: 0 !important;
 }
 
-/* Links in tweets */
 .twitter-feed-container .timeline-Tweet-text a {
   color: #a6192e !important;
 }

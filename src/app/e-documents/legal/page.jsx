@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import axios from "axios";
@@ -43,8 +42,23 @@ export default function LegalDocumentsPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <TopNavBar />
-      <MainNavBar />
+      <div
+        className="sticky top-0 z-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
+          }}
+        ></div>
+        <MainNavBar />
+      </div>
       <div
         className="min-h-screen bg-cover bg-center bg-fixed p-8 relative overflow-hidden"
         style={{

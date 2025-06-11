@@ -9,28 +9,34 @@ const HeroSection = () => {
 
   const slides = [
     {
-      title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
+      title: "Explore Today, Conserve Forever.",
       subtitle:
-          "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
+        "Discover the untamed beauty of our forests, where your adventure fuels vital conservation and empowers local communities",
       image: "/images/cypress.JPG",
       ctaText: "Explore Our Forests",
-      ctaLink: "#forests", // Replace with actual link as needed
+      ctaLink: "#forests",
+      secondaryCtaText: "Who We Are",
+      secondaryCtaLink: "/about",
     },
     {
-      title: "Mangrove Forest Conservation Efforts",
+      title: "Trees for Better Lives",
       subtitle:
-        "Protecting Kenya's forests for future generations. Increase the National Tree Cover from 13% to 21.03% in the 5-year period towards attainment of 30% tree cover by 2032",
+        "Enhancing Kenya's tree cover to 30% by 2032 through collective action",
       image: "/images/Mangroveforest.png",
       ctaText: "Explore Our Nurseries",
-      ctaLink: "#nurseries", // Replace with actual link as needed
+      ctaLink: "#nurseries",
+      secondaryCtaText: "Get In Touch",
+      secondaryCtaLink: "/contact",
     },
     {
-      title: "Trees For Better Lives",
+      title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
       subtitle:
-        "Promoting environmental sustainability since 2005. National Forest Cover from 8.83% to 10% in the 5 years plan period towards attainment of the National target of 10% forest cover by 2030",
+        "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
       image: "/images/MTKULAL.JPG",
-      ctaText: "Journey Towards 15B Trees",
-      ctaLink: "#tree-planting", // Replace with actual link as needed
+      ctaText: "Plant a Tree Today",
+      ctaLink: "#tree-planting",
+      secondaryCtaText: "Adopt a Forest",
+      secondaryCtaLink: "/adopt-a-forest",
     },
   ];
 
@@ -60,32 +66,32 @@ const HeroSection = () => {
         {/* Navigation Bars */}
         <div className="relative w-full z-20">
           <TopNavBar />
-          <div className="sticky top-0 mt-[5px]">
+          <div >
             <MainNavBar />
           </div>
         </div>
 
-        {/* Text Content and CTA Button */}
-        <div className="absolute bottom-10 left-4 sm:bottom-12 sm:left-6 md:bottom-16 md:left-8 lg:bottom-20 lg:left-10 w-1/2 flex flex-col justify-end items-start text-left z-10 p-4 sm:p-6 md:p-8 lg:p-10">
-          <div>
-            <h1
-              className="font-bold mb-3 sm:mb-4 md:mb-5 tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
-              style={{
-                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-              }}
-            >
-              {slides[currentSlide].title}
-            </h1>
-            <p
-              className="mb-4 sm:mb-5 md:mb-6 italic text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
-              style={{
-                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-              }}
-            >
-              {slides[currentSlide].subtitle}
-            </p>
+        {/* Text Content and CTA Buttons */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-center z-10 p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-6xl">
+          <h1
+            className="font-bold mb-3 sm:mb-8 md:mb-10 tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+            style={{
+              textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
+            }}
+          >
+            {slides[currentSlide].title}
+          </h1>
+          <p
+            className="mb-4 sm:mb-10 md:mb-10 italic text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
+            style={{
+              textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
+              fontFamily: "'Peugeot', Helvetica, sans-serif",
+            }}
+          >
+            {slides[currentSlide].subtitle}
+          </p>
+          <div className="flex gap-2 sm:gap-3 md:gap-8">
             <a
               href={slides[currentSlide].ctaLink}
               className="inline-block bg-white text-[#0D3C00] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-[#0D3C00] hover:text-white transition-all duration-300"
@@ -94,6 +100,15 @@ const HeroSection = () => {
               }}
             >
               {slides[currentSlide].ctaText}
+            </a>
+            <a
+              href={slides[currentSlide].secondaryCtaLink}
+              className="inline-block bg-[#0D3C00] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-white hover:text-[#0D3C00] transition-all duration-300"
+              style={{
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+              }}
+            >
+              {slides[currentSlide].secondaryCtaText}
             </a>
           </div>
         </div>

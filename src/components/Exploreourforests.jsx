@@ -7,47 +7,46 @@ const forests = [
   {
     name: "Kakamega Forest",
     image: "/images/forests/kakamega.jpg",
-    rating: 5,
+
   },
   {
     name: "Arabuko Sokoke Forest",
     image: "/images/forests/arabuko.jpeg",
-    rating: 4,
+  
   },
   {
     name: "Hombe Forest Guesthouse",
     image: "/images/forests/mau.jpg",
-    rating: 3,
+  
   },
   {
     name: "Karura Forest",
     image: "/images/forests/karura.jpg",
-    rating: 5,
+    
   },
   {
     name: "Ngong Forest",
     image: "/images/forests/ngong.jpeg",
-    rating: 4,
+    
   },
   {
     name: "Menengai Forest",
     image: "/images/forests/aberdare.jpeg",
-    rating: 5,
+ 
   },
   {
     name: "Mt. Kenya Forest",
     image: "/images/forests/cheranganyi.jpg",
-    rating: 4,
+    
   },
   {
     name: "Mt. Elgon Forest",
     image: "/images/forests/mtelgon.jpeg",
-    rating: 5,
   },
   {
     name: "Nairobi Arboretum",
     image: "/images/forests/mtelgon.jpeg",
-    rating: 5,
+  
   },
 ];
 
@@ -78,18 +77,6 @@ const ForestCardGrid = () => {
               <h3 className="text-white text-lg font-semibold tracking-tight drop-shadow-md">
                 {forest.name}
               </h3>
-              <div className="flex justify-center mt-2">
-                {[...Array(forest.rating)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-5 h-5 text-yellow-400 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 .587l3.668 7.431 8.332 1.209-6.001 5.853 1.416 8.26L12 18.897l-7.415 3.903 1.416-8.26L0 8.227l8.332-1.209z" />
-                  </svg>
-                ))}
-              </div>
             </div>
           </div>
         </Link>

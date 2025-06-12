@@ -6,7 +6,7 @@ import MissionSection from "@/app/homepage/MissionSection";
 import CodeOfConductSection from "@/app/homepage/CodeofConductSection";
 import NewsSection from "@/app/homepage/NewsSection";
 import Footer from "@/app/homepage/Footer";
-import FeedSection from "@/app/homepage/FeedSection";
+//import FeedSection from "@/app/homepage/FeedSection";
 import Principles from "@/app/homepage/Principles";
 import PatnersSection from "@/app/homepage/Patners";
 import Sidebar from "@/app/homepage/Sidebar";
@@ -20,12 +20,11 @@ function HomePageContents() {
       <HeroSection />
       <MissionSection />
       <CodeOfConductSection />
-      <Exploreourforests/>
       <Principles />
+      <Exploreourforests/>
+      <Exploreournuseries/>
       <PatnersSection />
       <NewsSection />
-      <Exploreournuseries/>
-      <FeedSection />
       <Footer />
       <FooterBottom />
       <Sidebar/>

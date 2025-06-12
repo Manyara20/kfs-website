@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -59,11 +58,10 @@ export default function JobVacancies() {
   };
 
   return (
-    <div className="bg-[#e8f5e9] min-h-screen">
-      <TopNavBar />
+    <div className="min-h-screen ">
       <MainNavBar />
       <div
-        className="min-h-screen bg-cover bg-center bg-fixed p-8 relative overflow-hidden"
+        className="min-h-screen bg-cover bg-center bg-fixed p-4 relative overflow-hidden"
         style={{
           backgroundImage: `linear-gradient(rgba(15, 90, 40, 0.8), rgba(15, 90, 40, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')`,
         }}
@@ -74,7 +72,7 @@ export default function JobVacancies() {
             backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
           }}
         ></div>
-        <div className="max-w-7xl mx-auto py-12 px-4 relative z-10">
+        <div className="max-w-7xl mx-auto py-4 px-4 relative z-10">
           {/* Main Card */}
           <div className="bg-gradient-to-br from-white to-[#f9f9f9] shadow-lg border border-[#e8ecef] mb-10 overflow-hidden">
             {/* Hero Section */}

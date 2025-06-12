@@ -24,7 +24,7 @@ pool.connect((err, client, release) => {
 
 // Multer setup
 const storage = multer.diskStorage({
-  destination: "./Uploads/",
+  destination: "./uploads/",
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniqueSuffix}${path.extname(file.originalname)}`);
@@ -68,7 +68,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       return res.status(400).json({ error: "Title and content are required" });
     }
 
-    const imageUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
     const result = await pool.query(
       "INSERT INTO posts (image, title, content, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [imageUrl, title, content, req.user.id]
@@ -93,7 +93,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
     const { id } = req.params;
     const { title, content } = req.body;
-    const imageUrl = req.file ? `/Uploads/${req.file.filename}` : null;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await pool.query(
       "UPDATE posts SET image = COALESCE($1, image), title = $2, content = $3, updated_at = NOW() WHERE id = $4 RETURNING *",

@@ -75,10 +75,8 @@ const ContactUsPage = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
-
+    <div className="flex flex-col min-h-screen ">
+      
       {/* Main Navigation Bar */}
       <MainNavBar />
 
@@ -86,8 +84,8 @@ const ContactUsPage = () => {
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-600">We are here to help! Reach out to us for any inquiries or support.</p>
+          <h1 className="text-5xl font-bold text-white mb-4">Contact Us</h1>
+          <p className="text-xl text-white">We are here to help! Reach out to us for any inquiries or support.</p>
         </div>
 
         {/* Grid Layout for Contact Information and Map */}
@@ -168,7 +166,7 @@ const ContactUsPage = () => {
 
           {/* Right Column: Map */}
           <div className="bg-white p-8 shadow-lg">
-            <h2 className="text-2xl font-semibold text-green-900 mb-6">Our Locations</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Our Locations</h2>
             <div className="w-full h-[400px]">
               <MapComponent mapCenter={mapCenter} locations={locations} />
             </div>
@@ -177,7 +175,7 @@ const ContactUsPage = () => {
 
         {/* Conservancy Information Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold text-green-900 text-center mb-8">Our Conservancies</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Conservancies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {conservancies.map((conservancy, index) => {
               // Find matching location for coordinates

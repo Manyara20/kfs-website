@@ -10,7 +10,7 @@ const principles = [
     description:
       "Adoption of an integrated ecosystem approach to conserving and managing forest resources, paying particular attention to ecologically fragile areas.",
     icon: "/icons/ecosystem.png",
-    background: "/images/Melia-nursery.jpg",
+    background: "/images/uniform.jpg",
   },
   {
     id: "public-good",
@@ -26,7 +26,7 @@ const principles = [
     description:
       "Sustainable management of forest resources to yield social, economic, and ecological goods and services for current and future generations.",
     icon: "/icons/conservation.png",
-    background: "/images/MangroverehabilitationTudor.jpg",
+    background: "/images/plant_tree.jpg",
   },
 ];
 
@@ -37,7 +37,7 @@ const coreValues = [
     title: "TEAMWORK",
     description:
       "The Service will embrace mutual support and respect, active participation, and collective responsibility, open communication, information sharing and mentoring.",
-    //background: "/images/teamwork-bg.jpg", // Placeholder background
+     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
   },
   {
     id: "results",
@@ -45,7 +45,7 @@ const coreValues = [
     title: "RESULTS ORIENTED",
     description:
       "The Service will pursue timely attainment of targeted results at all levels.",
-    //background: "/images/results-bg.jpg", // Placeholder background
+     background: "/images/MangroveboatinGazi.jpg", // Placeholder background
   },
   {
     id: "integrity",
@@ -53,7 +53,7 @@ const coreValues = [
     title: "INTEGRITY",
     description:
       "The Service and staff shall ascribe to high standards of personal integrity, ethics, transparency together with individual and corporate accountability in the conduct of business.",
-    //background: "/images/integrity-bg.jpg", // Placeholder background
+     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
   },
   {
     id: "scientific",
@@ -61,7 +61,7 @@ const coreValues = [
     title: "SCIENTIFIC PRINCIPLES AND PROFESSIONALISM",
     description:
       "Decision making and practice will be based on current scientific knowledge and best practice.",
-    //background: "/images/scientific-bg.jpg", // Placeholder background
+     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
   },
   {
     id: "creativity",
@@ -69,7 +69,7 @@ const coreValues = [
     title: "CREATIVITY AND INNOVATION",
     description:
       "The Service will encourage and reward creativity and innovativeness in work performance among staff.",
-    //background: "/images/creativity-bg.jpg", // Placeholder background
+    background: "/images/MangroveboatinGazi.jpg" // Placeholder background
   },
 ];
 
@@ -122,9 +122,11 @@ const PrinciplesAndValues = () => {
   }
 
   return (
-    <section >
+    <section
+    
+    >
       {/* Header with Tabs */}
-      <div className=" text-white rounded-t-3xl h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
+      <div className=" text-white  h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
         <div className="flex gap-6">
           <div
             className={`cursor-pointer text-xl sm:text-3xl font-extrabold uppercase ${
@@ -162,7 +164,7 @@ const PrinciplesAndValues = () => {
         <div
           className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-white p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
           style={{
-            //backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activePrinciple.background})`,
+            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activePrinciple.background})`,
           }}
         >
           {/* Principle Tabs (Visible on larger screens) */}
@@ -215,7 +217,7 @@ const PrinciplesAndValues = () => {
         <div
           className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-white p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
           style={{
-            //backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activeValue.background})`,
+            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activeValue.background})`,
           }}
         >
           {/* Value Tabs (Visible on larger screens) */}

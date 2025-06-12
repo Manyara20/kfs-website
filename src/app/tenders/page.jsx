@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -70,13 +69,12 @@ export default function TendersPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <TopNavBar />
+    <div className="flex flex-col min-h-screen ">
       <MainNavBar />
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900 mb-4">Tenders</h1>
-          <p className="text-xl text-gray-600 mb-4">
+          <h1 className="text-5xl font-bold text-white mb-4">Tenders</h1>
+          <p className="text-xl text-white mb-4">
             Explore the latest tenders from the Kenya Forest Service.
           </p>
           <div className="max-w-md mx-auto">
@@ -85,14 +83,14 @@ export default function TendersPage() {
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search tenders by description..."
-              className="w-full px-4 py-2 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
             />
           </div>
         </div>
         {error ? (
           <p className="text-red-500 text-center">{error}</p>
         ) : filteredTenders.length === 0 ? (
-          <p className="text-gray-600 text-center">
+          <p className="text-white text-center">
             {searchQuery
               ? "No tenders match your search."
               : "No active tenders available at this time."}

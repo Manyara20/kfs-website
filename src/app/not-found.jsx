@@ -1,15 +1,13 @@
 "use client";
 import Link from "next/link";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
 export default function NotFound() {
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
-      <div className="p-4 md:p-12 bg-white min-h-screen flex flex-col items-center justify-center">
+      <div className="p-4 md:p-12  min-h-screen flex flex-col items-center justify-center">
         <div className="text-center mb-10">
           <h1
             className="text-4xl md:text-5xl mb-4 text-[#023011]"

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Import useRouter for programmatic navigation
 
 const forests = [
   {
@@ -67,6 +68,7 @@ const NuseryCardSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
   const cardRefs = useRef([]);
+  const router = useRouter(); // Initialize router for programmatic navigation
 
   const calculateTransformOrigin = (index) => {
     const card = cardRefs.current[index];
@@ -135,11 +137,13 @@ const NuseryCardSlider = () => {
                     </svg>
                   ))}
                 </div>
-                <Link href={`/forests/${slugify(forests[currentIndex].name)}`}>
-                  <button className="mt-3 sm:mt-4 bg-green-600 text-white px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-full hover:bg-green-700 transition-colors duration-300">
-                    Discover More
-                  </button>
-                </Link>
+                {/* Replace Link with button and handle click programmatically */}
+                <button
+                  onClick={() => router.push(`/forests/${slugify(forests[currentIndex].name)}`)}
+                  className="mt-3 sm:mt-4 bg-green-600 text-white px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-full hover:bg-green-700 transition-colors duration-300"
+                >
+                  Discover More
+                </button>
               </div>
             </div>
           </div>

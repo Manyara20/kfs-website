@@ -53,6 +53,9 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-[85vh] sm:h-[85vh] md:h-[95vh] w-full overflow-hidden">
+      style={{
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+              }}
       {/* Slide Container with Background Image */}
       <div
         className="relative h-full bg-cover bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"

@@ -25,6 +25,9 @@ const data = [
 export default function MissionVisionGoal() {
   return (
     <div className="w-full p-4 md:p-6 bg-[#f5f5f5]">
+      style={{
+                fontFamily: "'Peugeot', Helvetica, sans-serif",
+              }}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {data.map((item, index) => (
           <div

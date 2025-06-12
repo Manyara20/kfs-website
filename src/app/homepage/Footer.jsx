@@ -41,7 +41,7 @@ const Footer = () => {
           <div className="p-6 sm:p-4 md:p-3 flex flex-col items-start">
             <div className="mb-6 sm:mb-4 md:mb-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-             <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+             <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Kenya Forest Service
               </p>
             </h3>
@@ -54,7 +54,7 @@ const Footer = () => {
           {/* Column 2: Contact Info */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Contact Us
               </p>
             </h3>
@@ -77,7 +77,7 @@ const Footer = () => {
           {/* Column 3: Toll-Free */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Toll Free
               </p>
             </h3>
@@ -98,7 +98,7 @@ const Footer = () => {
           {/* Column 4: Subscribe */}
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg font-serif font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
               Subscribe to The Forester Magazine
               </p>
             </h3>

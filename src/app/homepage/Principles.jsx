@@ -122,9 +122,7 @@ const PrinciplesAndValues = () => {
   }
 
   return (
-    <section
-    
-    >
+    <section>
       {/* Header with Tabs */}
       <div className=" text-white  h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
         <div className="flex gap-6">

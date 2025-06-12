@@ -10,7 +10,7 @@ const data = [
   },
   {
     title: "Vision",
-    image: "/images/20210614_kenya-Kanaan-Mataathia_0312.webp",
+    image: "/images/Mangroveforest.png",
     description:
       "To be an internationally recognized organization of excellence in knowledge-based sustainable forest resources development, conservation, and management.",
   },
@@ -25,9 +25,6 @@ const data = [
 export default function MissionVisionGoal() {
   return (
     <div className="w-full p-4 md:p-6 bg-[#f5f5f5]">
-      style={{
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-              }}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {data.map((item, index) => (
           <div
@@ -46,7 +43,6 @@ export default function MissionVisionGoal() {
                 <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-2">
                   <h6
                     className="text-lg font-bold"
-                    style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
                   >
                     {item.title}
                   </h6>
@@ -56,7 +52,6 @@ export default function MissionVisionGoal() {
               <div className="flex-grow flex items-center px-4 lg:px-8">
                 <p
                   className="text-gray-600 text-base text-center"
-                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
                 >
                   {item.description}
                 </p>

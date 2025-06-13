@@ -106,8 +106,7 @@ const MainNavBar = () => {
         <MenuItem
           sx={{
             fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
-            fontFamily: "'Peugeot', Helvetica, sans-serif",
-            color: isSticky ? "#fff" : "#0D3C00",
+             color: isSticky ? "#fff" : "#0D3C00",
             "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
             padding: "0.5rem 0.6rem",
             display: "flex",
@@ -183,8 +182,7 @@ const MainNavBar = () => {
                 sx={{
                   "& .MuiTypography-root": {
                     fontSize: { xs: "0.85rem", xl: "1.19rem" },
-                    fontFamily: "'Peugeot', Helvetica, sans-serif",
-                    textTransform: "capitalize",
+                             textTransform: "capitalize",
                   },
                 }}
               />
@@ -219,7 +217,7 @@ const MainNavBar = () => {
       position="sticky"
       sx={{
         backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-        backdropFilter: isSticky ? "none" : "blur(8px)",
+        backdropFilter: isSticky ? "none" : "blur(0px)",
         boxShadow: isSticky ? "0 2px 5px rgba(0,0,0,0.1)" : "none",
         top: 0,
         zIndex: 20,
@@ -289,8 +287,7 @@ const MainNavBar = () => {
                         display: "flex",
                         alignItems: "center",
                         fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                        fontFamily: "'Peugeot', Helvetica, sans-serif",
-                        fontWeight: 500,
+                                     fontWeight: 500,
                         padding: { md: "5px 7px", lg: "7px 10px" },
                         "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                         textTransform: "capitalize",
@@ -334,8 +331,7 @@ const MainNavBar = () => {
                     <Typography
                       sx={{
                         fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                        fontFamily: "'Peugeot', Helvetica, sans-serif",
-                        fontWeight: 500,
+                                     fontWeight: 500,
                         textTransform: "capitalize",
                       }}
                     >
@@ -470,8 +466,7 @@ const MainNavBar = () => {
             sx={{
               textAlign: "center",
               fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" },
-              fontFamily: "'Peugeot', Helvetica, sans-serif",
-              color: isSticky ? "#fff" : "#0D3C00",
+                 color: isSticky ? "#fff" : "#0D3C00",
               textTransform: "capitalize",
             }}
           >
@@ -498,8 +493,7 @@ const MainNavBar = () => {
               "& .MuiInputBase-input": {
                 color: isSticky ? "#fff" : "#0D3C00",
                 fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" },
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-                textTransform: "none",
+                     textTransform: "none",
               },
             }}
           />
@@ -527,8 +521,7 @@ const MainNavBar = () => {
                       sx={{
                         "& .MuiTypography-root": {
                           fontSize: { xs: "0.85rem", xl: "1.19rem" },
-                          fontFamily: "'Peugeot', Helvetica, sans-serif",
-                          textTransform: "capitalize",
+                                         textTransform: "capitalize",
                         },
                       }}
                     />
@@ -544,8 +537,7 @@ const MainNavBar = () => {
                 textAlign: "center",
                 mt: 2,
                 fontSize: { xs: "0.85rem", sm: "1rem" },
-                fontFamily: "'Peugeot', Helvetica, sans-serif",
-              }}
+                   }}
             >
               No results found.
             </Typography>

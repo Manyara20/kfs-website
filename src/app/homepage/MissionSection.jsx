@@ -10,7 +10,7 @@ const data = [
   },
   {
     title: "Vision",
-    image: "/images/20210614_kenya-Kanaan-Mataathia_0312.webp",
+    image: "/images/Mangroveforest.png",
     description:
       "To be an internationally recognized organization of excellence in knowledge-based sustainable forest resources development, conservation, and management.",
   },
@@ -43,7 +43,6 @@ export default function MissionVisionGoal() {
                 <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-2">
                   <h6
                     className="text-lg font-bold"
-                    style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
                   >
                     {item.title}
                   </h6>
@@ -53,7 +52,6 @@ export default function MissionVisionGoal() {
               <div className="flex-grow flex items-center px-4 lg:px-8">
                 <p
                   className="text-gray-600 text-base text-center"
-                  style={{ fontFamily: "'Peugeot', Helvetica, sans-serif" }}
                 >
                   {item.description}
                 </p>

@@ -12,7 +12,7 @@ const HeroSection = () => {
       title: "Explore Today, Conserve Forever.",
       subtitle:
         "Discover the untamed beauty of our forests, where your adventure fuels vital conservation and empowers local communities",
-      image: "/images/cypress.JPG",
+      image: "/images/hero/pre_ccf.JPG",
       ctaText: "Explore Our Forests",
       ctaLink: "#forests",
       secondaryCtaText: "Who We Are",
@@ -22,7 +22,7 @@ const HeroSection = () => {
       title: "Trees for Better Lives",
       subtitle:
         "Enhancing Kenya's tree cover to 30% by 2032 through collective action",
-      image: "/images/Mangroveforest.png",
+      image: "/images/hero/cs_ccf.jpg",
       ctaText: "Explore Our Nurseries",
       ctaLink: "#nurseries",
       secondaryCtaText: "Get In Touch",
@@ -32,7 +32,7 @@ const HeroSection = () => {
       title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
       subtitle:
         "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
-      image: "/images/MTKULAL.JPG",
+      image: "/images/hero/president.JPG",
       ctaText: "Plant a Tree Today",
       ctaLink: "#tree-planting",
       secondaryCtaText: "Adopt a Forest",
@@ -52,7 +52,8 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-[85vh] sm:h-[85vh] md:h-[95vh] w-full overflow-hidden">
+    <div className="relative h-[85vh] sm:h-[85vh] md:h-[100vh] w-full overflow-hidden">
+      
       {/* Slide Container with Background Image */}
       <div
         className="relative h-full bg-cover bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"
@@ -82,7 +83,7 @@ const HeroSection = () => {
             {slides[currentSlide].title}
           </h1>
           <p
-            className="mb-4 sm:mb-10 md:mb-10 italic text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
+            className="mb-4 sm:mb-10 md:mb-10  text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl" //italic
             style={{
               textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
             }}
@@ -93,14 +94,16 @@ const HeroSection = () => {
             <a
               href={slides[currentSlide].ctaLink}
               className="inline-block bg-white text-[#0D3C00] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-[#0D3C00] hover:text-white transition-all duration-300"
-              
+              style={{
+              }}
             >
               {slides[currentSlide].ctaText}
             </a>
             <a
               href={slides[currentSlide].secondaryCtaLink}
               className="inline-block bg-[#0D3C00] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-white hover:text-[#0D3C00] transition-all duration-300"
-              
+              style={{
+              }}
             >
               {slides[currentSlide].secondaryCtaText}
             </a>

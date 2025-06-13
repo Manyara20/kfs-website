@@ -58,7 +58,7 @@ const ForestCardGrid = () => {
     <>
     <div className="max-w-6xl mx-auto py-6 px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-2 text-shadow-lg tracking-wide">
-            Explore our Forests
+            Explore our Nursuries
           </h1>
       </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-8 bg-white">

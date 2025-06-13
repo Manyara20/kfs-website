@@ -41,6 +41,7 @@ const Footer = () => {
           <div className="p-6 sm:p-4 md:p-3 flex flex-col items-start">
             <Image
                     src="/images/kfs_logo.png"
+                    alt="Logo"
                     width={64}
                     height={64}
                     className="lg:py-4 py-4"

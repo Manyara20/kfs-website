@@ -71,7 +71,7 @@ const OfficeHoursPopup = () => {
                       className: "w-4 h-4",
                     })}
                   </div>
-                  <span className="text-[#0D3C00] text-sm font-['Peugeot',Helvetica,sans-serif]">
+                  <span className="text-[#0D3C00] text-sm   ">
                     {item.text}
                   </span>
                 </div>

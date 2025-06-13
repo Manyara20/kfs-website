@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 
@@ -39,7 +38,6 @@ const KakamegaForest = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -51,7 +49,7 @@ const KakamegaForest = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Kakamega Forest
           </motion.h1>
@@ -59,7 +57,7 @@ const KakamegaForest = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             Kenya's last true tropical rainforest, a haven of biodiversity and ancient greenery
           </motion.p>
@@ -81,7 +79,7 @@ const KakamegaForest = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -98,7 +96,7 @@ const KakamegaForest = () => {
             {/* Forest Activities Tab */}
             {activeTab === 'forest-activities' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Activities
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -119,7 +117,7 @@ const KakamegaForest = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {activity}
                       </span>
                     </li>
@@ -131,13 +129,13 @@ const KakamegaForest = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   How to Get There
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>By Road:</strong> From Nairobi (418 km): via Nakuru and Kapsabet (A104 → C36 → C39). From Eldoret: via C39 to Kapsabet. From Kakamega Town: 18 km towards Webuye/Eldoret road.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>By Air:</strong> Flights are available to Kakamega, Kisumu, or Eldoret, followed by road travel.
                 </p>
               </section>
@@ -146,10 +144,10 @@ const KakamegaForest = () => {
             {/* Park Entry Fee Tab */}
             {activeTab === 'park-entry-fee' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Park Entry Fees
                 </h2>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Forest Entry Fee
                 </h3>
                 <table className="w-full border border-gray-300 rounded-md overflow-hidden mb-6">
@@ -178,7 +176,7 @@ const KakamegaForest = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Vehicle Charges
                 </h3>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -194,13 +192,13 @@ const KakamegaForest = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {charge}
                       </span>
                     </li>
                   ))}
                 </ul>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mt-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Pay via{' '}
                   <a
                     href="https://kws.ecitizen.go.ke/"
@@ -218,10 +216,10 @@ const KakamegaForest = () => {
             {/* Key Features Tab */}
             {activeTab === 'key-features' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Key Features
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Kakamega Forest is renowned for its unique features, including:
                 </p>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -238,7 +236,7 @@ const KakamegaForest = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {feature}
                       </span>
                     </li>
@@ -250,19 +248,19 @@ const KakamegaForest = () => {
             {/* Attractions Tab */}
             {activeTab === 'attractions' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Attractions
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Tucked between the rolling hills of Kakamega, Vihiga, and Nandi counties lies Kenya’s last true tropical rainforest—about 238 km² of ancient green that once formed part of the vast Guineo-Congolian belt stretching across Africa. Perched at 1,500–1,600 m and watered by 1,200–1,700 mm of rain annually, Kakamega Forest is a living museum of humidity-loving life, wrapped in morning mists and the liquid calls of hornbills.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Wildlife
                 </h3>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The forest is home to over 400 butterfly species, 350 bird species (including the great blue turaco and hornbills), and primates like colobus, red-tailed, and De Brazza’s monkeys. Nocturnal creatures such as bush babies and owls can be spotted during night walks.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Cultural and Natural Highlights
                 </h3>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -277,7 +275,7 @@ const KakamegaForest = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {attraction}
                       </span>
                     </li>
@@ -289,10 +287,10 @@ const KakamegaForest = () => {
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Contacts
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Email:{' '}
                   <a
                     href="mailto:kakamegaforest@kws.go.ke"
@@ -301,10 +299,10 @@ const KakamegaForest = () => {
                     kakamegaforest@kws.go.ke
                   </a>
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Phone (Office): 0202418419
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Phone (Main Gate): 0202654658
                 </p>
               </section>

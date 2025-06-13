@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ const MountKenyaForestPage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -52,7 +50,7 @@ const MountKenyaForestPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Mount Kenya Forest
           </motion.h1>
@@ -60,7 +58,7 @@ const MountKenyaForestPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             A UNESCO World Heritage Site teeming with biodiversity and stunning landscapes
           </motion.p>
@@ -82,7 +80,7 @@ const MountKenyaForestPage = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -99,7 +97,7 @@ const MountKenyaForestPage = () => {
             {/* Forest Activities Tab */}
             {activeTab === 'forest-activities' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Forest Activities
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -114,7 +112,7 @@ const MountKenyaForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
                         {activity}
                       </span>
                     </li>
@@ -126,10 +124,10 @@ const MountKenyaForestPage = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   How to Get There
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Mount Kenya Forest Reserve is accessible from several towns, including Nanyuki, Meru, and Embu. The main entry points are via Naro Moru, Chogoria, and Sirimon gates, which are well-connected by road from Nairobi (approximately 175–200 km). Public transport (matatus) and private vehicles can reach these gates, with tarmac and all-weather roads available. For detailed directions, contact the Kenya Forest Service.
                 </p>
               </section>
@@ -138,10 +136,10 @@ const MountKenyaForestPage = () => {
             {/* Park Entry Fee Tab */}
             {activeTab === 'park-entry-fee' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Park Entry Fee
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Entry fees for Mount Kenya Forest Reserve vary based on citizenship and age. For current rates, contact the Kenya Forest Service at the details provided in the Contact Us section or visit www.kenyaforestservice.org.
                 </p>
               </section>
@@ -150,7 +148,7 @@ const MountKenyaForestPage = () => {
             {/* Key Features Tab */}
             {activeTab === 'key-features' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Key Features
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -168,7 +166,7 @@ const MountKenyaForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {feature}
                       </span>
                     </li>
@@ -180,22 +178,22 @@ const MountKenyaForestPage = () => {
             {/* Attractions Tab */}
             {activeTab === 'attractions' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Attractions
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Kenya Forest Service (KFS) manages the 213,082-hectare Mt. Kenya Forest Reserve that bestrides the equator in the central highland zones of Kenya. Administratively, this includes forest areas surrounding the mountain itself and adjacent forest blocks of Lower Imenti, Upper Imenti, Thunguru hill, Njuki-ini East, Njukiini West and Kierera.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Wildlife and Biodiversity
                 </h3>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The forest reserve has great potential for tourism development. In addition to having a recorded 880 plant species, the lush natural forests teem with wildlife including the African elephant, leopard, buffalo, giant forest hog, bongo and the black fronted duiker.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Tourist Accommodation Facilities
                 </h3>
-                <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Existing Facilities
                 </h4>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0 mb-6">
@@ -215,13 +213,13 @@ const MountKenyaForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {facility}
                       </span>
                     </li>
                   ))}
                 </ul>
-                <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Upcoming Facilities
                 </h4>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0 mb-6">
@@ -239,13 +237,13 @@ const MountKenyaForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 border border-green-200"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {facility}
                       </span>
                     </li>
                   ))}
                 </ul>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Photo Gallery
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -297,28 +295,28 @@ const MountKenyaForestPage = () => {
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Contact Us
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Kenya Forest Service
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Karura, Off Kiambu Road
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   P.O. Box 30513 – 00100 Nairobi, Kenya
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Tel: +254 20 2020285
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Fax: +254 20 2385374
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Email: <a href="mailto:info@kenyaforestservice.org" className="text-blue-600 underline">info@kenyaforestservice.org</a> or <a href="mailto:ecotourism@kenyaforestservice.org" className="text-blue-600 underline">ecotourism@kenyaforestservice.org</a>
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Website: <a href="http://www.kenyaforestservice.org" className="text-blue-600 underline">www.kenyaforestservice.org</a>
                 </p>
               </section>

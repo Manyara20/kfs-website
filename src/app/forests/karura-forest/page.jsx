@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ const KaruraForestPage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -52,7 +50,7 @@ const KaruraForestPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Karura Forest
           </motion.h1>
@@ -60,7 +58,7 @@ const KaruraForestPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             One of the largest urban forests in the world, teeming with wildlife and natural beauty
           </motion.p>
@@ -82,7 +80,7 @@ const KaruraForestPage = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -99,10 +97,10 @@ const KaruraForestPage = () => {
             {/* Forest Activities Tab */}
             {activeTab === 'forest-activities' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Activities Available
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   In Karura Forest, one can undertake the following activities:
                 </p>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -120,7 +118,7 @@ const KaruraForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
                         {activity}
                       </span>
                     </li>
@@ -132,19 +130,19 @@ const KaruraForestPage = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Getting There & Getting Around
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>By private transport:</strong> The main entrance to Karura Forest is on the Limuru Road just after the Belgian Embassy. However, one can also use either the KFS main gate which is off Kiambu road and opposite CID Headquarters, or the Old Kiambu Gate which is on Old Kiambu road.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>By public transport:</strong> Matatu (public service vehicle) numbers 11B, 106, 107, 108, 114 or 116 from Nairobi City Centre will get you to the main entrance on Limuru Road. To use the KFS main gate on Kiambu road, take matatu numbers 100 or 120.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Taxi hire from the city centre costs approximately Ksh 1,000.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   One can easily get around Karura Forest using the existing network of driving tracks and walking trails. Most sections of the forest are accessible by saloon cars.
                 </p>
               </section>
@@ -153,10 +151,10 @@ const KaruraForestPage = () => {
             {/* Park Entry Fee Tab */}
             {activeTab === 'park-entry-fee' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Park Entry Fee
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Entry tickets can be purchased at the point of entry between 6:00 am and 5:00 pm. For the current entry fees, contact the numbers provided in the Contact Us section.
                 </p>
               </section>
@@ -165,7 +163,7 @@ const KaruraForestPage = () => {
             {/* Key Features Tab */}
             {activeTab === 'key-features' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Key Features
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -183,7 +181,7 @@ const KaruraForestPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {feature}
                       </span>
                     </li>
@@ -195,83 +193,83 @@ const KaruraForestPage = () => {
             {/* Attractions Tab */}
             {activeTab === 'attractions' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Attractions
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Karura Forest Reserve is located in the northern part of Nairobi city. At 1,041 hectares, it is one of the largest urban gazetted forests in the world. The forest contains nearly all the 605 species of wildlife found in Nairobi including three types of antelope. It is managed by Kenya Forest Service (KFS).
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Wildlife in Karura Forest
                 </h3>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Mammals:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Include Harvey's Duiker, Grimm's Duiker, Bushbucks, Bush pigs, Genet Cats, Civets, Bush babies, Porcupines, Syke's Monkeys, Ground Squirrel, Hares and the Epauletted-bat.
                   </p>
                 </div>
                 <div className="mb8">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Reptiles:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Include pythons, green snakes and monitor lizards.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Birds:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     The forest hosts around 200 species of birds including Ayres Hawk-eagle, the African Crowned Eagle, the Silvery-cheeked Hornbill, the Hartlaub's Turaco, the Narina Trogon, Owls, Crested Cranes, Sparrows, Doves, Weavers and Vultures.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Butterflies:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Include the African Queen and Desmond's Green Banded Swallowtail.
                   </p>
                 </div>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Plants in Karura Forest
                 </h3>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Plantations:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Cover 632 hectares. Species found include Araucaria cunninghamii, Eucalyptus saligna, E. globula, Grevillea robusta, Cupressus torulosa and Cupressus lusitanica.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Indigenous trees:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Cover 260 hectares. Species include Olea europeae subsp. auspidata, Croton megalocarpus, Warburgia ugandensis (Muthiga), Brachyleana huillensis (Muhugu), Uvaridendron anisatum, Markhamia lutea, Vepris nobilis, Juniperus procera (Cedar), Craebean brownii, Newtonia buchananii, Salvadora persica, Ficus thonningii, Trichilia emetica, Calondendrum capense and Dombeya goetzenii.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Shrubs:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Include Strychnos henningsii (Muteta), Erythrococca bongensis (Muharangware), Vangueria madagascariensis (Mubiro), Rhamnus prinoides (Mukarakinga), Caesalpinia volkensii (Mubuthi), Solanum incanum (Mutongu), Elaeodendron buchananii (Mutanga) and Rhus natalensis (Muthigio).
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Other plants:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     There are groves of Arudinaria alpina, Kenya's native bamboo species along the riparian belts of Gitathuro and Ruaka rivers; exotic giant bamboo Dendrocalamus giganteus along Karura river near the tree nursery, and; small wetlands that are important habitats for birds.
                   </p>
                 </div>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Photo Gallery
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -313,28 +311,28 @@ const KaruraForestPage = () => {
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Contact Us
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>The Forester-in-Charge</strong>
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Karura Forest Reserve
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   P.O. Box 30513 – 00100 Nairobi, Kenya
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Tel (mobile phones): +254 (0) 727 818 960
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Tel: +254 20 2020285; 3754904/5/6
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Email: zmnairobi@kenyaforestservice.org or ecotourism@kenyaforestservice.org or info@kenyaforestservice.org
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Website: www.kenyaforestservice.org
                 </p>
               </section>

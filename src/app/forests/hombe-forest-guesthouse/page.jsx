@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ const HombeForestGuesthousePage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -52,7 +50,7 @@ const HombeForestGuesthousePage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Hombe Forest Guesthouse
           </motion.h1>
@@ -60,7 +58,7 @@ const HombeForestGuesthousePage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             Newly refurbished retreat in the heart of Mt. Kenya Forest Reserve
           </motion.p>
@@ -82,7 +80,7 @@ const HombeForestGuesthousePage = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -99,7 +97,7 @@ const HombeForestGuesthousePage = () => {
             {/* About Guesthouse Tab */}
             {activeTab === 'about-guesthouse' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   About the Guesthouse
                 </h2>
                 <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8 mx-auto max-w-4xl">
@@ -112,11 +110,11 @@ const HombeForestGuesthousePage = () => {
                     unoptimized
                   />
                 </div>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Kenya Forest Service (KFS) recently refurbished Hombe Forest Guesthouse in Mt. Kenya Forest Reserve
                   and the facility is now ready for occupation.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The guest house is in Hombe Forest Station in Mt. Kenya Forest Reserve. It is located off the Nairobi –
                   Nanyuki highway, approximately 165 km from Nairobi city.
                 </p>
@@ -126,7 +124,7 @@ const HombeForestGuesthousePage = () => {
             {/* Accommodation Details Tab */}
             {activeTab === 'accommodation-details' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Accommodation Details
                 </h2>
                 <ul className="space-y-3">
@@ -142,7 +140,7 @@ const HombeForestGuesthousePage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                     >
                       <span
-                        className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]"
+                        className="   font-medium text-white text-[0.85rem] leading-[1.6]"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <strong>{item.label}:</strong> {item.value}
@@ -166,30 +164,30 @@ const HombeForestGuesthousePage = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Location & Directions
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   To get there, one turns off at Chaka shopping center and drives for 13 km along the Chaka-Sagana tarmac
                   road.
                 </p>
                 <div className="bg-white p-4 rounded border border-green-200">
-                  <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                  <h3 className="   font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
                     Distance from Nairobi:
                   </h3>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Approximately 165 km
                   </p>
-                  <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mt-3 mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                  <h3 className="   font-semibold text-[#0f5a28] mt-3 mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
                     Access Road:
                   </h3>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     13 km from Chaka shopping center along Chaka-Sagana tarmac road
                   </p>
                 </div>
                 <div className="relative h-64 rounded-lg overflow-hidden mt-6 bg-gray-200">
                   <div className="flex items-center justify-center h-full">
-                    <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-gray-500 leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                    <p className="   font-normal text-gray-500 leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                       Map of Hombe Forest Guesthouse location
                     </p>
                   </div>
@@ -200,7 +198,7 @@ const HombeForestGuesthousePage = () => {
             {/* Ideal For Tab */}
             {activeTab === 'ideal-for' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Ideal For
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -217,7 +215,7 @@ const HombeForestGuesthousePage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
                         {item}
                       </span>
                     </li>
@@ -229,20 +227,20 @@ const HombeForestGuesthousePage = () => {
             {/* Booking Tab */}
             {activeTab === 'booking' && (
               <section className="bg-[#1a3c34] text-white p-8 rounded-lg">
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-3xl mb-4 text-center" style={{ fontSize: `${fontSize * 1.2}px` }}>
+                <h2 className="   font-bold text-3xl mb-4 text-center" style={{ fontSize: `${fontSize * 1.2}px` }}>
                   Make Your Booking Today!
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal leading-[1.8] text-[1rem] mb-6 text-center" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal leading-[1.8] text-[1rem] mb-6 text-center" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Experience the serene beauty of Mt. Kenya Forest Reserve
                 </p>
                 <div className="bg-white text-[#0f5a28] p-6 rounded-lg">
-                  <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                  <h3 className="   font-semibold text-2xl mb-3" style={{ fontSize: `${fontSize * 1.1}px` }}>
                     For Bookings Contact:
                   </h3>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-bold text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                  <p className="   font-bold text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                     020-2045780
                   </p>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Or use the contact information below
                   </p>
                 </div>
@@ -252,50 +250,50 @@ const HombeForestGuesthousePage = () => {
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4 border-b pb-2" style={{ fontSize: `${fontSize * 1.2}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-3xl mb-4 border-b pb-2" style={{ fontSize: `${fontSize * 1.2}px` }}>
                   Contact Information
                 </h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="bg-green-50 p-6 rounded-lg">
-                    <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                    <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                       Kenya Forest Service
                     </h3>
                     <address className="not-italic">
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         Karura, Off Kiambu Road
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         P.O. Box 30513 – 00100 Nairobi, Kenya
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-3" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mt-3" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         <span className="font-medium">Tel:</span> +254 20 2020285
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         <span className="font-medium">Fax:</span> +254 20 2385374
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         <span className="font-medium">Email:</span> info@kenyaforestservice.org
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         <span className="font-medium">Ecotourism Email:</span> ecotourism@kenyaforestservice.org
                       </p>
-                      <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                      <p className="   font-normal text-black leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                         <span className="font-medium">Website:</span> www.kenyaforestservice.org
                       </p>
                     </address>
                   </div>
                   <div className="bg-green-50 p-6 rounded-lg">
-                    <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                    <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                       Map Location
                     </h3>
                     <div className="relative h-64 rounded-lg overflow-hidden bg-gray-200">
                       <div className="flex items-center justify-center h-full">
-                        <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-gray-500 leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                        <p className="   font-normal text-gray-500 leading-[1.8] text-[0.9rem]" style={{ fontSize: `${fontSize * 0.9}px` }}>
                           Map of Hombe Forest Guesthouse location
                         </p>
                       </div>
                     </div>
-                    <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-3" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                    <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mt-3" style={{ fontSize: `${fontSize * 0.9}px` }}>
                       Located in Hombe Forest Station, Mt. Kenya Forest Reserve
                     </p>
                   </div>

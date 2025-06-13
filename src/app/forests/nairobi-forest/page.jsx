@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -30,7 +29,6 @@ const NairobiArboretumPage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       <div
         className="min-h-screen bg-cover bg-center bg-fixed flex justify-center items-center p-8 relative overflow-hidden"
@@ -53,13 +51,13 @@ const NairobiArboretumPage = () => {
           {/* Hero Section */}
           <section className="mb-12">
             <h1
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-2 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize"
+              className="   font-bold text-[#0f5a28] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)] mb-2 text-[2.2rem] leading-[1.3] tracking-[0.5px] capitalize"
               style={{ fontSize: `${fontSize * 1.5}px` }}
             >
               Nairobi Arboretum
             </h1>
             <p
-              className="font-['Peugeot',Helvetica,sans-serif] font-normal text-[#0f5a28] leading-[1.8] text-[1rem] mb-6"
+              className="   font-normal text-[#0f5a28] leading-[1.8] text-[1rem] mb-6"
               style={{ fontSize: `${fontSize * 0.9}px` }}
             >
               A 30.4 hectare urban forest sanctuary just 3km from Nairobi city center
@@ -81,25 +79,25 @@ const NairobiArboretumPage = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h2
-                  className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+                  className="   font-bold text-[#0f5a28] text-3xl mb-4"
                   style={{ fontSize: `${fontSize * 1.2}px` }}
                 >
                   History
                 </h2>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Established in 1907 by Mr. Battiscombe, Deputy Conservator of forests mainly as a site for exotic tree species trials. This was because foresters in Kenya had become concerned that indigenous trees that the railway relied on were getting depleted faster than they could regenerate.
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   To add to the tree species, Mr. H.M. Gardner (Chief Conservators of Forests) also collected indigenous shrubs and trees that were introduced there each year in spite of drought and diseases.
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Arboretum Forest Station was gazetted as protected Forest Reserves in 1932 and is managed by Kenya Forest Service (KFS).
@@ -107,7 +105,7 @@ const NairobiArboretumPage = () => {
               </div>
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 1.1}px` }}
                 >
                   Quick Facts
@@ -125,7 +123,7 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                     >
                       <span
-                        className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]"
+                        className="   font-medium text-white text-[0.85rem] leading-[1.6]"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <strong>{item.label}:</strong> {item.value}
@@ -140,7 +138,7 @@ const NairobiArboretumPage = () => {
           {/* Wildlife Section */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+              className="   font-bold text-[#0f5a28] text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Wildlife
@@ -148,7 +146,7 @@ const NairobiArboretumPage = () => {
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   Mammals
@@ -169,7 +167,7 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
@@ -178,7 +176,7 @@ const NairobiArboretumPage = () => {
               </div>
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   Birds
@@ -199,7 +197,7 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
@@ -208,13 +206,13 @@ const NairobiArboretumPage = () => {
               </div>
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   Reptiles & Butterflies
                 </h3>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mb-1"
+                  className="   font-medium text-black mb-1"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Reptiles:
@@ -230,14 +228,14 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
                   ))}
                 </ul>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mb-1"
+                  className="   font-medium text-black mb-1"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Butterflies:
@@ -255,7 +253,7 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
@@ -287,7 +285,7 @@ const NairobiArboretumPage = () => {
           {/* Plants Section */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+              className="   font-bold text-[#0f5a28] text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Plant Species
@@ -295,7 +293,7 @@ const NairobiArboretumPage = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 1.1}px` }}
                 >
                   Indigenous Trees
@@ -317,7 +315,7 @@ const NairobiArboretumPage = () => {
                       <div key={index} className="flex items-start">
                         <span className="text-green-600 mr-2">•</span>
                         <span
-                          className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                          className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
                         >
                           {item}
@@ -329,7 +327,7 @@ const NairobiArboretumPage = () => {
               </div>
               <div>
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 1.1}px` }}
                 >
                   Exotic Trees
@@ -351,7 +349,7 @@ const NairobiArboretumPage = () => {
                       <div key={index} className="flex items-start">
                         <span className="text-green-600 mr-2">•</span>
                         <span
-                          className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                          className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
                         >
                           {item}
@@ -367,7 +365,7 @@ const NairobiArboretumPage = () => {
           {/* Activities Section */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+              className="   font-bold text-[#0f5a28] text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Activities & Facilities
@@ -375,7 +373,7 @@ const NairobiArboretumPage = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 1.1}px` }}
                 >
                   Available Activities
@@ -398,7 +396,7 @@ const NairobiArboretumPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-3 rounded-lg"
                     >
                       <p
-                        className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white"
+                        className="   font-medium text-white"
                         style={{ fontSize: `${fontSize * 0.9}px` }}
                       >
                         {activity}
@@ -409,7 +407,7 @@ const NairobiArboretumPage = () => {
               </div>
               <div>
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 1.1}px` }}
                 >
                   Special Features
@@ -428,7 +426,7 @@ const NairobiArboretumPage = () => {
                         className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
-                        <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                        <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                           {item}
                         </span>
                       </li>
@@ -442,7 +440,7 @@ const NairobiArboretumPage = () => {
           {/* Gallery Section */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-6 text-center"
+              className="   font-bold text-[#0f5a28] text-3xl mb-6 text-center"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Arboretum Highlights
@@ -473,7 +471,7 @@ const NairobiArboretumPage = () => {
           {/* Visiting Information */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+              className="   font-bold text-[#0f5a28] text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Visiting Information
@@ -481,43 +479,43 @@ const NairobiArboretumPage = () => {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   Getting There
                 </h3>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mb-1"
+                  className="   font-medium text-black mb-1"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Public Transport:
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Matatu no.48 Kileleshwa route from Odeon, alight at Shell. Walk 100m to pedestrian gate.
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mt-3 mb-1"
+                  className="   font-medium text-black mt-3 mb-1"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Walking from CBD:
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   ~3km via University Way and State House Road
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mt-3 mb-1"
+                  className="   font-medium text-black mt-3 mb-1"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   By Car/Taxi:
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Take Arboretum Drive or University Way. Taxi ~KSh 500 from town.
@@ -525,31 +523,31 @@ const NairobiArboretumPage = () => {
               </div>
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   Visiting Hours
                 </h3>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   6:00 AM to 6:30 PM daily
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-3"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem] mt-3"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Entry tickets available at the gate during visiting hours
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black mt-3"
+                  className="   font-medium text-black mt-3"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Entry Fees:
                 </p>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                  className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
                 >
                   Forest conservation fee charged at entry (inquire for current rates)
@@ -557,7 +555,7 @@ const NairobiArboretumPage = () => {
               </div>
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3
-                  className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
+                  className="   font-semibold text-[#0f5a28] mb-3"
                   style={{ fontSize: `${fontSize * 0.95}px` }}
                 >
                   What to Bring
@@ -572,7 +570,7 @@ const NairobiArboretumPage = () => {
                   ].map((item, index) => (
                     <li
                       key={index}
-                      className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                      className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                       style={{ fontSize: `${fontSize * 0.9}px` }}
                     >
                       {item}
@@ -580,7 +578,7 @@ const NairobiArboretumPage = () => {
                   ))}
                 </ul>
                 <p
-                  className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.8rem] mt-3"
+                  className="   font-normal text-black leading-[1.8] text-[0.8rem] mt-3"
                   style={{ fontSize: `${fontSize * 0.8}px` }}
                 >
                   Note: Single use plastic bottles not allowed
@@ -592,7 +590,7 @@ const NairobiArboretumPage = () => {
           {/* Rules Section */}
           <section className="mb-12 bg-[#1a3c34] text-white p-8 rounded-lg">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-3xl mb-4"
+              className="   font-bold text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Visitor Guidelines
@@ -615,7 +613,7 @@ const NairobiArboretumPage = () => {
                   className="bg-green-50 transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                   style={{ fontSize: `${fontSize * 0.85}px` }}
                 >
-                  <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-black text-[0.85rem] leading-[1.6]">
+                  <span className="   font-medium text-black text-[0.85rem] leading-[1.6]">
                     {item}
                   </span>
                 </li>
@@ -626,26 +624,26 @@ const NairobiArboretumPage = () => {
           {/* Contact Section */}
           <section className="mb-12">
             <h2
-              className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-3xl mb-4"
+              className="   font-bold text-[#0f5a28] text-3xl mb-4"
               style={{ fontSize: `${fontSize * 1.2}px` }}
             >
               Contact Information
             </h2>
             <div className="bg-green-50 p-6 rounded-lg">
               <h3
-                className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2"
+                className="   font-semibold text-[#0f5a28] mb-2"
                 style={{ fontSize: `${fontSize * 0.95}px` }}
               >
                 The Forest Manager
               </h3>
               <p
-                className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
+                className="   font-normal text-black leading-[1.8] text-[0.9rem]"
                 style={{ fontSize: `${fontSize * 0.9}px` }}
               >
                 Arboretum Forest Station
               </p>
               <p
-                className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mt-2"
+                className="   font-normal text-black leading-[1.8] text-[0.9rem] mt-2"
                 style={{ fontSize: `${fontSize * 0.9}px` }}
               >
                 <span className="font-medium">Mobile:</span> +254 755 838999

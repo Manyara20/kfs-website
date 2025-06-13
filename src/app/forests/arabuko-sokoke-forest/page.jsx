@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ const ArabukoSokokeForestPage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -52,7 +50,7 @@ const ArabukoSokokeForestPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Arabuko-Sokoke Forest
           </motion.h1>
@@ -60,7 +58,7 @@ const ArabukoSokokeForestPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             Discover Kenya's largest coastal forest, home to rare wildlife and unique ecosystems
           </motion.p>
@@ -82,7 +80,7 @@ const ArabukoSokokeForestPage = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -99,16 +97,16 @@ const ArabukoSokokeForestPage = () => {
             {/* Forest Activities Tab */}
             {activeTab === 'forest-activities' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Activities Available
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   In Arabuko-Sokoke, one can undertake the following activities:
                 </p>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
                   {['Forest walks', 'Forest drives', 'Bird watching', 'Butterfly watching', 'Camping', 'Cycling', 'Picnicking', 'Running'].map((activity, index) => (
                     <li key={index} className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4" style={{ fontSize: `${fontSize * 0.85}px` }}>
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6] capitalize">{activity}</span>
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">{activity}</span>
                     </li>
                   ))}
                 </ul>
@@ -118,16 +116,16 @@ const ArabukoSokokeForestPage = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Getting There & Getting Around
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The forest lies along the tarmac Mombasa – Malindi highway, approximately 100 km from Mombasa town and 18 km from Malindi. The entry is clearly signposted and visitor services are available at the offices of KFS's Malindi Forest Zone located there. Regular buses and flights are available from Nairobi to Mombasa or Malindi. One can also use public service vehicles or taxis from Mombasa, Malindi or Watamu.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The forest has a network of driving tracks and walking trails. Many sections of the forest are accessible by saloon cars but for best access to all tracks, a 4WD is recommended. Driving is the easiest way to see transitions between the different forest types but one learns more about the forest by walking.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Trained guides are available to help one explore the forest. The guides are members of Arabuko-Sokoke Forest Guides Association (ASFGA) and charge as per the time spent and service rendered. Enquire about these services at the point of entry.
                 </p>
               </section>
@@ -136,10 +134,10 @@ const ArabukoSokokeForestPage = () => {
             {/* Park Entry Fee Tab */}
             {activeTab === 'park-entry-fee' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Park Entry Fee
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Kenya Forest Service (KFS) charges an entry fee at the point of entry to promote forest conservation. For current rates, enquire from the contacts given in the Contact Us section.
                 </p>
               </section>
@@ -148,7 +146,7 @@ const ArabukoSokokeForestPage = () => {
             {/* Key Features Tab */}
             {activeTab === 'key-features' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Key Features
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -161,7 +159,7 @@ const ArabukoSokokeForestPage = () => {
                     'Mida Creek, a beautiful tidal inlet with six species of mangrove trees is less than 1 km from the entrance to Arabuko-Sokoke Forest.',
                   ].map((item, index) => (
                     <li key={index} className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4" style={{ fontSize: `${fontSize * 0.85}px` }}>
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">{item}</span>
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -171,30 +169,30 @@ const ArabukoSokokeForestPage = () => {
             {/* Attractions Tab */}
             {activeTab === 'attractions' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Attractions
                 </h2>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Wildlife in Arabuko-Sokoke
                 </h3>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Mammals:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     The forest has 40 recorded mammal species including African Elephant, African Buffalo, African Civet, Caracal, Syke's Monkeys, Yellow Baboons and Lesser Galago (or bushbaby). Some of Kenya's rarest mammals are found here, including the Golden-rumped Elephant-shrew, Sokoke Bushy-tailed Mongoose and Ader's Duiker.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h4 className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <h4 className="   font-medium text-[#0f5a28] text-lg mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     Birds:
                   </h4>
-                  <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                  <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                     There are over 270 species of birds recorded in the forest including several rare and endemic species. The Clarke's Weaver is only found in Arabuko-Sokoke and another area 30 kms further north of Arabuko-Sokoke in the whole world.
                   </p>
                 </div>
                 <div className="mb-6">
-                  <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                  <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                     Plants in Arabuko-Sokoke
                   </h3>
                   <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -213,14 +211,14 @@ const ArabukoSokokeForestPage = () => {
                       },
                     ].map((item, index) => (
                       <li key={index} className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4" style={{ fontSize: `${fontSize * 0.85}px` }}>
-                        <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                        <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                           <strong>{item.title}:</strong> {item.description}
                         </span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-6" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-6" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Photo Gallery
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -266,25 +264,25 @@ const ArabukoSokokeForestPage = () => {
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Contact Us
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   <strong>The Forest Manager:</strong>
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Arabuko-Sokoke Forest Reserve
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   P.O. Box 201 – 80200 Malindi, Kenya.
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   +254755838366
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   +254717318134
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Email: zmkilifi@kenyaforestservice.org
                 </p>
               </section>

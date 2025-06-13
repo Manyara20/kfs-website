@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHelpCircle } from 'react-icons/io';
-import TopNavBar from '@/components/TopNavBar';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ const NgongHillsPage = () => {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       {/* Hero Section */}
@@ -52,7 +50,7 @@ const NgongHillsPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-4xl md:text-6xl font-bold text-white mb-4"
+            className="   text-4xl md:text-6xl font-bold text-white mb-4"
           >
             Ngong Hills Forest
           </motion.h1>
@@ -60,7 +58,7 @@ const NgongHillsPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-['Peugeot',Helvetica,sans-serif] text-lg md:text-xl text-white/90 max-w-2xl"
+            className="   text-lg md:text-xl text-white/90 max-w-2xl"
           >
             Discover the scenic beauty and biodiversity of Ngong Hills, just 25km from Nairobi
           </motion.p>
@@ -82,7 +80,7 @@ const NgongHillsPage = () => {
                     activeTab === tab.id
                       ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-['Peugeot',Helvetica,sans-serif] font-medium text-sm`}
+                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
                 >
                   {tab.label}
                 </button>
@@ -99,7 +97,7 @@ const NgongHillsPage = () => {
             {/* Forest Activities Tab */}
             {activeTab === 'forest-activities' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Forest Activities
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -117,7 +115,7 @@ const NgongHillsPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
                         {activity}
                       </span>
                     </li>
@@ -129,19 +127,19 @@ const NgongHillsPage = () => {
             {/* How to Get There Tab */}
             {activeTab === 'how-to-get-there' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   How to Get There
                 </h2>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Public Transport
                 </h3>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   To Ngong Entry Point: Board matatu no. 111 from Railways Matatu Terminus and alight at Ngong town (about 2km to entry point). From Ngong town, you can walk (2km) or take a bodaboda (Ksh 100).
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   To Corner Baridi Entry Point: Board matatu no. 112 from Railways Matatu Terminus and alight at Kiserian town (about 2km to entry point). From Kiserian town, you can walk (2km) or take a bodaboda (Ksh 100).
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Private Transport
                 </h3>
                 <ul className="space-y-2">
@@ -156,7 +154,7 @@ const NgongHillsPage = () => {
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[1px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.9}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
@@ -168,13 +166,13 @@ const NgongHillsPage = () => {
             {/* Park Entry Fee Tab */}
             {activeTab === 'park-entry-fee' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] 
+                <h2 className="   
 font-bold text-[#0f5a28] 
 text-2xl mb-4" 
 style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Park Entry Fee
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Forest conservation fee is charged at the point of entry. For current rates, contact the Forester in Charge at the details provided in the Contact Us section.
                 </p>
               </section>
@@ -183,7 +181,7 @@ style={{ fontSize: `${fontSize * 1.1}px` }}>
             {/* Key Features Tab */}
             {activeTab === 'key-features' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Key Features
                 </h2>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
@@ -203,7 +201,7 @@ style={{ fontSize: `${fontSize * 1.1}px` }}>
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {feature}
                       </span>
                     </li>
@@ -215,25 +213,25 @@ style={{ fontSize: `${fontSize * 1.1}px` }}>
             {/* Attractions Tab */}
             {activeTab === 'attractions' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Attractions
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Ngong Hills Forest is located in the northern tip of Kajiado County, about 25km from Nairobi city. The forest covers an area of 3,077.6 hectares and is managed by the Kenya Forest Service (KFS).
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Flora
                 </h3>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The vegetation includes exotic (Pine, Cypress) and indigenous (Sandalwood, Acacia, Croton) trees. Distribution is determined by altitude, soil type, human utilization, grazing, and forest fires.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Fauna
                 </h3>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The forest hosts buffaloes, wild pigs, porcupines, and dik-diks. Animal movement depends on drought, water, and forage availability. Animals are wild and can be dangerous; KFS Ranger accompaniment is required for hikes.
                 </p>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Areas of Special Interest
                 </h3>
                 <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0 mb-6">
@@ -250,13 +248,13 @@ style={{ fontSize: `${fontSize * 1.1}px` }}>
                       className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
-                      <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
+                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
                         {item}
                       </span>
                     </li>
                   ))}
                 </ul>
-                <h3 className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
+                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
                   Photo Gallery
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -303,16 +301,16 @@ style={{ fontSize: `${fontSize * 1.1}px` }}>
             {/* Contact Us Tab */}
             {activeTab === 'contact-us' && (
               <section>
-                <h2 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
+                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
                   Contact Us
                 </h2>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   The Forester in Charge
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Ngong Hills Forest Station
                 </p>
-                <p className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
+                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
                   Mobile: 0797 480784 or 0755 838360
                 </p>
               </section>

@@ -8,7 +8,8 @@
   font-family: 'Futura';
   font-style: normal;
   font-weight: 400;
-  src: url('/fonts/futura medium bt.ttf') format('woff2'),
+  font-size:1.2rem;
+  src: url('/fonts/Futura Book font.ttf') format('woff2'),
        url('/fonts/Futura futura medium bt.ttf') format('woff');
 }
 

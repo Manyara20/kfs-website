@@ -105,8 +105,8 @@ const MainNavBar = () => {
       >
         <MenuItem
           sx={{
-            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "0.91rem" },
-             color: isSticky ? "#fff" : "#0D3C00",
+            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "1.2rem" },
+             color: isSticky ? "#fff" : "#fff",
             "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
             padding: "0.5rem 0.6rem",
             display: "flex",
@@ -126,7 +126,7 @@ const MainNavBar = () => {
           {item.subItems?.length > 0 && (
             <ArrowDropDown
               sx={{
-                color: isSticky ? "#fff" : "#0D3C00",
+                color: isSticky ? "#fff" : "#fff",
                 fontSize: "1.1rem",
                 marginLeft: level % 2 === 0 ? "auto" : "0",
               }}
@@ -170,7 +170,7 @@ const MainNavBar = () => {
               target={item.isExternal ? "_blank" : "_self"}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               sx={{
-                color: isSticky ? "#fff" : "#0D3C00",
+                color: isSticky ? "#fff" : "#fff",
                 padding: "8px 16px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -188,11 +188,11 @@ const MainNavBar = () => {
               />
               {hasSubItems && (
                 expandedItems[key] ? (
-                  <ExpandLess sx={{ color: isSticky ? "#fff" : "#0D3C00" }} />
+                  <ExpandLess sx={{ color: isSticky ? "#fff" : "#fff" }} />
                 ) : (
                   <ExpandMore
                     sx={{
-                      color: isSticky ? "#fff" : "#0D3C00",
+                      color: isSticky ? "#fff" : "#fff",
                       marginLeft: level % 2 === 0 ? "auto" : "0",
                     }}
                   />
@@ -250,8 +250,8 @@ const MainNavBar = () => {
               <Image
                 src="/images/kfs_logo.png"
                 alt="KFS Logo"
-                width={50}
-                height={35}
+                width={64}
+                height={48}
               />
             </Link>
           </Box>
@@ -282,19 +282,19 @@ const MainNavBar = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: isSticky ? "#fff" : "#0D3C00",
+                        color: isSticky ? "#fff" : "#fff",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
-                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                                     fontWeight: 500,
+                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.2rem" },
+                                     fontWeight: 600,
                         padding: { md: "5px 7px", lg: "7px 10px" },
                         "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
                         textTransform: "capitalize",
                       }}
                     >
                       {item.label}
-                      <ArrowDropDown sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: "1.1rem" }} />
+                      <ArrowDropDown sx={{ color: isSticky ? "#fff" : "#fff", fontSize: "1.1rem" }} />
                     </Typography>
                     <Box
                       sx={{
@@ -320,7 +320,7 @@ const MainNavBar = () => {
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
                     sx={{
-                      color: isSticky ? "#fff" : "#0D3C00",
+                      color: isSticky ? "#fff" : "#fff",
                       textDecoration: "none",
                       padding: { md: "5px 7px", lg: "7px 10px" },
                       "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
@@ -330,8 +330,8 @@ const MainNavBar = () => {
                   >
                     <Typography
                       sx={{
-                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.05rem" },
-                                     fontWeight: 500,
+                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.2rem" },
+                                     fontWeight: 600,
                         textTransform: "capitalize",
                       }}
                     >
@@ -347,7 +347,7 @@ const MainNavBar = () => {
             {!isMobile && (
               <IconButton
                 sx={{
-                  color: isSticky ? "#fff" : "#0D3C00",
+                  color: isSticky ? "#fff" : "#fff",
                   fontWeight: "bold",
                   padding: { md: "5px", lg: "7px" },
                   "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
@@ -368,36 +368,36 @@ const MainNavBar = () => {
                 display: "flex",
                 gap: 1,
                 "&:hover": {
-                  backgroundColor: isSticky ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.2)",
+                  backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.1)",
                 },
               }}
             >
               <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
-                <Typography sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "1.68rem" }, fontWeight: "bold" }}>
+                <Typography sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" }, fontWeight: "bold" }}>
                   X
                 </Typography>
               </Link>
               <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Facebook sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2.2rem" } }} />
+                <Facebook sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
               </Link>
               <Link href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-                <Instagram sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2rem" } }} />
+                <Instagram sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
               </Link>
               <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <YouTube sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.2rem", xl: "2rem" } }} />
+                <YouTube sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
               </Link>
             </Button>
 
             {isMobile && (
               <>
                 <IconButton
-                  sx={{ color: isSticky ? "#fff" : "#0D3C00", padding: "5px" }}
+                  sx={{ color: isSticky ? "#fff" : "#fff", padding: "5px" }}
                   onClick={toggleSearchDrawer}
                 >
                   <SearchIcon sx={{ fontSize: "1.4rem" }} />
                 </IconButton>
                 <IconButton
-                  sx={{ color: isSticky ? "#fff" : "#0D3C00", padding: "5px" }}
+                  sx={{ color: isSticky ? "#fff" : "#fff", padding: "5px" }}
                   onClick={toggleDrawer(true)}
                 >
                   <MenuIcon />
@@ -417,7 +417,7 @@ const MainNavBar = () => {
             width: { xs: "80%", sm: "60%" },
             maxWidth: "300px",
             backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-            color: isSticky ? "#fff" : "#0D3C00",
+            color: isSticky ? "#fff" : "#fff",
             padding: "1rem",
           },
         }}
@@ -439,8 +439,8 @@ const MainNavBar = () => {
         onClose={toggleSearchDrawer}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.85)",
-            color: isSticky ? "#fff" : "#0D3C00",
+            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.3)",
+            color: isSticky ? "#fff" : "#fff",
             height: "auto",
             width: "100%",
             maxHeight: "70vh",

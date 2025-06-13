@@ -10,13 +10,13 @@ const data = [
   },
   {
     title: "Vision",
-    image: "/images/Mangroveforest.png",
+    image: "/images/hero/mangrove.png",
     description:
       "To be an internationally recognized organization of excellence in knowledge-based sustainable forest resources development, conservation, and management.",
   },
   {
     title: "Strategic Goal",
-    image: "/images/kenyas_goal_of_ac5f8973a9d77a1.jpg",
+    image: "/images/community.jpg",
     description:
       "Sustainably manage all forests and build resilient forest ecosystems.",
   },

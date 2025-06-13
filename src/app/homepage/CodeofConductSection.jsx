@@ -106,7 +106,7 @@ const CodeOfConductSection = () => {
                 className="p-4 bg-[#0D3C00] text-white border-4 border-white  hover:bg-white hover:border-[#15803d] hover:text-[#0D3C00] transition-all duration-300 cursor-pointer group"
                 onClick={() => toggleDetails(index)}
               >
-                <h6 className="text-lg font-semibold">{item.title}</h6>
+                <h6 className="text-lg font-bold">{item.title}</h6>
 
                 {/* Large Screens: Hover to show details */}
                 <div className="hidden md:block">

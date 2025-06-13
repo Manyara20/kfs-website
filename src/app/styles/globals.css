@@ -9,7 +9,9 @@
   font-style: normal;
   font-weight: 400;
   src: url('/fonts/futur.ttf') format('woff2'),
-       url('/fonts/Futura Bold font.ttf') format('woff');
+       url('/fonts/Futura Bold font.ttf') format('woff'),
+       url('/fonts/Futura Bold Italic font.ttf') format('woff');
+
 }
 
 

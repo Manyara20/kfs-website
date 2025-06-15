@@ -27,7 +27,7 @@ const navigationItems = [
       { label: "Tree Planting", link: "/quick-links/tree-planting" },
       { label: "Participatory Forest Management", link: "/quick-links/participatory-forest-management" },
       { label: "Customer Feedback", link: "/quick-links/CustomerFeedback" },
-      { label: "Background", link: "/quick-links/background"},
+      { label: "EcoTourism", link: "/quick-links/background"},
       {
         label: "Online Systems",
         link: "/quick-links/online-systems",

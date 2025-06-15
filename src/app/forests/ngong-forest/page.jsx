@@ -1,340 +1,311 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { IoMdHelpCircle } from 'react-icons/io';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
+import { FaTree } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
 import MainNavBar from '@/components/MainNavBar';
 import FooterBottom from '@/components/FooterBottom';
-import Image from 'next/image';
+import Link from 'next/link';
+
+const forestList = [
+  {
+    name: 'Kakamega Forest',
+    image: '/images/forests/kakamega.jpg',
+    href: '/forests/kakamega',
+  },
+  {
+    name: 'Karura Forest',
+    image: '/images/forests/karura.jpg',
+    href: '/forests/karura',
+  },
+  {
+    name: 'Hombe Forest',
+    image: '/images/forests/hombe.jpg',
+    href: '/forests/hombe',
+  },
+  {
+    name: 'Arabuko Sokoke',
+    image: '/images/forests/arabuko.jpg',
+    href: '/forests/arabuko',
+  },
+  {
+    name: 'Menengai Forest',
+    image: '/images/forests/menengai.jpg',
+    href: '/forests/menengai',
+  },
+  {
+    name: 'Mt. Kenya Forest',
+    image: '/images/forests/mtkenya.jpg',
+    href: '/forests/mtkenya',
+  },
+  {
+    name: 'Ngare Ndare',
+    image: '/images/forests/ngare.jpg',
+    href: '/forests/ngare',
+  },
+  {
+    name: 'Nairobi Arboretum',
+    image: '/images/forests/arboretum.jpg',
+    href: '/forests/arboretum',
+  },
+  {
+    name: 'Ndaragwa Nature Trail',
+    image: '/images/forests/ndaragwa.jpg',
+    href: '/forests/ndaragwa',
+  },
+  {
+    name: 'Arabuko Sokoke',
+    image: '/images/forests/arabuko.jpg',
+    href: '/forests/arabuko',
+  },
+  {
+    name: 'Arabuko Sokoke',
+    image: '/images/forests/arabuko.jpg',
+    href: '/forests/arabuko',
+  },
+];
 
 const NgongHillsPage = () => {
   const [fontSize, setFontSize] = useState(16);
-  const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('forest-activities');
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const handleFontSizeChange = (increase) => {
-    setFontSize((prev) => {
-      const newSize = increase ? prev + 1 : prev - 1;
-      return Math.max(12, Math.min(20, newSize));
-    });
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
+  const [showDrawer, setShowDrawer] = useState(false);
 
   const tabs = [
-    { id: 'forest-activities', label: 'Forest Activities' },
-    { id: 'how-to-get-there', label: 'How to Get There' },
-    { id: 'park-entry-fee', label: 'Park Entry Fee' },
-    { id: 'key-features', label: 'Key Features' },
+    { id: 'forest-activities', label: 'Activities' },
+    { id: 'how-to-get-there', label: 'Getting There' },
+    { id: 'park-entry-fee', label: 'Fees' },
+    { id: 'key-features', label: 'Features' },
     { id: 'attractions', label: 'Attractions' },
-    { id: 'contact-us', label: 'Contact Us' },
+    { id: 'contact-us', label: 'Contact' },
   ];
 
+  const tabVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+  };
+
   return (
-    <div>
+    <div className="bg-[#f7fdf9] text-gray-900 min-h-screen relative overflow-hidden">
       <MainNavBar />
-      
-      {/* Hero Section */}
-      <div className="relative h-[70vh] bg-cover bg-center" 
-           style={{ backgroundImage: `url('/images/Eco-tourism/NgongHillsForest/Ngong-Hills-Forest-Reserve-Ngong-Kenya-TortoisePathcom-6-jpeg.webp')` }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-          <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="   text-4xl md:text-6xl font-bold text-white mb-4"
-          >
-            Ngong Hills Forest
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="   text-lg md:text-xl text-white/90 max-w-2xl"
-          >
-            Discover the scenic beauty and biodiversity of Ngong Hills, just 25km from Nairobi
-          </motion.p>
+
+      {/* Hero */}
+      <div
+        className="relative h-[75vh] bg-cover bg-center flex items-center justify-center"
+        style={{
+          backgroundImage: "url('/images/forests/Ngong-Hills-Hiking-Trail.jpg')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-60" />
+        <div className="relative z-10 text-center text-white px-6 max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-extrabold">Ngong Hills Forest</h1>
+          <p className="text-lg mt-4">
+            A serene escape above Nairobi with panoramic views, peaceful trails, and unforgettable experiences.
+          </p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white" 
-             style={{ clipPath: 'ellipse(70% 100% at 50% 100%)' }}></div>
       </div>
 
-      {/* Tab Section */}
-      <div className="bg-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="border-b border-gray-200 mb-8">
-            <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`${
-                    activeTab === tab.id
-                      ? 'border-green-600 text-green-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2    font-medium text-sm`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </nav>
-          </div>
+      {/* Floating Forests Button */}
+      <button
+        onClick={() => setShowDrawer(true)}
+        className="fixed top-[35%] right-4 z-50 bg-green-700 hover:bg-green-800 text-white p-3 squared-full shadow-lg transition"
+        title="Explore Other Forests"
+      >
+        <FaTree className="text-xl" />
+      </button>
 
-          <motion.div
-            initial="hidden"
-            animate={isVisible ? 'visible' : 'hidden'}
-            variants={cardVariants}
-            className="bg-white p-8"
+      {/* Side Drawer */}
+      <AnimatePresence>
+        {showDrawer && (
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 w-[300px] sm:w-[400px] h-full bg-white shadow-xl z-50 p-6 overflow-y-auto"
           >
-            {/* Forest Activities Tab */}
-            {activeTab === 'forest-activities' && (
-              <section>
-                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  Forest Activities
-                </h2>
-                <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
-                  {[
-                    'Hiking',
-                    'Picnics',
-                    'Camping',
-                    'Viewing',
-                    'Religious activities',
-                    'Team building',
-                    'Weddings',
-                  ].map((activity, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
-                      style={{ fontSize: `${fontSize * 0.85}px` }}
-                    >
-                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6] capitalize">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-green-700">Discover Other Forests</h2>
+              <button
+                onClick={() => setShowDrawer(false)}
+                className="text-green-700 hover:text-green-900"
+              >
+                <AiOutlineClose className="text-2xl" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {forestList.map((forest) => (
+                <Link href={forest.href} key={forest.name} className="block group">
+                  <div className="relative overflow-hidden squared-xl shadow-lg group-hover:scale-[1.01] transition">
+                    <img
+                      src={forest.image}
+                      alt={forest.name}
+                      className="w-full h-40 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition" />
+                    <div className="absolute bottom-0 p-4 text-white font-semibold">
+                      {forest.name}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+
+      {/* Tabs */}
+      <div className="max-w-6xl mx-auto mt-12 px-4">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 squared-full font-semibold transition ${
+                activeTab === tab.id
+                  ? 'bg-green-700 text-white shadow'
+                  : 'bg-white border border-green-600 text-green-700 hover:bg-green-100'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="relative min-h-[400px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              variants={tabVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="bg-white/80 backdrop-blur-md shadow-lg p-8 squared-2xl"
+              style={{ fontSize: `${fontSize}px` }}
+            >
+              {activeTab === 'forest-activities' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">Forest Activities</h2>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      'Hiking along scenic ridges',
+                      'Picnic and barbecue zones',
+                      'Sunset photography spots',
+                      'Camping under the stars',
+                      'Prayer and meditation',
+                      'Team building grounds',
+                      'Nature-themed weddings',
+                    ].map((activity, i) => (
+                      <li
+                        key={i}
+                        className="bg-green-100 text-green-900 p-4 squared-lg shadow hover:scale-[1.01] transition"
+                      >
                         {activity}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {/* How to Get There Tab */}
-            {activeTab === 'how-to-get-there' && (
-              <section>
-                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  How to Get There
-                </h2>
-                <h3 className="   font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Public Transport
-                </h3>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  To Ngong Entry Point: Board matatu no. 111 from Railways Matatu Terminus and alight at Ngong town (about 2km to entry point). From Ngong town, you can walk (2km) or take a bodaboda (Ksh 100).
-                </p>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  To Corner Baridi Entry Point: Board matatu no. 112 from Railways Matatu Terminus and alight at Kiserian town (about 2km to entry point). From Kiserian town, you can walk (2km) or take a bodaboda (Ksh 100).
-                </p>
-                <h3 className="   font-semibold text-[#0f5a28] mb-2" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Private Transport
-                </h3>
-                <ul className="space-y-2">
-                  {[
-                    'Taxi from Nairobi city centre to Ngong entry point: ~Ksh 2,000',
-                    'Taxi from Nairobi city centre to Corner Baridi entry point: ~Ksh 2,500',
-                    'Taxi from Ngong town to Ngong entry point: ~Ksh 500',
-                    'Taxi from Kiserian town to Corner Baridi entry point: ~Ksh 500',
-                  ].map((item, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[1px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
-                      style={{ fontSize: `${fontSize * 0.9}px` }}
-                    >
-                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {/* Park Entry Fee Tab */}
-            {activeTab === 'park-entry-fee' && (
-              <section>
-                <h2 className="   
-font-bold text-[#0f5a28] 
-text-2xl mb-4" 
-style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  Park Entry Fee
-                </h2>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  Forest conservation fee is charged at the point of entry. For current rates, contact the Forester in Charge at the details provided in the Contact Us section.
-                </p>
-              </section>
-            )}
-
-            {/* Key Features Tab */}
-            {activeTab === 'key-features' && (
-              <section>
-                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  Key Features
-                </h2>
-                <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
-                  {[
-                    '3,077.6 hectares of exotic and indigenous trees.',
-                    'Visiting hours: 6:00 AM to 6:00 PM.',
-                    'Wear comfortable shoes, loose clothing, and carry water.',
-                    'Short rains: October-December; Long rains: March-May.',
-                    'No single-use plastic bottles allowed.',
-                    'Hiking requires KFS Ranger accompaniment for safety.',
-                    'Panoramic views of Great Rift Valley and Nairobi.',
-                    '30 wind power generation sites.',
-                    'High-altitude sports training and religious retreats.',
-                  ].map((feature, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
-                      style={{ fontSize: `${fontSize * 0.85}px` }}
-                    >
-                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+              {activeTab === 'how-to-get-there' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">How to Get There</h2>
+                  <p className="mb-4">
+                    Ngong Hills is 25km southwest of Nairobi and easily reachable via public or private means:
+                  </p>
+                  <ul className="space-y-2">
+                    <li>🚐 Matatu No. 111 to Ngong Town, then boda boda to gate</li>
+                    <li>🚖 Taxi to Ngong Entry: ~Ksh 2,000</li>
+                    <li>🚖 Taxi to Corner Baridi Entry: ~Ksh 2,500</li>
+                  </ul>
+                </section>
+              )}
+              {activeTab === 'park-entry-fee' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">Park Entry Fee</h2>
+                  <p>
+                    Entry to the forest is subject to a conservation fee. Kindly contact the forester for current rates.
+                  </p>
+                </section>
+              )}
+              {activeTab === 'key-features' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">Key Features</h2>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      '3,077 hectares of forest',
+                      'Open 6:00 AM – 6:00 PM',
+                      'Great for high-altitude training',
+                      'Guided hikes with KFS Rangers',
+                      'No single-use plastics allowed',
+                      'Breathtaking Rift Valley views',
+                      'Wind turbines within the reserve',
+                    ].map((feature, i) => (
+                      <li
+                        key={i}
+                        className="bg-white border border-green-200 p-4 squared-lg shadow-sm"
+                      >
                         {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {/* Attractions Tab */}
-            {activeTab === 'attractions' && (
-              <section>
-                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  Attractions
-                </h2>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  Ngong Hills Forest is located in the northern tip of Kajiado County, about 25km from Nairobi city. The forest covers an area of 3,077.6 hectares and is managed by the Kenya Forest Service (KFS).
-                </p>
-                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Flora
-                </h3>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  The vegetation includes exotic (Pine, Cypress) and indigenous (Sandalwood, Acacia, Croton) trees. Distribution is determined by altitude, soil type, human utilization, grazing, and forest fires.
-                </p>
-                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Fauna
-                </h3>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-4" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  The forest hosts buffaloes, wild pigs, porcupines, and dik-diks. Animal movement depends on drought, water, and forage availability. Animals are wild and can be dangerous; KFS Ranger accompaniment is required for hikes.
-                </p>
-                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Areas of Special Interest
-                </h3>
-                <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0 mb-6">
-                  {[
-                    'Communication Masts: High points for installation.',
-                    'Wind Power: 30 wind energy generation sites.',
-                    'Tourism: Attraction sites with scenic beauty.',
-                    'Sports Training: High altitude training and hiking.',
-                    'Religious Retreats: Popular sites for prayers.',
-                    'Scenic Views: Great Rift Valley and Nairobi views.',
-                  ].map((item, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4"
-                      style={{ fontSize: `${fontSize * 0.85}px` }}
-                    >
-                      <span className="   font-medium text-white text-[0.85rem] leading-[1.6]">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <h3 className="   font-semibold text-[#0f5a28] text-xl mb-3" style={{ fontSize: `${fontSize * 0.95}px` }}>
-                  Photo Gallery
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    {
-                      src: '/images/Eco-tourism/NgongHillsForest/Power-generating-wind-turbines.jpg',
-                      alt: 'Power generating wind turbines',
-                      caption: 'Wind Turbines',
-                    },
-                    {
-                      src: '/images/Eco-tourism/NgongHillsForest/Visitors-taking-a-walk-to-the-view-point.jpg',
-                      alt: 'Visitors taking a walk to the view point',
-                      caption: 'View Point Walk',
-                    },
-                    {
-                      src: '/images/Eco-tourism/NgongHillsForest/One-of-the-view-points.jpg',
-                      alt: 'One of the view points',
-                      caption: 'Scenic View Point',
-                    },
-                    {
-                      src: '/images/Eco-tourism/NgongHillsForest/Picnic-site-and-grounds-for-hire.jpg',
-                      alt: 'Picnic site and grounds for hire',
-                      caption: 'Picnic Site',
-                    },
-                  ].map((image, index) => (
-                    <div key={index} className="relative h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={300}
-                        height={225}
-                        className="w-full h-full object-cover"
-                        unoptimized
-                      />
-                      <p className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
-                        {image.caption}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+              {activeTab === 'attractions' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">Attractions</h2>
+                  <p className="mb-4">
+                    Discover a blend of rich biodiversity, spiritual calm, and stunning valley panoramas.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="font-semibold text-green-700">Flora & Fauna</h3>
+                      <p className="mb-2">
+                        Acacia, cypress, pine, and sandalwood trees thrive here. Wildlife includes buffaloes, dik-diks, and porcupines.
                       </p>
                     </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Contact Us Tab */}
-            {activeTab === 'contact-us' && (
-              <section>
-                <h2 className="   font-bold text-[#0f5a28] text-2xl mb-4" style={{ fontSize: `${fontSize * 1.1}px` }}>
-                  Contact Us
-                </h2>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  The Forester in Charge
-                </p>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  Ngong Hills Forest Station
-                </p>
-                <p className="   font-normal text-black leading-[1.8] text-[0.9rem] mb-2" style={{ fontSize: `${fontSize * 0.9}px` }}>
-                  Mobile: 0797 480784 or 0755 838360
-                </p>
-              </section>
-            )}
-          </motion.div>
+                    <div>
+                      <h3 className="font-semibold text-green-700">Points of Interest</h3>
+                      <ul className="list-disc pl-5">
+                        <li>Wind turbine installations</li>
+                        <li>Sunset viewpoints</li>
+                        <li>Ridge-top nature trails</li>
+                        <li>Peaceful prayer zones</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              )}
+              {activeTab === 'contact-us' && (
+                <section>
+                  <h2 className="text-2xl font-bold text-green-700 mb-4">Contact Us</h2>
+                  <p>📍 Ngong Hills Forest Station</p>
+                  <p>📞 0797 480784 | 0755 838360</p>
+                </section>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+        {/* Font Size Controls */}
+        <div className="flex justify-center gap-4 mt-8">
           <button
-            onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
-            aria-label="Increase font size"
+            onClick={() => setFontSize((f) => Math.min(f + 1, 20))}
+            className="bg-green-700 text-white p-2 squared-full"
           >
-            <IoMdHelpCircle className="text-white text-lg" />
+            <IoMdAddCircle className="text-xl" />
           </button>
           <button
-            onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800"
-            aria-label="Decrease font size"
+            onClick={() => setFontSize((f) => Math.max(f - 1, 12))}
+            className="bg-green-700 text-white p-2 squared-full"
           >
-            <IoMdHelpCircle className="text-white text-lg" />
+            <IoMdRemoveCircle className="text-xl" />
           </button>
         </div>
       </div>
+
       <FooterBottom />
     </div>
   );

@@ -21,8 +21,8 @@ function HomePageContents() {
       <MissionSection />
       <CodeOfConductSection />
       <Principles />
-      <Exploreournuseries/>
       <Exploreourforests/>
+      <Exploreournuseries/>
       <PatnersSection />
       <NewsSection />
       <Footer />

@@ -1,88 +1,212 @@
-// components/Exploreourforests.jsx
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const forests = [
   {
-    name: "Kakamega Forest",
-    image: "/images/forests/kakamega.jpg",
-
+    name: 'Karura Forest',
+    image: '/images/forests/karura.jpg',
+    subtitle: 'Urban oasis with trails and waterfalls',
+    href: '/forests/karura-forest',
   },
   {
-    name: "Arabuko Sokoke Forest",
-    image: "/images/forests/arabuko.jpeg",
-  
+    name: 'Menengai Forest',
+    image: '/images/forests/menengai.jpg',
+    subtitle: 'Volcanic crater with lush greenery',
+    href: '/forests/menengai-forest',
   },
   {
-    name: "Hombe Forest Guesthouse",
-    image: "/images/forests/mau.jpg",
-  
+    name: 'Mt. Kenya Forest',
+    image: '/images/forests/mtkenya.jpg',
+    subtitle: 'Majestic mountain forest with alpine flora',
+    href: '/forests/mt-kenya-forest',
   },
   {
-    name: "Karura Forest",
-    image: "/images/forests/karura.jpg",
-    
+    name: 'Ngare Ndare Forest',
+    image: '/images/forests/ngare.jpg',
+    subtitle: 'Canopy walkway and elephant corridor',
+    href: '/forests/ngare-ndare-forest',
   },
   {
-    name: "Ngong Forest",
-    image: "/images/forests/ngong.jpeg",
-    
+    name: 'Eburu Forest',
+    image: '/images/forests/eburu.jpg',
+    subtitle: 'Canopy walkway and elephant corridor',
+    href: '/forests/eburu-forest',
   },
   {
-    name: "Menengai Forest",
-    image: "/images/forests/aberdare.jpeg",
- 
+    name: 'Kakamega Forest',
+    image: '/images/forests/kakamega.jpg',
+    subtitle: 'Biodiverse rainforest with unique wildlife',
+    href: '/forests/kakamega-forest',
   },
   {
-    name: "Mt. Kenya Forest",
-    image: "/images/forests/cheranganyi.jpg",
-    
+    name: 'Castle Forest',
+    image: '/images/forests/ngare.jpg',
+    subtitle: 'Canopy walkway and elephant corridor',
+    href: '/forests/castle-forest',
   },
   {
-    name: "Mt. Elgon Forest",
-    image: "/images/forests/mtelgon.jpeg",
+    name: 'Michuki Memorial Conservation Forest',
+    image: '/images/forests/ngare.jpg',
+    subtitle: 'Canopy walkway and elephant corridor',
+    href: '/forests/michuki-memorial-conservation',
   },
   {
-    name: "Nairobi Arboretum",
-    image: "/images/forests/mtelgon.jpeg",
-  
+    name: 'Arabuko Sokoke',
+    image: '/images/forests/arabuko.jpg',
+    subtitle: 'Coastal forest with rare birds',
+    href: '/forests/arabuko-sokoke-forest',
+  },
+  {
+    name: 'Ngong Hills Forest',
+    image: '/images/forests/ngong.jpg',
+    subtitle: 'Scenic hills with stunning city views',
+    href: '/forests/ngong-forest',
+  },
+  {
+    name: 'Nairobi Arboretum',
+    image: '/images/forests/arboretum.jpg',
+    subtitle: 'Botanical haven in the city center',
+    href: '/forests/arboretum-forest',
+  },
+  {
+    name: 'Hombe Forest',
+    image: '/images/forests/hombe.jpg',
+    subtitle: 'Serene retreat in lush nature',
+    href: '/forests/hombe-forest-guesthouse',
   },
 ];
 
-const slugify = (str) =>
-  str.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
 const ForestCardGrid = () => {
+  const [currentGroup, setCurrentGroup] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const groupSize = 3; // 1x3 grid
+  const totalGroups = Math.ceil(forests.length / groupSize);
+
+  // Automatic rotation every 8 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 8000);
+    return () => clearInterval(interval);
+  }, [currentGroup]);
+
+  const handleNext = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentGroup((prev) => (prev + 1) % totalGroups);
+    setTimeout(() => setIsTransitioning(false), 500); // Match transition duration
+  };
+
+  const handlePrev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentGroup((prev) => (prev - 1 + totalGroups) % totalGroups);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const currentForests = forests.slice(
+    currentGroup * groupSize,
+    (currentGroup + 1) * groupSize
+  );
+
+  const cardVariants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.5 } },
+  };
+
   return (
-    <>
-    <div className="max-w-6xl mx-auto py-6 px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-2 text-shadow-lg tracking-wide">
-            Explore our Nursuries
+    <div className="relative max-h-screen  bg-[#0f5a28] py-14 px-4 sm:px-6 lg:px-8">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-30"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+            Discover Kenya’s Forests
           </h1>
+        </motion.div>
+
+        {/* 1x3 Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentGroup}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {currentForests.map((forest, index) => (
+              <Link href={forest.href} key={forest.name}>
+                <motion.div
+                  variants={cardVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="relative h-64 squred-xl overflow-hidden shadow-xl bg-white"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                >
+                  <Image
+                    src={forest.image}
+                    alt={forest.name}
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover transition-transform duration-500"
+                    unoptimized
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
+                    <h2 className="text-white text-lg font-bold">{forest.name}</h2>
+                    <p className="text-white/90 text-sm">{forest.subtitle}</p>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+            {/* Fill empty slots if less than 3 forests */}
+            {Array.from({ length: groupSize - currentForests.length }).map((_, i) => (
+              <div key={`empty-${i}`} className="h-64 squared-xl bg-gray-200 opacity-50" />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-center gap-4 mt-8">
+          <motion.button
+            onClick={handlePrev}
+            className="bg-green-600 hover:bg-green-700 text-white p-3 squared-full shadow-lg disabled:opacity-50"
+            disabled={isTransitioning}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaArrowLeft className="text-xl" />
+          </motion.button>
+          <motion.button
+            onClick={handleNext}
+            className="bg-green-600 hover:bg-green-700 text-white p-3 squared-full shadow-lg disabled:opacity-50"
+            disabled={isTransitioning}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaArrowRight className="text-xl" />
+          </motion.button>
+        </div>
       </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-8 bg-white">
-      {forests.map((forest, index) => (
-        <Link key={index} href={`/forests/${slugify(forest.name)}`}>
-          <div className="cursor-pointer relative squared-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white">
-            <div className="relative">
-              <img
-                src={forest.image}
-                alt={forest.name}
-                className="w-full h-64 object-cover transition-opacity duration-300 hover:opacity-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div className="absolute bottom-0 left-0 w-full p-4">
-              <h3 className="text-white text-lg font-semibold tracking-tight drop-shadow-md">
-                {forest.name}
-              </h3>
-            </div>
-          </div>
-        </Link>
-      ))}
     </div>
-    </>
   );
 };
 

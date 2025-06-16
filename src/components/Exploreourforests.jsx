@@ -84,7 +84,7 @@ const forests = [
 const ForestCardGrid = () => {
   const [currentGroup, setCurrentGroup] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const groupSize = 3; // 1x3 grid
+  const groupSize = 4; // 1x3 grid
   const totalGroups = Math.ceil(forests.length / groupSize);
 
   // Automatic rotation every 8 seconds
@@ -130,7 +130,7 @@ const ForestCardGrid = () => {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative max-w-8xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ const ForestCardGrid = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentGroup}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-8xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

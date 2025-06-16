@@ -9,6 +9,16 @@ const HeroSection = () => {
 
   const slides = [
     {
+      title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
+      subtitle:
+        "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
+      image: "/images/hero/president.jpg",
+      ctaText: "Plant a Tree Today",
+      ctaLink: "#tree-planting",
+      secondaryCtaText: "Adopt a Forest",
+      secondaryCtaLink: "/adopt-a-forest",
+    },
+    {
       title: "Explore Today, Conserve Forever.",
       subtitle:
         "Discover the untamed beauty of our forests, where your adventure fuels vital conservation and empowers local communities",
@@ -28,16 +38,7 @@ const HeroSection = () => {
       secondaryCtaText: "Get In Touch",
       secondaryCtaLink: "/contact",
     },
-    {
-      title: "Growing 15 Billion Trees for a Greener Kenya by 2032",
-      subtitle:
-        "Join us in restoring our landscapes, combating climate change, and securing livelihoods",
-      image: "/images/hero/president.jpg",
-      ctaText: "Plant a Tree Today",
-      ctaLink: "#tree-planting",
-      secondaryCtaText: "Adopt a Forest",
-      secondaryCtaLink: "/adopt-a-forest",
-    },
+    
   ];
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const HeroSection = () => {
       
       {/* Slide Container with Background Image */}
       <div
-        className="relative h-full  object-fit bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"
+        className="relative h-full  bg-cover bg-no-repeat bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"
         style={{
           backgroundImage: `url(${slides[currentSlide].image})`,
         }}

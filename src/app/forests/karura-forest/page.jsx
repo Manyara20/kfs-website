@@ -14,48 +14,69 @@ const forestList = [
   {
     name: 'Ngong Hills Forest',
     image: '/images/forests/Ngong-Hills-Hiking-Trail.jpg',
-    href: '/forests/ngong',
+    href: '/forests/ngong-forest',
   },
   {
     name: 'Kakamega Forest',
     image: '/images/forests/kakamega.jpg',
-    href: '/forests/kakamega',
+    href: '/forests/kakamega-forest',
   },
   {
     name: 'Hombe Forest',
     image: '/images/forests/hombe.jpg',
-    href: '/forests/hombe',
+    href: '/forests/hombe-forest-guesthouse',
   },
   {
     name: 'Arabuko Sokoke',
     image: '/images/forests/arabuko.jpg',
-    href: '/forests/arabuko',
+    href: '/forests/arabuko-sokoke-forest',
   },
   {
     name: 'Menengai Forest',
     image: '/images/forests/menengai.jpg',
-    href: '/forests/menengai',
+    href: '/forests/menengai-forest',
   },
   {
     name: 'Mt. Kenya Forest',
     image: '/images/forests/mtkenya.jpg',
-    href: '/forests/mtkenya',
+    href: '/forests/mt-kenya-forest',
   },
   {
     name: 'Ngare Ndare',
     image: '/images/forests/ngare.jpg',
-    href: '/forests/ngare',
+    href: '/forests/ngare-ndare-forest',
+  },
+  {
+    name: 'Ngong Hills Forest',
+    image: '/images/forests/ngong.jpg',
+    href: '/forests/ngong-forest',
   },
   {
     name: 'Nairobi Arboretum',
     image: '/images/forests/arboretum.jpg',
-    href: '/forests/arboretum',
+    href: '/forests/arboretum-forest',
   },
   {
     name: 'Ndaragwa Nature Trail',
     image: '/images/forests/ndaragwa.jpg',
-    href: '/forests/ndaragwa',
+    href: '/forests/ndaragwa-nature-trail',
   },
+  {
+    name: 'Eburu Forest',
+    image: '/images/forests/eburu.jpg',
+    href: '/forests/eburu-forest',
+  },
+  {
+    name: 'Castle Forest',
+    image: '/images/forests/castle.jpg',
+    href: '/forests/castle-forest',
+  },
+  {
+    name: 'Michuki Memorial Conservation Forest',
+    image: '/images/forests/michuki.jpg',
+    href: '/forests/michuki-memorial-conservation',
+  },
+
 ];
 
 const KaruraForestPage = () => {
@@ -95,11 +116,11 @@ const KaruraForestPage = () => {
       <div
         className="relative h-[60vh] bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
+          backgroundImage: "url('https://live.staticflickr.com/7608/17027026260_20e79501dc_b.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-60" />
-        <div className="relative z-10 text-center text-white px-6 max-w-4xl">
+        <div className="absolute inset-0 bg-opacity-60" />
+        <div className="relative z-10 text-center text-green-600 px-6 max-w-4xl">
           <h1
             className="font-['Peugeot',Helvetica,sans-serif] font-bold text-white text-[2.2rem] sm:text-[3rem] leading-[1.3] tracking-[0.5px] capitalize"
             style={{ fontSize: `${fontSize * 2}px` }}
@@ -156,7 +177,7 @@ const KaruraForestPage = () => {
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={cardVariants}
-          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 rounded-lg shadow-lg"
+          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 squared-lg shadow-lg"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -192,7 +213,7 @@ const KaruraForestPage = () => {
                     ].map((activity, i) => (
                       <li
                         key={i}
-                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -240,7 +261,7 @@ const KaruraForestPage = () => {
                     ].map((item, i) => (
                       <li
                         key={i}
-                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <h3
@@ -274,7 +295,7 @@ const KaruraForestPage = () => {
                   >
                     Entry tickets are available at the gate from 6:00 AM to 5:00 PM. For current rates, contact the Forester-in-Charge via details in the Contact section.
                   </p>
-                  <div className="bg-green-100 p-4 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-4 squared-lg shadow-md">
                     <p
                       className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
                       style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -310,7 +331,7 @@ const KaruraForestPage = () => {
                     ].map((feature, i) => (
                       <li
                         key={i}
-                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -410,16 +431,23 @@ const KaruraForestPage = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
                       {
-                        src: '/images/forests/karuraforest.jpg',
+                        src: '/images/forests/karura-waterfall.jpg',
                         alt: 'Scenic waterfall in Karura Forest',
                         caption: 'Scenic waterfall in Karura Forest',
+                        width: 300,
+                        height: 225,
+                      },
+                      {
+                        src: '/images/forests/karura-caves.jpeg',
+                        alt: 'Mau cave in Karura Forest',
+                        caption: 'Scenic cave in Karura Forest',
                         width: 300,
                         height: 225,
                       },
                     ].map((image, i) => (
                       <div
                         key={i}
-                        className="relative rounded-lg overflow-hidden shadow-md"
+                        className="relative squared-lg overflow-hidden shadow-md"
                         style={{ height: `${fontSize * 14}px` }}
                       >
                         <Image
@@ -449,7 +477,7 @@ const KaruraForestPage = () => {
                   >
                     Contact Us
                   </h2>
-                  <div className="bg-green-100 p-4 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-4 squared-lg shadow-md">
                     <p
                       className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-2"
                       style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -516,7 +544,7 @@ const KaruraForestPage = () => {
         {/* Floating Forests Button */}
         <button
           onClick={() => setShowDrawer(true)}
-          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 rounded-full shadow-lg transition"
+          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 squared-full shadow-lg transition"
           title="Explore Other Forests"
         >
           <FaTree className="text-xl" />
@@ -550,7 +578,7 @@ const KaruraForestPage = () => {
               <div className="space-y-4">
                 {forestList.map((forest) => (
                   <Link href={forest.href} key={forest.name} className="block group">
-                    <div className="relative overflow-hidden rounded-xl shadow-lg group-hover:scale-[1.01] transition">
+                    <div className="relative overflow-hidden squared-xl shadow-lg group-hover:scale-[1.01] transition">
                       <Image
                         src={forest.image}
                         alt={forest.name}
@@ -578,14 +606,14 @@ const KaruraForestPage = () => {
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-20">
           <button
             onClick={() => setFontSize((prev) => Math.min(prev + 1, 20))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Increase font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => setFontSize((prev) => Math.max(prev - 1, 12))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Decrease font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />

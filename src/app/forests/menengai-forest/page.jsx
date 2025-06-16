@@ -14,48 +14,75 @@ const forestList = [
   {
     name: 'Ngong Hills Forest',
     image: '/images/forests/Ngong-Hills-Hiking-Trail.jpg',
-    href: '/forests/ngong',
-  },
-  {
-    name: 'Kakamega Forest',
-    image: '/images/forests/kakamega.jpg',
-    href: '/forests/kakamega',
+    href: '/forests/ngong-forest',
   },
   {
     name: 'Karura Forest',
     image: '/images/forests/karura.jpg',
-    href: '/forests/karura',
+    subtitle: 'Urban oasis with trails and waterfalls',
+    href: '/forests/karura-forest',
+  },
+  {
+    name: 'Kakamega Forest',
+    image: '/images/forests/kakamega.jpg',
+    href: '/forests/kakamega-forest',
   },
   {
     name: 'Hombe Forest',
     image: '/images/forests/hombe.jpg',
-    href: '/forests/hombe',
+    href: '/forests/hombe-forest-guesthouse',
   },
   {
     name: 'Arabuko Sokoke',
-    image: '/images/forests/arabuko.jpg',
-    href: '/forests/arabuko',
+    image: '/images/forests/arabuko.jpeg',
+    href: '/forests/arabuko-sokoke-forest',
+  },
+  {
+    name: 'Menengai Forest',
+    image: '/images/forests/menengai.jpg',
+    href: '/forests/menengai-forest',
   },
   {
     name: 'Mt. Kenya Forest',
-    image: '/images/forests/mtkenya.jpg',
-    href: '/forests/mtkenya',
+    image: '/images/forests/mt.kenya.jpg',
+    href: '/forests/mt-kenya-forest',
   },
   {
     name: 'Ngare Ndare',
-    image: '/images/forests/ngare.jpg',
-    href: '/forests/ngare',
+    image: '/images/forests/ngare.png',
+    href: '/forests/ngare-ndare-forest',
+  },
+  {
+    name: 'Ngong Hills Forest',
+    image: '/images/forests/ngong.jpeg',
+    href: '/forests/ngong-forest',
   },
   {
     name: 'Nairobi Arboretum',
     image: '/images/forests/arboretum.jpg',
-    href: '/forests/arboretum',
+    href: '/forests/arboretum-forest',
   },
   {
     name: 'Ndaragwa Nature Trail',
-    image: '/images/forests/ndaragwa.jpg',
-    href: '/forests/ndaragwa',
+    image: '/images/forests/ndaragwa.webp',
+    href: '/forests/ndaragwa-nature-trail',
   },
+  {
+    name: 'Eburu Forest',
+    image: '/images/forests/eburu.jpg',
+    href: '/forests/eburu-forest',
+  },
+  {
+    name: 'Castle Forest',
+    image: '/images/forests/castle.jpeg',
+    href: '/forests/castle-forest',
+  },
+  {
+    name: 'Michuki Memorial Conservation Forest',
+    image: '/images/forests/michuki.jpg',
+    href: '/forests/michuki-memorial-conservation',
+  },
+
 ];
 
 const MenengaiForestPage = () => {
@@ -90,21 +117,21 @@ const MenengaiForestPage = () => {
 
   const galleryImages = [
     {
-      src: '/images/menengai/forest1.jpg',
+      src: '/images/forests/menengai.jpg',
       alt: 'Lush green Menengai Forest',
       caption: 'Lush green Menengai Forest',
       width: 300,
       height: 225,
     },
     {
-      src: '/images/menengai/crater.jpg',
+      src: '/images/forests/menengai.jpg',
       alt: 'Menengai Crater View',
       caption: 'Menengai Crater View',
       width: 300,
       height: 225,
     },
     {
-      src: '/images/menengai/hiking.jpg',
+      src: '/images/forests/menengai.jpg',
       alt: 'Hiking Trails',
       caption: 'Hiking Trails',
       width: 300,
@@ -119,10 +146,10 @@ const MenengaiForestPage = () => {
       <div
         className="relative h-[60vh] bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: "url('/images/background-template/background.jpg')",
+          backgroundImage: "url('https://www.hikingadventures.net/wp-content/uploads/2020/11/Menengai-Crater-2-2048x1536.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-60" />
+        <div className="absolute inset-0 bg-opacity-60" />
         <div className="relative z-10 text-center text-white px-6 max-w-4xl">
           <h1
             className="font-['Peugeot',Helvetica,sans-serif] font-bold text-white text-[2.2rem] sm:text-[3rem] leading-[1.3] tracking-[0.5px] capitalize"
@@ -180,7 +207,7 @@ const MenengaiForestPage = () => {
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={cardVariants}
-          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 rounded-lg shadow-lg"
+          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 squared-lg shadow-lg"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -214,7 +241,7 @@ const MenengaiForestPage = () => {
                     ].map((activity, i) => (
                       <li
                         key={i}
-                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -223,9 +250,9 @@ const MenengaiForestPage = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mt-8">
+                  <div className="relative h-64 md:h-96 squared-lg overflow-hidden mt-8">
                     <Image
-                      src="/images/Eco-tourism/MenengaiForest/hiking-trails.jpg"
+                      src="/images/forests/menengai.jpg"
                       alt="Hiking trails in Menengai Forest"
                       width={900}
                       height={600}
@@ -243,7 +270,7 @@ const MenengaiForestPage = () => {
                   >
                     Getting There
                   </h2>
-                  <div className="bg-green-100 p-6 rounded-lg shadow-md mb-6">
+                  <div className="bg-green-100 p-6 squared-lg shadow-md mb-6">
                     <h3
                       className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2"
                       style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -281,7 +308,7 @@ const MenengaiForestPage = () => {
                       Experienced guides are available for a fee at the main gate.
                     </p>
                   </div>
-                  <div className="relative h-64 rounded-lg overflow-hidden mt-6 bg-gray-200">
+                  <div className="relative h-64 squared-lg overflow-hidden mt-6 bg-gray-200">
                     <div className="flex items-center justify-center h-full">
                       <p
                         className="font-['Peugeot',Helvetica,sans-serif] text-gray-500"
@@ -338,7 +365,7 @@ const MenengaiForestPage = () => {
                     ].map((feature, i) => (
                       <li
                         key={i}
-                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                        className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                         style={{ fontSize: `${fontSize * 0.85}px` }}
                       >
                         <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -347,9 +374,9 @@ const MenengaiForestPage = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mt-8">
+                  <div className="relative h-64 md:h-96 squared-lg overflow-hidden mt-8">
                     <Image
-                      src="/images/Eco-tourism/MenengaiForest/panoramic-viewpoint.jpg"
+                      src="/images/forests/menengai.jpg"
                       alt="Panoramic viewpoint at Menengai Caldera"
                       width={900}
                       height={600}
@@ -374,7 +401,7 @@ const MenengaiForestPage = () => {
                     Menengai Caldera, in Menengai Forest Station, is a massive shield volcano in the Great Rift Valley, 10 km north of Nakuru. Spanning 90 km² with a 12 km diameter and nearly 0.5 km depth, it’s one of the largest calderas globally.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-green-100 p-6 rounded-lg shadow-md">
+                    <div className="bg-green-100 p-6 squared-lg shadow-md">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28]"
                         style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -394,7 +421,7 @@ const MenengaiForestPage = () => {
                         <strong>Fauna:</strong> Mammals like Rock Hyrax, Olive Baboons, Mountain Reedbucks. Birds include Verreaux’s Eagles, Abyssinian Ground Hornbills, and Red-winged Starlings. Insects feature arachnids, molluscs, and butterflies.
                       </p>
                     </div>
-                    <div className="bg-green-100 p-6 rounded-lg shadow-md">
+                    <div className="bg-green-100 p-6 squared-lg shadow-md">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28]"
                         style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -433,7 +460,7 @@ const MenengaiForestPage = () => {
                     {galleryImages.map((image, i) => (
                       <div
                         key={i}
-                        className="relative rounded-lg overflow-hidden shadow-md"
+                        className="relative squared-lg overflow-hidden shadow-md"
                         style={{ height: `${fontSize * 12}px` }}
                       >
                         <Image
@@ -445,7 +472,7 @@ const MenengaiForestPage = () => {
                           unoptimized
                         />
                         <p
-                          className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
+                          className="absolute bottom-0 left-0 right-0 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
                           style={{ fontSize: `${fontSize * 0.8}px` }}
                         >
                           {image.caption}
@@ -463,7 +490,7 @@ const MenengaiForestPage = () => {
                   >
                     Contact Information
                   </h2>
-                  <div className="bg-green-100 p-6 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-6 squared-lg shadow-md">
                     <p
                       className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
                       style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -512,7 +539,7 @@ const MenengaiForestPage = () => {
         {/* Floating Forests Button */}
         <button
           onClick={() => setShowDrawer(true)}
-          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 rounded-full shadow-lg transition"
+          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 squared-full shadow-lg transition"
           title="Explore Other Forests"
         >
           <FaTree className="text-xl" />
@@ -546,7 +573,7 @@ const MenengaiForestPage = () => {
               <div className="space-y-4">
                 {forestList.map((forest) => (
                   <Link href={forest.href} key={forest.name} className="block group">
-                    <div className="relative overflow-hidden rounded-xl shadow-lg group-hover:scale-[1.01] transition">
+                    <div className="relative overflow-hidden squared-xl shadow-lg group-hover:scale-[1.01] transition">
                       <Image
                         src={forest.image}
                         alt={forest.name}
@@ -555,7 +582,7 @@ const MenengaiForestPage = () => {
                         className="w-full h-40 object-cover"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition" />
+                      <div className="absolute inset-0 group-hover:bg-opacity-50 transition" />
                       <div
                         className="absolute bottom-0 p-4 text-white font-['Peugeot',Helvetica,sans-serif] font-semibold"
                         style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -574,14 +601,14 @@ const MenengaiForestPage = () => {
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-20">
           <button
             onClick={() => setFontSize((prev) => Math.min(prev + 1, 20))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Increase font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => setFontSize((prev) => Math.max(prev - 1, 12))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Decrease font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />

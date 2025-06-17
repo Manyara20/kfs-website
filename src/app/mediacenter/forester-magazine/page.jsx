@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -34,7 +33,6 @@ export default function ForesterMagazinePage() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       <div
@@ -103,10 +101,10 @@ export default function ForesterMagazinePage() {
             {magazines.map((magazine, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg p-4 shadow-md relative"
+                className="bg-white squared-lg p-4 shadow-md relative"
                 style={{ backgroundColor: '#0f5a28' }}
               >
-                <div className="bg-white rounded-lg p-6">
+                <div className="bg-white squared-lg p-6">
                   <div className="flex items-center gap-4">
                     <svg
                       className="w-6 h-6 text-[#0f5a28]"
@@ -135,7 +133,7 @@ export default function ForesterMagazinePage() {
                     href={magazine.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#0f5a28] text-white py-2 px-6 rounded-lg text-sm mt-4 inline-block hover:bg-[#2e5b4f] transition-all duration-300"
+                    className="bg-[#0f5a28] text-white py-2 px-6 squared-lg text-sm mt-4 inline-block hover:bg-[#2e5b4f] transition-all duration-300"
                   >
                     View
                   </Link>

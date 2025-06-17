@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -135,7 +134,6 @@ export default function EventsCalendarPage() {
 
   return (
     <div>
-      <TopNavBar />
      <MainNavBar />
       <div
         className="min-h-screen bg-cover bg-center bg-fixed p-4 relative overflow-hidden"
@@ -149,12 +147,12 @@ export default function EventsCalendarPage() {
             backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
           }}
         ></div>
-        <div className="max-w-5xl mx-auto px-2 py-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-2 py-8 relative z-10">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className="bg-white bg-opacity-95 p-12 max-w-5xl w-full shadow-lg rounded-none"
+            className="bg-white bg-opacity-95 p-12 max-w-9xl w-full shadow-lg rounded-none"
           >
             <h1 className="font-bold text-[#0f5a28] text-4xl text-center mb-2 drop-shadow-md capitalize tracking-tight leading-tight">
               Events Calendar

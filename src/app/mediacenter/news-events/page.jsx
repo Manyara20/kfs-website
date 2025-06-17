@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import NewsCard from "@/app/homepage/NewsCard";
@@ -97,7 +96,6 @@ const NewsandEvents = () => {
 
   return (
     <>
-      <TopNavBar />
       <MainNavBar />
       <section className="py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8 md:mb-12">

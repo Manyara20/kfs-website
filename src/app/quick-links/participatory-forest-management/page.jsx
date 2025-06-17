@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -33,7 +32,6 @@ export default function ParticipatoryForestManagementPage() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
 
       <div
@@ -54,7 +52,7 @@ export default function ParticipatoryForestManagementPage() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={cardVariants}
-          className="relative z-10 bg-white bg-opacity-95 p-10 max-w-5xl w-full border border-white/30 rounded-md shadow-lg"
+          className="relative z-10 bg-white bg-opacity-95 p-10 max-w-6xl w-full border border-white/30 squared-md shadow-lg"
         >
           {/* Tabs */}
           <div className="flex border-b border-gray-300 mb-8">
@@ -105,7 +103,7 @@ export default function ParticipatoryForestManagementPage() {
                 utilization, and conservation of forest resources for equitable benefits to all stakeholders.
               </p>
 
-              <ul className="list-disc list-inside bg-green-900 text-white p-6 rounded-md mb-8 space-y-2">
+              <ul className="list-disc list-inside bg-green-900 text-white p-6 squared-md mb-8 space-y-2">
                 <li>Increase and maintain tree and forest cover of at least ten percent of the land area of Kenya.</li>
                 <li>Strengthen Community Forest Associations (CFAs) through capacity building and legal empowerment.</li>
                 <li>Promote collaborative forest management through Forest Management Agreements (FMAs).</li>
@@ -119,7 +117,7 @@ export default function ParticipatoryForestManagementPage() {
       initial="hidden"
       animate="visible"
       variants={cardVariants}
-      className="bg-white bg-opacity-95 rounded-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl"
+      className="bg-white bg-opacity-95 squared-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="flex items-center gap-4">
         <IoDocumentTextOutline className="text-green-800 text-4xl" />
@@ -130,7 +128,7 @@ export default function ParticipatoryForestManagementPage() {
       </div>
       <button
         onClick={() => handleDownload(file.name)}
-        className="bg-green-800 text-white text-sm py-2 px-6 rounded-lg hover:bg-green-700 hover:shadow-md transition-all"
+        className="bg-green-800 text-white text-sm py-2 px-6 squared-lg hover:bg-green-700 hover:shadow-md transition-all"
       >
         Download
       </button>
@@ -163,7 +161,7 @@ export default function ParticipatoryForestManagementPage() {
                 {forestPlansDocs.map((doc) => (
                   <motion.li
                     key={doc.id}
-                    className="flex items-center justify-between bg-white bg-opacity-90 rounded-md p-5 shadow-md hover:shadow-lg transition-shadow"
+                    className="flex items-center justify-between bg-white bg-opacity-90 squared-md p-5 shadow-md hover:shadow-lg transition-shadow"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: doc.id * 0.1 }}
@@ -175,7 +173,7 @@ export default function ParticipatoryForestManagementPage() {
                     <a
                       href={doc.url}
                       download
-                      className="bg-green-700 text-white px-5 py-2 rounded-md hover:bg-green-800 transition-colors text-sm"
+                      className="bg-green-700 text-white px-5 py-2 squared-md hover:bg-green-800 transition-colors text-sm"
                       aria-label={`Download ${doc.name}`}
                     >
                       Download

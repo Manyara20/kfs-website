@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -30,7 +29,6 @@ export default function video() {
         aria-hidden="true"
       />
 
-      <TopNavBar />
       <MainNavBar />
 
       <main className="flex-grow flex justify-center items-start pt-8 z-10">
@@ -38,7 +36,7 @@ export default function video() {
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={cardVariants}
-          className="bg-white bg-opacity-95 max-w-4xl w-full p-12 border border-white border-opacity-30 rounded-none relative z-20"
+          className="bg-white bg-opacity-95 max-w-6xl w-full p-12 border border-white border-opacity-30 squared-none relative z-20"
         >
           {/* Tabs */}
           <nav className="mb-8 border-b border-green-900 flex gap-8">
@@ -77,10 +75,10 @@ export default function video() {
               <p className="font-peugeot font-normal text-black text-base leading-relaxed mb-6 tracking-wide">
                 Watch Our Sign Language Charter Video (Note: Update to Audio if available):
               </p>
-              <div className="w-full rounded-lg overflow-hidden">
+              <div className="w-full squared-lg overflow-hidden">
                 {isLoaded && (
                   <iframe
-                    className="w-full h-72 sm:h-96 rounded-lg border-0"
+                    className="w-full h-72 sm:h-96 squared-lg border-0"
                     src="https://www.youtube.com/embed/674CgQpSzOk?si=0uD8HSaohm-nPCzx"
                     title="Sign Language Service Charter"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -104,10 +102,10 @@ export default function video() {
               <p className="font-peugeot font-normal text-black text-base leading-relaxed mb-6 tracking-wide">
                 Watch Our Sign Language Charter Video:
               </p>
-              <div className="w-full rounded-lg overflow-hidden">
+              <div className="w-full squared-lg overflow-hidden">
                 {isLoaded && (
                   <iframe
-                    className="w-full h-72 sm:h-96 rounded-lg border-0"
+                    className="w-full h-72 sm:h-96 squared-lg border-0"
                     src="https://www.youtube.com/embed/ZXXwvbU-zDA?si=Z8sN8oIYal0arF2-"
                     title="Sign Language Service Charter"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

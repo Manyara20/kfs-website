@@ -14,47 +14,73 @@ const forestList = [
   {
     name: 'Ngong Hills Forest',
     image: '/images/forests/Ngong-Hills-Hiking-Trail.jpg',
-    href: '/forests/ngong',
-  },
-  {
-    name: 'Kakamega Forest',
-    image: '/images/forests/kakamega.jpg',
-    href: '/forests/kakamega',
+    href: '/forests/ngong-forest',
   },
   {
     name: 'Karura Forest',
     image: '/images/forests/karura.jpg',
-    href: '/forests/karura',
+    subtitle: 'Urban oasis with trails and waterfalls',
+    href: '/forests/karura-forest',
+  },
+  {
+    name: 'Kakamega Forest',
+    image: '/images/forests/kakamega.jpg',
+    href: '/forests/kakamega-forest',
   },
   {
     name: 'Hombe Forest',
     image: '/images/forests/hombe.jpg',
-    href: '/forests/hombe',
+    href: '/forests/hombe-forest-guesthouse',
   },
   {
     name: 'Arabuko Sokoke',
-    image: '/images/forests/arabuko.jpg',
-    href: '/forests/arabuko',
+    image: '/images/forests/arabuko.jpeg',
+    href: '/forests/arabuko-sokoke-forest',
   },
   {
     name: 'Menengai Forest',
     image: '/images/forests/menengai.jpg',
-    href: '/forests/menengai',
+    href: '/forests/menengai-forest',
   },
   {
     name: 'Mt. Kenya Forest',
-    image: '/images/forests/mtkenya.jpg',
-    href: '/forests/mtkenya',
+    image: '/images/forests/mt.kenya.jpg',
+    href: '/forests/mt-kenya-forest',
   },
   {
     name: 'Ngare Ndare',
-    image: '/images/forests/ngare.jpg',
-    href: '/forests/ngare',
+    image: '/images/forests/ngare.png',
+    href: '/forests/ngare-ndare-forest',
+  },
+  {
+    name: 'Ngong Hills Forest',
+    image: '/images/forests/ngong.jpeg',
+    href: '/forests/ngong-forest',
+  },
+  {
+    name: 'Nairobi Arboretum',
+    image: '/images/forests/arboretum.jpg',
+    href: '/forests/arboretum-forest',
   },
   {
     name: 'Ndaragwa Nature Trail',
-    image: '/images/forests/ndaragwa.jpg',
-    href: '/forests/ndaragwa',
+    image: '/images/forests/ndaragwa.webp',
+    href: '/forests/ndaragwa-nature-trail',
+  },
+  {
+    name: 'Eburu Forest',
+    image: '/images/forests/eburu.jpg',
+    href: '/forests/eburu-forest',
+  },
+  {
+    name: 'Castle Forest',
+    image: '/images/forests/castle.jpeg',
+    href: '/forests/castle-forest',
+  },
+  {
+    name: 'Michuki Memorial Conservation Forest',
+    image: '/images/forests/michuki.jpg',
+    href: '/forests/michuki-memorial-conservation',
   },
 ];
 
@@ -96,10 +122,10 @@ const NairobiArboretumPage = () => {
       <div
         className="relative h-[60vh] bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
+          backgroundImage: "url('https://th.bing.com/th/id/R.656a82d1c6b531018a6baa2fc2a75f0d?rik=g4b3ay7zXi9ZKQ&pid=ImgRaw&r=0')",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-60" />
+        <div className="absolute inset-0" />
         <div className="relative z-10 text-center text-white px-6 max-w-4xl">
           <h1
             className="font-['Peugeot',Helvetica,sans-serif] font-bold text-white text-[2.2rem] sm:text-[3rem] leading-[1.3] tracking-[0.5px] capitalize"
@@ -157,7 +183,7 @@ const NairobiArboretumPage = () => {
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={cardVariants}
-          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 rounded-lg shadow-lg"
+          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 squared-lg shadow-lg"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -195,7 +221,7 @@ const NairobiArboretumPage = () => {
                       >
                         Arboretum Forest Station was gazetted as protected Forest Reserves in 1932 and is managed by Kenya Forest Service (KFS).
                       </p>
-                      <div className="relative h-64 rounded-lg overflow-hidden mt-6">
+                      <div className="relative h-64 squared-lg overflow-hidden mt-6">
                         <Image
                           src="/images/Eco-tourism/NairobiArboretum/Nairobi-Arboretum-2.jpg"
                           alt="Panoramic view of Nairobi Arboretum"
@@ -206,7 +232,7 @@ const NairobiArboretumPage = () => {
                         />
                       </div>
                     </div>
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -247,7 +273,7 @@ const NairobiArboretumPage = () => {
                     Wildlife
                   </h2>
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -277,7 +303,7 @@ const NairobiArboretumPage = () => {
                         ))}
                       </ul>
                     </div>
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -307,7 +333,7 @@ const NairobiArboretumPage = () => {
                         ))}
                       </ul>
                     </div>
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -373,7 +399,7 @@ const NairobiArboretumPage = () => {
                     ].map((image, index) => (
                       <div
                         key={index}
-                        className="relative rounded-lg overflow-hidden shadow-md"
+                        className="relative squared-lg overflow-hidden shadow-md"
                         style={{ height: `${fontSize * 12}px` }}
                       >
                         <Image
@@ -385,7 +411,7 @@ const NairobiArboretumPage = () => {
                           unoptimized
                         />
                         <p
-                          className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
+                          className="absolute bottom-0 left-0 right-0 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
                           style={{ fontSize: `${fontSize * 0.8}px` }}
                         >
                           {image.caption}
@@ -411,7 +437,7 @@ const NairobiArboretumPage = () => {
                       >
                         Indigenous Trees
                       </h3>
-                      <div className="bg-green-50 p-6 rounded-lg">
+                      <div className="bg-green-50 p-6 squared-lg">
                         <div className="grid sm:grid-cols-2 gap-4">
                           {[
                             'Croton megalocarpus',
@@ -445,7 +471,7 @@ const NairobiArboretumPage = () => {
                       >
                         Exotic Trees
                       </h3>
-                      <div className="bg-green-50 p-6 rounded-lg">
+                      <div className="bg-green-50 p-6 squared-lg">
                         <div className="grid sm:grid-cols-2 gap-4">
                           {[
                             'Araucaria species',
@@ -506,7 +532,7 @@ const NairobiArboretumPage = () => {
                         ].map((activity, index) => (
                           <div
                             key={index}
-                            className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-3 rounded-lg"
+                            className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-3 squared-lg"
                           >
                             <p
                               className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white"
@@ -525,7 +551,7 @@ const NairobiArboretumPage = () => {
                       >
                         Special Features
                       </h3>
-                      <div className="bg-green-50 p-6 rounded-lg">
+                      <div className="bg-green-50 p-6 squared-lg">
                         <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 p-0">
                           {[
                             'Picnic sites',
@@ -569,7 +595,7 @@ const NairobiArboretumPage = () => {
                     ].map((image, index) => (
                       <div
                         key={index}
-                        className="relative rounded-lg overflow-hidden shadow-md"
+                        className="relative squared-lg overflow-hidden shadow-md"
                         style={{ height: `${fontSize * 12}px` }}
                       >
                         <Image
@@ -581,7 +607,7 @@ const NairobiArboretumPage = () => {
                           unoptimized
                         />
                         <p
-                          className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
+                          className="absolute bottom-0 left-0 right-0 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
                           style={{ fontSize: `${fontSize * 0.8}px` }}
                         >
                           {image.caption}
@@ -600,7 +626,7 @@ const NairobiArboretumPage = () => {
                     Visiting Information
                   </h2>
                   <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -644,7 +670,7 @@ const NairobiArboretumPage = () => {
                         Take Arboretum Drive or University Way. Taxi ~KSh 500 from town.
                       </p>
                     </div>
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -676,7 +702,7 @@ const NairobiArboretumPage = () => {
                         Forest conservation fee charged at entry (inquire for current rates)
                       </p>
                     </div>
-                    <div className="bg-green-50 p-6 rounded-lg">
+                    <div className="bg-green-50 p-6 squared-lg">
                       <h3
                         className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-3"
                         style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -708,7 +734,7 @@ const NairobiArboretumPage = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-8 bg-[#1a3c34] text-white p-8 rounded-lg">
+                  <div className="mt-8 bg-[#1a3c34] text-white p-8 squared-lg">
                     <h3
                       className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-xl mb-4"
                       style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -750,7 +776,7 @@ const NairobiArboretumPage = () => {
                   >
                     Contact Information
                   </h2>
-                  <div className="bg-green-100 p-4 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-4 squared-lg shadow-md">
                     <h3
                       className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2"
                       style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -779,7 +805,7 @@ const NairobiArboretumPage = () => {
         {/* Floating Forests Button */}
         <button
           onClick={() => setShowDrawer(true)}
-          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 rounded-full shadow-lg transition"
+          className="fixed top-[35%] right-4 z-50 bg-[#1a3c34] hover:bg-green-800 text-white p-3 squared-full shadow-lg transition"
           title="Explore Other Forests"
         >
           <FaTree className="text-xl" />
@@ -813,7 +839,7 @@ const NairobiArboretumPage = () => {
               <div className="space-y-4">
                 {forestList.map((forest) => (
                   <Link href={forest.href} key={forest.name} className="block group">
-                    <div className="relative overflow-hidden rounded-xl shadow-lg group-hover:scale-[1.01] transition">
+                    <div className="relative overflow-hidden squared-xl shadow-lg group-hover:scale-[1.01] transition">
                       <Image
                         src={forest.image}
                         alt={forest.name}
@@ -822,7 +848,7 @@ const NairobiArboretumPage = () => {
                         className="w-full h-40 object-cover"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition" />
+                      <div className="absolute inset-0 group-hover:bg-opacity-50 transition" />
                       <div
                         className="absolute bottom-0 p-4 text-white font-['Peugeot',Helvetica,sans-serif] font-semibold"
                         style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -841,14 +867,14 @@ const NairobiArboretumPage = () => {
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-20">
           <button
             onClick={() => setFontSize((prev) => Math.min(prev + 1, 20))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Increase font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => setFontSize((prev) => Math.max(prev - 1, 12))}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Decrease font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />

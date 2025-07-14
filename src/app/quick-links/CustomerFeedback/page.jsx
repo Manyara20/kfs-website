@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -13,9 +12,7 @@ export default function CustomerFeedbackPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <TopNavBar />
+    <div className="flex flex-col max-h-screen  bg-gray-50">
 
       {/* Main Navigation Bar */}
       <MainNavBar />
@@ -37,7 +34,7 @@ export default function CustomerFeedbackPage() {
 
         {/* Main Content Card */}
         <motion.div
-          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-2xl w-full relative z-10 border border-white/30 rounded-xl"
+          className="bg-white bg-opacity-95 backdrop-blur-lg shadow-xl p-12 max-w-6xl w-full relative z-10 border border-white/30 squared-xl"
           initial="hidden"
           animate="visible"
           variants={cardVariants}
@@ -49,7 +46,7 @@ export default function CustomerFeedbackPage() {
           <div className="mt-8">
             <h2 className="text-3xl font-semibold text-[#0f5a28] mb-4">Resources</h2>
             <ul className="space-y-2">
-              <li className="flex justify-between items-center bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-lg p-4 hover:from-[#C8E6C9] hover:to-[#A5D6A7] hover:-translate-y-1 hover:shadow-md transition-all">
+              <li className="flex justify-between items-center bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] squared-lg p-4 hover:from-[#C8E6C9] hover:to-[#A5D6A7] hover:-translate-y-1 hover:shadow-md transition-all">
                 <div className="flex items-center gap-2">
                   <svg
                     className="w-6 h-6 text-[#0D3C00]"
@@ -71,7 +68,7 @@ export default function CustomerFeedbackPage() {
                   href="https://www.surveymonkey.com/r/NCPZPGG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#0f5a28] text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-[#388e3c] hover:shadow-md transition-all"
+                  className="bg-[#0f5a28] text-white py-2 px-4 squared-lg text-sm font-medium hover:bg-[#388e3c] hover:shadow-md transition-all"
                 >
                   Take Survey
                 </a>

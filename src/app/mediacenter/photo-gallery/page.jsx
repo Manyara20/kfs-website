@@ -2,7 +2,6 @@
 "use client";
 
 import Image from "next/image";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 
@@ -25,7 +24,6 @@ const photos = [
 export default function KFSGalleryPage() {
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
 
       <div className="p-4 md:p-12 bg-white min-h-screen">

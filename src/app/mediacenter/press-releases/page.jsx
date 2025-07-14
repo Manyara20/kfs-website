@@ -1,7 +1,6 @@
 "use client";
 
 import { IoDocumentTextOutline } from "react-icons/io5";
-import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
 import { motion } from "framer-motion";
@@ -52,7 +51,6 @@ export default function PressReleasesPage() {
 
   return (
     <div>
-      <TopNavBar />
       <MainNavBar />
       
       <div
@@ -83,7 +81,7 @@ export default function PressReleasesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="bg-white bg-opacity-95 rounded-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl mb-6 md:flex-row flex-col gap-4"
+                className="bg-white bg-opacity-95 squared-xl p-6 flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl mb-6 md:flex-row flex-col gap-4"
               >
                 <div className="flex items-center gap-4">
                   <IoDocumentTextOutline className="text-[#0f5a28] text-4xl" />
@@ -101,7 +99,7 @@ export default function PressReleasesPage() {
                     href={press.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#0f5a28] text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg hover:bg-[#388e3c] hover:shadow-md transition-all cursor-pointer"
+                    className="bg-[#0f5a28] text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 squared-lg hover:bg-[#388e3c] hover:shadow-md transition-all cursor-pointer"
                     onClick={() => handleLinkClick(press.link, press.title)}
                   >
                     View
@@ -109,7 +107,7 @@ export default function PressReleasesPage() {
                 ) : (
                   <button
                     disabled
-                    className="bg-gray-400 text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 rounded-lg cursor-not-allowed opacity-50"
+                    className="bg-gray-400 text-white font-['Peugeot',Helvetica,sans-serif] text-sm py-2 px-6 squared-lg cursor-not-allowed opacity-50"
                   >
                     View
                   </button>

@@ -70,7 +70,7 @@ const BackgroundPage = () => {
         ></div>
 
         {/* Main Tabs Navigation */}
-        <div className="w-full max-w-5xl mx-auto mb-6 z-10">
+        <div className="w-full max-w-6xl mx-auto mb-6 z-10">
           <div className="flex overflow-x-auto whitespace-nowrap border-b border-green-200 scrollbar-thin scrollbar-thumb-green-600 scrollbar-track-transparent">
             {mainTabs.map((tab) => (
               <button
@@ -96,7 +96,7 @@ const BackgroundPage = () => {
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={cardVariants}
-          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-5xl w-full relative z-10 border border-white/30 rounded-lg shadow-lg"
+          className="bg-white/95 p-6 sm:p-8 md:p-10 max-w-6xl w-full relative z-10 border border-white/30 squared-lg shadow-lg"
         >
           <AnimatePresence mode="wait">
             {activeMainTab === 'background' && (
@@ -153,7 +153,7 @@ const BackgroundPage = () => {
                   ].map((item, index) => (
                     <li
                       key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
                       <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -169,7 +169,7 @@ const BackgroundPage = () => {
                   By promoting ecotourism, KFS aims to be the leading organization of excellence in the development and operation of responsible tourism in forest reserves.
                 </p>
                 <div className="mt-8 flex justify-center">
-                  <div className="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4 border border-green-200 w-full sm:w-auto">
+                  <div className="bg-white shadow-md squared-lg p-4 flex items-center space-x-4 border border-green-200 w-full sm:w-auto">
                     <span className="text-green-600 text-[32px]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +198,7 @@ const BackgroundPage = () => {
                       href="/path/to/application-form.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-[#1a3c34] text-white px-4 py-2 rounded-md hover:bg-green-800 transition-colors duration-300"
+                      className="bg-[#1a3c34] text-white px-4 py-2 squared-md hover:bg-green-800 transition-colors duration-300"
                     >
                       Download
                     </a>
@@ -227,7 +227,7 @@ const BackgroundPage = () => {
                   The following charges apply (all exclusive of VAT):
                 </p>
                 <div className="space-y-6">
-                  <div className="bg-green-100 p-4 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-4 squared-lg shadow-md">
                     <h2
                       className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-[1.2rem]"
                       style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -319,7 +319,7 @@ const BackgroundPage = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="bg-green-100 p-4 rounded-lg shadow-md">
+                  <div className="bg-green-100 p-4 squared-lg shadow-md">
                     <h2
                       className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] text-[1.2rem]"
                       style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -428,7 +428,7 @@ const BackgroundPage = () => {
                       ].map((item, index) => (
                         <li
                           key={index}
-                          className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                          className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                           style={{ fontSize: `${fontSize * 0.85}px` }}
                         >
                           <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -492,7 +492,7 @@ const BackgroundPage = () => {
                   ].map((item, index) => (
                     <li
                       key={index}
-                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                      className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                       style={{ fontSize: `${fontSize * 0.85}px` }}
                     >
                       <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -523,7 +523,7 @@ const BackgroundPage = () => {
                   ].map((forest, index) => (
                     <div
                       key={index}
-                      className="bg-green-100 p-4 rounded-lg shadow transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
+                      className="bg-green-100 p-4 squared-lg shadow transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
                     >
                       <span
                         className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem]"
@@ -547,7 +547,7 @@ const BackgroundPage = () => {
                   To be added to the ecotourism investment database or to receive updates on available opportunities, send an email request to{' '}
                   <span className="text-[#0f5a28] font-semibold">info@kenyaforestservice.org</span>.
                 </p>
-                <div className="mt-6 p-4 bg-green-200 rounded-lg shadow">
+                <div className="mt-6 p-4 bg-green-200 squared-lg shadow">
                   <p
                     className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-black"
                     style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -633,7 +633,7 @@ const BackgroundPage = () => {
                       >
                         Guidelines for Constructing Ecotourism & Recreational Facilities in Public Forests
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
                         <p
                           className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-6"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -656,7 +656,7 @@ const BackgroundPage = () => {
                           ].map((guideline, index) => (
                             <li
                               key={index}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -682,7 +682,7 @@ const BackgroundPage = () => {
                       >
                         Guidelines for Decommissioning Ecotourism & Recreational Facilities in Public Forests
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
                         <p
                           className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-6"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -697,7 +697,7 @@ const BackgroundPage = () => {
                           ].map((guideline, index) => (
                             <li
                               key={index}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <span className="font-['Peugeot',Helvetica,sans-serif] font-medium text-white text-[0.85rem] leading-[1.6]">
@@ -706,7 +706,7 @@ const BackgroundPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-8 p-4 bg-green-50 rounded border border-green-100">
+                        <div className="mt-8 p-4 bg-green-50 squared border border-green-100">
                           <h3
                             className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2"
                             style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -737,8 +737,8 @@ const BackgroundPage = () => {
                       >
                         Code of Conduct for Forest Adjacent Communities in Ecotourism & Recreation in Public Forests
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-                        <div className="mb-6 p-4 bg-green-50 rounded border border-green-100">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
+                        <div className="mb-6 p-4 bg-green-50 squared border border-green-100">
                           <p
                             className="font-['Peugeot',Helvetica,sans-serif] font-normal text-[#0f5a28] leading-[1.8] text-[0.9rem]"
                             style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -771,7 +771,7 @@ const BackgroundPage = () => {
                           ].map((item, index) => (
                             <li
                               key={index}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <h3
@@ -789,7 +789,7 @@ const BackgroundPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-8 p-4 bg-blue-50 rounded border border-blue-100">
+                        <div className="mt-8 p-4 bg-blue-50 squared border border-blue-100">
                           <h3
                             className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-blue-700 mb-2"
                             style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -820,7 +820,7 @@ const BackgroundPage = () => {
                       >
                         Code of Conduct for Private Investors in Ecotourism & Recreation Facilities
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
                         <p
                           className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-6"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -910,12 +910,12 @@ const BackgroundPage = () => {
                           ].map((guideline) => (
                             <li
                               key={guideline.number}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <div className="flex items-start">
                                 <div
-                                  className="bg-green-100 rounded-lg p-2 mr-3 flex-shrink-0"
+                                  className="bg-green-100 squared-lg p-2 mr-3 flex-shrink-0"
                                   style={{ fontSize: `${fontSize * 0.9}px` }}
                                 >
                                   <span className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28]">
@@ -940,7 +940,7 @@ const BackgroundPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-8 p-4 bg-blue-50 rounded border border-blue-100">
+                        <div className="mt-8 p-4 bg-blue-50 squared border border-blue-100">
                           <h3
                             className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-blue-700 mb-2"
                             style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -993,7 +993,7 @@ const BackgroundPage = () => {
                       >
                         Code of Conduct for Tour Leaders, Guides and Porters
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
                         <p
                           className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-6"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -1045,11 +1045,11 @@ const BackgroundPage = () => {
                           ].map((guideline, index) => (
                             <li
                               key={index}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <div className="flex items-start">
-                                <div className="bg-green-100 rounded-lg p-2 mr-3 flex-shrink-0">
+                                <div className="bg-green-100 squared-lg p-2 mr-3 flex-shrink-0">
                                   <svg
                                     className="w-5 h-5 text-[#0f5a28]"
                                     fill="none"
@@ -1083,7 +1083,7 @@ const BackgroundPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-8 p-4 bg-blue-50 rounded border border-blue-100">
+                        <div className="mt-8 p-4 bg-blue-50 squared border border-blue-100">
                           <h3
                             className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-blue-700 mb-2"
                             style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -1114,7 +1114,7 @@ const BackgroundPage = () => {
                       >
                         Code of Conduct for Visitors
                       </h2>
-                      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                      <div className="bg-white shadow-md squared-lg p-6 mb-8">
                         <p
                           className="font-['Peugeot',Helvetica,sans-serif] font-normal text-black leading-[1.8] text-[0.9rem] mb-6"
                           style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -1168,12 +1168,12 @@ const BackgroundPage = () => {
                           ].map((guideline) => (
                             <li
                               key={guideline.number}
-                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 rounded-md"
+                              className="bg-[#1a3c34] transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] p-4 squared-md"
                               style={{ fontSize: `${fontSize * 0.85}px` }}
                             >
                               <div className="flex items-start">
                                 <div
-                                  className="bg-green-100 rounded-lg p-2 mr-3 flex-shrink-0"
+                                  className="bg-green-100 squared-lg p-2 mr-3 flex-shrink-0"
                                   style={{ fontSize: `${fontSize * 0.9}px` }}
                                 >
                                   <span className="font-['Peugeot',Helvetica,sans-serif] font-bold text-[#0f5a28]">
@@ -1198,7 +1198,7 @@ const BackgroundPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-8 p-4 bg-blue-50 rounded border border-blue-100">
+                        <div className="mt-8 p-4 bg-blue-50 squared border border-blue-100">
                           <h3
                             className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-blue-700 mb-2"
                             style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -1276,7 +1276,7 @@ const BackgroundPage = () => {
                   ))}
                 </ul>
               </div>
-              <div className="flex-1 bg-green-50 rounded-lg p-4 flex items-center justify-center">
+              <div className="flex-1 bg-green-50 squared -lg p-4 flex items-center justify-center">
                 <p
                   className="font-['Peugeot',Helvetica,sans-serif] font-medium text-[#0f5a28] italic text-center"
                   style={{ fontSize: `${fontSize * 0.9}px` }}
@@ -1310,7 +1310,7 @@ const BackgroundPage = () => {
                 { title: 'Eastern Arc Mountain Forests', description: 'Mbololo and Ngangao' },
                 { title: 'Urban Forests', description: 'Karura and the Ngong Hills' },
               ].map((ecosystem, index) => (
-                <div key={index} className="bg-green-50 rounded-lg p-4">
+                <div key={index} className="bg-green-50 squared-lg p-4">
                   <h3
                     className="font-['Peugeot',Helvetica,sans-serif] font-semibold text-[#0f5a28] mb-2"
                     style={{ fontSize: `${fontSize * 0.95}px` }}
@@ -1354,7 +1354,7 @@ const BackgroundPage = () => {
                   {['Panoramic views', 'Lakes', 'Craters', 'Waterfalls', 'Caves', 'Hills'].map((feature, index) => (
                     <span
                       key={index}
-                      className="bg-green-100 text-[#0f5a28] px-3 py-1 rounded-full text-sm font-['Peugeot',Helvetica,sans-serif]"
+                      className="bg-green-100 text-[#0f5a28] px-3 py-1 squared-full text-sm font-['Peugeot',Helvetica,sans-serif]"
                       style={{ fontSize: `${fontSize * 0.8}px` }}
                     >
                       {feature}
@@ -1380,7 +1380,7 @@ const BackgroundPage = () => {
                     (facility, index) => (
                       <span
                         key={index}
-                        className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-['Peugeot',Helvetica,sans-serif]"
+                        className="bg-blue-100 text-blue-800 px-3 py-1 squared-full text-sm font-['Peugeot',Helvetica,sans-serif]"
                         style={{ fontSize: `${fontSize * 0.8}px` }}
                       >
                         {facility}
@@ -1394,7 +1394,7 @@ const BackgroundPage = () => {
 
           {/* Call to Action */}
           <div className="p-6">
-            <div className="bg-[#1a3c34] rounded-lg p-6 text-center">
+            <div className="bg-[#1a3c34] squared-lg p-6 text-center">
               <h3
                 className="font-['Peugeot',Helvetica,sans-serif] font-bold text-white mb-3"
                 style={{ fontSize: `${fontSize * 1.1}px` }}
@@ -1411,7 +1411,7 @@ const BackgroundPage = () => {
                 <a
                   href="/path/to/application-form.pdf"
                   download
-                  className="bg-white text-[#0f5a28] font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
+                  className="bg-white text-[#0f5a28] font-semibold px-6 py-3 squared-lg shadow hover:bg-gray-100 transition flex items-center justify-center gap-2"
                 >
                   <svg
                     className="w-5 h-5"
@@ -1433,7 +1433,7 @@ const BackgroundPage = () => {
                   href="https://www.kenyaforestservice.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-yellow-400 text-[#0f5a28] font-semibold px-6 py-3 rounded-lg shadow hover:bg-yellow-300 transition flex items-center justify-center gap-2"
+                  className="bg-yellow-400 text-[#0f5a28] font-semibold px-6 py-3 squared-lg shadow hover:bg-yellow-300 transition flex items-center justify-center gap-2"
                 >
                   <svg
                     className="w-5 h-5"
@@ -1462,14 +1462,14 @@ const BackgroundPage = () => {
         <div className="fixed bottom-4 right-4 flex flex-col space-y-2 z-20">
           <button
             onClick={() => handleFontSizeChange(true)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Increase font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />
           </button>
           <button
             onClick={() => handleFontSizeChange(false)}
-            className="bg-[#1a3c34] p-2 rounded-full hover:bg-green-800 transition-colors duration-300"
+            className="bg-[#1a3c34] p-2 squared-full hover:bg-green-800 transition-colors duration-300"
             aria-label="Decrease font size"
           >
             <IoMdHelpCircle className="text-white text-lg" />

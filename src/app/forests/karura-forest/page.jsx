@@ -17,6 +17,12 @@ const forestList = [
     href: '/forests/ngong-forest',
   },
   {
+    name: 'Karura Forest',
+    image: '/images/forests/karura.jpg',
+    subtitle: 'Urban oasis with trails and waterfalls',
+    href: '/forests/karura-forest',
+  },
+  {
     name: 'Kakamega Forest',
     image: '/images/forests/kakamega.jpg',
     href: '/forests/kakamega-forest',
@@ -28,7 +34,7 @@ const forestList = [
   },
   {
     name: 'Arabuko Sokoke',
-    image: '/images/forests/arabuko.jpg',
+    image: '/images/forests/arabuko.jpeg',
     href: '/forests/arabuko-sokoke-forest',
   },
   {
@@ -38,17 +44,17 @@ const forestList = [
   },
   {
     name: 'Mt. Kenya Forest',
-    image: '/images/forests/mtkenya.jpg',
+    image: '/images/forests/mt.kenya.jpg',
     href: '/forests/mt-kenya-forest',
   },
   {
     name: 'Ngare Ndare',
-    image: '/images/forests/ngare.jpg',
+    image: '/images/forests/ngare.png',
     href: '/forests/ngare-ndare-forest',
   },
   {
     name: 'Ngong Hills Forest',
-    image: '/images/forests/ngong.jpg',
+    image: '/images/forests/ngong.jpeg',
     href: '/forests/ngong-forest',
   },
   {
@@ -58,7 +64,7 @@ const forestList = [
   },
   {
     name: 'Ndaragwa Nature Trail',
-    image: '/images/forests/ndaragwa.jpg',
+    image: '/images/forests/ndaragwa.webp',
     href: '/forests/ndaragwa-nature-trail',
   },
   {
@@ -68,7 +74,7 @@ const forestList = [
   },
   {
     name: 'Castle Forest',
-    image: '/images/forests/castle.jpg',
+    image: '/images/forests/castle.jpeg',
     href: '/forests/castle-forest',
   },
   {
@@ -459,7 +465,7 @@ const KaruraForestPage = () => {
                           unoptimized
                         />
                         <p
-                          className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
+                          className="absolute bottom-0 left-0 right-0  text-white p-2 font-['Peugeot',Helvetica,sans-serif] text-[0.8rem]"
                           style={{ fontSize: `${fontSize * 0.8}px` }}
                         >
                           {image.caption}
@@ -587,7 +593,7 @@ const KaruraForestPage = () => {
                         className="w-full h-40 object-cover"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition" />
+                      <div className="absolute inset-0 group-hover:bg-opacity-50 transition" />
                       <div
                         className="absolute bottom-0 p-4 text-white font-['Peugeot',Helvetica,sans-serif] font-semibold"
                         style={{ fontSize: `${fontSize * 0.9}px` }}

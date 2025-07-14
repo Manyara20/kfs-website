@@ -14,7 +14,7 @@ const forests = [
   },
   {
     name: 'Menengai Forest',
-    image: '/images/forests/menengai.jpg',
+    image: '/images/forests/Menengai-Forest.jpg',
     subtitle: 'Volcanic crater with lush greenery',
     href: '/forests/menengai-forest',
   },

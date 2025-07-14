@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const forests = [
   {
@@ -82,37 +81,16 @@ const forests = [
 ];
 
 const ForestCardGrid = () => {
-  const [currentGroup, setCurrentGroup] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const groupSize = 4; // 1x3 grid
-  const totalGroups = Math.ceil(forests.length / groupSize);
+  const [visibleCount, setVisibleCount] = useState(8); // Show 8 cards (2 rows of 4)
+  const groupSize = 8; // 2 rows x 4 columns
+  const totalForests = forests.length;
+  const hasMore = visibleCount < totalForests;
 
-  // Automatic rotation every 8 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [currentGroup]);
-
-  const handleNext = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentGroup((prev) => (prev + 1) % totalGroups);
-    setTimeout(() => setIsTransitioning(false), 500); // Match transition duration
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + groupSize, totalForests));
   };
 
-  const handlePrev = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentGroup((prev) => (prev - 1 + totalGroups) % totalGroups);
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
-
-  const currentForests = forests.slice(
-    currentGroup * groupSize,
-    (currentGroup + 1) * groupSize
-  );
+  const currentForests = forests.slice(0, visibleCount);
 
   const cardVariants = {
     initial: { opacity: 0, scale: 0.8 },
@@ -121,7 +99,7 @@ const ForestCardGrid = () => {
   };
 
   return (
-    <div className="relative max-h-screen  bg-[#0f5a28] py-14 px-4 sm:px-6 lg:px-8">
+    <div className="relative max-h-screen bg-[#0f5a28] py-14 px-4 sm:px-6 lg:px-8">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed opacity-30"
@@ -142,16 +120,9 @@ const ForestCardGrid = () => {
           </h1>
         </motion.div>
 
-        {/* 1x3 Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentGroup}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-8xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+        {/* 2x4 Grid */}
+        <AnimatePresence>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-8xl mx-auto">
             {currentForests.map((forest, index) => (
               <Link href={forest.href} key={forest.name}>
                 <motion.div
@@ -159,7 +130,7 @@ const ForestCardGrid = () => {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="relative h-64 squred-xl overflow-hidden shadow-xl bg-white"
+                  className="relative h-64 rounded-lg overflow-hidden shadow-xl bg-white"
                   whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 >
                   <Image
@@ -177,34 +148,22 @@ const ForestCardGrid = () => {
                 </motion.div>
               </Link>
             ))}
-            {/* Fill empty slots if less than 3 forests */}
-            {Array.from({ length: groupSize - currentForests.length }).map((_, i) => (
-              <div key={`empty-${i}`} className="h-64 squared-xl bg-gray-200 opacity-50" />
-            ))}
-          </motion.div>
+          </div>
         </AnimatePresence>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-center gap-4 mt-8">
-          <motion.button
-            onClick={handlePrev}
-            className="bg-green-600 hover:bg-green-700 text-white p-3 squared-full shadow-lg disabled:opacity-50"
-            disabled={isTransitioning}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaArrowLeft className="text-xl" />
-          </motion.button>
-          <motion.button
-            onClick={handleNext}
-            className="bg-green-600 hover:bg-green-700 text-white p-3 squared-full shadow-lg disabled:opacity-50"
-            disabled={isTransitioning}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaArrowRight className="text-xl" />
-          </motion.button>
-        </div>
+        {/* Load More Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-8">
+            <motion.button
+              onClick={handleLoadMore}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Load More
+            </motion.button>
+          </div>
+        )}
       </div>
     </div>
   );

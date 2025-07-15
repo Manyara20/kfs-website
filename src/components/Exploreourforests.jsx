@@ -85,9 +85,14 @@ const ForestCardGrid = () => {
   const groupSize = 8; // 2 rows x 4 columns
   const totalForests = forests.length;
   const hasMore = visibleCount < totalForests;
+  const canLoadLess = visibleCount > 8; // Show Load Less only if more than 8 cards are visible
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + groupSize, totalForests));
+  };
+
+  const handleLoadLess = () => {
+    setVisibleCount(8); // Reset to initial 8 cards
   };
 
   const currentForests = forests.slice(0, visibleCount);
@@ -151,17 +156,29 @@ const ForestCardGrid = () => {
           </div>
         </AnimatePresence>
 
-        {/* Load More Button */}
-        {hasMore && (
-          <div className="flex justify-center mt-8">
-            <motion.button
-              onClick={handleLoadMore}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Load More
-            </motion.button>
+        {/* Load More and Load Less Buttons */}
+        {(hasMore || canLoadLess) && (
+          <div className="flex justify-center mt-8 space-x-4">
+            {hasMore && (
+              <motion.button
+                onClick={handleLoadMore}
+                className="bg-white hover:bg-green-700 text-green-600 font-semibold py-4 px-8 rounded-lg shadow-lg"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Load More
+              </motion.button>
+            )}
+            {canLoadLess && (
+              <motion.button
+                onClick={handleLoadLess}
+                className="bg-white hover:bg-red-700 text-red-600 font-semibold py-4 px-8 rounded-lg shadow-lg"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Load Less
+              </motion.button>
+            )}
           </div>
         )}
       </div>

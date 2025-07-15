@@ -22,7 +22,6 @@ function HomePageContents() {
       <CodeOfConductSection />
       <Principles />
       <Exploreourforests/>
-      <Exploreournuseries/>
       <PatnersSection />
       <NewsSection />
       <Footer />

@@ -57,7 +57,7 @@ const NuseryCardSlider = () => {
   return (
     <>
     <div className="max-w-6xl mx-auto py-6 px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-2 text-shadow-lg tracking-wide">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#0D3C00] text-center mb-2 text-shadow-lg tracking-wide">
             Explore our Nursuries
           </h1>
       </div>

@@ -11,16 +11,21 @@ import Principles from "@/app/homepage/Principles";
 import PatnersSection from "@/app/homepage/Patners";
 import Sidebar from "@/app/homepage/Sidebar";
 import Exploreourforests from "@/components/Exploreourforests";
+import About from "@/app/homepage/About";
+import Tagline from "@/components/Tagline";
 import Exploreournuseries from "@/components/Exploreournuseries";
 
 
 function HomePageContents() {
   return (
     <div>
+      
       <HeroSection />
       <MissionSection />
-      <CodeOfConductSection />
       <Principles />
+      <About />
+      {/* <CodeOfConductSection /> */}
+      
       <Exploreourforests/>
       <PatnersSection />
       <NewsSection />

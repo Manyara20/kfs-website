@@ -1,38 +1,33 @@
+import React from "react";
 import Image from "next/image";
 
-const NewsCard = ({ title, description, imageUrl, author, date, comments, className }) => {
+const NewsCard = ({
+  title,
+  description,
+  imageUrl,
+  author,
+  date,
+  comments,
+  className,
+  onClick,
+}) => {
   return (
     <div
-      className={`bg-gray-100 shadow-lg flex-1 flex flex-col min-w-0 ${className}`} // flex-1 for equal width, flex-col for height control
+      className={`bg-white shadow-md rounded-lg overflow-hidden ${className}`}
+      onClick={onClick}
     >
-      <div
-        className="h-62 bg-gray-300 flex-shrink-0" // Fixed height for image, no shrinking
-        style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}
-      ></div>
-      <div className="p-4 flex flex-col flex-grow"> {/* flex-grow to fill remaining space */}
-        <h3 className="text-green-900 font-extrabold text-center uppercase text-lg xl:text-xl">
-          {title}
-        </h3>
-        <div className="flex items-center font-bold gap-4 text-sm xl:text-base text-black my-2">
-          <span className="flex items-center gap-1">
-            <Image src="/icons/user.png" alt="Author" width={16} height={16} />
-            {author}
-          </span>
-          <span className="flex items-center gap-1">
-            <Image src="/icons/calendar.png" alt="Date" width={16} height={16} />
-            {date}
-          </span>
-          <span className="flex items-center gap-1">
-            <Image src="/icons/comment.png" alt="Comments" width={16} height={16} />
-            {comments} Comments
-          </span>
-        </div>
-        <p className="text-gray-700 text-base xl:text-lg flex-grow">{description}</p> {/* flex-grow ensures content stretches */}
-        <div className="flex justify-center mt-4">
-          <button className="text-black text-lg xl:text-xl font-extrabold hover:underline">
-            READ MORE
-          </button>
-        </div>
+      <Image
+        src={imageUrl}
+        alt={title}
+        width={768}
+        height={527}
+        className="w-full h-48 object-cover"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-[#0E2E0E] mb-2">{title}</h3>
+        <p className="text-gray-600 text-sm mb-2">{description}</p>
+        <p className="text-gray-500 text-xs mb-1">{author} | {date}</p>
+        <p className="text-gray-500 text-xs">Comments: {comments}</p>
       </div>
     </div>
   );

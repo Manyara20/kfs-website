@@ -122,15 +122,15 @@ const PrinciplesAndValues = () => {
   }
 
   return (
-    <section>
+    <section >
       {/* Header with Tabs */}
-      <div className=" text-white  h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
+      <div className=" text-black  bg-white h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
         <div className="flex gap-6">
           <div
             className={`cursor-pointer text-xl sm:text-3xl font-extrabold uppercase ${
               activeSection === "principles"
-                ? "underline underline-offset-4 decoration-white decoration-4"
-                : "text-gray-500 hover:text-white"
+                ? "underline underline-offset-4 decoration-[#ac6738] decoration-4"
+                : "text-gray-500 hover:text-[#ac6738]"
             }`}
             onClick={() => {
               setActiveSection("principles");
@@ -143,8 +143,8 @@ const PrinciplesAndValues = () => {
           <div
             className={`cursor-pointer text-xl sm:text-3xl font-extrabold uppercase ${
               activeSection === "values"
-                ? "underline underline-offset-4 decoration-white decoration-4"
-                : "text-gray-500 hover:text-white"
+                ? "underline underline-offset-4 decoration-[#ac6738] decoration-4"
+                : "text-gray-500 hover:text-[#ac6738]"
             }`}
             onClick={() => {
               setActiveSection("values");
@@ -173,8 +173,8 @@ const PrinciplesAndValues = () => {
                   key={principle.id}
                   className={`cursor-pointer text-lg font-semibold uppercase ${
                     activePrincipleTab === principle.id
-                      ? "underline underline-offset-4 decoration-white decoration-4 text-white"
-                      : "text-gray-300 hover:text-white"
+                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-white"
+                      : "text-gray-300 hover:text-[#ac6738]"
                   }`}
                   onClick={() => {
                     setActivePrincipleTab(principle.id);
@@ -226,7 +226,7 @@ const PrinciplesAndValues = () => {
                   key={value.id}
                   className={`cursor-pointer text-lg font-semibold uppercase ${
                     activeValueTab === value.id
-                      ? "underline underline-offset-4 decoration-white decoration-4 text-white"
+                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-white"
                       : "text-gray-300 hover:text-white"
                   }`}
                   onClick={() => {

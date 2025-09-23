@@ -22,6 +22,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.flaticon.com",
       },
+      
     ],
   },
 };

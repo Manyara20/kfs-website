@@ -38,7 +38,26 @@ const HeroSection = () => {
       secondaryCtaText: "Get In Touch",
       secondaryCtaLink: "/contact",
     },
-    
+    {
+      title: "Trees for Better Lives",
+      subtitle:
+        "Enhancing Kenya's tree cover to 30% by 2032 through collective action",
+      image: "/images/hero/cs_plants.jpeg",
+      ctaText: "Explore Our Nurseries",
+      ctaLink: "/about/nurseries",
+      secondaryCtaText: "Get In Touch",
+      secondaryCtaLink: "/contact",
+    },
+    {
+      title: "Trees for Better Lives",
+      subtitle:
+        "Enhancing Kenya's tree cover to 30% by 2032 through collective action",
+      image: "/images/hero/cs_plants.jpeg",
+      ctaText: "Explore Our Nurseries",
+      ctaLink: "/about/nurseries",
+      secondaryCtaText: "Get In Touch",
+      secondaryCtaLink: "/contact",
+    },
   ];
 
   useEffect(() => {
@@ -54,10 +73,9 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-[85vh] sm:h-[85vh] md:h-[100vh] w-full overflow-hidden">
-      
       {/* Slide Container with Background Image */}
       <div
-        className="relative h-full  bg-cover bg-no-repeat bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"
+        className="relative h-full bg-cover bg-no-repeat bg-center flex flex-col justify-start items-center text-white transition-all duration-500 ease-in-out"
         style={{
           backgroundImage: `url(${slides[currentSlide].image})`,
         }}
@@ -68,15 +86,15 @@ const HeroSection = () => {
         {/* Navigation Bars */}
         <div className="relative w-full z-20">
           <TopNavBar />
-          <div >
+          <div>
             <MainNavBar />
           </div>
         </div>
 
         {/* Text Content and CTA Buttons */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-center z-10 p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-6xl">
+        <div className="absolute bottom-10 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col justify-center items-center text-center z-10 p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-6xl">
           <h1
-            className="font-bold mb-3 sm:mb-8 md:mb-10 tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+            className="font-extrabold mb-3 sm:mb-4 md:mb-6 tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
             style={{
               textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
             }}
@@ -84,7 +102,7 @@ const HeroSection = () => {
             {slides[currentSlide].title}
           </h1>
           <p
-            className="mb-4 sm:mb-10 md:mb-10  text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl" //italic
+            className="font-medium mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
             style={{
               textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
             }}
@@ -95,16 +113,12 @@ const HeroSection = () => {
             <a
               href={slides[currentSlide].ctaLink}
               className="inline-block bg-white text-[#0D3C00] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-[#0D3C00] hover:text-white transition-all duration-300"
-              style={{
-              }}
             >
               {slides[currentSlide].ctaText}
             </a>
             <a
               href={slides[currentSlide].secondaryCtaLink}
               className="inline-block bg-[#0D3C00] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-white hover:text-[#0D3C00] transition-all duration-300"
-              style={{
-              }}
             >
               {slides[currentSlide].secondaryCtaText}
             </a>

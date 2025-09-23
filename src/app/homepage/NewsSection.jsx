@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const NewsSection = () => {
   const [newsData, setNewsData] = useState([]);
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState("");
   const [currentNoticeIndex, setCurrentNoticeIndex] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -54,12 +56,16 @@ const NewsSection = () => {
 
   const getImageUrl = (image) => {
     return image
-      ? `${process.env.NEXT_PUBLIC_API_URL.replace('/api', '')}${image}`
+      ? `${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${image}`
       : "https://via.placeholder.com/150x100";
   };
 
   const isImageFile = (file_url) => {
     return file_url && /\.(jpg|jpeg|png|gif)$/i.test(file_url);
+  };
+
+  const handleCardClick = (id) => {
+    router.push(`/mediacenter/news-events/${id}`);
   };
 
   return (
@@ -82,7 +88,11 @@ const NewsSection = () => {
           ) : (
             <ul className="space-y-4">
               {newsData.map((item, index) => (
-                <li key={index} className="flex items-start bg-white p-4 rounded-lg shadow">
+                <li
+                  key={index}
+                  className="flex items-start bg-white p-4 rounded-lg shadow cursor-pointer"
+                  onClick={() => handleCardClick(item.id)}
+                >
                   <img
                     src={getImageUrl(item.image)}
                     alt={item.title}
@@ -92,7 +102,7 @@ const NewsSection = () => {
                     <h3 className="text-lg font-semibold text-[#0E2E0E]">{item.title}</h3>
                     <p className="text-sm text-gray-600">{truncateContent(item.content)}</p>
                     <p className="text-xs text-gray-500 mt-1">
-                      {new Date(item.created_at).toLocaleDateString("en-US", {
+                      {new Date(item.date).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
@@ -125,7 +135,7 @@ const NewsSection = () => {
                   <div className="p-4 h-full flex flex-col justify-between">
                     {isImageFile(item.file_url) && (
                       <img
-                        src={`${process.env.NEXT_PUBLIC_API_URL.replace('/api', '')}${item.file_url}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${item.file_url}`}
                         alt={item.title}
                         className="w-full h-full object-cover rounded mb-2"
                       />
@@ -133,7 +143,7 @@ const NewsSection = () => {
                     <h3 className="text-lg font-semibold text-[#0E2E0E] truncate">{item.title}</h3>
                     {item.file_url && (
                       <a
-                        href={`${process.env.NEXT_PUBLIC_API_URL.replace('/api', '')}${item.file_url}`}
+                        href={`${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${item.file_url}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block mt-2 bg-[#0f5a28] text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition"

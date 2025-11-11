@@ -13,6 +13,7 @@ import Sidebar from "@/app/homepage/Sidebar";
 import Exploreourforests from "@/components/Exploreourforests";
 import About from "@/app/homepage/About";
 import Tagline from "@/components/Tagline";
+import KFSAI from "@/app/homepage/KFSAI";
 import Exploreournuseries from "@/components/Exploreournuseries";
 
 
@@ -32,6 +33,7 @@ function HomePageContents() {
       <Footer />
       <FooterBottom />
       <Sidebar/>
+      <KFSAI/>
     </div>
   );
 }

@@ -24,11 +24,12 @@ function HomePageContents() {
       <HeroSection />
       <MissionSection />
       <Principles />
-      <About />
+      {/* <About /> */}
       {/* <CodeOfConductSection /> */}
       
       <Exploreourforests/>
       <PatnersSection />
+      {/* <Exploreournuseries /> */}
       <NewsSection />
       <Footer />
       <FooterBottom />

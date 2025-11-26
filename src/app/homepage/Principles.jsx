@@ -122,7 +122,7 @@ const PrinciplesAndValues = () => {
   }
 
   return (
-    <section >
+    <section bg-white="true">
       {/* Header with Tabs */}
       <div className=" text-black  bg-white h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
         <div className="flex gap-6">
@@ -160,9 +160,9 @@ const PrinciplesAndValues = () => {
       {/* Content Area */}
       {activeSection === "principles" && (
         <div
-          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-white p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
+          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-black p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activePrinciple.background})`,
+            backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 255), rgba(255, 255, 255, 0.5)), url(${activePrinciple.background})`,
           }}
         >
           {/* Principle Tabs (Visible on larger screens) */}
@@ -173,8 +173,8 @@ const PrinciplesAndValues = () => {
                   key={principle.id}
                   className={`cursor-pointer text-lg font-semibold uppercase ${
                     activePrincipleTab === principle.id
-                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-white"
-                      : "text-gray-300 hover:text-[#ac6738]"
+                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-black"
+                      : "text-gray-500 hover:text-[#ac6738]"
                   }`}
                   onClick={() => {
                     setActivePrincipleTab(principle.id);
@@ -197,7 +197,7 @@ const PrinciplesAndValues = () => {
               width={32}
               height={32}
               className="sm:w-[40px] sm:h-[40px]"
-              style={{ filter: "brightness(0) invert(1)" }}
+              style={{ filter: "brightness(0) invert(0)" }}
             />
             <div className="animate-fade-in">
               <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 uppercase">

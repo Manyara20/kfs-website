@@ -125,15 +125,15 @@ const ForestCardGrid = () => {
   };
 
   return (
-    <div className="relative bg-[#0f5a28] py-14 px-4 sm:px-6 lg:px-8">
-      {/* Background Image */}
+    <div className="relative bg-white py-14 px-4 sm:px-6 lg:px-8">
+      {/* Background Image
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed opacity-30"
         style={{
           backgroundImage:
             "url('/images/pattern.svg')",
         }}
-      />
+      />  */}
 
       <div className="relative max-w-8xl mx-auto">
         <motion.div
@@ -142,7 +142,7 @@ const ForestCardGrid = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray tracking-tight">
             Discover Kenya’s Forests
           </h1>
         </motion.div>

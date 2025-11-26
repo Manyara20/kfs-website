@@ -26,7 +26,7 @@ const FloatingChatButton = () => {
           {/* Optional Tooltip */}
           {!isChatOpen && (
             <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-black text-white text-xs sm:text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-              Chat with KFS Documents
+              Chat with Kichaka
             </span>
           )}
         </button>

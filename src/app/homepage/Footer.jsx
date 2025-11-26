@@ -15,24 +15,23 @@ const Footer = () => {
   // Placeholder during server-side rendering to avoid hydration mismatch
   if (!isMounted) {
     return (
-      <footer className="bg-[#0D3C00] text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
+      <footer className=" text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
         <div className="px-8 sm:px-6 md:px-4 lg:px-2"></div>
       </footer>
     );
   }
 
   return (
-    <footer className="bg-[#0D3C00] text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
+    <footer className=" text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
       {/* Background Overlay with Forest Theme */}
+      
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity"
         style={{
-          backgroundImage: `url('https://www.transparenttextures.com/patterns/leaf.png')`,
-          backgroundSize: "200px 200px",
-          backgroundRepeat: "repeat",
+          backgroundImage: "url('/images/background-template/footer.png')",
         }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D3C00]/80 to-[#1f5d2f]/80"></div>
+      /> 
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0D3C00]/30 to-[#1f5d2f]/70"></div>
 
       <div className="relative px-2 sm:px-2 md:px-2 lg:px-2">
         {/* Main Content */}
@@ -79,21 +78,23 @@ const Footer = () => {
           <div className="p-6 sm:p-4 md:p-3">
             <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg  font-bold text-white mb-4 sm:mb-3 md:mb-2">
             <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
-              Toll Free
+              Quick Links
               </p>
             </h3>
-            <div className="flex items-center gap-3 sm:gap-2 text-2xl sm:text-xl md:text-lg lg:text-base font-semibold text-white mb-3 sm:mb-2">
-              <FaPhone className="text-white rotate-180" />
-              <span>0800 721 277</span>
-            </div>
-            <p className="text-xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              Toll Free Number (For Anticorruption and Complaints)
+            
+            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
+              Kenya Forestry College
             </p>
-            <div className="flex justify-start lg:py-4">
-              <button className="bg-[#1f5d2f] text-white py-2 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2  text-2xl sm:text-lg md:text-2xl lg:text-2xl font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
-                Call Now
-              </button>
-            </div>
+            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
+              Ministry of Environment and Forestry
+            </p>
+            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
+              KEFRI
+            </p>
+            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
+              Nurseries
+            </p>
+            
           </div>
 
           {/* Column 4: Subscribe */}

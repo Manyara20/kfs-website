@@ -69,14 +69,14 @@ const NewsSection = () => {
   };
 
   return (
-    <section className="py-6 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8 bg-[#e6f5e6]">
+    <section className="py-7 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8 bg-[#e6f5e6]">
       <div className="text-center mb-6 sm:mb-8 md:mb-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-black text-[#0E2E0E]">
           News & Notices
         </h1>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Section: Latest News */}
         <div className="lg:col-span-2">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mb-4 flex items-center">
@@ -90,7 +90,7 @@ const NewsSection = () => {
               {newsData.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-start bg-white p-4 rounded-lg shadow cursor-pointer"
+                  className="flex items-start bg-white p-4 shadow cursor-pointer"
                   onClick={() => handleCardClick(item.id)}
                 >
                   <img
@@ -124,7 +124,7 @@ const NewsSection = () => {
           {notices.length === 0 && !error ? (
             <p className="text-gray-600 text-center text-base">No notices available at this time.</p>
           ) : (
-            <div className="relative w-full h-[530px] bg-white rounded-lg shadow overflow-hidden">
+            <div className="relative w-full h-[530px] bg-white shadow overflow-hidden">
               {notices.map((item, index) => (
                 <div
                   key={index}

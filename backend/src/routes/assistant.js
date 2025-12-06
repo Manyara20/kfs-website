@@ -8,11 +8,9 @@ const router = express.Router();
 // Initialize OpenAI client
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// In-memory threads to remember chat history
+
 const threads = {};
 
-// POST /ask
-// POST /ask
 router.post("/ask", async (req, res) => {
   try {
     const { message, thread_id } = req.body;
@@ -25,7 +23,7 @@ router.post("/ask", async (req, res) => {
     messages.push({ role: "user", content: message });
 
     const response = await client.chat.completions.create({
-      model: "gpt-3.5-turbo", // use a model you have access to
+      model: "gpt-3.5-turbo", 
       messages,
     });
 
@@ -40,7 +38,7 @@ router.post("/ask", async (req, res) => {
   } catch (err) {
     console.error("ASK ERROR:", err);
 
-    // Handle rate limit gracefully
+    
     if (err.code === "insufficient_quota" || err.status === 429) {
       return res.status(429).json({ error: "Quota exceeded. Please try later." });
     }

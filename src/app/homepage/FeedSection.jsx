@@ -15,7 +15,7 @@ const EventCard = ({ date, title, time, venue, onClick }) => {
       className="w-full flex items-center bg-[#0f5a28] text-white rounded p-2 sm:p-3 mb-1 transition-all duration-200 hover:bg-[#e6f5e6] hover:text-[#000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff0000]"
     >
       <div className="w-10 sm:w-12 h-10 sm:h-12 bg-[#000] text-white flex flex-col items-center justify-center rounded mr-2">
-        <span className="text-sm sm:text-base font-bold">{day}</span>
+        <span className="text-sm sm:text-base font-bold rounded">{day}</span>
         <span className="text-[8px] sm:text-[10px] uppercase">{month}</span>
       </div>
       <div className="flex flex-col text-xs sm:text-sm text-left">
@@ -94,7 +94,6 @@ const KFSFeeds = () => {
         setEvents(response.data);
         setError("");
       } catch (err) {
-        console.error(err);
         setError("Failed to load events.");
       }
     };
@@ -105,7 +104,6 @@ const KFSFeeds = () => {
         setNotices(response.data);
         setError("");
       } catch (err) {
-        console.error(err);
         setError("Failed to load notices.");
       }
     };
@@ -150,7 +148,7 @@ const KFSFeeds = () => {
                   title={item.title}
                   time={item.time}
                   venue={item.venue}
-                  onClick={() => console.log(`Clicked Event: ${item.title}`)}
+                  onClick={() => {}}
                 />
               ))
             )}
@@ -175,7 +173,7 @@ const KFSFeeds = () => {
                   title={item.title}
                   description={item.description}
                   file_url={item.file_url}
-                  onClick={() => console.log(`Clicked Notice: ${item.title}`)}
+                  onClick={() => {}}
                 />
               ))
             )}

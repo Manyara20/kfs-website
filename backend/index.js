@@ -12,6 +12,8 @@ const eventsRouter = require("./src/routes/events");
 const noticesRouter = require("./src/routes/notices");
 const usersRouter = require("./src/routes/users");
 const mailingRouter = require("./src/routes/mailing");
+const assistantRouter = require("./src/routes/assistant");
+
 
 const { Pool } = require("pg");
 
@@ -19,6 +21,7 @@ const app = express();
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+app.use("/api/assistant", assistantRouter);
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];

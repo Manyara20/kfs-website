@@ -32,37 +32,48 @@ const FloatingChatButton = () => {
         </button>
 
         {/* Chat Panel - Slides in from bottom-right */}
-        <div
-          className={`absolute bottom-20 right-0 w-96 sm:w-[420px] md:w-[480px] h-[600px] bg-white rounded-2xl shadow-2xl border-4 border-[#2a7a3d] overflow-hidden transition-all duration-500 origin-bottom-right ${
-            isChatOpen
-              ? "translate-y-0 opacity-100 scale-100"
-              : "translate-y-10 opacity-0 scale-90 pointer-events-none"
-          }`}
-        >
-          {/* Header */}
-          <div className="bg-[#2a7a3d] text-white p-4 flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#2a7a3d] font-bold text-xl">K</span>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">KFS AI Assistant</h3>
-                <p className="text-xs opacity-90">Ask anything about policies, regulations, forests...</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsChatOpen(false)}
-              className="text-white hover:bg-white/20 rounded-full p-2 transition"
-            >
-              <FaTimes />
-            </button>
-          </div>
+{/* Floating Chat - ONE clean box with green KFS style */}
+<div
+  className={`fixed bottom-20 right-4 w-96 sm:w-[420px] md:w-[480px] bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 origin-bottom-right z-50 border-4 border-[#2a7a3d] ${
+    isChatOpen
+      ? "translate-y-0 opacity-100 scale-100"
+      : "translate-y-12 opacity-0 scale-90 pointer-events-none"
+  }`}
+  style={{ maxHeight: "85vh" }}
+>
+  {/* Header - Green with white K logo */}
+  <div className="bg-[#2a7a3d] text-white p-5 flex justify-between items-center">
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+        <span className="text-[#2a7a3d] font-black text-2xl">K</span>
+      </div>
+      <div>
+        <h3 className="font-bold text-lg leading-tight">KFS AI Assistant</h3>
+        <p className="text-xs opacity-90">Always here to help with policies & forests</p>
+      </div>
+    </div>
+    <button
+      onClick={() => setIsChatOpen(false)}
+      className="w-10 h-10 rounded-full hover:bg-white/20 flex items-center justify-center transition"
+    >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
 
-          {/* Chat Content */}
-          <div className="h-full bg-gradient-to-b from-green-50 to-white">
-            <KFSDocumentChat />
-          </div>
-        </div>
+  {/* Chat Area - Light green gradient background */}
+  <div className="h-full min-h-96 bg-gradient-to-b from-green-50 to-white flex flex-col">
+    <KFSDocumentChat />
+  </div>
+
+  {/* Optional: tiny resize handle */}
+  <div className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize opacity-30 hover:opacity-60">
+    <svg className="w-full h-full text-[#2a7a3d]" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20 15h-2v2h2v-2zm0-4h-4v2h4v-2zm0-4h-6v2h6V7zm-8 8H8v2h4v-2zm-4 4H4v2h4v-2zm8-8H12v2h4v-2z" />
+    </svg>
+  </div>
+</div>
       </div>
     </>
   );

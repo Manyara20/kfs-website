@@ -11,38 +11,24 @@ export default function JobVacancies() {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/jobs/public`;
-      console.log(`Fetching jobs from ${url}`);
-      try {
-        const response = await axios.get(url, {
-          timeout: 5000,
-        });
-        console.log("Response received:", response.status, response.data);
-        setJobs(response.data);
-        setError("");
-      } catch (err) {
-        console.error("Full Axios error:", err);
-        console.error("Axios error details:", {
-          name: err.name,
-          message: err.message,
-          code: err.code,
-          status: err.response?.status,
-          data: err.response?.data,
-          request: err.request ? "Request made, no response" : "No request sent",
-          stack: err.stack,
-        });
-        setError(
-          err.response?.data?.error ||
-          err.message ||
-          "Failed to load jobs. Please check the server."
-        );
-      }
-    };
+useEffect(() => {
+  const fetchJobs = async () => {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/jobs/public`;
+    try {
+      const response = await axios.get(url, { timeout: 5000 });
+      setJobs(response.data);
+      setError("");
+    } catch (err) {
+      setError(
+        err.response?.data?.error ||
+        err.message ||
+        "Failed to load jobs. Please check the server."
+      );
+    }
+  };
 
-    fetchJobs();
-  }, []);
+  fetchJobs();
+}, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },

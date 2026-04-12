@@ -1,111 +1,110 @@
-/* global.css */
-
-/* Import Tailwind CSS */
+/* globals.css */
 @import "tailwindcss";
 
-/* Custom Fonts */
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@theme {
+  --color-kfs-dark:   #0D3C00;
+  --color-kfs-medium: #1f5d2f;
+  --color-kfs-light:  #e6f5e6;
+  --color-kfs-accent: #ac6738;
+  --color-kfs-bg:     #f4faf4;
+}
+
+/* ─── Custom Fonts ───────────────────────────────────────────── */
 @font-face {
   font-family: 'Futura';
   font-style: normal;
   font-weight: 400;
-  font-size:1.2rem;
-  src: url('/fonts/Futura Book font.ttf') format('woff2'),
-       url('/fonts/Futura futura medium bt.ttf') format('woff');
+  src: url('/fonts/Futura Book font.ttf') format('truetype'),
+       url('/fonts/Futura futura medium bt.ttf') format('truetype');
 }
 
-
-/* Define CSS custom properties for colors */
+/* ─── Base Styles ────────────────────────────────────────────── */
 :root {
   --background: #ffffff;
-  --foreground: #ffe8e8;
+  --foreground: #1a1a1a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #000;
-  }
-}
-
-/* Typography System */
 html {
-  font-size: 1.0rem;
+  font-size: 1rem;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
-  font-family: 'Futura', Helvetica, sans-serif;
+  font-family: 'Futura', Helvetica, Arial, sans-serif;
   background: var(--background);
   color: var(--foreground);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* General Styles */
+/* ─── Keyframe Animations ────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Custom Utilities ───────────────────────────────────────── */
+@utility animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+@utility animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility text-shadow-sm {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@utility text-shadow {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+@utility body-bg {
+  background-image:
+    linear-gradient(rgba(15, 90, 40, 0.82), rgba(15, 90, 40, 0.82)),
+    url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ─── General Layout ─────────────────────────────────────────── */
 .fullscreen-section {
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-}
-
-/* Hide scrollbar for Chrome, Safari, and Edge */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for Firefox */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-/* Twitter Feed Styles */
-.twitter-feed-container {
-  background-color: #ffffff;
-}
-
-.twitter-feed-container .twitter-timeline,
-.twitter-feed-container .twitter-timeline-rendered {
-  background-color: #fff !important;
-  border: none !important;
-  width: 100% !important;
-}
-
-.twitter-feed-container .timeline-TweetList-tweet {
-  background-color: #ffffff !important;
-  border: none !important;
-  padding: 12px !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.twitter-feed-container .timeline-Tweet-text {
-  color: #ffffff !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
-}
-
-.twitter-feed-container .timeline-Tweet-author .TweetAuthor-name {
-  color: #ffffff !important;
-  font-weight: 500 !important;
-}
-
-.twitter-feed-container .timeline-Tweet-author .TweetAuthor-screenName,
-.twitter-feed-container .timeline-Tweet-timestamp {
-  color: #e0e0e0 !important;
-}
-
-.twitter-feed-container .timeline-Header,
-.twitter-feed-container .timeline-Footer {
-  display: none !important;
-}
-
-.twitter-feed-container .timeline-TweetList-tweet {
-  border-radius: 0 !important;
-}
-
-.twitter-feed-container .timeline-Tweet-text a {
-  color: #a6192e !important;
 }

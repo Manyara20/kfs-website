@@ -14,22 +14,18 @@ const NewsSection = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts/public`);
-        setNewsData(response.data.slice(0, 4));
-        setError("");
-      } catch (err) {
-        console.error("Error fetching news:", err);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts/public`);
+        setNewsData(data.slice(0, 4));
+      } catch {
         setError("Failed to load news. Please try again later.");
       }
     };
 
     const fetchNotices = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notices/public`);
-        setNotices(response.data);
-        setError("");
-      } catch (err) {
-        console.error("Error fetching notices:", err);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notices/public`);
+        setNotices(data);
+      } catch {
         setError("Failed to load notices.");
       }
     };
@@ -39,70 +35,64 @@ const NewsSection = () => {
   }, []);
 
   useEffect(() => {
-    if (notices.length > 1) {
-      const interval = setInterval(() => {
-        setCurrentNoticeIndex((prevIndex) =>
-          prevIndex === notices.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 3000);
-      return () => clearInterval(interval);
-    }
+    if (notices.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentNoticeIndex((prev) => (prev + 1) % notices.length);
+    }, 3_000);
+    return () => clearInterval(interval);
   }, [notices]);
 
-  const truncateContent = (content) => {
-    if (content.length <= 100) return content;
-    return content.substring(0, 100) + "...";
-  };
+  const truncate = (text, max = 100) =>
+    text.length <= max ? text : text.slice(0, max) + "…";
 
-  const getImageUrl = (image) => {
-    return image
+  const getImageUrl = (image) =>
+    image
       ? `${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${image}`
       : "https://via.placeholder.com/150x100";
-  };
 
-  const isImageFile = (file_url) => {
-    return file_url && /\.(jpg|jpeg|png|gif)$/i.test(file_url);
-  };
-
-  const handleCardClick = (id) => {
-    router.push(`/mediacenter/news-events/${id}`);
-  };
+  const isImageFile = (url) => url && /\.(jpg|jpeg|png|gif)$/i.test(url);
 
   return (
-    <section className="py-7 sm:py-8 md:py-12 px-2 sm:px-4 md:px-6 lg:px-8 bg-[#e6f5e6]">
-      <div className="text-center mb-6 sm:mb-8 md:mb-12">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-black text-[#0E2E0E]">
-          News & Notices
-        </h1>
-      </div>
+    <section className="py-12 px-4 sm:px-6 lg:px-10 bg-kfs-light">
+      <div className="max-w-7xl mx-auto">
+        {/* Heading */}
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-kfs-dark text-center mb-10">
+          News &amp; Notices
+        </h2>
 
-      <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Section: Latest News */}
-        <div className="lg:col-span-2">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mb-4 flex items-center">
-            Latest News
-          </h2>
-          {error && <p className="text-red-500 text-center text-base">{error}</p>}
-          {newsData.length === 0 && !error ? (
-            <p className="text-gray-600 text-center text-base">No news available at this time.</p>
-          ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Latest News */}
+          <div className="lg:col-span-2">
+            <h3 className="text-lg font-bold text-kfs-medium mb-4 uppercase tracking-wide border-b-2 border-kfs-medium pb-2">
+              Latest News
+            </h3>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {newsData.length === 0 && !error && (
+              <p className="text-gray-500 text-sm">No news available at this time.</p>
+            )}
+
             <ul className="space-y-4">
-              {newsData.map((item, index) => (
+              {newsData.map((item) => (
                 <li
-                  key={index}
-                  className="flex items-start bg-white p-4 shadow cursor-pointer"
-                  onClick={() => handleCardClick(item.id)}
+                  key={item.id}
+                  className="flex gap-4 bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition-shadow duration-200"
+                  onClick={() => router.push(`/mediacenter/news-events/${item.id}`)}
                 >
                   <img
                     src={getImageUrl(item.image)}
                     alt={item.title}
-                    className="w-32 h-20 object-cover rounded mr-4"
+                    className="w-28 h-20 object-cover rounded flex-shrink-0"
                   />
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[#0E2E0E]">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{truncateContent(item.content)}</p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {new Date(item.date).toLocaleDateString("en-US", {
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-semibold text-kfs-dark leading-snug mb-1 line-clamp-2">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-gray-500 leading-relaxed mb-1">
+                      {truncate(item.content)}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {new Date(item.date).toLocaleDateString("en-KE", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
@@ -112,50 +102,71 @@ const NewsSection = () => {
                 </li>
               ))}
             </ul>
-          )}
-        </div>
+          </div>
 
-        {/* Right Section: Notices Slider */}
-        <div className="lg:col-span-1">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mb-4">
-            Updates
-          </h2>
-          {error && <p className="text-red-500 text-center text-base">{error}</p>}
-          {notices.length === 0 && !error ? (
-            <p className="text-gray-600 text-center text-base">No notices available at this time.</p>
-          ) : (
-            <div className="relative w-full h-[530px] bg-white shadow overflow-hidden">
-              {notices.map((item, index) => (
-                <div
-                  key={index}
-                  className={`absolute w-full h-full transition-opacity duration-500 ${
-                    index === currentNoticeIndex ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <div className="p-4 h-full flex flex-col justify-between">
+          {/* Notices Slider */}
+          <div className="lg:col-span-1">
+            <h3 className="text-lg font-bold text-kfs-medium mb-4 uppercase tracking-wide border-b-2 border-kfs-medium pb-2">
+              Updates
+            </h3>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {notices.length === 0 && !error && (
+              <p className="text-gray-500 text-sm">No updates available at this time.</p>
+            )}
+
+            {notices.length > 0 && (
+              <div className="relative bg-white rounded-lg shadow-sm overflow-hidden h-[480px]">
+                {notices.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 p-4 flex flex-col justify-between transition-opacity duration-500 ${
+                      index === currentNoticeIndex ? "opacity-100" : "opacity-0 pointer-events-none"
+                    }`}
+                  >
                     {isImageFile(item.file_url) && (
                       <img
                         src={`${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${item.file_url}`}
                         alt={item.title}
-                        className="w-full h-full object-cover rounded mb-2"
+                        className="w-full flex-1 object-cover rounded mb-3 min-h-0"
                       />
                     )}
-                    <h3 className="text-lg font-semibold text-[#0E2E0E] truncate">{item.title}</h3>
-                    {item.file_url && (
-                      <a
-                        href={`${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${item.file_url}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-2 bg-[#0f5a28] text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition"
-                      >
-                        {isImageFile(item.file_url) ? "View Image" : "Download PDF"}
-                      </a>
-                    )}
+                    <div className="flex-shrink-0">
+                      <h4 className="text-sm font-semibold text-kfs-dark truncate mb-2">
+                        {item.title}
+                      </h4>
+                      {item.file_url && (
+                        <a
+                          href={`${process.env.NEXT_PUBLIC_API_URL.replace("/api", "")}${item.file_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block bg-kfs-dark text-white px-4 py-1.5 rounded text-xs font-medium hover:bg-kfs-medium transition-colors"
+                        >
+                          {isImageFile(item.file_url) ? "View Image" : "Download PDF"}
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+
+                {/* Dot indicators */}
+                {notices.length > 1 && (
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    {notices.map((_, i) => (
+                      <button
+                        key={i}
+                        aria-label={`Notice ${i + 1}`}
+                        onClick={() => setCurrentNoticeIndex(i)}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+                          i === currentNoticeIndex ? "bg-kfs-dark scale-125" : "bg-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

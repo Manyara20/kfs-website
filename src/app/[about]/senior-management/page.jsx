@@ -4,7 +4,7 @@ import Link from "next/link";
 import TopNavBar from "@/components/TopNavBar";
 import MainNavBar from "@/components/MainNavBar";
 import FooterBottom from "@/components/FooterBottom";
-import InfoIcon from "@mui/icons-material/Info";
+import { FaInfoCircle } from "react-icons/fa";
 
 // Management Details Object
 const managementDetails = {
@@ -162,7 +162,7 @@ export default function KFSSeniorManagementPage() {
                 className="text-[#6A961F] hover:bg-[#6A961F]/10 p-2 rounded-full transition-colors duration-200"
                 aria-label="View Profile"
               >
-                <InfoIcon fontSize="small" />
+                <FaInfoCircle className="text-base" />
               </button>
             </Link>
           </div>
@@ -193,7 +193,7 @@ export default function KFSSeniorManagementPage() {
                   className="text-[#0D3C00] hover:bg-[#6A961F]/10 p-2 rounded-full transition-colors duration-200"
                   aria-label="View Profile"
                 >
-                  <InfoIcon fontSize="small" />
+                  <FaInfoCircle className="text-base" />
                 </button>
               </Link>
             </div>

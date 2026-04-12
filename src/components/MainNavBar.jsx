@@ -1,550 +1,321 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  MenuItem,
-  IconButton,
-  Link,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  Collapse,
-  useMediaQuery,
-  TextField,
-  InputAdornment,
-  Button,
-} from "@mui/material";
-import {
-  ArrowDropDown,
-  Menu as MenuIcon,
-  Search as SearchIcon,
-  ExpandLess,
-  ExpandMore,
-  Facebook,
-  YouTube,
-  Instagram,
-} from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
+import Link from "next/link";
 import Image from "next/image";
+import {
+  FaFacebookF,
+  FaYoutube,
+  FaInstagram,
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaChevronRight,
+} from "react-icons/fa";
 import navigationItems from "./navigationItems";
 
 const MainNavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
   const [isSticky, setIsSticky] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const toggleDrawer = (open) => () => setDrawerOpen(open);
-  const toggleSearchDrawer = () => setSearchDrawerOpen((prev) => !prev);
-
-  const handleToggle = (key) => {
-    setExpandedItems((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
+  // Flatten nav tree for search
   const flattenItems = (items, parentPath = []) => {
-    let flatItems = [];
+    let result = [];
     items.forEach((item) => {
-      const currentPath = [...parentPath, item.label];
+      const path = [...parentPath, item.label];
       if (item.link) {
-        flatItems.push({ label: currentPath.join(" > "), link: item.link, isExternal: item.isExternal });
+        result.push({ label: path.join(" › "), link: item.link, isExternal: item.isExternal });
       }
       if (item.subItems?.length > 0) {
-        flatItems = flatItems.concat(flattenItems(item.subItems, currentPath));
+        result = result.concat(flattenItems(item.subItems, path));
       }
     });
-    return flatItems;
+    return result;
   };
 
-  const flatNavigationItems = flattenItems(navigationItems);
+  const flatNavItems = flattenItems(navigationItems);
 
   useEffect(() => {
-    if (searchQuery.trim()) {
-      const lowerQuery = searchQuery.toLowerCase().trim();
-      const filtered = flatNavigationItems.filter((item) =>
-        item.label.toLowerCase().includes(lowerQuery)
-      );
-      setFilteredItems(filtered);
-    } else {
-      setFilteredItems([]);
-    }
+    const q = searchQuery.trim().toLowerCase();
+    setFilteredItems(
+      q ? flatNavItems.filter((i) => i.label.toLowerCase().includes(q)) : []
+    );
   }, [searchQuery]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsSticky(window.scrollY > 0);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const renderSubMenu = (items, level = 0) => {
-    return items.map((item, idx) => (
-      <Box
-        key={idx}
-        sx={{
-          position: "relative",
-          "&:hover > .MuiBox-root": {
-            visibility: "visible",
-            opacity: 1,
-          },
-        }}
-      >
-        <MenuItem
-          sx={{
-            fontSize: { md: "0.65rem", lg: "0.65rem", xl: "1.2rem" },
-             color: isSticky ? "#fff" : "#fff",
-            "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-            padding: "0.5rem 0.6rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            textTransform: "capitalize",
-          }}
-        >
+  const toggleExpanded = (key) =>
+    setExpandedItems((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchQuery("");
+  };
+
+  // ── Desktop submenu (recursive) ──────────────────────────────
+  const DesktopSubMenu = ({ items, level = 0 }) => (
+    <div
+      className={`absolute ${level === 0 ? "top-full left-0" : "top-0 left-full"} bg-kfs-dark min-w-[210px] shadow-xl border-t-2 border-kfs-accent invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50`}
+    >
+      {items.map((item, idx) => (
+        <div key={idx} className="relative group/nested">
           <Link
             href={item.link || "#"}
             target={item.isExternal ? "_blank" : "_self"}
             rel={item.isExternal ? "noopener noreferrer" : undefined}
-            style={{ textDecoration: "none", color: "inherit", display: "block" }}
+            className="flex items-center justify-between px-4 py-2.5 text-sm text-white/90 hover:bg-white/10 hover:text-white capitalize border-b border-white/5 last:border-0 transition-colors duration-150"
           >
-            {item.label}
+            <span>{item.label}</span>
+            {item.subItems?.length > 0 && (
+              <FaChevronRight className="ml-3 text-[10px] opacity-60 flex-shrink-0" />
+            )}
           </Link>
           {item.subItems?.length > 0 && (
-            <ArrowDropDown
-              sx={{
-                color: isSticky ? "#fff" : "#fff",
-                fontSize: "1.1rem",
-                marginLeft: level % 2 === 0 ? "auto" : "0",
-              }}
-            />
+            <DesktopSubMenu items={item.subItems} level={level + 1} />
           )}
-        </MenuItem>
-        {item.subItems?.length > 0 && (
-          <Box
-            sx={{
-              visibility: "hidden",
-              opacity: 0,
-              position: "absolute",
-              top: "100%",
-              left: "100%",
-              backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-              minWidth: "180px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-              zIndex: 1000 + level,
-              transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
-            }}
-          >
-            {renderSubMenu(item.subItems, level + 1)}
-          </Box>
-        )}
-      </Box>
-    ));
-  };
+        </div>
+      ))}
+    </div>
+  );
 
-  const renderMobileMenu = (items, parentIdx = "", level = 0) => {
-    return items.map((item, idx) => {
-      const key = parentIdx ? `${parentIdx}-${idx}` : `${idx}`;
-      const hasSubItems = item.subItems?.length > 0;
-
+  // ── Mobile menu (recursive) ───────────────────────────────────
+  const MobileMenuItems = ({ items, parentKey = "", level = 0 }) =>
+    items.map((item, idx) => {
+      const key = parentKey ? `${parentKey}-${idx}` : `${idx}`;
+      const hasChildren = item.subItems?.length > 0;
       return (
         <React.Fragment key={key}>
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={hasSubItems ? () => handleToggle(key) : null}
-              component={hasSubItems ? "button" : Link}
-              href={hasSubItems ? undefined : item.link || "#"}
-              target={item.isExternal ? "_blank" : "_self"}
-              rel={item.isExternal ? "noopener noreferrer" : undefined}
-              sx={{
-                color: isSticky ? "#fff" : "#fff",
-                padding: "8px 16px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <ListItemText
-                primary={item.label}
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: { xs: "0.85rem", xl: "1.19rem" },
-                             textTransform: "capitalize",
-                  },
-                }}
-              />
-              {hasSubItems && (
-                expandedItems[key] ? (
-                  <ExpandLess sx={{ color: isSticky ? "#fff" : "#fff" }} />
-                ) : (
-                  <ExpandMore
-                    sx={{
-                      color: isSticky ? "#fff" : "#fff",
-                      marginLeft: level % 2 === 0 ? "auto" : "0",
-                    }}
-                  />
-                )
-              )}
-            </ListItemButton>
-          </ListItem>
-          {hasSubItems && (
-            <Collapse in={expandedItems[key]} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding sx={{ pl: 3 }}>
-                {renderMobileMenu(item.subItems, key, level + 1)}
-              </List>
-            </Collapse>
+          <div className="border-b border-white/10">
+            {hasChildren ? (
+              <button
+                className="w-full flex items-center justify-between px-4 py-3 text-sm text-white hover:bg-white/10 capitalize transition-colors duration-150"
+                style={{ paddingLeft: `${16 + level * 14}px` }}
+                onClick={() => toggleExpanded(key)}
+              >
+                <span>{item.label}</span>
+                <FaChevronDown
+                  className={`text-xs transition-transform duration-200 flex-shrink-0 ${
+                    expandedItems[key] ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            ) : (
+              <Link
+                href={item.link || "#"}
+                target={item.isExternal ? "_blank" : "_self"}
+                rel={item.isExternal ? "noopener noreferrer" : undefined}
+                className="flex items-center py-3 text-sm text-white/90 hover:text-white hover:bg-white/10 capitalize transition-colors duration-150"
+                style={{ paddingLeft: `${16 + level * 14}px` }}
+                onClick={() => setDrawerOpen(false)}
+              >
+                {item.label}
+              </Link>
+            )}
+          </div>
+          {hasChildren && expandedItems[key] && (
+            <div className="bg-black/20">
+              <MobileMenuItems items={item.subItems} parentKey={key} level={level + 1} />
+            </div>
           )}
         </React.Fragment>
       );
     });
-  };
 
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-        backdropFilter: isSticky ? "none" : "blur(0px)",
-        boxShadow: isSticky ? "0 2px 5px rgba(0,0,0,0.1)" : "none",
-        top: 0,
-        zIndex: 20,
-        transition: "background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease",
-        marginTop: "5px",
-      }}
-    >
-      <Box
-        sx={{
-          width: { xs: "95%", sm: "90%", lg: "85%", xl: "80%" },
-          maxWidth: "1600px",
-          margin: "auto",
-          backgroundColor: "transparent",
-          borderRadius: "8px",
-          padding: "0.5rem 1rem",
-          boxShadow: "none",
-        }}
+    <>
+      {/* ── Sticky Nav Bar ───────────────────────────────────── */}
+      <nav
+        className={`sticky top-0 z-30 transition-all duration-300 ${
+          isSticky
+            ? "bg-kfs-dark shadow-lg shadow-black/30"
+            : "bg-black/15 backdrop-blur-sm"
+        }`}
       >
-        <Toolbar
-          sx={{
-            minHeight: "auto !important",
-            padding: "0 !important",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ flexShrink: 0, paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
-            <Link href="/">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0 py-2">
               <Image
                 src="/images/kfs_logo.png"
-                alt="KFS Logo"
+                alt="Kenya Forest Service"
                 width={64}
                 height={48}
+                priority
               />
             </Link>
-          </Box>
 
-          {!isMobile && (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexGrow: 1,
-                gap: { md: 1, lg: 2 },
-                flexWrap: "nowrap",
-                alignItems: "center",
-              }}
-            >
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-0.5 flex-1 justify-center">
               {navigationItems.map((item, index) =>
                 item.subItems ? (
-                  <Box
-                    key={index}
-                    sx={{
-                      position: "relative",
-                      "&:hover > .MuiBox-root": {
-                        visibility: "visible",
-                        opacity: 1,
-                      },
-                    }}
-                  >
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: isSticky ? "#fff" : "#fff",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.2rem" },
-                                     fontWeight: 600,
-                        padding: { md: "5px 7px", lg: "7px 10px" },
-                        "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                        textTransform: "capitalize",
-                      }}
-                    >
+                  <div key={index} className="relative group">
+                    <button className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-white hover:bg-white/10 rounded transition-colors duration-150 capitalize">
                       {item.label}
-                      <ArrowDropDown sx={{ color: isSticky ? "#fff" : "#fff", fontSize: "1.1rem" }} />
-                    </Typography>
-                    <Box
-                      sx={{
-                        visibility: "hidden",
-                        opacity: 0,
-                        position: "absolute",
-                        top: "100%",
-                        left: 0,
-                        backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-                        minWidth: "180px",
-                        boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-                        zIndex: 1000,
-                        transition: "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out",
-                      }}
-                    >
-                      {renderSubMenu(item.subItems)}
-                    </Box>
-                  </Box>
+                      <FaChevronDown className="text-[10px] opacity-70 mt-px" />
+                    </button>
+                    <DesktopSubMenu items={item.subItems} />
+                  </div>
                 ) : (
                   <Link
                     key={index}
                     href={item.link}
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
-                    sx={{
-                      color: isSticky ? "#fff" : "#fff",
-                      textDecoration: "none",
-                      padding: { md: "5px 7px", lg: "7px 10px" },
-                      "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                      display: "flex",
-                      alignItems: "center",
-                    }}
+                    className="px-3 py-2 text-sm font-semibold text-white hover:bg-white/10 rounded transition-colors duration-150 capitalize"
                   >
-                    <Typography
-                      sx={{
-                        fontSize: { md: "0.75rem", lg: "0.75rem", xl: "1.2rem" },
-                                     fontWeight: 600,
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
+                    {item.label}
                   </Link>
                 )
               )}
-            </Box>
-          )}
+            </div>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            {!isMobile && (
-              <IconButton
-                sx={{
-                  color: isSticky ? "#fff" : "#fff",
-                  fontWeight: "bold",
-                  padding: { md: "5px", lg: "7px" },
-                  "&:hover": { backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                }}
-                onClick={toggleSearchDrawer}
+            {/* Right Controls */}
+            <div className="flex items-center gap-1.5">
+              {/* Search (desktop) */}
+              <button
+                className="hidden md:flex items-center justify-center w-9 h-9 text-white hover:bg-white/10 rounded transition-colors duration-150"
+                onClick={() => setSearchOpen(true)}
+                aria-label="Search"
               >
-                <SearchIcon sx={{ fontSize: { xs: "1.4rem", md: "1.6rem", xl: "2rem" } }} />
-              </IconButton>
-            )}
+                <FaSearch className="text-sm" />
+              </button>
 
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: isSticky ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
-                color: isSticky ? "#fff" : "#fff",
-                borderRadius: "4px",
-                padding: { xs: "6px 14px", md: "8px 18px" },
-                display: "flex",
-                gap: 1,
-                "&:hover": {
-                  backgroundColor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.1)",
-                },
-              }}
-            >
-              <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
-                <Typography sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" }, fontWeight: "bold" }}>
+              {/* Social links */}
+              <div className="flex items-center gap-0.5 bg-white/10 rounded px-2 py-1.5">
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-gray-200 px-1.5 font-bold text-sm leading-none transition-colors"
+                  aria-label="X (Twitter)"
+                >
                   X
-                </Typography>
-              </Link>
-              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Facebook sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
-              </Link>
-              <Link href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-                <Instagram sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
-              </Link>
-              <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <YouTube sx={{ color: isSticky ? "#fff" : "#fff", fontSize: { xs: "1.6rem", xl: "2.2rem" } }} />
-              </Link>
-            </Button>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 p-1 transition-colors" aria-label="Facebook">
+                  <FaFacebookF className="text-sm" />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 p-1 transition-colors" aria-label="Instagram">
+                  <FaInstagram className="text-sm" />
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 p-1 transition-colors" aria-label="YouTube">
+                  <FaYoutube className="text-sm" />
+                </a>
+              </div>
 
-            {isMobile && (
-              <>
-                <IconButton
-                  sx={{ color: isSticky ? "#fff" : "#fff", padding: "5px" }}
-                  onClick={toggleSearchDrawer}
-                >
-                  <SearchIcon sx={{ fontSize: "1.4rem" }} />
-                </IconButton>
-                <IconButton
-                  sx={{ color: isSticky ? "#fff" : "#fff", padding: "5px" }}
-                  onClick={toggleDrawer(true)}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </>
-            )}
-          </Box>
-        </Toolbar>
-      </Box>
+              {/* Mobile controls */}
+              <button
+                className="md:hidden flex items-center justify-center w-9 h-9 text-white hover:bg-white/10 rounded transition-colors"
+                onClick={() => setSearchOpen(true)}
+                aria-label="Search"
+              >
+                <FaSearch className="text-sm" />
+              </button>
+              <button
+                className="md:hidden flex items-center justify-center w-9 h-9 text-white hover:bg-white/10 rounded transition-colors"
+                onClick={() => setDrawerOpen(true)}
+                aria-label="Open menu"
+              >
+                <FaBars className="text-lg" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={toggleDrawer(false)}
-        sx={{
-          "& .MuiDrawer-paper": {
-            width: { xs: "80%", sm: "60%" },
-            maxWidth: "300px",
-            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)",
-            color: isSticky ? "#fff" : "#fff",
-            padding: "1rem",
-          },
-        }}
-      >
-        <Box sx={{ width: "100%" }}>
-          <IconButton
-            onClick={toggleDrawer(false)}
-            sx={{ position: "absolute", top: "1rem", right: "1rem", color: isSticky ? "#fff" : "#0D3C00" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <List sx={{ paddingTop: "3rem" }}>{renderMobileMenu(navigationItems)}</List>
-        </Box>
-      </Drawer>
-
-      <Drawer
-        anchor="top"
-        open={searchDrawerOpen}
-        onClose={toggleSearchDrawer}
-        sx={{
-          "& .MuiDrawer-paper": {
-            backgroundColor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.3)",
-            color: isSticky ? "#fff" : "#fff",
-            height: "auto",
-            width: "100%",
-            maxHeight: "70vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 3,
-            overflowY: "auto",
-          },
-        }}
-      >
-        <Box
-          sx={{
-            width: { xs: "90%", sm: "70%", md: "50%" },
-            maxWidth: "600px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 1.5,
-          }}
-        >
-          <Typography
-            variant="h6"
-            sx={{
-              textAlign: "center",
-              fontSize: { xs: "0.85rem", sm: "1rem", xl: "1.4rem" },
-                 color: isSticky ? "#fff" : "#0D3C00",
-              textTransform: "capitalize",
-            }}
-          >
-            Search the Website
-          </Typography>
-          <TextField
-            variant="outlined"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Enter keywords..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: isSticky ? "#fff" : "#0D3C00", fontSize: { xs: "1.1rem", xl: "1.54rem" } }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
-                "&:hover fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
-                "&.Mui-focused fieldset": { borderColor: isSticky ? "#fff" : "#0D3C00" },
-              },
-              "& .MuiInputBase-input": {
-                color: isSticky ? "#fff" : "#0D3C00",
-                fontSize: { xs: "0.8rem", sm: "0.9rem", xl: "1.26rem" },
-                     textTransform: "none",
-              },
-            }}
+      {/* ── Mobile Drawer ────────────────────────────────────── */}
+      {drawerOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60"
+            onClick={() => setDrawerOpen(false)}
           />
-          {filteredItems.length > 0 && (
-            <List sx={{ mt: 2, bgcolor: isSticky ? "#0D3C00" : "rgba(0,0,0,0.1)", maxHeight: "50vh", overflowY: "auto" }}>
-              {filteredItems.map((item, idx) => (
-                <ListItem key={idx} disablePadding>
-                  <ListItemButton
-                    component={Link}
+          {/* Panel */}
+          <div className="absolute right-0 top-0 h-full w-4/5 max-w-xs bg-kfs-dark flex flex-col overflow-hidden shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-white/20 flex-shrink-0">
+              <Image src="/images/kfs_logo.png" alt="KFS Logo" width={48} height={36} />
+              <button
+                className="text-white hover:text-gray-300 transition-colors"
+                onClick={() => setDrawerOpen(false)}
+                aria-label="Close menu"
+              >
+                <FaTimes className="text-xl" />
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1 py-2">
+              <MobileMenuItems items={navigationItems} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Search Overlay ───────────────────────────────────── */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-50 bg-kfs-dark/96 flex flex-col items-center pt-20 px-4 animate-fade-in">
+          <button
+            className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
+            onClick={closeSearch}
+            aria-label="Close search"
+          >
+            <FaTimes className="text-2xl" />
+          </button>
+
+          <div className="w-full max-w-2xl">
+            <h2 className="text-white text-2xl font-bold text-center mb-8 tracking-wide">
+              Search KFS Website
+            </h2>
+
+            {/* Input */}
+            <div className="relative">
+              <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-sm" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Enter keywords…"
+                autoFocus
+                className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/25 text-white placeholder-white/40 rounded focus:outline-none focus:border-white/60 transition-colors text-sm"
+              />
+            </div>
+
+            {/* Results */}
+            {filteredItems.length > 0 && (
+              <div className="mt-4 rounded border border-white/15 overflow-hidden max-h-72 overflow-y-auto">
+                {filteredItems.map((item, idx) => (
+                  <Link
+                    key={idx}
                     href={item.link}
                     target={item.isExternal ? "_blank" : "_self"}
                     rel={item.isExternal ? "noopener noreferrer" : undefined}
-                    sx={{
-                      color: isSticky ? "#fff" : "#0D3C00",
-                      padding: "8px 16px",
-                      "&:hover": { bgcolor: isSticky ? "rgba(255,255,255,0.1)" : "rgba(106,150,31,0.1)" },
-                    }}
-                    onClick={() => {
-                      setSearchDrawerOpen(false);
-                      setSearchQuery("");
-                    }}
+                    className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white capitalize border-b border-white/10 last:border-0 transition-colors"
+                    onClick={closeSearch}
                   >
-                    <ListItemText
-                      primary={item.label}
-                      sx={{
-                        "& .MuiTypography-root": {
-                          fontSize: { xs: "0.85rem", xl: "1.19rem" },
-                                         textTransform: "capitalize",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          )}
-          {searchQuery.trim() && filteredItems.length === 0 && (
-            <Typography
-              sx={{
-                color: isSticky ? "#fff" : "#0D3C00",
-                textAlign: "center",
-                mt: 2,
-                fontSize: { xs: "0.85rem", sm: "1rem" },
-                   }}
-            >
-              No results found.
-            </Typography>
-          )}
-        </Box>
-      </Drawer>
-    </AppBar>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {searchQuery.trim() && filteredItems.length === 0 && (
+              <p className="text-white/50 text-center mt-8 text-sm">
+                No results found for &ldquo;{searchQuery}&rdquo;
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

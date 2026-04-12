@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 const partners = [
   "https://whatthelogo.com/storage/logos/wwf-world-wildlife-fund-51730.png",
   "https://whatthelogo.com/storage/logos/african-wildlife-foundation-225883.png",
@@ -13,40 +11,28 @@ const partners = [
   "https://whatthelogo.com/storage/logos/undp-136787.png",
   "https://www.kefri.org/assets/images/kefri_logo.png",
   "https://www.rhinoark.org/wp-content/uploads/2021/12/cropped-rhino-ark-logo-2.png",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxmDPqcVy-UyLi-DX0pMl0zEV51gSoq6ap-w&s"
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxmDPqcVy-UyLi-DX0pMl0zEV51gSoq6ap-w&s",
 ];
 
-const PartnersSection = () => {
-  return (
-    <section className="bg-white py-12">
-      <h2 className="text-3xl font-bold text-center mb-8  text-[#0d3c00]">Our Partners</h2>
-      <div className="relative overflow-hidden w-full">
-        <div className="flex space-x-8 animate-move" style={{ minWidth: "max-content" }}>
-          {[...partners, ...partners].map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Partner ${index % partners.length}`}
-              className="w-24 h-24 object-contain"
-            />
-          ))}
-        </div>
+const PartnersSection = () => (
+  <section className="bg-white py-12 border-b border-gray-100">
+    <h2 className="text-2xl md:text-3xl font-bold text-center text-kfs-dark mb-10">
+      Our Partners
+    </h2>
+    <div className="relative overflow-hidden w-full">
+      {/* Duplicate the list so the marquee loops seamlessly */}
+      <div className="flex gap-12 animate-marquee" style={{ minWidth: "max-content" }}>
+        {[...partners, ...partners].map((logo, index) => (
+          <img
+            key={index}
+            src={logo}
+            alt={`Partner ${(index % partners.length) + 1}`}
+            className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+          />
+        ))}
       </div>
-      <style jsx>{`
-        @keyframes move {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-move {
-          animation: move 12s linear infinite;
-        }
-      `}</style>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default PartnersSection;

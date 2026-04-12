@@ -34,82 +34,79 @@ const coreValues = [
   {
     id: "teamwork",
     icon: "/icons/teamwork.png",
-    title: "TEAMWORK",
+    title: "Teamwork",
     description:
       "The Service will embrace mutual support and respect, active participation, and collective responsibility, open communication, information sharing and mentoring.",
-     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
+    background: "/images/MangroveboatinGazi.jpg",
   },
   {
     id: "results",
     icon: "/icons/results.png",
-    title: "RESULTS ORIENTED",
-    description:
-      "The Service will pursue timely attainment of targeted results at all levels.",
-     background: "/images/MangroveboatinGazi.jpg", // Placeholder background
+    title: "Results Oriented",
+    description: "The Service will pursue timely attainment of targeted results at all levels.",
+    background: "/images/MangroveboatinGazi.jpg",
   },
   {
     id: "integrity",
     icon: "/icons/integrity.png",
-    title: "INTEGRITY",
+    title: "Integrity",
     description:
       "The Service and staff shall ascribe to high standards of personal integrity, ethics, transparency together with individual and corporate accountability in the conduct of business.",
-     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
+    background: "/images/MangroveboatinGazi.jpg",
   },
   {
     id: "scientific",
     icon: "/icons/scientific.png",
-    title: "SCIENTIFIC PRINCIPLES AND PROFESSIONALISM",
+    title: "Scientific Principles & Professionalism",
     description:
       "Decision making and practice will be based on current scientific knowledge and best practice.",
-     background: "/images/MangroveboatinGazi.jpg" // Placeholder background
+    background: "/images/MangroveboatinGazi.jpg",
   },
   {
     id: "creativity",
     icon: "/icons/creativity.png",
-    title: "CREATIVITY AND INNOVATION",
+    title: "Creativity & Innovation",
     description:
       "The Service will encourage and reward creativity and innovativeness in work performance among staff.",
-    background: "/images/MangroveboatinGazi.jpg" // Placeholder background
+    background: "/images/MangroveboatinGazi.jpg",
   },
 ];
 
 const PrinciplesAndValues = () => {
-  const [activeSection, setActiveSection] = useState("principles"); // Toggle between principles and values
-  const [activePrincipleTab, setActivePrincipleTab] = useState("ecosystem"); // For principles
-  const [activeValueTab, setActiveValueTab] = useState("teamwork"); // For values
-  const [currentPrincipleIndex, setCurrentPrincipleIndex] = useState(0); // For principles slider
-  const [currentValueIndex, setCurrentValueIndex] = useState(0); // For values slider
+  const [activeSection, setActiveSection] = useState("principles");
+  const [activePrincipleTab, setActivePrincipleTab] = useState("ecosystem");
+  const [activeValueTab, setActiveValueTab] = useState("teamwork");
+  const [currentPrincipleIndex, setCurrentPrincipleIndex] = useState(0);
+  const [currentValueIndex, setCurrentValueIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Set isMounted to true on client-side to avoid hydration mismatch
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Auto-slide effect for both sections on small screens
   useEffect(() => {
+    if (!isMounted) return;
     const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
-    if (isSmallScreen) {
-      const interval = setInterval(() => {
-        if (activeSection === "principles") {
-          setCurrentPrincipleIndex((prevIndex) =>
-            prevIndex === principles.length - 1 ? 0 : prevIndex + 1
-          );
-        } else if (activeSection === "values") {
-          setCurrentValueIndex((prevIndex) =>
-            prevIndex === coreValues.length - 1 ? 0 : prevIndex + 1
-          );
-        }
-      }, 5000); // Change every 5 seconds
-      return () => clearInterval(interval); // Cleanup on unmount
-    }
-  }, [activeSection]);
+    if (!isSmallScreen) return;
 
-  // Update active tabs when slider indices change
+    const interval = setInterval(() => {
+      if (activeSection === "principles") {
+        setCurrentPrincipleIndex((prev) =>
+          prev === principles.length - 1 ? 0 : prev + 1
+        );
+      } else {
+        setCurrentValueIndex((prev) =>
+          prev === coreValues.length - 1 ? 0 : prev + 1
+        );
+      }
+    }, 5_000);
+    return () => clearInterval(interval);
+  }, [activeSection, isMounted]);
+
   useEffect(() => {
     if (activeSection === "principles") {
       setActivePrincipleTab(principles[currentPrincipleIndex].id);
-    } else if (activeSection === "values") {
+    } else {
       setActiveValueTab(coreValues[currentValueIndex].id);
     }
   }, [currentPrincipleIndex, currentValueIndex, activeSection]);
@@ -117,93 +114,80 @@ const PrinciplesAndValues = () => {
   const activePrinciple = principles.find((p) => p.id === activePrincipleTab);
   const activeValue = coreValues.find((v) => v.id === activeValueTab);
 
-  if (!isMounted) {
-    return null; // Prevent server-side rendering mismatch
-  }
+  if (!isMounted) return null;
 
   return (
-    <section bg-white="true">
-      {/* Header with Tabs */}
-      <div className=" text-black  bg-white h-16 sm:h-20 flex items-center justify-center shadow-lg z-10">
-        <div className="flex gap-6">
-          <div
-            className={`cursor-pointer text-xl sm:text-3xl font-extrabold uppercase ${
-              activeSection === "principles"
-                ? "underline underline-offset-4 decoration-[#ac6738] decoration-4"
-                : "text-gray-500 hover:text-[#ac6738]"
-            }`}
-            onClick={() => {
-              setActiveSection("principles");
-              setActivePrincipleTab("ecosystem");
-              setCurrentPrincipleIndex(0);
-            }}
-          >
-            Guiding Principles
-          </div>
-          <div
-            className={`cursor-pointer text-xl sm:text-3xl font-extrabold uppercase ${
-              activeSection === "values"
-                ? "underline underline-offset-4 decoration-[#ac6738] decoration-4"
-                : "text-gray-500 hover:text-[#ac6738]"
-            }`}
-            onClick={() => {
-              setActiveSection("values");
-              setActiveValueTab("teamwork");
-              setCurrentValueIndex(0);
-            }}
-          >
-            Core Values
-          </div>
+    <section className="bg-white">
+      {/* Section Toggle Header */}
+      <div className="bg-white h-16 sm:h-20 flex items-center justify-center shadow border-b border-gray-100">
+        <div className="flex gap-8">
+          {["principles", "values"].map((section) => (
+            <button
+              key={section}
+              className={`text-lg sm:text-2xl font-extrabold uppercase tracking-wide transition-colors duration-200 ${
+                activeSection === section
+                  ? "text-kfs-dark underline underline-offset-4 decoration-kfs-accent decoration-4"
+                  : "text-gray-400 hover:text-kfs-accent"
+              }`}
+              onClick={() => {
+                setActiveSection(section);
+                if (section === "principles") {
+                  setActivePrincipleTab("ecosystem");
+                  setCurrentPrincipleIndex(0);
+                } else {
+                  setActiveValueTab("teamwork");
+                  setCurrentValueIndex(0);
+                }
+              }}
+            >
+              {section === "principles" ? "Guiding Principles" : "Core Values"}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Content Area */}
-      {activeSection === "principles" && (
+      {/* Principles Content */}
+      {activeSection === "principles" && activePrinciple && (
         <div
-          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-black p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
+          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center flex flex-col justify-center p-6 sm:p-10 transition-all duration-500"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 255), rgba(255, 255, 255, 0.5)), url(${activePrinciple.background})`,
+            backgroundImage: `linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0.5)), url(${activePrinciple.background})`,
           }}
         >
-          {/* Principle Tabs (Visible on larger screens) */}
-          <div className="hidden sm:block mb-8">
-            <div className="flex flex-row gap-6 pl-6">
-              {principles.map((principle) => (
-                <div
-                  key={principle.id}
-                  className={`cursor-pointer text-lg font-semibold uppercase ${
-                    activePrincipleTab === principle.id
-                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-black"
-                      : "text-gray-500 hover:text-[#ac6738]"
-                  }`}
-                  onClick={() => {
-                    setActivePrincipleTab(principle.id);
-                    setCurrentPrincipleIndex(
-                      principles.findIndex((p) => p.id === principle.id)
-                    );
-                  }}
-                >
-                  {principle.title}
-                </div>
-              ))}
-            </div>
+          {/* Principle Tabs */}
+          <div className="hidden sm:flex gap-6 mb-8">
+            {principles.map((p) => (
+              <button
+                key={p.id}
+                className={`text-base font-semibold uppercase tracking-wide transition-colors duration-200 ${
+                  activePrincipleTab === p.id
+                    ? "text-kfs-dark underline underline-offset-4 decoration-kfs-accent decoration-4"
+                    : "text-gray-500 hover:text-kfs-accent"
+                }`}
+                onClick={() => {
+                  setActivePrincipleTab(p.id);
+                  setCurrentPrincipleIndex(principles.findIndex((x) => x.id === p.id));
+                }}
+              >
+                {p.title}
+              </button>
+            ))}
           </div>
 
-          {/* Principle Content */}
-          <div className="flex items-start gap-3 sm:gap-4 max-w-full sm:max-w-2xl pl-0 sm:pl-6">
+          {/* Active Principle */}
+          <div className="flex items-start gap-4 max-w-2xl animate-fade-in-up">
             <Image
               src={activePrinciple.icon}
               alt={activePrinciple.title}
-              width={32}
-              height={32}
-              className="sm:w-[40px] sm:h-[40px]"
-              style={{ filter: "brightness(0) invert(0)" }}
+              width={40}
+              height={40}
+              className="flex-shrink-0"
             />
-            <div className="animate-fade-in">
-              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 uppercase">
+            <div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 uppercase tracking-wide text-kfs-dark">
                 {activePrinciple.title}
               </h3>
-              <p className="text-sm sm:text-base leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 {activePrinciple.description}
               </p>
             </div>
@@ -211,75 +195,54 @@ const PrinciplesAndValues = () => {
         </div>
       )}
 
-      {activeSection === "values" && (
+      {/* Core Values Content */}
+      {activeSection === "values" && activeValue && (
         <div
-          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center text-white p-4 sm:p-6 flex flex-col justify-center transition-all duration-500"
+          className="relative w-full h-[400px] sm:h-[500px] bg-cover bg-center flex flex-col justify-center p-6 sm:p-10 transition-all duration-500"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${activeValue.background})`,
+            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.82), rgba(0,0,0,0.1)), url(${activeValue.background})`,
           }}
         >
-          {/* Value Tabs (Visible on larger screens) */}
-          <div className="hidden sm:block mb-8">
-            <div className="flex flex-row gap-6 pl-6">
-              {coreValues.map((value) => (
-                <div
-                  key={value.id}
-                  className={`cursor-pointer text-lg font-semibold uppercase ${
-                    activeValueTab === value.id
-                      ? "underline underline-offset-4 decoration-[#ac6738] decoration-4 text-white"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                  onClick={() => {
-                    setActiveValueTab(value.id);
-                    setCurrentValueIndex(
-                      coreValues.findIndex((v) => v.id === value.id)
-                    );
-                  }}
-                >
-                  {value.title}
-                </div>
-              ))}
-            </div>
+          {/* Value Tabs */}
+          <div className="hidden sm:flex gap-6 mb-8 flex-wrap">
+            {coreValues.map((v) => (
+              <button
+                key={v.id}
+                className={`text-base font-semibold uppercase tracking-wide transition-colors duration-200 ${
+                  activeValueTab === v.id
+                    ? "text-white underline underline-offset-4 decoration-kfs-accent decoration-4"
+                    : "text-gray-300 hover:text-white"
+                }`}
+                onClick={() => {
+                  setActiveValueTab(v.id);
+                  setCurrentValueIndex(coreValues.findIndex((x) => x.id === v.id));
+                }}
+              >
+                {v.title}
+              </button>
+            ))}
           </div>
 
-          {/* Value Content */}
-          <div className="flex items-start gap-3 sm:gap-4 max-w-full sm:max-w-2xl pl-0 sm:pl-6">
+          {/* Active Value */}
+          <div className="flex items-start gap-4 max-w-2xl animate-fade-in-up">
             <Image
               src={activeValue.icon}
               alt={activeValue.title}
-              width={32}
-              height={32}
-              className="sm:w-[40px] sm:h-[40px]"
-              style={{ filter: "brightness(0) invert(1)" }}
+              width={40}
+              height={40}
+              className="flex-shrink-0 brightness-0 invert"
             />
-            <div className="animate-fade-in">
-              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 uppercase">
+            <div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 uppercase tracking-wide text-white">
                 {activeValue.title}
               </h3>
-              <p className="text-sm sm:text-base leading-relaxed">
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                 {activeValue.description}
               </p>
             </div>
           </div>
         </div>
       )}
-
-      {/* Inline Styles */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.5s ease-in-out;
-        }
-      `}</style>
     </section>
   );
 };

@@ -2,139 +2,154 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaTwitter, FaFacebookF, FaInstagram, FaSkype, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import Link from "next/link";
+import {
+  FaTwitter,
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaClock,
+} from "react-icons/fa";
+
+const quickLinks = [
+  { label: "Kenya Forestry College", href: "https://kfc.ac.ke", external: true },
+  { label: "Ministry of Environment", href: "#", external: false },
+  { label: "KEFRI", href: "#", external: false },
+  { label: "Nurseries", href: "/about/nurseries", external: false },
+];
 
 const Footer = () => {
-  // State to ensure rendering happens only on the client to avoid hydration error
   const [isMounted, setIsMounted] = useState(false);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Placeholder during server-side rendering to avoid hydration mismatch
   if (!isMounted) {
     return (
-      <footer className=" text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
-        <div className="px-8 sm:px-6 md:px-4 lg:px-2"></div>
-      </footer>
+      <footer className="relative text-white py-16 w-full border-t-4 border-kfs-medium overflow-hidden bg-kfs-dark" />
     );
   }
 
   return (
-    <footer className=" text-white py-12 sm:py-10 md:py-8 lg:py-6 w-full border-t-4 border-[#1f5d2f] relative overflow-hidden">
-      {/* Background Overlay with Forest Theme */}
-      
+    <footer className="relative text-white w-full border-t-4 border-kfs-medium overflow-hidden">
+      {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed opacity"
-        style={{
-          backgroundImage: "url('/images/background-template/footer.png')",
-        }}
-      /> 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D3C00]/30 to-[#1f5d2f]/70"></div>
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/background-template/footer.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-kfs-dark/85 to-kfs-medium/90" />
 
-      <div className="relative px-2 sm:px-2 md:px-2 lg:px-2">
-        {/* Main Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-6 md:gap-4 lg:gap-3">
-          {/* Column 1: Logo, Tagline */}
-          <div className="p-6 sm:p-4 md:p-3 flex flex-col items-start">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+          {/* Column 1 — Logo & Vision */}
+          <div className="flex flex-col gap-4">
             <Image
-                    src="/images/kfs_logo.png"
-                    alt="Logo"
-                    width={64}
-                    height={64}
-                    className="lg:py-4 py-4"
-                />
-            
-            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-6 sm:mb-4 md:mb-3 font-light italic">
-              To be an internationally recognized organisation for excellence in knowledge-based sustainable forest resources management and conservation.
+              src="/images/kfs_logo.png"
+              alt="KFS Logo"
+              width={64}
+              height={64}
+            />
+            <p className="text-sm text-white/75 leading-relaxed italic">
+              To be an internationally recognized organisation for excellence in
+              knowledge-based sustainable forest resources management and conservation.
             </p>
           </div>
 
-          {/* Column 2: Contact Info */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg  font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+          {/* Column 2 — Contact */}
+          <div>
+            <h3 className="text-base font-bold text-white mb-4 uppercase tracking-wider">
               Contact Us
-              </p>
             </h3>
-            <div className="grid grid-cols-1 gap-3 sm:gap-2 text-white/80">
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaEnvelope className="text-white" />
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2.5 text-sm text-white/75">
+                <FaEnvelope className="mt-0.5 flex-shrink-0 text-white/60" />
                 info@kenyaforestservice.org
-              </p>
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaMapMarkerAlt className="text-white" />
-                P.O BOX 30513 - 00100 NAIROBI - KENYA
-              </p>
-              <p className="text-xl sm:text-lg md:text-base lg:text-sm py-1 flex items-center gap-2">
-                <FaClock className="text-white" />
-                Mon - Fri (8am - 5pm) Sat & Sun CLOSED
-              </p>
-            </div>
+              </li>
+              <li className="flex items-start gap-2.5 text-sm text-white/75">
+                <FaPhone className="mt-0.5 flex-shrink-0 text-white/60" />
+                0800 123 456 (Toll Free)
+              </li>
+              <li className="flex items-start gap-2.5 text-sm text-white/75">
+                <FaMapMarkerAlt className="mt-0.5 flex-shrink-0 text-white/60" />
+                P.O. Box 30513–00100, Nairobi, Kenya
+              </li>
+              <li className="flex items-start gap-2.5 text-sm text-white/75">
+                <FaClock className="mt-0.5 flex-shrink-0 text-white/60" />
+                Mon–Fri 8am–5pm · Sat &amp; Sun Closed
+              </li>
+            </ul>
           </div>
 
-          {/* Column 3: Toll-Free */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg  font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
+          {/* Column 3 — Quick Links */}
+          <div>
+            <h3 className="text-base font-bold text-white mb-4 uppercase tracking-wider">
               Quick Links
-              </p>
             </h3>
-            
-            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              Kenya Forestry College
-            </p>
-            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              Ministry of Environment and Forestry
-            </p>
-            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              KEFRI
-            </p>
-            <p className="text-2xl sm:text-lg md:text-base lg:text-sm text-white/80 mb-4 sm:mb-3 md:mb-2">
-              Nurseries
-            </p>
-            
+            <ul className="space-y-2.5">
+              {quickLinks.map(({ label, href, external }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
+                    target={external ? "_blank" : "_self"}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="text-sm text-white/75 hover:text-white transition-colors duration-150"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Column 4: Subscribe */}
-          <div className="p-6 sm:p-4 md:p-3">
-            <h3 className="text-3xl sm:text-2xl md:text-xl lg:text-lg  font-bold text-white mb-4 sm:mb-3 md:mb-2">
-            <p className=" font-bold text-[#fff] leading-[1.8] text-[1.2rem] mb-2">
-              Subscribe to The Forester Magazine
-              </p>
+          {/* Column 4 — Newsletter */}
+          <div>
+            <h3 className="text-base font-bold text-white mb-4 uppercase tracking-wider">
+              The Forester Magazine
             </h3>
-            <div className="flex flex-col gap-4 sm:gap-3 md:gap-2">
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full p-3 sm:p-2.5 md:p-2  text-[#e6f5e6] text-xl sm:text-lg md:text-base lg:text-sm border border-white focus:outline-none focus:ring-2 focus:ring-[#1f5d2f] pl-10"
-                />
-              </div>
-              <div className="flex justify-start">
-                <button className="bg-[#1f5d2f] text-white py-4 sm:py-1.5 md:py-1 px-4 sm:px-3 md:px-2  text-2xl sm:text-lg md:text-base lg:text-2xl font-medium hover:bg-white hover:text-[#0D3C00] transition-all duration-300 shadow-md hover:shadow-lg">
-                  Subscribe
-                </button>
-              </div>
-              <div className="flex gap-4 sm:gap-3 md:gap-2">
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                  <FaTwitter className="text-white text-xl sm:text-xl md:text-lg lg:text-3xl hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
+            <p className="text-sm text-white/70 mb-4 leading-relaxed">
+              Subscribe to receive the latest forestry news and updates.
+            </p>
+            <div className="flex flex-col gap-3">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                className="w-full px-3 py-2.5 bg-white/10 border border-white/25 text-white placeholder-white/40 text-sm rounded focus:outline-none focus:border-white/60 transition-colors"
+              />
+              <button className="w-full bg-kfs-medium hover:bg-white hover:text-kfs-dark text-white font-semibold py-2.5 px-4 text-sm rounded transition-all duration-300">
+                Subscribe
+              </button>
+            </div>
+
+            {/* Social icons */}
+            <div className="flex gap-4 mt-5">
+              {[
+                { href: "https://twitter.com",   Icon: FaTwitter,   label: "Twitter"   },
+                { href: "https://facebook.com",  Icon: FaFacebookF, label: "Facebook"  },
+                { href: "https://instagram.com", Icon: FaInstagram, label: "Instagram" },
+                { href: "https://youtube.com",   Icon: FaYoutube,   label: "YouTube"   },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-white/60 hover:text-white hover:scale-110 transition-all duration-200"
+                >
+                  <Icon className="text-xl" />
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                  <FaFacebookF className="text-white text-xl sm:text-xl md:text-lg lg:text-3xl hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  <FaInstagram className="text-white text-xl sm:text-xl md:text-lg lg:text-3xl hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-                <a href="skype:user?call" target="_blank" rel="noopener noreferrer">
-                  <FaSkype className="text-white text-xl sm:text-xl md:text-4xl lg:text-3xl hover:text-[#1f5d2f] hover:scale-110 hover:rotate-12 transition-all duration-300" />
-                </a>
-              </div>
+              ))}
             </div>
           </div>
         </div>
-
       </div>
     </footer>
   );

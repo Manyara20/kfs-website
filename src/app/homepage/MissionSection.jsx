@@ -68,7 +68,7 @@ export default function MissionVisionNews() {
   };
 
   return (
-    <div className="w-full bg-[url('/images/pattern.svg')] bg-cover bg-center py-2 valleys:md:py-3">
+    <div className="w-full bg-[url('/images/pattern.svg')] bg-cover bg-center py-2 md:py-3">
       <div className="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-0 sm:px-0 lg:px-0">
         {/* Left Section: Image */}
         <div className="flex flex-col space-y-0 h-[720px] overflow-hidden">
